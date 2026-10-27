@@ -39,6 +39,10 @@ python3 scripts/skills.py claude-sync --apply
 python3 scripts/skills.py opencode-sync --apply
 ```
 
+### Externally managed skills
+
+List external skill directory names in `config/runtime.json` under `external_skills` before syncing (for example `yab-browser`). EKit carries those directories through its shared-runtime sync but does not own, update, or include them in its file manifest. The external provider remains responsible for installing and updating them. An absent external directory is left absent; symlinked external directories and collisions with EKit-owned skill IDs stop the sync. Unregistered extras are still proposed for removal, so inspect every preview. A concurrent external change detected during staging aborts the sync; avoid running vendor setup at the same time.
+
 Use `sync --apply --adopt-unmanaged` only for the one-time migration when the Codex/shared skill directory already exists without this repository's ownership marker. The command backs up that directory before replacing it. Do not hand-edit installed skill copies.
 
 ## Routine updates and checks

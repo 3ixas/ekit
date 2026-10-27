@@ -304,6 +304,75 @@ class SyncTests(unittest.TestCase):
         with self.assertRaisesRegex(skills.CheckError, "global AGENTS.md was edited"):
             skills.sync_apply(self.root, self.target, self.global_target, self.backups)
 
+    def test_registered_external_skill_survives_sync_and_vendor_updates(self) -> None:
+        skills.sync_apply(self.root, self.target, self.global_target, self.backups)
+        external = self.target / "vendor-browser"
+        external.mkdir()
+        (external / "SKILL.md").write_text("vendor version 1")
+        config_path = self.root / "config" / "runtime.json"
+        config = skills.read_json(config_path)
+        config["external_skills"] = ["vendor-browser"]
+        write_json(config_path, config)
+        # Earlier syncs may have recorded it in the managed manifest.
+        marker_path = self.target / skills.MARKER
+        marker = skills.read_json(marker_path)
+        marker["files"]["vendor-browser/SKILL.md"] = skills.file_hash(external / "SKILL.md")
+        write_json(marker_path, marker)
+        (external / "SKILL.md").write_text("vendor version 2")
+        self.assertEqual(skills.sync_status(self.root, self.target, self.global_target).drift, [])
+        skills.sync_apply(self.root, self.target, self.global_target, self.backups)
+        self.assertEqual((external / "SKILL.md").read_text(), "vendor version 2")
+        self.assertNotIn("vendor-browser/SKILL.md", skills.read_json(marker_path)["files"])
+        self.assertEqual(skills.doctor(self.root, self.target, self.global_target, probe_tools=False), [])
+        (external / "SKILL.md").write_text("vendor version 3")
+        skills.sync_apply(self.root, self.target, self.global_target, self.backups)
+        self.assertEqual((external / "SKILL.md").read_text(), "vendor version 3")
+
+    def test_external_owned_collision_and_unsafe_ids_are_rejected(self) -> None:
+        config_path = self.root / "config" / "runtime.json"
+        config = skills.read_json(config_path)
+        config["external_skills"] = ["example"]
+        write_json(config_path, config)
+        with self.assertRaisesRegex(skills.CheckError, "conflicts with EKit ownership"):
+            skills.sync_apply(self.root, self.target, self.global_target, self.backups)
+        config["external_skills"] = ["../escape"]
+        write_json(config_path, config)
+        with self.assertRaisesRegex(skills.CheckError, "safe skill IDs"):
+            skills.sync_status(self.root, self.target, self.global_target)
+        self.assertFalse(self.target.exists())
+
+    def test_external_concurrent_edit_aborts_without_losing_vendor_change(self) -> None:
+        skills.sync_apply(self.root, self.target, self.global_target, self.backups)
+        config_path = self.root / "config" / "runtime.json"
+        config = skills.read_json(config_path)
+        config["external_skills"] = ["vendor"]
+        write_json(config_path, config)
+        external = self.target / "vendor"
+        external.mkdir()
+        skill = external / "SKILL.md"
+        skill.write_text("before")
+        original_copytree = skills.shutil.copytree
+        def race(source, destination, *args, **kwargs):
+            result = original_copytree(source, destination, *args, **kwargs)
+            if Path(source) == external:
+                skill.write_text("vendor updated")
+            return result
+        with mock.patch.object(skills.shutil, "copytree", side_effect=race):
+            with self.assertRaisesRegex(skills.CheckError, "external skills changed"):
+                skills.sync_apply(self.root, self.target, self.global_target, self.backups)
+        self.assertEqual(skill.read_text(), "vendor updated")
+
+    def test_external_symlink_is_not_followed(self) -> None:
+        skills.sync_apply(self.root, self.target, self.global_target, self.backups)
+        config_path = self.root / "config" / "runtime.json"
+        config = skills.read_json(config_path)
+        config["external_skills"] = ["vendor"]
+        write_json(config_path, config)
+        (self.target / "vendor").symlink_to(self.root / "config", target_is_directory=True)
+        with self.assertRaisesRegex(skills.CheckError, "real directory"):
+            skills.sync_apply(self.root, self.target, self.global_target, self.backups)
+        self.assertTrue((self.target / "vendor").is_symlink())
+
     def test_failed_verification_rolls_back_both_targets(self) -> None:
         self.target.mkdir(parents=True)
         (self.target / "legacy.txt").write_text("legacy runtime\n")

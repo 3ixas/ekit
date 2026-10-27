@@ -2,7 +2,7 @@
 
 `VOICE.md` describes the author across contexts. `STYLE.md` describes a publication, project, team, or deliverable. Neither file is required.
 
-When the user asks for their voice, first read any voice profile named by the active personal instructions or supplied with the request. If no profile is available, inspect representative samples already authorized and relevant to the task. If none exist, preserve the source draft's observable voice. Ask for a sample only when matching the person, rather than simply producing strong prose, materially affects the result. Never invent a personal voice from generic preferences.
+On every writing-skill invocation, first read the complete personal voice profile and writing-preferences companion as required by `SKILL.md`, including when reviewing another author or following a project style. Any additional author profile supplied with the request guides that author's voice. If no profile is available, inspect representative samples already authorized and relevant to the task. If none exist, preserve the source draft's observable voice. Ask for a sample only when matching the person, rather than simply producing strong prose, materially affects the result. Never invent a personal voice from generic preferences.
 
 ## Build from evidence
 
@@ -16,7 +16,7 @@ Keep three things distinct: observed habits supported by the author's writing; q
 
 Translate approved references into decisions an editor can apply: lead with the decision and its consequence; replace a vague benefit with a tangible outcome; make a scene carry an emotion; vary sentence rhythm where it serves the piece. Identify general craft qualities rather than reproducing a named writer's distinctive style. Keep personal selections in the author's own profile or knowledge system, not in this reusable skill.
 
-Keep the core profile short enough for everyday use. Link detailed context preferences and source examples from an optional companion, then read only the relevant section when needed. Do not search for or require a companion the profile does not name. Neither a long reference library nor a preference questionnaire is a prerequisite for an ordinary draft.
+Keep the core profile concise and link detailed context preferences and source examples from its companion. Read both personal files in full on every invocation, then apply the guidance relevant to the piece. Do not substitute selected-section retrieval or a previous summary for either full read. External source links are further references, not mandatory reading on every task; a new preference questionnaire is not required.
 
 ## Apply profiles
 

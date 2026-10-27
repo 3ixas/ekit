@@ -28,7 +28,7 @@ Use this optional file to capture stable, evidence-based traits of an author’s
 
 - Qualities explicitly chosen by the author, distinguished from observed habits:
 - Contexts and expressive levels where they apply:
-- Optional companion for detailed references; load only its relevant section:
+- Companion for detailed references (the personal writing skill requires a full read of both personal context files on every invocation):
 - Approved comparison or feedback and its limits:
 
 ## Do not infer

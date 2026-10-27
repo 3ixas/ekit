@@ -2,7 +2,7 @@
 
 Use this branch for requests such as “review my current commitments”, “check my focus” or a personal goal/life-direction review. Ordinary capture remains the normal Obsidian path; code review, project strategy and teaching retain their own owners.
 
-For the four-level planning workflow, including weekly selection and tomorrow's shortlist, also read [personal planning](personal-planning.md). Preserve this contract's review dates and evidence rules; use an explicit live migration record to distinguish the current task library from a scheduler awaiting cutover.
+For the four-level planning context, also read [personal planning](personal-planning.md). The dedicated `planning` skill owns daily and weekly operational review. Preserve this contract's review dates and evidence rules; use an explicit live migration record to distinguish the current task library from a scheduler awaiting cutover.
 
 ## Resolve context in a fresh session
 

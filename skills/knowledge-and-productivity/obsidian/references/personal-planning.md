@@ -23,29 +23,9 @@ Read direction, active commitments, deferred triggers and relevant review eviden
 
 Produce a short changed/unchanged decision and its consequence for the week. Record agreed changes only; preserve unreviewed items and their dates. A passed deferred checkpoint is an invitation to assess circumstances, not automatic activation. Do not invent practice quotas or new milestones to make the page look complete.
 
-## Plan next week
+## Operational planning
 
-Read current focus, standing practice defaults, the previous relevant weekly note, current selected/unfinished tasks, upcoming real deadlines and fixed commitments. Resolve the intended Monday–Sunday dates in the configured timezone; a Sunday planning session normally concerns the next week. State the period so an ambiguous “next week” cannot silently select the wrong one.
-
-- Briefly identify actual progress, recurring obstacles and any useful adjustment. A missed session is not debt. Do not mark a review completed merely because its note was opened.
-- Propose a few outcomes for finite projects and a deliberate number of sessions for ongoing practices, adjusted from existing defaults. Include necessary responsibilities. Useful project work can be allocated time without speculative decomposition into dozens of actions.
-- Check rough capacity against known commitments and the user's stated circumstances. Use a coarse feasibility check; do not request a minute-by-minute inventory of evenings. If the week cannot fit, make the reduction or deferral explicit. Optional exploration receives space only if deliberately chosen.
-- Retain user-supplied capacity or session counts in a labelled draft even when the subject or content is unresolved. Capacity is not itself a commitment. Do not force clarification when an honest partial draft is useful.
-- Show the proposed selection and material trade-offs. Let the user settle new commitments; do not treat agreement to the overall system as agreement to this week's workload. Avoid reopening direction unless a conflict requires it.
-
-Record the agreed plan as one short weekly note in the configured root, with outcomes/sessions, other commitments/trade-offs and a brief review when it actually occurs. Link existing project context and tasks; do not copy the backlog or calendar. Update the current-plan pointer if authorised and present. Use one note per resolved period, checking for an existing note before creating another. Do not generate an empty historical review.
-
-When the user requests task application, use the live tool contract and configured weekly-selection mechanism. Reuse matching tasks/sessions; preserve unrelated labels, dates, descriptions, parents, deadlines and recurrence. Reassess the previous selection explicitly rather than blindly carrying it forward or clearing all labels account-wide. Create only the agreed sessions, normally undated until the user selects working times. Completing one session does not complete its programme. Changing practice frequency does not rewrite genuine recurring responsibilities.
-
-## Plan tomorrow
-
-Resolve tomorrow's date in the configured timezone. Read the agreed weekly plan, remaining selected work, actual deadlines and tomorrow's fixed commitments. Include a genuine urgent obligation even if it lacks the weekly label, making the resulting trade-off visible.
-
-Return a short, reasoned shortlist and relevant constraints. Use recognisable work: an existing next action, a project session or a chosen practice session. Clarify a starting action or session outcome only when ambiguity prevents starting; avoid a preparation ritual. The user chooses what to tackle and reserves the actual times in their calendar interface. Do not generate an automatic timetable or insist on exact session times to provide a useful shortlist.
-
-If no weekly plan exists, say so and offer a bounded daily selection from current focus and known obligations; do not fabricate weekly agreement or force a strategic review. Unfinished work remains available. Do not silently move everything to tomorrow, duplicate missed sessions or infer completion from an absent task.
-
-If the user explicitly requests setting chosen dates/times or other bookkeeping, perform only those supported operations and verify them. Do not create a second calendar event when the task's direct calendar integration already supplies the intended representation. Do not activate integrations, install calendar apps, change a schedule mirror or start reminders as part of planning.
+The dedicated `planning` skill owns daily and weekly Todoist review, task reconciliation, stale-item tracking and time-block proposals. When supporting it, supply the live Obsidian direction, current focus, standing defaults and relevant weekly note. Do not run a competing shortlist-only planning workflow.
 
 ## Review, adjust and save
 

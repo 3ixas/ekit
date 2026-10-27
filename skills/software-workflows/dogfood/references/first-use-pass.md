@@ -1,0 +1,11 @@
+# First-use pass
+
+Use this mode when the request concerns a new user's path to value, including a relevant pre-launch review. Define the intended starting point, audience, first meaningful success, target revision and safe environment from product evidence; record assumptions. Start at the landing page when it is part of the journey.
+
+Select a small set of distinct, product-relevant perspectives for routine work; a fuller pre-launch pass can cover five. Candidates include a hurried skimmer, a trust-conscious evaluator, a narrow-screen user on a constrained connection, someone following interface language literally, and someone testing invalid inputs and recovery. Adapt or omit perspectives that do not fit. These are test lenses, not evidence of real users' behaviour or accessibility needs.
+
+Use a real running surface and browser where available. Give each pass a clean starting state, isolated session and safe test data where possible; record any shared state or blocked access. Delegate independent passes when supported and appropriate, within the user's instructions and host limits. Otherwise run them sequentially and disclose the limitation. A viewport is not a physical device; claim slow-network testing only when throttling was actually applied. Record browser, viewport, network conditions and any simulation limits.
+
+For each pass, follow the visible journey to first success or the point it stops. Record the steps, expected and observed results, URL or screen, and a screenshot when it helps explain a finding. Do not invent confusion, emotions, quotes, success or coverage. Group duplicate findings while preserving which passes encountered each; rank by severity, impact and recurrence, not counts alone. Agent counts do not estimate real-world prevalence.
+
+Fix clear issues only within the task's authorised scope. After changes, repeat affected journeys from a clean state where feasible, including the failing step and path to first success; report what passed, remains open or could not be retested. Do not claim launch readiness from simulated users alone. Real user research remains separately valuable. Avoid real payments, messages, destructive operations and other consequential actions without specific authority.

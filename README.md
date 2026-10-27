@@ -55,7 +55,7 @@ Naming a workflow counts as requesting it; `$skill-name` in Codex and `/skill-na
 | Multi-capability learning journey | `learn` → `teach` → evidence and route review |
 | Understand completed work | `defend` |
 | Resume later | `handoff` → `pickup` |
-| Tasks and scheduling | FlowSavvy; invoke its owned workflow when requested |
+| Tasks and scheduling | Todoist for current tasks; FlowSavvy remains available when requested |
 | Personal facts and notes | `obsidian` |
 | Change this skill system | `skill-review` → `skill-authoring` |
 
@@ -82,7 +82,7 @@ If you use this at work, keep the work machine’s instructions, accounts and in
 | [Frontend and design](skills/frontend-and-design/README.md) | Create reference-led interfaces and validate their experience and craft. |
 | [Research and decisions](skills/research-and-decisions/README.md) | Find evidence, understand systems, develop options, and analyze data. |
 | [Writing and artifacts](skills/writing-and-artifacts/README.md) | Produce strong prose and correctly rendered files. |
-| [Knowledge and productivity](skills/knowledge-and-productivity/README.md) | Use FlowSavvy for current tasks and scheduling, and Obsidian for durable notes and commitment reviews. |
+| [Knowledge and productivity](skills/knowledge-and-productivity/README.md) | Use Todoist for current tasks, and Obsidian for durable notes and commitment reviews. |
 | [Personal workflows](skills/personal-workflows/README.md) | Hold the few personal routines that earn dedicated instructions. |
 | [Agent system](skills/agent-system/README.md) | Clarify, coordinate, teach, preserve continuity, and maintain skills. |
 

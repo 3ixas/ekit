@@ -576,8 +576,27 @@ def _runtime_hashes(target: Path) -> dict[str, str]:
     return {path.relative_to(target).as_posix(): file_hash(path) for path in files_under(target) if path.relative_to(target).as_posix() != MARKER}
 
 
+def external_skill_ids(root: Path) -> set[str]:
+    raw = read_json(root / "config" / "runtime.json").get("external_skills", [])
+    if not isinstance(raw, list) or any(not isinstance(x, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", x) for x in raw):
+        raise CheckError("external_skills must be a list of safe skill IDs")
+    if len(raw) != len(set(raw)):
+        raise CheckError("duplicate external skill ID")
+    names = set(raw)
+    owned = {item["id"] for item in discover(root) if item["lifecycle"] == "skills"}
+    overlap = sorted(names & owned)
+    if overlap:
+        raise CheckError("external skill conflicts with EKit ownership: " + ", ".join(overlap))
+    return names
+
+
+def managed_runtime_hashes(root: Path, target: Path) -> dict[str, str]:
+    external = external_skill_ids(root)
+    return {path: digest for path, digest in _runtime_hashes(target).items() if PurePosixPath(path).parts[0] not in external}
+
+
 def sync_status(root: Path, target: Path, global_target: Path | None = None) -> SyncStatus:
-    desired, current = desired_hashes(root), _runtime_hashes(target)
+    desired, current = desired_hashes(root), managed_runtime_hashes(root, target)
     adds = sorted(set(desired) - set(current))
     removes = sorted(set(current) - set(desired))
     changes = sorted(key for key in set(desired) & set(current) if desired[key] != current[key])
@@ -598,6 +617,8 @@ def sync_status(root: Path, target: Path, global_target: Path | None = None) -> 
                 for relative, old_hash in previous.items():
                     if not _safe_relative_source_path(relative):
                         drift.append("runtime marker contains an unsafe path")
+                        continue
+                    if PurePosixPath(relative).parts[0] in external_skill_ids(root):
                         continue
                     path = target / relative
                     if not path.is_file() or file_hash(path) != old_hash:
@@ -626,7 +647,7 @@ def _assert_safe_target(path: Path, label: str) -> None:
 
 
 def _verify_runtime(root: Path, target: Path, global_target: Path) -> None:
-    expected, actual = desired_hashes(root), _runtime_hashes(target)
+    expected, actual = desired_hashes(root), managed_runtime_hashes(root, target)
     if actual != expected:
         missing = sorted(set(expected) - set(actual)); extra = sorted(set(actual) - set(expected))
         changed = sorted(k for k in set(expected) & set(actual) if expected[k] != actual[k])
@@ -675,6 +696,16 @@ def sync_apply(
             "global_agents": file_hash(global_target) if had_global and global_target.is_file() else None,
         })
         sources, projection = active_projection(root), runtime_projection(root)
+        external = external_skill_ids(root)
+        external_before = {key: value for key, value in _runtime_hashes(target).items() if PurePosixPath(key).parts[0] in external}
+        for skill_id in external:
+            source = target / skill_id
+            if source.is_symlink() or (source.exists() and not source.is_dir()):
+                raise CheckError(f"external skill must be a real directory: {skill_id}")
+            if source.exists():
+                if any(path.is_symlink() for path in source.rglob("*")):
+                    raise CheckError(f"external skill contains a symlink: {skill_id}")
+                shutil.copytree(source, stage / skill_id, copy_function=shutil.copy2)
         if set(sources) != set(projection):
             raise CheckError("runtime projection paths disagree with source paths")
         for relative, content in projection.items():
@@ -686,7 +717,11 @@ def sync_apply(
         commit = subprocess.run(["git", "-C", str(root), "rev-parse", "HEAD"], capture_output=True, text=True, check=False).stdout.strip()
         write_json(stage / MARKER, {"schema": MARKER_SCHEMA, "repository": "elias-agent-skills", "source_commit": commit, "generated_at": datetime.now(timezone.utc).isoformat(), "files": manifest, "global_agents": file_hash(root / "config" / "AGENTS.md")})
         if had_runtime:
-            shutil.copytree(target, backup / "skills", copy_function=shutil.copy2, symlinks=True); os.replace(target, old_runtime)
+            shutil.copytree(target, backup / "skills", copy_function=shutil.copy2, symlinks=True)
+            external_after = {key: value for key, value in _runtime_hashes(target).items() if PurePosixPath(key).parts[0] in external}
+            if external_after != external_before:
+                raise CheckError("external skills changed during sync; retry")
+            os.replace(target, old_runtime)
         if had_global:
             shutil.copy2(global_target, backup / "AGENTS.md"); os.replace(global_target, old_global)
         os.replace(stage, target); runtime_installed = True
@@ -1128,7 +1163,7 @@ def _claude_expected_directories(files: dict[str, Any]) -> set[str]:
     return result
 
 
-def _valid_codex_legacy_link(codex_target: Path, skill_id: str, link: Path) -> bool:
+def _valid_codex_legacy_link(root: Path, codex_target: Path, skill_id: str, link: Path) -> bool:
     marker_path = codex_target / MARKER
     if codex_target.is_symlink() or not marker_path.is_file() or not link.is_symlink():
         return False
@@ -1141,7 +1176,8 @@ def _valid_codex_legacy_link(codex_target: Path, skill_id: str, link: Path) -> b
     files = marker.get("files")
     if not isinstance(files, dict) or f"{skill_id}/SKILL.md" not in files:
         return False
-    if _runtime_hashes(codex_target) != files:
+    expected = {key: value for key, value in files.items() if PurePosixPath(key).parts[0] not in external_skill_ids(root)}
+    if managed_runtime_hashes(root, codex_target) != expected:
         return False
     return _claude_link_target(link) == (codex_target / skill_id).resolve(strict=False)
 
@@ -1218,7 +1254,7 @@ def claude_sync_status(
                 if expected_target != old_target:
                     link_changes.append(skill_id)
                 continue
-            if _valid_codex_legacy_link(codex_skills_target, skill_id, path):
+            if _valid_codex_legacy_link(root, codex_skills_target, skill_id, path):
                 link_changes.append(skill_id)
                 continue
             conflicts.append(f"Claude skill path already exists and is not a recognized managed or Codex legacy link: {skill_id}")
@@ -1601,7 +1637,7 @@ def doctor(root: Path, target: Path, global_target: Path, *, probe_tools: bool =
     status = sync_status(root, target, global_target)
     errors.extend(f"runtime drift: {item}" for item in status.drift)
     if status.global_drift: errors.append("global AGENTS.md was edited after the last sync")
-    desired, actual = desired_hashes(root), _runtime_hashes(target)
+    desired, actual = desired_hashes(root), managed_runtime_hashes(root, target)
     for relative in sorted(set(desired) | set(actual)):
         if desired.get(relative) != actual.get(relative): errors.append(f"runtime mismatch: {relative}")
     if not global_target.is_file() or file_hash(global_target) != file_hash(root / "config" / "AGENTS.md"):

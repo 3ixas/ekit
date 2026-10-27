@@ -11,5 +11,8 @@
   "opencode_agents": "~/.config/opencode/AGENTS.md",
   "opencode_backups": "~/.config/opencode/skill-backups/elias-agent-skills",
   "handoffs": "~/.agents/handoffs",
-  "codex_config": "~/.codex/config.toml"
+  "codex_config": "~/.codex/config.toml",
+  "external_skills": [
+    "yab-browser"
+  ]
 }

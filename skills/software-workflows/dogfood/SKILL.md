@@ -14,8 +14,9 @@ A flow-based product-quality report with observed problems and bounded fixes whe
 ## Method
 
 1. Map the requested journeys and personas from product evidence. Identify the running surface and safe test data; name inaccessible journeys as coverage gaps.
-2. Exercise normal and failure states as a user. Record actions, observed results, and evidence of friction, surprise, trust, recovery, accessibility, or polish problems; distinguish defects from preferences.
-3. Return a journey-based report with reproduction steps and consequences. Apply only authorized bounded fixes, re-exercise their affected journeys, and separate verified corrections from recommendations.
+2. For a first-use or pre-launch journey, use the [first-use pass](references/first-use-pass.md) to select contrasting perspectives, exercise the journey, and record its evidence.
+3. Exercise normal and failure states as a user. Record actions, observed results, and evidence of friction, surprise, trust, recovery, accessibility, or polish problems; distinguish defects from preferences.
+4. Return a journey-based report with reproduction steps and consequences. Apply only authorized bounded fixes, re-exercise their affected journeys, and separate verified corrections from recommendations.
 
 ## Boundaries
 
