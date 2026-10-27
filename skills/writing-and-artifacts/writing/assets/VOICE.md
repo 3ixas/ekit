@@ -24,6 +24,13 @@ Use this optional file to capture stable, evidence-based traits of an author’s
 - Representative approved samples or short excerpts:
 - Explicit author feedback:
 
+## Chosen development preferences (optional)
+
+- Qualities explicitly chosen by the author, distinguished from observed habits:
+- Contexts and expressive levels where they apply:
+- Optional companion for detailed references; load only its relevant section:
+- Approved comparison or feedback and its limits:
+
 ## Do not infer
 
 - Facts, opinions, experiences, or emotions that must come from the author:

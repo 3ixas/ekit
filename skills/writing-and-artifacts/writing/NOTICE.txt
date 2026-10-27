@@ -8,3 +8,4 @@ Applicable records:
 - references/licenses/mit-compound-engineering.txt
 - references/licenses/mit-pstack.txt
 - references/licenses/published-works-reference.txt
+- references/licenses/user-approved-writing-preferences.txt

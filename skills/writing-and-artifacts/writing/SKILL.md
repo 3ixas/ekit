@@ -17,7 +17,7 @@ For personal or persuasive writing, first find the writer's throughline: the tur
 
 Before returning a draft, run a distinctiveness pass. Ask whether the central point could belong to anyone, whether the most memorable details came from the source, whether each paragraph advances the reader's decision or understanding, and whether the prose sounds like a person with a view rather than a polished profile. Prefer one or two telling specifics over a catalogue of credentials. Stop when the piece has done its job.
 
-When writing as Elias, first read the current voice profile named by the active personal instructions. If it is unavailable, disclose the gap and preserve the supplied draft's observable voice without inventing one.
+When writing as Elias, first read the current voice profile named by the active personal instructions. Distinguish observed habits from explicitly chosen development preferences. If the profile links a detailed companion, load only the part relevant to this piece; do not require the full reference library or a new preference interview for ordinary writing. If the profile is unavailable, disclose the gap and preserve the supplied draft's observable voice without inventing one.
 
 Read only the route that fits the request:
 
