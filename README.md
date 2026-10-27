@@ -1,6 +1,6 @@
 # EKit
 
-EKit is Elias’s kit: the skills and shared instructions I use with Codex, Claude Code and OpenCode.
+EKit is Elias’ kit: the skills and shared instructions I use with Codex, Claude Code and OpenCode.
 
 I keep them here so I can change a workflow in one place and use it across my personal setup. It also gives me a public reference I can download from another machine without signing into GitHub.
 
