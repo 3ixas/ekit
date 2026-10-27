@@ -1,0 +1,6 @@
+interface:
+  display_name: "Planning"
+  short_description: "Review work and plan the next day or week"
+  default_prompt: "Use planning to review my work and plan tomorrow."
+policy:
+  allow_implicit_invocation: true

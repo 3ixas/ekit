@@ -1,0 +1,26 @@
+{
+  "id": "planning",
+  "group": "knowledge-and-productivity",
+  "origin": "original",
+  "invocation": [
+    "explicit"
+  ],
+  "sources": [],
+  "dependencies": {
+    "skills": [
+      "obsidian",
+      "grilling"
+    ],
+    "tools": [
+      "todoist",
+      "calendar",
+      "obsidian"
+    ]
+  },
+  "reviewed": "2026-10-27",
+  "owned_changes": {
+    "date": "2026-10-27",
+    "method": "Independently written from Elias's approved personal-planning workflow; no new external text copied.",
+    "changes": "Adds a dedicated Todoist-centred daily and weekly planning owner with complete coverage, individual decisions, a private 30-day review record and snapshots; delegates direction and focus to Obsidian. Uses the owned grilling skill as a supporting method for dependency-aware planning question rounds."
+  }
+}

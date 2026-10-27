@@ -1,6 +1,6 @@
 ---
 name: obsidian
-description: Retrieve, create, update, or validate Obsidian knowledge; review personal direction or current focus, plan next week, or prepare tomorrow's work using live vault context and deliberate human selection.
+description: Retrieve, create, update, or validate Obsidian knowledge; review personal direction and current focus using live vault context, dated checkpoints and bounded evidence.
 ---
 
 # Obsidian
@@ -22,7 +22,7 @@ For a goal, life-direction, current-focus or commitment check, read [the review 
 
 ## Personal planning
 
-For “review my long-term direction”, “review my current focus”, “plan next week” or “plan tomorrow”, use [the planning workflow](references/personal-planning.md). Resolve the live operating manual, current focus, standing defaults and relevant weekly plan; disclose any provider transition before relying on task evidence. Help choose and reduce work, then perform requested bookkeeping. The user chooses commitments and working times. Do not automatically create a timetable, roll unfinished work forward, or reopen higher-level decisions during ordinary day planning.
+For long-term direction or current-focus reflection, use [the planning context](references/personal-planning.md) with the commitment-review contract. For daily and weekly operational planning, the dedicated `planning` skill owns the Todoist review and delegates personal context here. Preserve the four entry points and the live vault model; do not silently change providers or commitments.
 
 ## Boundaries
 

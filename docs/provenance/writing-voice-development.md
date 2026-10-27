@@ -5,10 +5,10 @@ Owned design requirements for the writing capability, reviewed 2026-10-27. The i
 - Distinguish observed author habits from explicitly chosen development preferences and publication/project requirements.
 - Preserve existing profile evidence when adding aspirations; a selected influence does not establish an existing habit, experience, opinion or measured result.
 - Translate references into general craft decisions without reproducing a named writer's distinctive style or importing literary prose.
-- Keep the everyday profile short. Load only the relevant part of an optional companion named by that profile; ordinary drafting does not require a new interview or a complete reference library.
+- Keep the everyday profile concise. On every writing-skill invocation, read the full personal voice profile and its writing-preferences companion before working on prose, including short tasks and work for another author. Retrieve any truncated remainder, then apply only the context appropriate to the task. Prior summaries and selected sections do not satisfy the read requirement. External linked works and a new preference interview are not required.
 - Select expressive range by the reader, purpose and approved profile. Product brand guidance and academic assignment conventions retain precedence.
 - Calibrate original variants against the same supplied or explicitly hypothetical facts, preserving uncertainty and recording exactly what the author accepts.
-- If profile evidence is unavailable, disclose that gap and preserve the supplied draft's observable voice; do not reconstruct missing private preferences or search unrelated personal records.
+- If either personal file is unavailable, identify it and disclose incomplete context loading and preserve the supplied draft's observable voice; do not reconstruct missing private preferences or search unrelated personal records.
 - Profile and skill changes do not grant sending, publishing, deployment, paid-action or runtime-activation authority.
 
 This is original owned guidance under the repository's applicable root licence. Existing upstream source records and notices retain their own terms.

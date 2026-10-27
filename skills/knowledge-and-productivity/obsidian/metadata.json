@@ -24,11 +24,11 @@
       "calendar"
     ]
   },
-  "reviewed": "2026-10-26",
+  "reviewed": "2026-10-27",
   "owned_changes": {
-    "date": "2026-10-25",
+    "date": "2026-10-27",
     "method": "Independently written from the user-approved planning design; no additional upstream text copied. Existing upstream provenance and licence unchanged.",
-    "changes": "Retains commitment reviews; adds direction/focus/week/tomorrow entry points, deliberate selection, transition-aware provider resolution, field-preserving task bookkeeping and bounded persistence. Personal priorities and provider status remain in the live vault.",
+    "changes": "Retains direction, focus and commitment reviews; delegates daily and weekly operational planning to the dedicated planning skill. Existing source provenance and licence remain unchanged.",
     "maintained_contract": "skills/knowledge-and-productivity/obsidian/references/personal-planning.md"
   }
 }

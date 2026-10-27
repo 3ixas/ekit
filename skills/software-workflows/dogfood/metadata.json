@@ -23,6 +23,15 @@
       "license": "reference-only-no-copied-text",
       "use": "informed-by",
       "changes": "Theo, These 3 skills changed my life (2026-10-26), YouTube 5Bmp9cz1JN8. Transcript inspected 25:27\u201326:53 and 28:01\u201328:17. Trigger descriptions and model-loadable workflows; optional command syntax. Independently written adaptation; no transcript text copied. Digest identifies this bounded evidence note, not video bytes or a full transcript."
+    },
+    {
+      "repository": "https://x.com/roundtablespace/status/2111717667228770611",
+      "ref": "status:2111717667228770611",
+      "path": "user-supplied post text",
+      "digest": "sha256:cb7466ca3b6b4c1bac882100b46d0bbd3f31f922f0dd78ff4606e0bce501970d",
+      "license": "reference-only-no-copied-text",
+      "use": "informed-by",
+      "changes": "User-supplied post text reviewed 2026-10-27; independently written first-use pass adapts contrasting browser journeys with proportional coverage, evidence, authority and retest boundaries. Digest identifies the bounded evidence note, not the full post. Original post was not independently retrieved."
     }
   ],
   "dependencies": {
@@ -33,5 +42,5 @@
       "browser"
     ]
   },
-  "reviewed": "2026-10-26"
+  "reviewed": "2026-10-27"
 }

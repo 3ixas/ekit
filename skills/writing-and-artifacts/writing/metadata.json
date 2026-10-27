@@ -53,12 +53,12 @@
     },
     {
       "repository": "original owned writing-profile requirements",
-      "ref": "sha256:5e01bcac51785b87a3cf1489ac3c8580ffa7d2224c5937f8368e08242fddcbe4",
+      "ref": "sha256:c1be9cfe0f83472e2fdc88c8132a33dfeddce295e54348a87d6be657dd44b931",
       "path": "docs/provenance/writing-voice-development.md",
-      "digest": "sha256:5e01bcac51785b87a3cf1489ac3c8580ffa7d2224c5937f8368e08242fddcbe4",
+      "digest": "sha256:c1be9cfe0f83472e2fdc88c8132a33dfeddce295e54348a87d6be657dd44b931",
       "license": "user-approved-writing-preferences",
       "use": "informed-by",
-      "changes": "Independently written contextual voice handling: observed traits versus chosen development preferences, optional companion loading, fact-preserving calibration and missing-evidence behaviour. Personal selections and private assessments remain outside this publication source. Existing upstream sources and notices unchanged."
+      "changes": "Independently written contextual voice handling: observed traits versus chosen development preferences, mandatory full reads of both personal context files on every invocation, truncation recovery and explicit missing-file disclosure, fact-preserving calibration and missing-evidence behaviour. Personal selections and private assessments remain outside this publication source. Existing upstream sources and notices unchanged."
     }
   ],
   "dependencies": {
