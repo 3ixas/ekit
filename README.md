@@ -1,14 +1,39 @@
 # EKit
 
-This repository is the sole editable source for every personal skill and shared agent instruction I deliberately use. It supports Codex, Claude Code, and OpenCode through host-specific generated projections. External services and CLIs remain separate tools; their authentication and access do not transfer between agents.
+EKit is Elias’s kit: the skills and shared instructions I use with Codex, Claude Code and OpenCode.
 
-I normally describe what I want in ordinary language. My active agent selects one primary owner and loads relevant supporting specialists. User-requested (`explicit`) workflows load when I name or clearly request their method in ordinary language or dictation. Multiple workflows can be requested together under one primary owner. `$skill-name` in Codex and `/skill-name` in Claude Code remain optional shortcuts. Request recognition is model-guided; loading never grants additional action authority.
+I keep them here so I can change a workflow in one place and use it across my personal setup. It also gives me a public reference I can download from another machine without signing into GitHub.
 
-This is my personal collection, tailored to my workflows rather than a general-purpose toolkit. There is no promise of support or compatibility for other setups. External contributions are considered case by case.
+The collection covers software development, research, writing, documents and a few personal routines. Some skills are adapted from other people’s work; others are specific to how I use agents.
 
-For browser downloads and selective use on another machine, see [download skills for work](docs/work-downloads.md). [Publication readiness](docs/publication-readiness.md) records the remaining gates before making this repository public.
+[Browse the skills](skills/) · [Download complete bundles](docs/work-downloads.md) · [Set up the personal system](docs/agent-portability.md)
 
-## Day-to-day paths
+## How I use it
+
+I normally describe what I want in ordinary language. The agent selects a workflow and brings in the relevant specialists. When I want a particular method, I name it:
+
+```text
+Use Grill With Docs to help me work through this feature before we build it.
+```
+
+```text
+Implement the next ready ticket, check it against the requirements and review the change.
+```
+
+```text
+Review this explanation and make it clearer, keeping my voice.
+```
+
+For software work, I want the agent to understand the task, make a focused change and show evidence that it works. The usual path for a larger change is:
+
+**Work through the problem → write the spec → break it into tickets → implement each slice → verify → review the session.**
+
+That maps to [`grill-with-docs`](skills/software-workflows/grill-with-docs/SKILL.md) → [`to-spec`](skills/software-workflows/to-spec/SKILL.md) → [`to-tickets`](skills/software-workflows/to-tickets/SKILL.md) → [`implement`](skills/software-workflows/implement/SKILL.md) → [`verify`](skills/software-workflows/verify/SKILL.md) → [`retro`](skills/agent-system/retro/SKILL.md). Smaller, settled changes can go straight to `implement`. `implement-spec` handles an approved set of tickets with parallel agents.
+
+Naming a workflow counts as requesting it; `$skill-name` in Codex and `/skill-name` in Claude Code are optional shortcuts. The agent can combine requested workflows and supporting skills, but loading a skill does not grant permission to publish, send messages or take other actions outside the task. See the [portability guide](docs/agent-portability.md) for each host’s behaviour and limits.
+
+<details>
+<summary>More workflows and when I use them</summary>
 
 | Situation | Usual path |
 |---|---|
@@ -38,7 +63,17 @@ Full Stop and Full Send accept natural language or dictation; slash/dollar comma
 
 `grilling` is the general exhaustive alignment workflow. It works with codebases, product ideas, writing, documents, and personal or life decisions. `grill-with-docs` is the software wrapper that runs `grilling` with `domain-modeling` and durable project documents.
 
-## Groups
+</details>
+
+## Use a few skills elsewhere
+
+Start with [the active skills](skills/) and choose the parts that fit your setup. Each skill is a directory: its references, scripts, assets, metadata and notices can matter just as much as `SKILL.md`.
+
+The [download guide](docs/work-downloads.md) covers browser downloads at a recorded commit, dependencies and comparison with an existing installation. Public downloads do not need a GitHub login. The work network’s download route and receiving agent still need checking on that machine.
+
+If you use this at work, keep the work machine’s instructions, accounts and installation process in charge. Review the selected bundles there before changing anything. The full personal sync commands below also manage global instructions; use the download guide for selective adoption.
+
+## What’s here
 
 | Group | Responsibility |
 |---|---|
@@ -55,25 +90,48 @@ Approved active skills live in `skills/<group>/<id>`. Candidates under `candidat
 
 The [activation manifest](docs/activation-manifest.md) lists the active, candidate, and paused bundles with their lifecycle, group, invocation, and origin.
 
-## Manage the repository
+## Maintain the personal setup
+
+I edit the source in this repository, then generate the installed copies for each agent. Installed files are generated output; changes belong here.
+
+After a source change, run the checks:
 
 ```sh
 python3 scripts/skills.py check --list
 python3 -m unittest discover -s tests -v
+```
+
+Then preview the host projections:
+
+```sh
 python3 scripts/skills.py sync
-python3 scripts/skills.py updates
+python3 scripts/skills.py claude-sync
+python3 scripts/skills.py opencode-sync
+```
+
+These commands show the proposed changes without applying them. Review additions, changes, removals, global instructions and the rollback path before using `--apply`. Application requires a marked runtime and creates a timestamped backup. The one-time `sync --apply --adopt-unmanaged` migration also backs up an existing unmarked runtime.
+
+See the [portability guide](docs/agent-portability.md) for setup, rollback and fresh-session checks. The [Claude plugin](plugins/elias-mods/README.md) is installed and updated separately.
+
+<details>
+<summary>Health checks and upstream updates</summary>
+
+```sh
 python3 scripts/skills.py doctor
 python3 scripts/skills.py claude-doctor
 python3 scripts/skills.py opencode-doctor
 python3 scripts/skills.py capabilities
+python3 scripts/skills.py updates
 ```
 
-`sync` is a preview unless `--apply` is supplied. Application requires a marked runtime, creates a timestamped rollback snapshot, stages the complete runtime beside the target, swaps it atomically, installs the canonical global `AGENTS.md`, and verifies hashes. The one-time first migration uses `sync --apply --adopt-unmanaged`; it backs up the old unmarked runtime before replacement.
+`updates` compares the recorded source paths with upstream. It never overwrites an owned skill. I review a useful change through `skill-review`, adapt it through `skill-authoring`, then validate and preview the projections before syncing.
 
-See [using the system across agents](docs/agent-portability.md) for first-time setup, routine sync and health checks, host-specific invocation limits, and the latest fresh-session verification record.
+</details>
 
-## Review and provenance
+## Sources and licences
 
-Every adapted or synthesized bundle records its sources in `metadata.json`. [Third-party notices](THIRD_PARTY_NOTICES.md) describe licences and copying limits. The maintained source inventory and adaptation treatment live in [provenance](docs/provenance/retained-source-treatment.md). Historical assessments and private review receipts stay outside the public collection.
+This collection includes adaptations from [Matt Pocock’s skills](https://github.com/mattpocock/skills), [Poteto’s PStack](https://github.com/cursor/plugins/tree/main/pstack) and other sources. Each adapted skill records its source, revision and changes in `metadata.json`.
 
-`python3 scripts/skills.py updates` compares pinned source paths with their current upstream state. It never changes an owned skill. Review a useful change through `skill-review`, adapt it through `skill-authoring`, run focused behavioural checks, then sync.
+The [root MIT licence](LICENSE) covers my eligible original contributions. Upstream material keeps its own terms; see [licence scope](LICENSE_SCOPE.md), [third-party notices](THIRD_PARTY_NOTICES.md) and the [source inventory](docs/provenance/retained-source-treatment.md). Keep the relevant notices and licence files with any bundles you use.
+
+I maintain EKit for my own use and consider contributions case by case. There is no support or compatibility promise for other setups.
