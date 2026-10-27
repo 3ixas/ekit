@@ -1,0 +1,34 @@
+{
+  "id": "observability",
+  "group": "engineering-specialists",
+  "origin": "synthesized",
+  "invocation": [
+    "automatic",
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/addyosmani/agent-skills",
+      "ref": "be4e44a9fbc5e8df0beaefadbb28bd22ee61cc39",
+      "path": "skills/observability-and-instrumentation",
+      "digest": "git-tree:1e8f1c0144e2b8f7859f5870329a31f8abc58193",
+      "license": "mit-addyosmani",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned observability capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/o11y-dev/opentelemetry-skill",
+      "ref": "580194890c61f8a9769ca1299bf0a13446a599a0",
+      "path": "SKILL.md",
+      "digest": "git-blob:15c06d5a395d0e0eca1a380b41b532b7d121bd9c",
+      "license": "apache-2.0-o11y",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned observability capability; vendor routing and unrelated framework assumptions removed."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": []
+  },
+  "reviewed": "2026-10-26"
+}

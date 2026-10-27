@@ -1,0 +1,16 @@
+{
+  "id": "dinner-decider",
+  "group": "personal-workflows",
+  "origin": "original",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [],
+  "dependencies": {
+    "skills": [],
+    "tools": [
+      "exa-search"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

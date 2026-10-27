@@ -1,0 +1,45 @@
+{
+  "id": "pr",
+  "group": "software-workflows",
+  "origin": "adapted",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "24fe0ef7737efae15c87225755e9f6f5965e4888",
+      "path": "skills/engineering/pr",
+      "digest": "git-tree:00b896d811adffad747c7ca30078d909d60c7f93",
+      "license": "mit-mattpocock",
+      "use": "adapted",
+      "changes": "Adopted the graduated upstream skill from the open v1.3 pull request (mattpocock/skills#1120), keeping its CREDITS.md attribution to Dex Horthy's show-me. Owned change: read an older CONTEXT.md when a project has no GLOSSARY.md. The upstream CREDITS.md lives at references/credits.md because owned bundles only allow standard entries."
+    },
+    {
+      "repository": "https://github.com/humanlayer/skills",
+      "ref": "ca7c8088db69e315a8b2deea43820270457f8f3c",
+      "path": "plugins/visual-pr/skills/visual-pr",
+      "digest": "git-tree:2104d685d33ba9594a4dfe13241f0f7f02190401",
+      "license": "mit-humanlayer-skills",
+      "use": "informed-by",
+      "changes": "Added the one-sentence why and the data-contract view to the Summary; the .humanlayer task storage, automatic PR creation, and fixed template were not adopted."
+    },
+    {
+      "repository": "https://github.com/t3dotgg/tstack",
+      "ref": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+      "path": "skills/file-pr/SKILL.md",
+      "digest": "sha256:174a7ae52e3b9d17f2bd0eaf0a11a89d744d1249164ecbdb0e642359eee75b1b",
+      "license": "mit-tstack",
+      "use": "adapted",
+      "changes": "Independently written adaptation. Publication handoff checks existing PR, context/privacy and actual proof; retains owned prose/template and omits model attribution."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": [
+      "git",
+      "github"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

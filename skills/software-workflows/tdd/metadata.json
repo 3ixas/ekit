@@ -1,0 +1,53 @@
+{
+  "id": "tdd",
+  "group": "software-workflows",
+  "origin": "synthesized",
+  "invocation": [
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "24fe0ef7737efae15c87225755e9f6f5965e4888",
+      "path": "skills/engineering/tdd",
+      "digest": "git-tree:bf1bf5ffcd63aa8abce830f2955a853c121fb463",
+      "license": "mit-mattpocock",
+      "use": "adapted",
+      "changes": "Copied the pinned upstream method into the owned bundle without semantic changes. Re-pinned to v1.3.1 on 2026-10-05; the only upstream change was the CONTEXT.md to GLOSSARY.md rename, already applied. Updated the stale codebase-design invocation to the owned architecture vocabulary reference on 2026-10-26. Replaced the stale codebase-design loader with the owned architecture vocabulary source on 2026-10-26; preserved seam confirmation and red-green method."
+    },
+    {
+      "repository": "https://github.com/cursor/plugins",
+      "ref": "5bf2b1544db739998121a306340631963c2ff3de",
+      "path": ".",
+      "digest": "git-tree:331716e6a03a58540d1d2c204dc282adf7374039",
+      "license": "mit-pstack",
+      "use": "informed-by",
+      "changes": "Repository-wide assessment informed the owned design; no upstream prose or assets were copied."
+    },
+    {
+      "repository": "https://github.com/trailofbits/skills",
+      "ref": "321ccfe628eca0d314b0ee4eaffcdd8a05639aaf",
+      "path": "plugins/property-based-testing/skills/property-based-testing/SKILL.md",
+      "digest": "git-blob:1cc39d8d8cba5955bf9c8d7c9a2aef348722a55e",
+      "license": "cc-by-sa-4.0-trailofbits",
+      "use": "copied",
+      "changes": "Pinned source body retained verbatim in references/source-methods/source-3-skill.md under CC BY-SA 4.0; local changes are the attribution header, Markdown fence and relocation. Owned operational guidance is separate. Corrected the earlier informed-by classification during the 2026-10-26 publication review."
+    },
+    {
+      "repository": "https://github.com/wdm0006/python-skills",
+      "ref": "954796b7fc28e342cf08f80b9a4a39414a419c7a",
+      "path": "skills/python/testing-strategy/SKILL.md",
+      "digest": "git-blob:067f5ce9125b0123f8563aa10bb9db9960e97427",
+      "license": "mit-wdm0006",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned tdd capability; vendor routing and unrelated framework assumptions removed."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "architecture"
+    ],
+    "tools": []
+  },
+  "reviewed": "2026-10-26"
+}

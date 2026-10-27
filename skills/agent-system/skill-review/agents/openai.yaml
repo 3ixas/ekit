@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skill Review"
+  short_description: "Assess skill value, overlap, provenance, and behaviour"
+  default_prompt: "Use $skill-review for this request."

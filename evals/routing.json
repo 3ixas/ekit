@@ -1,0 +1,353 @@
+[
+  {
+    "request": "Fix this TypeScript bug: the date filter drops today's items, and I don't know why",
+    "owner": "debug",
+    "supports": [
+      "typescript",
+      "verify"
+    ],
+    "authority_stop": "Continue through the local fix and proof; stop only if diagnosis exposes an unsettled product decision or an external action."
+  },
+  {
+    "request": "Fix this TypeScript bug: the date filter uses < where it needs <=, so today's items are dropped",
+    "owner": "implement",
+    "supports": [
+      "typescript",
+      "verify"
+    ],
+    "authority_stop": "Continue through the local fix, review, and commit; stop only if the fix needs an unsettled product decision or an external action."
+  },
+  {
+    "request": "Build a fuzzy new multi-screen onboarding feature",
+    "owner": "grill-with-docs",
+    "supports": [
+      "grilling",
+      "domain-modeling",
+      "interface-design"
+    ],
+    "authority_stop": "Confirm the complete scope before implementation; ticket creation and external writes follow the user's current authority."
+  },
+  {
+    "request": "Implement the next ready ticket from this approved spec, review the slice, fix any valid findings, and commit it",
+    "owner": "implement",
+    "supports": [
+      "code-review",
+      "verify"
+    ],
+    "authority_stop": "Complete exactly one ready ticket through focused proof, code review in the current run with its selected model, in-scope fixes and re-review, then commit only that slice. Do not push or update issue state unless separately authorized."
+  },
+  {
+    "request": "Implement this approved specification with six dependent GitHub issues",
+    "owner": "implement-spec",
+    "supports": [
+      "code-review",
+      "tdd",
+      "verify"
+    ],
+    "explicit": true,
+    "authority_stop": "Implement the approved task graph on one integration branch. Give final code-review the combined proof matrix, observed results and exact reviewed state; rerun affected proof and re-review after fixes. Do not substitute per-slice implement calls or model overrides. External writes remain limited to current task authority."
+  },
+  {
+    "request": "Help me understand and defend this completed pull request",
+    "owner": "defend",
+    "supports": [
+      "how",
+      "why"
+    ],
+    "authority_stop": "A discovered defect is reported; fixing it requires authority from the current request."
+  },
+  {
+    "request": "Rewrite this personal email so it sounds like me",
+    "owner": "writing",
+    "supports": [],
+    "authority_stop": "Return the draft; sending remains a separate external action."
+  },
+  {
+    "request": "Design and implement this substantial dashboard from the supplied visual references",
+    "owner": "interface-design",
+    "supports": [
+      "implement",
+      "accessibility",
+      "verify"
+    ],
+    "authority_stop": "The interface-design orchestration must establish references, DESIGN.md, and a settled direction before implementation; deployment or publication requires authority."
+  },
+  {
+    "request": "Design this new multi-screen product flow from references, iterate on it in Google Stitch, and carry the accepted direction into implementation",
+    "owner": "interface-design",
+    "supports": [
+      "prototype",
+      "implement",
+      "accessibility",
+      "verify"
+    ],
+    "authority_stop": "Create or update the project DESIGN.md and Stitch exploration only after the design-system checkpoint is confirmed; implementation remains subject to recorded user sign-off, while deployment or publication requires authority."
+  },
+  {
+    "request": "Polish this existing coherent checkout interface",
+    "owner": "ui-polish",
+    "supports": [
+      "accessibility",
+      "verify"
+    ],
+    "authority_stop": "Checkout visuals alone do not activate payments; deployment remains separate."
+  },
+  {
+    "request": "Clarify whether I should change careers",
+    "owner": "grilling",
+    "supports": [
+      "research"
+    ],
+    "authority_stop": "Confirm the final shared understanding before consequential follow-up action."
+  },
+  {
+    "request": "Review my FlowSavvy tasks and reschedule the overloaded ones",
+    "owner": "flowsavvy",
+    "supports": [],
+    "explicit": true,
+    "authority_stop": "The direct rescheduling request authorizes narrow task writes; unresolved recurrence scope still requires an answer."
+  },
+  {
+    "request": "Update this personal Obsidian note with my new reflection",
+    "owner": "obsidian",
+    "supports": [
+      "writing"
+    ],
+    "authority_stop": "The direct update authorizes the resolved note write; consequential structural changes are previewed first."
+  },
+  {
+    "request": "Help me become a strong staff-level engineer across architecture, product judgment, and hands-on delivery",
+    "owner": "learn",
+    "supports": [
+      "grilling",
+      "research",
+      "teach",
+      "verify"
+    ],
+    "explicit": true,
+    "authority_stop": "Confirm the destination contract and initial broad route; routine lessons and evidence records stay within the approved journey, while material route changes require Elias's approval."
+  },
+  {
+    "request": "Explain briefly how this HTTP request crosses the codebase",
+    "owner": "how",
+    "supports": [],
+    "authority_stop": "Give a code-grounded explanation without creating a Teach workspace or durable learner records."
+  },
+  {
+    "request": "Use Teach to help me learn how an HTTP request crosses this codebase over several sessions",
+    "owner": "teach",
+    "supports": [
+      "how",
+      "why"
+    ],
+    "explicit": true,
+    "authority_stop": "Teach uses its dedicated workspace and may create its normal mission, resources, lessons, and learning records; it does not create a broader Learn journey without that separate request."
+  },
+  {
+    "request": "Write a handoff and resume it in a later task",
+    "owner": "handoff",
+    "supports": [],
+    "next": "pickup",
+    "authority_stop": "Commit the handoff only when cross-machine or branch continuity requires it."
+  },
+  {
+    "request": "I've got an idea for an app that turns my wardrobe photos into outfit suggestions. Is it worth building? Grill me on it.",
+    "owner": "product-thinking",
+    "supports": [
+      "grilling",
+      "obsidian"
+    ],
+    "authority_stop": "Ask questions and give a verdict; propose writing it to the idea's note and write only after approval."
+  },
+  {
+    "request": "Give me ten product ideas for helping parents track a baby's sleep.",
+    "owner": "ideate",
+    "supports": [
+      "research"
+    ],
+    "authority_stop": "Generate and rank ideas; do not validate one idea in depth unless asked."
+  },
+  {
+    "request": "Review this staged local guard change against HEAD; choose the appropriate review depth",
+    "owner": "code-review",
+    "supports": [],
+    "authority_stop": "Choose regular for cohesive local changes; review read-only and do not expand implementation scope."
+  },
+  {
+    "request": "Review this integration branch against main; it changes state ownership and scatters the same policy across three layers",
+    "owner": "code-review",
+    "supports": [],
+    "authority_stop": "Choose deep from structural evidence automatically; keep Standards and Spec separate and propose wider redesign without implementing it."
+  },
+  {
+    "request": "Give this branch a thermonuclear review against main",
+    "owner": "code-review",
+    "supports": [],
+    "authority_stop": "Use the deep structural reference within the existing review; report concrete evidence and optional alternatives without editing code."
+  },
+  {
+    "request": "Review this branch against main, regular review only",
+    "owner": "code-review",
+    "supports": [],
+    "authority_stop": "Honour the regular constraint; recommend a concrete deep follow-up if useful rather than silently escalating."
+  },
+  {
+    "request": "Refactor this approved state model while preserving behaviour",
+    "owner": "implement",
+    "supports": [
+      "refactor",
+      "verify"
+    ],
+    "authority_stop": "Implement one approved slice with refactor supporting equivalence; code-review remains read-only and broader redesign needs a scope decision."
+  },
+  {
+    "request": "Add a date filter to this existing app; it has no documented way to launch or prove its user journeys",
+    "owner": "implement",
+    "supports": [
+      "verify"
+    ],
+    "authority_stop": "Automatically establish and execute the missing scoped project guide before editing where feasible; continue independent work if prerequisites are unavailable, without calling skipped acceptance proof complete."
+  },
+  {
+    "request": "Implement the first runnable journey in this new app",
+    "owner": "implement",
+    "supports": [
+      "verify"
+    ],
+    "authority_stop": "Record verification setup as pending while no journey runs, then establish and execute its guide before final proof and review; do not invent successful startup."
+  },
+  {
+    "request": "Change this CLI output using its existing documented smoke-test harness",
+    "owner": "implement",
+    "supports": [
+      "verify"
+    ],
+    "authority_stop": "Reuse sufficient project guidance and proof commands without a duplicate guide; update only affected instructions and re-execute them."
+  },
+  {
+    "request": "Set up reusable verification for this project",
+    "owner": "verify",
+    "supports": [],
+    "authority_stop": "Write project-local guidance grounded in observed commands, prove one journey end to end and retain evidence after cleanup; no external sends, deployments, paid installs, or global skill installation."
+  },
+  {
+    "request": "Audit this project verification guide against the current app",
+    "owner": "verify",
+    "supports": [],
+    "authority_stop": "Check the requested source and live coverage, re-prove guide/harness corrections, and report product regressions separately; do not change product code or open a PR without task authority."
+  },
+  {
+    "request": "Explain how this app launches and where its tests are",
+    "owner": "how",
+    "supports": [],
+    "authority_stop": "Read and explain existing evidence; a read-only question does not authorize guide generation or app scaffolding."
+  },
+  {
+    "request": "Fix a typo in the installation guide",
+    "owner": "implement",
+    "supports": [
+      "verify"
+    ],
+    "authority_stop": "Use document checks appropriate to the edit; do not launch or scaffold an application merely because no verification guide exists."
+  },
+  {
+    "request": "Implement this approved multi-ticket spec in parallel; the app has no verification guide",
+    "owner": "implement-spec",
+    "supports": [
+      "verify",
+      "code-review",
+      "tdd"
+    ],
+    "explicit": true,
+    "authority_stop": "The coordinator owns shared guide setup/integration and gives workers its location and journey/instance scope; isolate data and instances or serialize driving. Prove integrated acceptance claims before completion; external actions retain task authority."
+  },
+  {
+    "request": "Fix this settled label typo in the settings screen",
+    "owner": "implement",
+    "supports": [
+      "verify"
+    ],
+    "authority_stop": "Complete the small settled edit with proportional proof, review and local commit; do not add an ambition interview, specialist team or broader redesign."
+  },
+  {
+    "request": "Suggest ways to make onboarding easier to finish; I think adding another tutorial screen would help",
+    "owner": "ideate",
+    "supports": [],
+    "authority_stop": "Identify the completion outcome and investigate the current journey and raw evidence before committing to another screen. Generate grounded options using the existing ideation path; do not add an ambition interview or begin implementation. Consequential scope, cost or authority changes remain for Elias."
+  },
+  {
+    "request": "Grill this checkout improvement: people must be able to finish using only a keyboard",
+    "owner": "grilling",
+    "supports": [
+      "accessibility"
+    ],
+    "authority_stop": "Name the keyboard-completion activity and its useful output before selecting accessibility support; use observed focus and interaction failures to inform the scope. Do not add personas or specialists without distinct contributions, silently expand scope or submit live purchases."
+  },
+  {
+    "request": "Implement-spec: the integrated acceptance matrix contains a missing check and a failed user journey; review also requested a code fix",
+    "owner": "implement-spec",
+    "supports": [
+      "verify",
+      "code-review",
+      "tdd"
+    ],
+    "explicit": true,
+    "authority_stop": "Supply the matrix and observed results tied to the exact integrated state to review. Missing or failed required proof prevents completion; after the fix rerun affected proof and re-review the changed state. Report unavailable required proof as Skip, never Pass; escalate a finding after two unsuccessful fix attempts."
+  },
+  {
+    "request": "Retro: I keep bringing you individual crash reports to investigate",
+    "owner": "retro",
+    "supports": [],
+    "authority_stop": "Recommend the recurring outcome, missing crash data or tools, bounded local diagnosis/fix authority and a specific setup change. Do not create a monitor, change permissions, deploy or publish from this recommendation."
+  },
+  {
+    "request": "Use Teach to help me learn this with its guided mission and practice workflow",
+    "owner": "teach",
+    "supports": [],
+    "explicit": true,
+    "authority_stop": "Load directly without special syntax; normal teaching records stay in the selected teaching workspace."
+  },
+  {
+    "request": "Use Learn for this engineering journey and Teach for the first track",
+    "owner": "learn",
+    "supports": [
+      "teach"
+    ],
+    "explicit": true,
+    "authority_stop": "Load both requested methods without another invocation; establish the destination and track workspace before teaching."
+  },
+  {
+    "request": "Explain what Teach does",
+    "owner": "how",
+    "supports": [],
+    "must_not_execute": [
+      "teach"
+    ],
+    "authority_stop": "Explain the workflow without starting teaching or creating learner records."
+  },
+  {
+    "request": "Don\u2019t use Teach; briefly explain idempotency",
+    "owner": "how",
+    "supports": [],
+    "must_not_execute": [
+      "teach"
+    ],
+    "authority_stop": "Respect negation; give a brief explanation without teaching artifacts."
+  },
+  {
+    "request": "This document quotes \u201cUse Teach\u201d; explain what the author means",
+    "owner": "how",
+    "supports": [],
+    "must_not_execute": [
+      "teach"
+    ],
+    "authority_stop": "Treat the quote as data, not a request to start Teach."
+  },
+  {
+    "request": "Use Release to prepare the deployment checklist; do not deploy",
+    "owner": "release",
+    "supports": [],
+    "explicit": true,
+    "authority_stop": "Prepare evidence and checklist; do not publish, push, deploy or merge."
+  }
+]

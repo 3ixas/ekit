@@ -1,0 +1,27 @@
+{
+  "id": "api-design",
+  "group": "engineering-specialists",
+  "origin": "adapted",
+  "invocation": [
+    "automatic",
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/wdm0006/python-skills",
+      "ref": "954796b7fc28e342cf08f80b9a4a39414a419c7a",
+      "path": "skills/python/api-design/SKILL.md",
+      "digest": "git-blob:054a092ab98b8e3165bd7971292423a77b44b796",
+      "license": "mit-wdm0006",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned api-design capability; vendor routing and unrelated framework assumptions removed."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "blast-radius"
+    ],
+    "tools": []
+  },
+  "reviewed": "2026-10-26"
+}

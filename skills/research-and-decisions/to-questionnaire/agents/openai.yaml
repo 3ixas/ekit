@@ -1,0 +1,4 @@
+interface:
+  display_name: "to-questionnaire"
+  short_description: "Prepare a questionnaire for a knowledgeable stakeholder"
+  default_prompt: "Use $to-questionnaire for this request."

@@ -1,0 +1,6 @@
+interface:
+  display_name: "FlowSavvy"
+  short_description: "Read, plan, and update FlowSavvy tasks"
+  default_prompt: "Use $flowsavvy to review or update my FlowSavvy tasks."
+policy:
+  allow_implicit_invocation: true

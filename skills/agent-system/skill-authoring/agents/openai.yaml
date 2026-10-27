@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skill Authoring"
+  short_description: "Author an approved skill and verify its behaviour"
+  default_prompt: "Use $skill-authoring for this request."

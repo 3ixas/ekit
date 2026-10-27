@@ -1,0 +1,4 @@
+interface:
+  display_name: "Wait What"
+  short_description: "Recover immediately when Elias says he is lost by restating the current point in plain language"
+  default_prompt: "Use $wait-what for this request."

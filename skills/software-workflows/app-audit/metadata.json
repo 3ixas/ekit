@@ -1,0 +1,65 @@
+{
+  "id": "app-audit",
+  "group": "software-workflows",
+  "origin": "original",
+  "invocation": [
+    "explicit"
+  ],
+  "sources": [
+    {
+      "repository": "https://is-agentic.com",
+      "ref": "sha256:41cacbc952a0d9b8336773d531abd573e0916092deb1fb6c1e468b03451b997d",
+      "path": ".well-known/agent-skills/is-agentic/SKILL.md",
+      "digest": "sha256:41cacbc952a0d9b8336773d531abd573e0916092deb1fb6c1e468b03451b997d",
+      "license": "is-agentic-reference",
+      "use": "informed-by",
+      "changes": "Independently written agent-readiness guidance under app-audit; local-first checks, exact-target public report retrieval, publication authority, evidence prioritization, and freshness boundaries. No upstream prose or assets imported. SHA-256 identifies the exact public response reviewed 2026-10-22 (Accept: text/markdown), not a vendor versioned permalink; no immutable upstream Git revision was available."
+    },
+    {
+      "repository": "https://is-agentic.com",
+      "ref": "sha256:b1b45d0a580b7ad831282c338894f233db913297d183fbf6210e5b9a3ff03a1c",
+      "path": "docs",
+      "digest": "sha256:b1b45d0a580b7ad831282c338894f233db913297d183fbf6210e5b9a3ff03a1c",
+      "license": "is-agentic-reference",
+      "use": "informed-by",
+      "changes": "Independently written agent-readiness guidance under app-audit; local-first checks, exact-target public report retrieval, publication authority, evidence prioritization, and freshness boundaries. No upstream prose or assets imported. SHA-256 identifies the exact public response reviewed 2026-10-22 (Accept: text/markdown), not a vendor versioned permalink; no immutable upstream Git revision was available."
+    },
+    {
+      "repository": "https://is-agentic.com",
+      "ref": "sha256:0a43ce46412832086ef7379f02ffc7a11d79286eb04556f72d6ff9e884ba3554",
+      "path": "methodology",
+      "digest": "sha256:0a43ce46412832086ef7379f02ffc7a11d79286eb04556f72d6ff9e884ba3554",
+      "license": "is-agentic-reference",
+      "use": "informed-by",
+      "changes": "Independently written agent-readiness guidance under app-audit; local-first checks, exact-target public report retrieval, publication authority, evidence prioritization, and freshness boundaries. No upstream prose or assets imported. SHA-256 identifies the exact public response reviewed 2026-10-22 (Accept: text/markdown), not a vendor versioned permalink; no immutable upstream Git revision was available."
+    },
+    {
+      "repository": "https://is-agentic.com",
+      "ref": "sha256:d6d30f867add739704c2cc90adb2300ee75a25f9dcb04b84bdfdb9a7625301ac",
+      "path": "about",
+      "digest": "sha256:d6d30f867add739704c2cc90adb2300ee75a25f9dcb04b84bdfdb9a7625301ac",
+      "license": "is-agentic-reference",
+      "use": "informed-by",
+      "changes": "Independently written agent-readiness guidance under app-audit; local-first checks, exact-target public report retrieval, publication authority, evidence prioritization, and freshness boundaries. No upstream prose or assets imported. SHA-256 identifies the exact public response reviewed 2026-10-22 (Accept: text/markdown), not a vendor versioned permalink; no immutable upstream Git revision was available."
+    },
+    {
+      "repository": "https://www.youtube.com/watch?v=5Bmp9cz1JN8",
+      "ref": "video:5Bmp9cz1JN8;published:2026-10-26",
+      "path": "transcript#t=1527-1613,1681-1697",
+      "digest": "sha256:3e073bc9fa97ba8b33f1b700cd2bb450bfe843ed279f347dbb15924f888e0ffa",
+      "license": "reference-only-no-copied-text",
+      "use": "informed-by",
+      "changes": "Theo, These 3 skills changed my life (2026-10-26), YouTube 5Bmp9cz1JN8. Transcript inspected 25:27\u201326:53 and 28:01\u201328:17. Trigger descriptions and model-loadable workflows; optional command syntax. Independently written adaptation; no transcript text copied. Digest identifies this bounded evidence note, not video bytes or a full transcript."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "verify"
+    ],
+    "tools": [
+      "browser",
+      "official-docs"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

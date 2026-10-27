@@ -1,0 +1,28 @@
+{
+  "id": "shadcn",
+  "group": "engineering-specialists",
+  "origin": "adapted",
+  "invocation": [
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "openai://curated-skills",
+      "ref": "reviewed-2026-09-14",
+      "path": "build-web-apps/shadcn",
+      "digest": "version:reviewed-2026-09-14",
+      "license": "proprietary-reference",
+      "use": "informed-by",
+      "changes": "Methods selectively consolidated into Elias's owned shadcn capability; vendor routing and unrelated framework assumptions removed."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "interface-design"
+    ],
+    "tools": [
+      "official-docs"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

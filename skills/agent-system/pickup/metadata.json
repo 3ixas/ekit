@@ -1,0 +1,49 @@
+{
+  "id": "pickup",
+  "group": "agent-system",
+  "origin": "synthesized",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/cursor/plugins",
+      "ref": "5bf2b1544db739998121a306340631963c2ff3de",
+      "path": "pstack/skills/poteto-mode/playbooks/session-pickup.md",
+      "digest": "git-blob:9b2ed06e0ff8b01bf03b7a0d6a4cbb8ba3a46720",
+      "license": "mit-pstack",
+      "use": "adapted",
+      "changes": "Retained local derivative compared against the pinned source, not claimed as an exact upstream version. Source paths, blob identities, complete local comparison diffs and file hashes are in docs/provenance/retained-sources.json; historical authorship of each delta is not asserted. MIT notice retained."
+    },
+    {
+      "repository": "https://github.com/humanlayer/humanlayer",
+      "ref": "99abe673498cf8bdcd5f989aebe9406a27185b3b",
+      "path": ".claude/commands/resume_handoff.md",
+      "digest": "git-blob:e9c5b135cd8bc66bab28f1d73c6c7ea41b3acda5",
+      "license": "apache-2.0-humanlayer",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned pickup capability; vendor routing and unrelated framework assumptions removed. 2026-10-02: finds the handoff by given path, then the newest file in ~/.agents/handoffs/<project>/, then legacy $TMPDIR files, and reports every place searched when nothing is found; the description no longer names HANDOFF.md."
+    },
+    {
+      "repository": "https://github.com/t3dotgg/tstack",
+      "ref": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+      "path": "skills/takeover/SKILL.md",
+      "digest": "sha256:9f00a7c67bf82603af2e80f56e9ce63f1516a1b4339365b79cf786d9d9055465",
+      "license": "mit-tstack",
+      "use": "adapted",
+      "changes": "Independently written adaptation. Conditional inherited-PR continuation with verified intent/proof, preserved human credit, explicit continuation/replacement authority and live source reread."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "modernize",
+      "verify"
+    ],
+    "tools": [
+      "git",
+      "github"
+    ]
+  },
+  "reviewed": "2026-10-26",
+  "owned_changes": "2026-10-26 writing-for-agents pass: Removed generic supporting/evidence paragraph already owned by shared instructions. Made reconciliation completion observable without ending authorized continuation at a plan. Replaced a truncated or stale UI summary with a complete description of the current workflow. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed."
+}

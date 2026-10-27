@@ -1,0 +1,65 @@
+{
+  "id": "full-stop",
+  "group": "software-workflows",
+  "origin": "adapted",
+  "invocation": [
+    "explicit"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/t3dotgg/tstack",
+      "ref": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+      "path": "skills/full-stop/SKILL.md",
+      "digest": "sha256:243ed08a040df888e35a5db8da704dced345270efdd0afa74252a766e05a4b09",
+      "license": "mit-tstack",
+      "use": "adapted",
+      "changes": "Independently written adaptation. Shared delivery lifecycle, explicit human-merge endpoint, narrow task authority, current-head proof, independent readiness and host-aware waiting. Reuses owned owners; no upstream watcher or model-specific review stack."
+    },
+    {
+      "repository": "https://github.com/t3dotgg/tstack",
+      "ref": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+      "path": "skills/full-send/SKILL.md",
+      "digest": "sha256:ba585e47cd901506b0e2de13025b0e39bc02462c136cf27491ad3efbdfe66020",
+      "license": "mit-tstack",
+      "use": "adapted",
+      "changes": "Independently written adaptation. Shared delivery lifecycle, explicit human-merge endpoint, narrow task authority, current-head proof, independent readiness and host-aware waiting. Reuses owned owners; no upstream watcher or model-specific review stack."
+    },
+    {
+      "repository": "https://github.com/t3dotgg/tstack",
+      "ref": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+      "path": "skills/babysit-pr/SKILL.md",
+      "digest": "sha256:fbe43ba3ab76a466a88ef8b46dca1b41fb8101347d24a396903849865173a6ac",
+      "license": "mit-tstack",
+      "use": "adapted",
+      "changes": "Independently written adaptation. Shared delivery lifecycle, explicit human-merge endpoint, narrow task authority, current-head proof, independent readiness and host-aware waiting. Reuses owned owners; no upstream watcher or model-specific review stack."
+    },
+    {
+      "repository": "https://github.com/t3dotgg/tstack",
+      "ref": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+      "path": "skills/file-pr/SKILL.md",
+      "digest": "sha256:174a7ae52e3b9d17f2bd0eaf0a11a89d744d1249164ecbdb0e642359eee75b1b",
+      "license": "mit-tstack",
+      "use": "adapted",
+      "changes": "Independently written adaptation. Shared delivery lifecycle, explicit human-merge endpoint, narrow task authority, current-head proof, independent readiness and host-aware waiting. Reuses owned owners; no upstream watcher or model-specific review stack."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "babysit-pr",
+      "code-review",
+      "debug",
+      "implement",
+      "implement-spec",
+      "pickup",
+      "pr",
+      "pr-feedback",
+      "retro",
+      "verify"
+    ],
+    "tools": [
+      "git",
+      "github"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

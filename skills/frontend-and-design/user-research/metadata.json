@@ -1,0 +1,24 @@
+{
+  "id": "user-research",
+  "group": "frontend-and-design",
+  "origin": "imported",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/hueyexe/frontend-agent-skills",
+      "ref": "2841c079dd8a9c634882227194dc42e25227710d",
+      "path": "ux-research-discovery-testing/SKILL.md",
+      "digest": "git-blob:b97255e5541e6f780e15ae0b23cd872525cecb91",
+      "license": "mit-huey",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned user-research capability; vendor routing and unrelated framework assumptions removed. The complete existing method is retained in references/research-method.md behind a checkable entrypoint, with conditional loading and host-neutral question examples."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": []
+  },
+  "reviewed": "2026-10-26"
+}

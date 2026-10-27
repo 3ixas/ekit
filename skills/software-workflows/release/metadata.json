@@ -1,0 +1,57 @@
+{
+  "id": "release",
+  "group": "software-workflows",
+  "origin": "synthesized",
+  "invocation": [
+    "explicit"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/EveryInc/compound-engineering-plugin",
+      "ref": "fd8abda7f64ead2f410da2cfd86c0c8e7cbf8187",
+      "path": ".",
+      "digest": "git-tree:9bae2981e76e480a46529dec3a45e14cb358a4bd",
+      "license": "mit-compound-engineering",
+      "use": "informed-by",
+      "changes": "Repository-wide assessment informed the owned design; no upstream prose or assets were copied."
+    },
+    {
+      "repository": "https://github.com/addyosmani/agent-skills",
+      "ref": "be4e44a9fbc5e8df0beaefadbb28bd22ee61cc39",
+      "path": "skills/shipping-and-launch/SKILL.md",
+      "digest": "git-blob:f3fba8a01265db5547a8755c81902d0aa56c4104",
+      "license": "mit-addyosmani",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned release capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/wdm0006/python-skills",
+      "ref": "954796b7fc28e342cf08f80b9a4a39414a419c7a",
+      "path": "skills/python/release-management/SKILL.md",
+      "digest": "git-blob:382d9e7f93c02e77021758fd6defc4a641d3d3e4",
+      "license": "mit-wdm0006",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned release capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://www.youtube.com/watch?v=5Bmp9cz1JN8",
+      "ref": "video:5Bmp9cz1JN8;published:2026-10-26",
+      "path": "transcript#t=1527-1613,1681-1697",
+      "digest": "sha256:3e073bc9fa97ba8b33f1b700cd2bb450bfe843ed279f347dbb15924f888e0ffa",
+      "license": "reference-only-no-copied-text",
+      "use": "informed-by",
+      "changes": "Theo, These 3 skills changed my life (2026-10-26), YouTube 5Bmp9cz1JN8. Transcript inspected 25:27\u201326:53 and 28:01\u201328:17. Trigger descriptions and model-loadable workflows; optional command syntax. Independently written adaptation; no transcript text copied. Digest identifies this bounded evidence note, not video bytes or a full transcript."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "code-review",
+      "verify"
+    ],
+    "tools": [
+      "git",
+      "github"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

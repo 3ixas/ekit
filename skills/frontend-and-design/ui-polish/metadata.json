@@ -1,0 +1,154 @@
+{
+  "id": "ui-polish",
+  "group": "frontend-and-design",
+  "origin": "synthesized",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/Nutlope/hallmark",
+      "ref": "7ec868225c6caa040558c321ee0fefa0e73f83a8",
+      "path": "skills/hallmark/references/redesign.md",
+      "digest": "git-blob:17f73ad18744e24173b3748fcfa0ca412202889f",
+      "license": "mit-hallmark",
+      "use": "informed-by",
+      "changes": "Routes structural polish through interface-design-owned preservation guidance and actual behaviour checks; no duplicate helper or source text/code imported."
+    },
+    {
+      "repository": "https://github.com/pbakaus/impeccable",
+      "ref": "cb56ed6c19a07329a9fa0cd4e657bee040156593",
+      "path": "plugin/skills/impeccable/SKILL.md",
+      "digest": "git-blob:4ae57d2a8ce47cc8fee8eac0e6332ccd56091889",
+      "license": "apache-2.0-impeccable",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned ui-polish capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/vercel-labs/agent-skills",
+      "ref": "063bee94c3f4df8453406c830b0a7df0f2860278",
+      "path": "skills/web-design-guidelines",
+      "digest": "git-tree:3116f3e62dbd02b44a598b1aa690d2a8938e8f89",
+      "license": "declared-mit-vercel-labs",
+      "use": "copied",
+      "changes": "Pinned source bodies retained in source-method snapshots with an owned heading/fence and boundary-newline normalization only: vercel-design-guidelines.md. Exact paths, upstream blob IDs, byte hashes and declaration/notice blockers are recorded in docs/provenance/retained-sources.json. The pinned README declares MIT; no upstream copyright notice is invented."
+    },
+    {
+      "repository": "https://github.com/emilkowalski/skills",
+      "ref": "d16ebe60d09a5ba2afcb7054ede9d0a10c9f6128",
+      "path": "skills/emil-design-eng",
+      "digest": "git-tree:db7a20dc1d8ad26a0307dcb45ebc79fc372f5c69",
+      "license": "mit-emilkowalski",
+      "use": "adapted",
+      "changes": "Pinned verbatim as an owned source snapshot with the Initial Response greeting removed; component craft details paraphrased into polish-modes.md."
+    },
+    {
+      "repository": "https://github.com/emilkowalski/skills",
+      "ref": "d16ebe60d09a5ba2afcb7054ede9d0a10c9f6128",
+      "path": "skills/mobile-native",
+      "digest": "git-tree:fdad6e6e91d8bbfda7164c7027269a8389dbadcd",
+      "license": "mit-emilkowalski",
+      "use": "adapted",
+      "changes": "Pinned verbatim as an owned source snapshot with the Initial Response greeting removed; symptom fixes paraphrased into a mobile-web mode in polish-modes.md."
+    },
+    {
+      "repository": "https://github.com/emilkowalski/skills",
+      "ref": "e8a175de22ae1e49370fc144c1f3bb9aeedf988d",
+      "path": "skills/break-ui",
+      "digest": "git-tree:f2a3441d4cf14df060ee363e155502a4818b5f8d",
+      "license": "mit-emilkowalski",
+      "use": "adapted",
+      "changes": "Pinned verbatim as an owned source snapshot with the Initial Response greeting removed; the map, worst-case, toggle, break, and report-before-fixing method and the truncate/wrap/clamp rules paraphrased into the resilience mode in polish-modes.md."
+    },
+    {
+      "repository": "https://github.com/madebymustafa/design-taste",
+      "ref": "c4a6bff0871eb4b15371b0e7d2751628b0ed4608",
+      "path": "skills/taste-ux-copy/SKILL.md",
+      "digest": "git-blob:efa7eecf93b7c08dff3c33f7a2bf7b1f6f8ae554",
+      "license": "mit-design-taste",
+      "use": "informed-by",
+      "changes": "Informed the Copy polish mode (actions, errors, empty states, progress, headlines, consistency); independently written, no text copied."
+    },
+    {
+      "repository": "https://github.com/madebymustafa/design-taste",
+      "ref": "c4a6bff0871eb4b15371b0e7d2751628b0ed4608",
+      "path": "skills/design-taste/SKILL.md",
+      "digest": "git-blob:d6bac0ab1e3df4466153a5ba64ce1001a804910b",
+      "license": "mit-design-taste",
+      "use": "informed-by",
+      "changes": "Its never list informed the AI-default questions in the audit mode; independently written, no text copied."
+    },
+    {
+      "repository": "https://github.com/marvkr/better-design",
+      "ref": "e146625f3041ef8089a2013587435fc763dc3b15",
+      "path": "skills/better-design/SKILL.md",
+      "digest": "git-blob:4c47505edde43ee0b15b753bf1c2e09b84cd7287",
+      "license": "mit-better-design",
+      "use": "informed-by",
+      "changes": "Measured rendered spacing against the scale and one icon family per product, adapted from its inspect-spacing and icon-library steps; no text copied."
+    },
+    {
+      "repository": "https://github.com/Leonxlnx/taste-skill",
+      "ref": "f624f37a8c650b9cc550253104925efe4c8de246",
+      "license": "mit-taste-skill",
+      "use": "informed-by",
+      "path": "skills/taste-skill/references/critique.md",
+      "digest": "git-blob:8f955f6a70bcec88723d4c3897461d5bd8c8668a",
+      "changes": "Informed judging screenshots at three widths in the audit mode; independently written, no text copied."
+    },
+    {
+      "repository": "https://github.com/Leonxlnx/taste-skill",
+      "ref": "f624f37a8c650b9cc550253104925efe4c8de246",
+      "license": "mit-taste-skill",
+      "use": "informed-by",
+      "path": "skills/taste-skill/references/tells.md",
+      "digest": "git-blob:875d4a970bd79892295f922f08f67aa812efee3c",
+      "changes": "Informed the editorial-default questions and the removal-is-not-enough note in the audit mode; no text copied."
+    },
+    {
+      "repository": "https://joshpuckett.me",
+      "ref": "reviewed-2026-10-16",
+      "path": "seamless-mobile-safari",
+      "digest": "version:reviewed-2026-10-16",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Informed mobile-safari-edges.md (edge-strip technique, dynamic edge colours, limits) and the mobile-web mode's pre-release default; behaviour checked against WebKit's LocalFrameView edge sampling at 77f8a2b, which added the backdrop-filter and translucency caveats. Paraphrased; no text or code copied."
+    },
+    {
+      "repository": "https://swestack.bles-software.com",
+      "ref": "sha256:900ac1ed99a77319c25786a58d488c0aa75efb2a2ec73e22d9e8013926b63599",
+      "path": "skills/tastegate/scripts/gate.py",
+      "digest": "sha256:8036133fa27cf1fe3f880345be925da2d787dd4bf58b56bfd74655816d1cdb58",
+      "license": "mit-bles-designer-stack",
+      "use": "informed-by",
+      "changes": "Informed the targeted rendered-diagnostics reference; aesthetic failures and the executable gate are excluded. Existing host DOM tools supply measurements. Source is designer-stack.zip?v=6, pinned by archive hash; no upstream text or code copied."
+    },
+    {
+      "repository": "https://swestack.bles-software.com",
+      "ref": "sha256:900ac1ed99a77319c25786a58d488c0aa75efb2a2ec73e22d9e8013926b63599",
+      "path": "skills/visual-qa/SKILL.md",
+      "digest": "sha256:456f8925fd32dcc251c7c6b0a5eda4433c7be857329066355e7aeb0e2a3fd557",
+      "license": "mit-bles-designer-stack",
+      "use": "informed-by",
+      "changes": "Informed the optional raster-text inspection boundary; the OCR scanner remains deferred and is not a required check. Source is designer-stack.zip?v=6, pinned by archive hash; no upstream text or code copied."
+    },
+    {
+      "repository": "https://github.com/Leonxlnx/taste-skill",
+      "ref": "6010f91a9935f1c167dfc500fb1a475681892e6b",
+      "path": "skills/taste-skill",
+      "digest": "git-tree:2a22452297d559ea5ad97c178879d30ee3ec8022",
+      "license": "mit-taste-skill",
+      "use": "informed-by",
+      "changes": "Uses the single interface-design-owned toolkit through its guide; no duplicate scripts, library or entrypoint. Project contract and existing specialist boundaries govern."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "accessibility"
+    ],
+    "tools": [
+      "browser"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

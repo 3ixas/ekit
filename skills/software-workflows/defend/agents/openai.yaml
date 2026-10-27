@@ -1,0 +1,4 @@
+interface:
+  display_name: "Defend"
+  short_description: "Help Elias understand and defend a completed or proposed software change through code-grounded e"
+  default_prompt: "Use $defend for this request."

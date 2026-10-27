@@ -1,0 +1,29 @@
+{
+  "id": "why",
+  "group": "research-and-decisions",
+  "origin": "adapted",
+  "invocation": [
+    "automatic",
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/cursor/plugins",
+      "ref": "5bf2b1544db739998121a306340631963c2ff3de",
+      "path": "pstack/skills/why",
+      "digest": "git-tree:7cae2f31c55827495b38ba185c5bd901b3a85fa2",
+      "license": "mit-pstack",
+      "use": "adapted",
+      "changes": "Retained local derivative compared against the pinned source, not claimed as an exact upstream version. Source paths, blob identities, complete local comparison diffs and file hashes are in docs/provenance/retained-sources.json; historical authorship of each delta is not asserted. MIT notice retained."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": [
+      "git",
+      "github"
+    ]
+  },
+  "reviewed": "2026-10-26",
+  "owned_changes": "2026-10-26 writing-for-agents pass: Corrected absence-of-evidence claim to match the existing epistemics contract. Replaced assumed source-control access with observed availability and explicit gaps. Aligned investigator roster with source availability checks. Kept synthesis template from converting unavailable source control into an assumed search. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed."
+}

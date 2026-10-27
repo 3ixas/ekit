@@ -1,0 +1,273 @@
+{
+  "id": "product-thinking",
+  "group": "research-and-decisions",
+  "origin": "synthesized",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://x.com/emilkowalski",
+      "ref": "published-2026-09-29",
+      "path": "status: product-thinking skill announcement",
+      "digest": "version:published-2026-09-29",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Idea only: a question-heavy idea-validation skill built from notes on great product builders. No text used."
+    },
+    {
+      "repository": "https://www.momtestbook.com",
+      "ref": "published-2013",
+      "path": "The Mom Test (Rob Fitzpatrick)",
+      "digest": "version:published-2013",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://www.demandsidesales.com",
+      "ref": "published-2020",
+      "path": "Demand-Side Sales 101 (Bob Moesta)",
+      "digest": "version:published-2020",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://www.youtube.com",
+      "ref": "published-lennys-podcast",
+      "path": "watch?v=2wypVv9wZtI (Bob Moesta)",
+      "digest": "version:published-lennys-podcast",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://hbr.org",
+      "ref": "published-2016-09",
+      "path": "2016/09/know-your-customers-jobs-to-be-done",
+      "digest": "version:published-2016-09",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://paulgraham.com",
+      "ref": "published-2012-11",
+      "path": "startupideas.html",
+      "digest": "version:published-2012-11",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://paulgraham.com",
+      "ref": "published-2013-07",
+      "path": "ds.html",
+      "digest": "version:published-2013-07",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://paulgraham.com",
+      "ref": "published-2012-01",
+      "path": "schlep.html",
+      "digest": "version:published-2012-01",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://www.youtube.com",
+      "ref": "published-lennys-podcast",
+      "path": "watch?v=VjJ6xcv7e8s (Sean Ellis)",
+      "digest": "version:published-lennys-podcast",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://review.firstround.com",
+      "ref": "published-first-round-review",
+      "path": "how-superhuman-built-an-engine-to-find-product-market-fit/",
+      "digest": "version:published-first-round-review",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://www.youtube.com",
+      "ref": "published-lennys-podcast",
+      "path": "watch?v=0igjSRZyX-w (Rahul Vohra)",
+      "digest": "version:published-lennys-podcast",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://www.lennysnewsletter.com",
+      "ref": "published-2024-08",
+      "path": "p/how-to-consistently-go-viral-nikita-bier",
+      "digest": "version:published-2024-08",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://www.aprildunford.com",
+      "ref": "published-2019",
+      "path": "books (Obviously Awesome)",
+      "digest": "version:published-2019",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://www.youtube.com",
+      "ref": "published-lennys-podcast",
+      "path": "watch?v=-VqmFI9vY7w (April Dunford)",
+      "digest": "version:published-lennys-podcast",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://linear.app",
+      "ref": "published-2024-02-28",
+      "path": "now/rethinking-the-startup-mvp-building-a-competitive-product (Tuomas Artman)",
+      "digest": "version:published-2024-02-28",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://linear.app",
+      "ref": "reviewed-2026-09-30",
+      "path": "method",
+      "digest": "version:reviewed-2026-09-30",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://www.youtube.com",
+      "ref": "published-lennys-podcast",
+      "path": "watch?v=4muxFVZ4XfM (Karri Saarinen)",
+      "digest": "version:published-lennys-podcast",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://www.ycombinator.com",
+      "ref": "published-yc-startup-school",
+      "path": "library/6f-how-to-plan-an-mvp (Michael Seibel)",
+      "digest": "version:published-yc-startup-school",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://www.svpg.com",
+      "ref": "published-2017-12-04",
+      "path": "four-big-risks/ (Marty Cagan)",
+      "digest": "version:published-2017-12-04",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://mastersofscale.com",
+      "ref": "published-masters-of-scale",
+      "path": "brian-chesky/",
+      "digest": "version:published-masters-of-scale",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://docs.superhuman.com",
+      "ref": "reviewed-2026-09-30",
+      "path": "@reidhoffman/rituals-of-great-boards/11-star-experience-6",
+      "digest": "version:reviewed-2026-09-30",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://www.youtube.com",
+      "ref": "published-1997-wwdc",
+      "path": "watch?v=FF-tKLISfPE (Steve Jobs, WWDC 1997 Q&A)",
+      "digest": "version:published-1997-wwdc",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://www.simonandschuster.com",
+      "ref": "published-2011",
+      "path": "Steve Jobs (Walter Isaacson), ch. 25",
+      "digest": "version:published-2011",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://www.youtube.com",
+      "ref": "published-lennys-podcast",
+      "path": "watch?v=X-83gvgVaWc (Gibson Biddle)",
+      "digest": "version:published-lennys-podcast",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://www.youtube.com",
+      "ref": "published-lennys-podcast",
+      "path": "watch?v=YP_QghPLG-8 (Shreyas Doshi)",
+      "digest": "version:published-lennys-podcast",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://s2.q4cdn.com",
+      "ref": "published-2016-04",
+      "path": "299287126/files/doc_financials/annual/2015-Letter-to-Shareholders.PDF",
+      "digest": "version:published-2016-04",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://www.aboutamazon.com",
+      "ref": "published-2017-04",
+      "path": "news/company-news/2016-letter-to-shareholders",
+      "digest": "version:published-2017-04",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    },
+    {
+      "repository": "https://www.cnbc.com",
+      "ref": "published-2020-10-21",
+      "path": "2020/10/21/quibi-to-shut-down-after-just-6-months.html",
+      "digest": "version:published-2020-10-21",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Principles paraphrased and attributed in independently written lens, roster, or case references; no text copied."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "grilling",
+      "obsidian",
+      "research",
+      "grill-with-docs"
+    ],
+    "tools": []
+  },
+  "reviewed": "2026-10-26",
+  "owned_changes": "Independently authored 2026-10-22 adaptation: load grilling collaborative exploration, develop answers as well as challenge them, explain product lenses, preserve evidence limits and fold reusable thinking into the existing verdict.\n\n2026-10-26 writing-for-agents pass: Removed generic supporting/evidence paragraph already owned by shared instructions. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed."
+}

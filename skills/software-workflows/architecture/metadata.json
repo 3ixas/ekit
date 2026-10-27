@@ -1,0 +1,48 @@
+{
+  "id": "architecture",
+  "group": "software-workflows",
+  "origin": "synthesized",
+  "invocation": [
+    "automatic",
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "24fe0ef7737efae15c87225755e9f6f5965e4888",
+      "path": "skills/engineering/codebase-design",
+      "digest": "git-tree:07ba1cd60efc12d0d3a083005c1d9651cf15e39a",
+      "license": "mit-mattpocock",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned architecture capability; vendor routing and unrelated framework assumptions removed. Re-pinned to v1.3.1 on 2026-10-05; the only upstream change was the CONTEXT.md to GLOSSARY.md rename, already applied. Writing-for-agents pass on 2026-10-26 makes the existing method stages and completion evidence explicit; removes duplicated shared-instruction boilerplate without changing workflow intent."
+    },
+    {
+      "repository": "https://github.com/cursor/plugins",
+      "ref": "5bf2b1544db739998121a306340631963c2ff3de",
+      "path": ".",
+      "digest": "git-tree:331716e6a03a58540d1d2c204dc282adf7374039",
+      "license": "mit-pstack",
+      "use": "adapted",
+      "changes": "Retained local derivative compared against the pinned source, not claimed as an exact upstream version. Source paths, blob identities, complete local comparison diffs and file hashes are in docs/provenance/retained-sources.json; historical authorship of each delta is not asserted. MIT notice retained."
+    },
+    {
+      "repository": "https://github.com/EveryInc/compound-engineering-plugin",
+      "ref": "fd8abda7f64ead2f410da2cfd86c0c8e7cbf8187",
+      "path": "skills/ce-plan/SKILL.md",
+      "digest": "git-blob:3d1c55ea4e57710e78d7b8f512d1ad9c0ec9cda0",
+      "license": "mit-compound-engineering",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned architecture capability; vendor routing and unrelated framework assumptions removed."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "domain-modeling",
+      "blast-radius"
+    ],
+    "tools": [
+      "git"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

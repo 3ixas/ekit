@@ -1,0 +1,2 @@
+# Unified patch context includes a required leading space on blank lines.
+docs/provenance/adaptations/*.patch -whitespace

@@ -1,0 +1,63 @@
+{
+  "id": "how",
+  "group": "research-and-decisions",
+  "origin": "adapted",
+  "invocation": [
+    "automatic",
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/cursor/plugins",
+      "ref": "5bf2b1544db739998121a306340631963c2ff3de",
+      "path": "pstack/skills/how",
+      "digest": "git-tree:ec7ec1c4ce1a4194695b6759a54e8a218b0f3936",
+      "license": "mit-pstack",
+      "use": "adapted",
+      "changes": "Retained local derivative compared against the pinned source, not claimed as an exact upstream version. Source paths, blob identities, complete local comparison diffs and file hashes are in docs/provenance/retained-sources.json; historical authorship of each delta is not asserted. MIT notice retained."
+    },
+    {
+      "repository": "https://github.com/humanlayer/humanlayer",
+      "ref": "99abe673498cf8bdcd5f989aebe9406a27185b3b",
+      "path": ".claude/commands/research_codebase.md",
+      "digest": "git-blob:543bf509c2995cdd4ff319efc60d06a9e1789b96",
+      "license": "apache-2.0-humanlayer",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned how capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/humanlayer/skills",
+      "ref": "ca7c8088db69e315a8b2deea43820270457f8f3c",
+      "path": "plugins/show-me/skills/show-me/SKILL.md",
+      "digest": "git-blob:f0ccd047c136d7b702b385e0ecad775ccb773eae",
+      "license": "mit-humanlayer-skills",
+      "use": "adapted",
+      "changes": "Condensed into references/visual-answers.md as a view-picking table, used when Elias asks to be shown; the macOS open command became host-neutral publishing."
+    },
+    {
+      "repository": "https://github.com/cursor/plugins",
+      "ref": "93b00b89ef425a9c1bac0d0b317dfc49c930ac99",
+      "path": "pstack/skills/how/references",
+      "digest": "git-tree:1cb40e8d2de222f486ff5c09262931a90f460122",
+      "license": "mit-pstack",
+      "use": "copied",
+      "changes": "critic-prompt.md and critique-rubric.md restored verbatim from the last upstream version before pstack deleted them in e8d856f (2026-09-07); critique mode depends on them."
+    },
+    {
+      "repository": "https://github.com/humanlayer/humanlayer",
+      "ref": "2f66a45b186d88488fa356862be0117db1ccae9f",
+      "path": ".claude/skills/grind-research/SKILL.md",
+      "digest": "sha256:08a14f5fc3c08dab020eedda6ebf623498bae832d513135709434299eb330348",
+      "license": "apache-2.0-humanlayer-2026",
+      "use": "adapted",
+      "changes": "Independently written adaptation in references/research-refresh.md: scoped gap analysis, claim verification, in-place corrections and evidence of improvement. Removed HumanLayer storage, templates, mandatory delegation, automatic splitting and blanket ticket exclusions; retained existing how exploration and authority boundaries. Full Apache-2.0 and current upstream NOTICE retained in licenses/."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": [
+      "git"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

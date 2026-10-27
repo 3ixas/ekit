@@ -1,0 +1,37 @@
+{
+  "id": "apple-design",
+  "group": "frontend-and-design",
+  "origin": "adapted",
+  "invocation": [
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "openai://curated-skills",
+      "ref": "reviewed-2026-09-14",
+      "path": "skills/apple-design",
+      "digest": "version:reviewed-2026-09-14",
+      "license": "proprietary-reference",
+      "use": "informed-by",
+      "changes": "Methods selectively consolidated into Elias's owned apple-design capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/emilkowalski/skills",
+      "ref": "d16ebe60d09a5ba2afcb7054ede9d0a10c9f6128",
+      "path": "skills/apple-design",
+      "digest": "git-tree:cd509ae729c86487d352e17a26651217a4c25711",
+      "license": "mit-emilkowalski",
+      "use": "copied",
+      "changes": "Pinned verbatim as an owned source snapshot with the Initial Response greeting removed; linked for Apple-quality feel on the web."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "accessibility"
+    ],
+    "tools": [
+      "official-docs"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

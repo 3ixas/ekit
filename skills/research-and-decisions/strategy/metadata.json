@@ -1,0 +1,27 @@
+{
+  "id": "strategy",
+  "group": "research-and-decisions",
+  "origin": "adapted",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/EveryInc/compound-engineering-plugin",
+      "ref": "fd8abda7f64ead2f410da2cfd86c0c8e7cbf8187",
+      "path": "skills/ce-strategy",
+      "digest": "git-tree:24248ecc6e03f37dbd2d1e399359913f184bde0f",
+      "license": "mit-compound-engineering",
+      "use": "adapted",
+      "changes": "Entrypoint and four references (grounding, interview, strategy-template, update-run) adapted on 2026-10-02 after the references were lost in d6f0ef4: Compound Engineering skill names mapped to owned equivalents (ideate, product-thinking, grill-with-docs, to-spec, to-tickets, dogfood), ce-product-pulse dropped, and one-question-at-a-time asking replaced with grilling rounds and options rounds for positioning and track choices."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "research"
+    ],
+    "tools": []
+  },
+  "reviewed": "2026-10-26",
+  "owned_changes": "2026-10-26 writing-for-agents pass: Removed the fixed current-year claim. Resolved conflict between the general no-options rule and the explicit positioning/track options-round method. Made missing STRATEGY.md a valid first-run path consistently with the entrypoint. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed."
+}

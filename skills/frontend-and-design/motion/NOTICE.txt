@@ -1,0 +1,14 @@
+Source and licence companions
+
+This bundle contains owned guidance and source-derived material; the root MIT licence does not override upstream terms. Source paths, revisions, digests and use are in metadata.json. Keep references/licenses/ with the whole bundle. Records named declared-*, proprietary-*, restricted-* or reference-* can describe limits/uncertainty rather than a complete permission grant. See the maintained source inventory for unresolved publication gates.
+
+Applicable records:
+- references/licenses/apache-2.0-impeccable.txt
+- references/licenses/declared-mit-vercel-labs.txt
+- references/licenses/design-resource-reference.txt
+- references/licenses/mit-animejs.txt
+- references/licenses/mit-bles-designer-stack.txt
+- references/licenses/mit-emilkowalski.txt
+- references/licenses/mit-taste-skill.txt
+- references/licenses/motion-ai-kit-reference.txt
+- references/licenses/published-works-reference.txt

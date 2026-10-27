@@ -1,0 +1,40 @@
+{
+  "id": "ideate",
+  "group": "research-and-decisions",
+  "origin": "synthesized",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/EveryInc/compound-engineering-plugin",
+      "ref": "fd8abda7f64ead2f410da2cfd86c0c8e7cbf8187",
+      "path": "skills/ce-ideate",
+      "digest": "git-tree:aab578db83254f1a640acb675567e5001398b1df",
+      "license": "mit-compound-engineering",
+      "use": "informed-by",
+      "changes": "Rewritten 2026-09-30 as a compact owned skill: kept grounding first, axis decomposition, generate-all-before-critique, and explicit rejection; the imported entrypoint depended on seven reference files that were never imported. Survivors are now presented as a grilling options round and hand off to product-thinking or grill-with-docs instead of ce-brainstorm."
+    },
+    {
+      "repository": "https://felixrieseberg.com",
+      "ref": "published-2026-10-13",
+      "path": "how-to-be-more-ambitious-a-tutorial-for-humans-with-models/",
+      "digest": "version:published-2026-10-13",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Restate the subject as an activity, name the outcome one level up, and borrow one axis from an adjacent discipline; independently written, no text copied."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "grill-with-docs",
+      "grilling",
+      "obsidian",
+      "product-thinking",
+      "research"
+    ],
+    "tools": []
+  },
+  "reviewed": "2026-10-26",
+  "owned_changes": "2026-10-26 writing-for-agents pass: Removed generic supporting/evidence paragraph already owned by shared instructions. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed."
+}

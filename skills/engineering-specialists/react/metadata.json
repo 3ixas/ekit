@@ -1,0 +1,51 @@
+{
+  "id": "react",
+  "group": "engineering-specialists",
+  "origin": "synthesized",
+  "invocation": [
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/vercel-labs/agent-skills",
+      "ref": "063bee94c3f4df8453406c830b0a7df0f2860278",
+      "path": "skills/react-best-practices",
+      "digest": "git-tree:343db72180d05814949fef7d46be96b5c6ee86b3",
+      "license": "declared-mit-vercel-labs",
+      "use": "copied",
+      "changes": "Pinned source bodies retained in source-method snapshots with an owned heading/fence and boundary-newline normalization only: vercel-react.md. Exact paths, upstream blob IDs, byte hashes and declaration/notice blockers are recorded in docs/provenance/retained-sources.json. The pinned README declares MIT; no upstream copyright notice is invented."
+    },
+    {
+      "repository": "https://github.com/addyosmani/agent-skills",
+      "ref": "be4e44a9fbc5e8df0beaefadbb28bd22ee61cc39",
+      "path": "skills/observability-and-instrumentation/SKILL.md",
+      "digest": "git-blob:84d9cb373467fe0e15236e190833ecc90f840c38",
+      "license": "mit-addyosmani",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned react capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/emilkowalski/skills",
+      "ref": "d16ebe60d09a5ba2afcb7054ede9d0a10c9f6128",
+      "path": "skills/pick-ui-library",
+      "digest": "git-tree:370e19776f0aa2403a2edeed78266bd6a5d78036",
+      "license": "mit-emilkowalski",
+      "use": "adapted",
+      "changes": "Pinned verbatim as an owned source snapshot with the Initial Response greeting removed; used as the default library list when the project has no installed choice."
+    },
+    {
+      "repository": "https://github.com/humanlayer/skills",
+      "ref": "ca7c8088db69e315a8b2deea43820270457f8f3c",
+      "path": "plugins/narrow-react-prop-types/skills/narrow-react-prop-types/SKILL.md",
+      "digest": "git-blob:5ee3644aa827eb2452be3ead8f66c3b97ad7f4e5",
+      "license": "mit-humanlayer-skills",
+      "use": "adapted",
+      "changes": "Live call sites define the prop contract; added to the method. CI loop wiring not adopted."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": []
+  },
+  "reviewed": "2026-10-26"
+}

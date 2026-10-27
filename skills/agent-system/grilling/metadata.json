@@ -1,0 +1,43 @@
+{
+  "id": "grilling",
+  "group": "agent-system",
+  "origin": "adapted",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",
+      "path": "skills/productivity/grilling",
+      "digest": "git-tree:f0732035b8b1b60ae39454e4191caef32fa91903",
+      "license": "mit-mattpocock",
+      "use": "adapted",
+      "changes": "Adapted the pinned questioning and options-round method. Owned additions include depth-pass guidance and the independently authored collaborative-exploration contract; the previous local clarify path remains retired. Upstream source identity and MIT notice retained."
+    },
+    {
+      "repository": "https://github.com/addyosmani/agent-skills",
+      "ref": "be4e44a9fbc5e8df0beaefadbb28bd22ee61cc39",
+      "path": ".",
+      "digest": "git-tree:58df3a6d8a1683df3e8bb5682de717693b668758",
+      "license": "mit-addyosmani",
+      "use": "informed-by",
+      "changes": "Repository-wide assessment informed the owned design; no upstream prose or assets were copied."
+    },
+    {
+      "repository": "https://felixrieseberg.com",
+      "ref": "published-2026-10-13",
+      "path": "how-to-be-more-ambitious-a-tutorial-for-humans-with-models/",
+      "digest": "version:published-2026-10-13",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Independently wrote the depth-pass reference and linked it before the first round and from the closing gap check. The 2026-10-21 refinement ties expert and adjacent-discipline methods to concrete activities and useful outputs, selects specialists for their contribution, and grounds stretch targets in evidence and constraints; no text copied."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": []
+  },
+  "reviewed": "2026-10-26",
+  "owned_changes": "Independently authored from the user-approved 2026-10-22 exploration agreement: shared collaborative reasoning, adaptive explanation, concrete alternatives, proportionate evidence, decision-ready stopping and a brief grounded reflection. No new external source text used.\n\n2026-10-26 writing-for-agents pass: Replaced vague any-trigger-phrase matching with intended shared-exploration requests and discussion exclusion. Replaced a truncated or stale UI summary with a complete description of the current workflow. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed."
+}

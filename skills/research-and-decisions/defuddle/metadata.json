@@ -1,0 +1,27 @@
+{
+  "id": "defuddle",
+  "group": "research-and-decisions",
+  "origin": "imported",
+  "invocation": [
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/kepano/obsidian-skills",
+      "ref": "8ccef29ae8624eccc734e77ced4a6e54baf5d83a",
+      "path": "skills/defuddle",
+      "digest": "git-tree:db0b775af7e7d603f59fa2b67bdef615baf1a48f",
+      "license": "mit-kepano",
+      "use": "adapted",
+      "changes": "Copied Kepano’s pinned Defuddle method into the owned supporting bundle; only the owned name changed from `web-extract` to the source tool name."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": [
+      "defuddle"
+    ]
+  },
+  "reviewed": "2026-10-26",
+  "owned_changes": "2026-10-26 writing-for-agents pass: aligned description and entrypoint with supporting-only invocation and the existing group catalogue; removed the host-specific WebFetch name and made extraction completeness observable. The pinned upstream identity, licence, and tool method are unchanged."
+}

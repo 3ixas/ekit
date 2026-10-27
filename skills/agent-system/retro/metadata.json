@@ -1,0 +1,37 @@
+{
+  "id": "retro",
+  "group": "agent-system",
+  "origin": "adapted",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "24fe0ef7737efae15c87225755e9f6f5965e4888",
+      "path": "skills/engineering/retro",
+      "digest": "git-tree:335c1862a43da9d629abafdb79ca0c0de118be08",
+      "license": "mit-mattpocock",
+      "use": "adapted",
+      "changes": "Replaced the earlier synthesized retro with the graduated upstream skill from the open v1.3 pull request (mattpocock/skills#1120). Owned changes: a fuller description and one line routing accepted shared-skill changes through skill-review."
+    },
+    {
+      "repository": "https://felixrieseberg.com",
+      "ref": "published-2026-10-13",
+      "path": "how-to-be-more-ambitious-a-tutorial-for-humans-with-models/",
+      "digest": "version:published-2026-10-13",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Added the Altitude improvement category with the crash-free example paraphrased. The 2026-10-21 refinement requires a concrete recurring outcome, missing data or tools, bounded authority, and a specific setup recommendation; no monitoring or permission is created. Independently written, no text copied."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "writing-for-agents",
+      "skill-review"
+    ],
+    "tools": []
+  },
+  "reviewed": "2026-10-26",
+  "owned_changes": "2026-10-26 writing-for-agents pass: Removed host-specific Skill tool assumption. Removed contradictory claim that review never needs exploration; retained implementation/review responsibility split. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed."
+}

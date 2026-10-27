@@ -1,0 +1,37 @@
+{
+  "id": "openai",
+  "group": "engineering-specialists",
+  "origin": "synthesized",
+  "invocation": [
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "openai://curated-skills",
+      "ref": "reviewed-2026-09-14",
+      "path": "openai-developers/agents",
+      "digest": "version:reviewed-2026-09-14",
+      "license": "proprietary-reference",
+      "use": "informed-by",
+      "changes": "Methods selectively consolidated into Elias's owned openai capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/wdm0006/python-skills",
+      "ref": "954796b7fc28e342cf08f80b9a4a39414a419c7a",
+      "path": "skills/python/llm-features/SKILL.md",
+      "digest": "git-blob:a876984f94d21ebe30fd7206c39424b707ccb882",
+      "license": "mit-wdm0006",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned openai capability; vendor routing and unrelated framework assumptions removed."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "security"
+    ],
+    "tools": [
+      "official-docs"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

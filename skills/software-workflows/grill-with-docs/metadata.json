@@ -1,0 +1,48 @@
+{
+  "id": "grill-with-docs",
+  "group": "software-workflows",
+  "origin": "adapted",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",
+      "path": "skills/engineering/grill-with-docs",
+      "digest": "git-tree:eedaf2562c83155115e9c649fa3ecaac2e10e81d",
+      "license": "mit-mattpocock",
+      "use": "adapted",
+      "changes": "Copied the pinned upstream method into the owned bundle; only Codex host or explicitly approved Elias workflow gates were added."
+    },
+    {
+      "repository": "https://github.com/humanlayer/humanlayer",
+      "ref": "99abe673498cf8bdcd5f989aebe9406a27185b3b",
+      "path": ".claude/commands/create_plan.md",
+      "digest": "git-blob:ca47c42e5e8f8cb16a45ad24151185c13b3ed184",
+      "license": "apache-2.0-humanlayer",
+      "use": "adapted",
+      "changes": "Kept as an owned copy of the pinned source method; the bundle name and repository routing are local ownership details."
+    },
+    {
+      "repository": "https://felixrieseberg.com",
+      "ref": "published-2026-10-13",
+      "path": "how-to-be-more-ambitious-a-tutorial-for-humans-with-models/",
+      "digest": "version:published-2026-10-13",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Scope contract now records the expert-level target and independent evidence of success from grilling's depth pass; independently written, no text copied."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "grilling",
+      "domain-modeling"
+    ],
+    "tools": [
+      "git"
+    ]
+  },
+  "reviewed": "2026-10-26",
+  "owned_changes": "Independently authored 2026-10-22 adaptation: apply grilling collaborative exploration to software behavior, repository evidence and failure cases within existing rounds; keep project documents focused on decisions and rationale."
+}

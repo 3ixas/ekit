@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Owned agent skill metadata",
+  "type": "object",
+  "required": ["id", "group", "origin", "invocation", "sources", "dependencies", "reviewed"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "group": {"enum": ["software-workflows", "engineering-specialists", "frontend-and-design", "research-and-decisions", "writing-and-artifacts", "knowledge-and-productivity", "personal-workflows", "agent-system"]},
+    "origin": {"enum": ["original", "imported", "adapted", "synthesized"]},
+    "invocation": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["automatic", "supporting", "explicit"]}},
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["repository", "ref", "path", "digest", "license", "use", "changes"],
+        "additionalProperties": false,
+        "properties": {
+          "repository": {"type": "string"},
+          "ref": {"type": "string", "minLength": 1},
+          "path": {"type": "string", "minLength": 1},
+          "digest": {"type": "string", "pattern": "^(sha256|git-(commit|tree|blob)|version):"},
+          "license": {"type": "string", "minLength": 1},
+          "use": {"enum": ["copied", "adapted", "informed-by"]},
+          "changes": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "dependencies": {
+      "type": "object",
+      "required": ["skills", "tools"],
+      "additionalProperties": false,
+      "properties": {
+        "skills": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "tools": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}
+      }
+    },
+    "reviewed": {"type": "string", "format": "date"}
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "typescript",
+  "group": "engineering-specialists",
+  "origin": "imported",
+  "invocation": [
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/cursor/plugins",
+      "ref": "5bf2b1544db739998121a306340631963c2ff3de",
+      "path": "pstack/skills/typescript-best-practices",
+      "digest": "git-tree:924cb1d5fee20dc4028a10bf98b26dec8cbdfd83",
+      "license": "mit-pstack",
+      "use": "adapted",
+      "changes": "Retained local derivative compared against the pinned source, not claimed as an exact upstream version. Source paths, blob identities, complete local comparison diffs and file hashes are in docs/provenance/retained-sources.json; historical authorship of each delta is not asserted. MIT notice retained."
+    },
+    {
+      "repository": "https://github.com/humanlayer/skills",
+      "ref": "ca7c8088db69e315a8b2deea43820270457f8f3c",
+      "path": "plugins/narrow-react-prop-types/skills/narrow-react-prop-types/SKILL.md",
+      "digest": "git-blob:5ee3644aa827eb2452be3ead8f66c3b97ad7f4e5",
+      "license": "mit-humanlayer-skills",
+      "use": "adapted",
+      "changes": "Generalised into a narrow-contracts section in type-boundaries.md."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": []
+  },
+  "reviewed": "2026-10-26"
+}

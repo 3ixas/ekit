@@ -1,0 +1,63 @@
+{
+  "id": "prototype",
+  "group": "frontend-and-design",
+  "origin": "adapted",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",
+      "path": "skills/engineering/prototype",
+      "digest": "git-tree:e41d92e171f074a2b6887d8f6faca4a15c83d1ca",
+      "license": "mit-mattpocock",
+      "use": "adapted",
+      "changes": "Copied the pinned upstream method into the owned bundle without semantic changes. Owned completion instructions preserve experiment evidence without assuming production or external issue-write authority."
+    },
+    {
+      "repository": "https://github.com/EveryInc/compound-engineering-plugin",
+      "ref": "fd8abda7f64ead2f410da2cfd86c0c8e7cbf8187",
+      "path": "skills/ce-prototype/SKILL.md",
+      "digest": "git-blob:78e195729cb3ebf0834a12dc6ad92f9a0c2b3acb",
+      "license": "mit-compound-engineering",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned prototype capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/pbakaus/impeccable",
+      "ref": "cb56ed6c19a07329a9fa0cd4e657bee040156593",
+      "path": "plugin/skills/impeccable/SKILL.md",
+      "digest": "git-blob:4ae57d2a8ce47cc8fee8eac0e6332ccd56091889",
+      "license": "apache-2.0-impeccable",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned prototype capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/cursor/plugins",
+      "ref": "5bf2b1544db739998121a306340631963c2ff3de",
+      "path": "pstack/skills/arena",
+      "digest": "git-tree:b486289bc677bf473f5b51b9bec31fe1e33fde45",
+      "license": "mit-pstack",
+      "use": "adapted",
+      "changes": "Retained local derivative compared against the pinned source, not claimed as an exact upstream version. Source paths, blob identities, complete local comparison diffs and file hashes are in docs/provenance/retained-sources.json; historical authorship of each delta is not asserted. MIT notice retained."
+    },
+    {
+      "repository": "https://github.com/emilkowalski/skills",
+      "ref": "d16ebe60d09a5ba2afcb7054ede9d0a10c9f6128",
+      "path": "skills/prototype",
+      "digest": "git-tree:34cd3a303aef0a975fcce3ac906d6b293e600399",
+      "license": "mit-emilkowalski",
+      "use": "adapted",
+      "changes": "Pinned verbatim as an owned source snapshot with the Initial Response greeting removed; named-axis divergence, fully working variants, and no production changes before selection added to the UI branch."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": [
+      "browser",
+      "imagegen"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

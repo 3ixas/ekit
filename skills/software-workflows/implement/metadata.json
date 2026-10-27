@@ -1,0 +1,84 @@
+{
+  "id": "implement",
+  "group": "software-workflows",
+  "origin": "adapted",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",
+      "path": "skills/engineering/implement",
+      "digest": "git-tree:f07d230f645fc9ac390cf13a450bbff12ad791a3",
+      "license": "mit-mattpocock",
+      "use": "adapted",
+      "changes": "Copied the pinned upstream method into the owned bundle. Elias's approved single-slice flow adds a code-review pass in the current run using its selected model, in-scope fixes with re-review, and a local commit to each standalone invocation. Owned integration: automatically use verify for project guide discovery/setup, affected-journey upkeep, and acceptance evidence; implement-spec coordinates shared guide and instance ownership."
+    },
+    {
+      "repository": "https://github.com/humanlayer/humanlayer",
+      "ref": "99abe673498cf8bdcd5f989aebe9406a27185b3b",
+      "path": ".claude/commands/implement_plan.md",
+      "digest": "git-blob:3d8ed51a1dd2cf9616e9be04e869eee5aea43453",
+      "license": "apache-2.0-humanlayer",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned implement capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/cursor/plugins",
+      "ref": "5bf2b1544db739998121a306340631963c2ff3de",
+      "path": "pstack/skills/poteto-mode",
+      "digest": "git-tree:286fadb34f85d74cbfdb7761ffdcbdddf6abbc4c",
+      "license": "mit-pstack",
+      "use": "adapted",
+      "changes": "Retained local derivative compared against the pinned source, not claimed as an exact upstream version. Source paths, blob identities, complete local comparison diffs and file hashes are in docs/provenance/retained-sources.json; historical authorship of each delta is not asserted. MIT notice retained."
+    },
+    {
+      "repository": "https://github.com/addyosmani/agent-skills",
+      "ref": "be4e44a9fbc5e8df0beaefadbb28bd22ee61cc39",
+      "path": ".",
+      "digest": "git-tree:58df3a6d8a1683df3e8bb5682de717693b668758",
+      "license": "mit-addyosmani",
+      "use": "informed-by",
+      "changes": "Repository-wide assessment informed the owned design; no upstream prose or assets were copied."
+    },
+    {
+      "repository": "https://felixrieseberg.com",
+      "ref": "published-2026-10-13",
+      "path": "how-to-be-more-ambitious-a-tutorial-for-humans-with-models/",
+      "digest": "version:published-2026-10-13",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Added a proof plan before editing, evidence passed to review, evidence-only dismissal of findings, and a two-attempt escalation bound, following the article's outside-judge principle; independently written, no text copied."
+    },
+    {
+      "repository": "https://github.com/DietrichGebert/ponytail",
+      "ref": "09c434ab73ca43761c5d8b0c5d341926c2fba710",
+      "path": "skills/ponytail/SKILL.md",
+      "digest": "sha256:9badd22a32e19cb884e46dfa8d3aae82bb81dfa5484105b8b4f0262df823a509",
+      "license": "mit-ponytail",
+      "use": "adapted",
+      "changes": "Independently written adaptation of reuse-first discovery in references/slice-execution.md. Search affected and likely shared modules before adding helpers, components, services or dependencies; judge full semantics and maintenance burden, preserve safety, accessibility and approved design, and keep discovery proportional. No upstream prose, scripts, persona, modes or hooks copied."
+    },
+    {
+      "repository": "https://github.com/t3dotgg/tstack",
+      "ref": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+      "path": "skills/sol-loop/SKILL.md",
+      "digest": "sha256:1db1eb4c4a156ee666070e9a12623d520cd1bd9b19c3fc21003fe5a440ba0b10",
+      "license": "mit-tstack",
+      "use": "adapted",
+      "changes": "Independently written adaptation. Bounded shared review budget, stable findings, evidence-backed disagreement and focused re-review; preserves two axes, selected model and snapshot gates. Rejects rare-case dismissal, vendor orchestration and attribution."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "code-review",
+      "verify"
+    ],
+    "tools": [
+      "git",
+      "github"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "modernize",
+  "group": "software-workflows",
+  "origin": "adapted",
+  "invocation": [
+    "explicit"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/t3dotgg/tstack",
+      "ref": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+      "path": "skills/modernize/SKILL.md",
+      "digest": "sha256:6172d774c46f535367086da90db1b0aaaaac969ed05ff040444f9afa9a6b1552",
+      "license": "mit-tstack",
+      "use": "adapted",
+      "changes": "Independently written adaptation. Conceptual reassessment, MODERNIZE/REWORK/CLOSE outcomes, range-diff and explicit-SHA lease; preserves authority, existing changes and live auto-merge boundaries."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "code-review",
+      "pr-feedback",
+      "verify"
+    ],
+    "tools": [
+      "git",
+      "github"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

@@ -1,0 +1,534 @@
+{
+  "kind": "review-scenarios",
+  "note": "Expected outcomes, not execution evidence. Observed independent simulation results are in the linked assessment.",
+  "cases": [
+    {
+      "skill": "email-assistant",
+      "request": "Use Email Assistant to review my inboxes and prepare cleanup choices.",
+      "nearby_negative": "Rewrite this pasted email paragraph.",
+      "expected_result": "Discover personal accounts; read complete relevant threads; propose exact effects; perform no Gmail mutation without approval."
+    },
+    {
+      "skill": "flowsavvy",
+      "request": "Review my FlowSavvy tasks for this week.",
+      "nearby_negative": "Give me general advice about procrastination.",
+      "expected_result": "Read live configuration and paginate the review; distinguish completion from blocks; make no writes from review alone."
+    },
+    {
+      "skill": "flowsavvy-feature-request",
+      "request": "Turn this FlowSavvy idea into a feature request: I need a way to see blocked work.",
+      "nearby_negative": "Reschedule this FlowSavvy task for Friday.",
+      "expected_result": "Return idea, motivating situation and current workaround; ask only for missing facts needed for truthful fields; no task mutation."
+    },
+    {
+      "skill": "flowsavvy-project",
+      "request": "Turn my selected WORK task into a FlowSavvy project with dependencies.",
+      "nearby_negative": "Rename a task in FlowSavvy.",
+      "expected_result": "Inspect eligible source and live configuration; propose complete connected DAG and source action; wait for approval; preserve recurring series."
+    },
+    {
+      "skill": "obsidian",
+      "request": "Plan tomorrow using my current Obsidian planning pages.",
+      "nearby_negative": "Review the architecture of this service.",
+      "expected_result": "Resolve live vault and provider transition; return bounded shortlist; no automatic scheduling or note write from planning alone."
+    },
+    {
+      "skill": "todoist-project",
+      "request": "Turn this idea into a Todoist child project.",
+      "nearby_negative": "Help me choose current work without requesting Todoist.",
+      "expected_result": "Resolve live projects, propose child breakdown, wait for approval, reconcile before creates and verify all affected fields."
+    },
+    {
+      "skill": "dinner-decider",
+      "request": "Help a companion and me choose dinner tonight.",
+      "nearby_negative": "Format this already selected recipe as a PDF.",
+      "expected_result": "Apply existing dietary defaults and user-supplied updates; ask only missing material constraints; research two or three options with Exa, wait for selection, then deliver consistent two-serving UK recipe."
+    },
+    {
+      "skill": "documents",
+      "request": "Redline this Word document and check its pagination.",
+      "nearby_negative": "Improve this paragraph in chat.",
+      "expected_result": "Preserve document semantics and revisions; render affected pages, inspect layout and verify saved file opens."
+    },
+    {
+      "skill": "images",
+      "request": "Generate a transparent product illustration using these references.",
+      "nearby_negative": "Draw an accurate chart from this CSV.",
+      "expected_result": "Use required references and approved design constraints, generate through ImageGen and inspect actual placement and result."
+    },
+    {
+      "skill": "pdf",
+      "request": "Fill these PDF fields and verify the resulting pages.",
+      "nearby_negative": "Help decide the narrative for a slide deck.",
+      "expected_result": "Identify PDF operation, preserve relevant content, render affected pages, verify text when relevant and open/page-count result."
+    },
+    {
+      "skill": "slides",
+      "request": "Create a presentation that helps this audience choose an option.",
+      "nearby_negative": "Rewrite this plain-text email.",
+      "expected_result": "Define audience action and slide jobs; build evidence-led deck, inspect every rendered slide and verify final file."
+    },
+    {
+      "skill": "spreadsheets",
+      "request": "Update this workbook model and verify the recalculated totals.",
+      "nearby_negative": "Explain why our business metric fell without a workbook.",
+      "expected_result": "Preserve model, recalculate with compatible engine, inspect errors/totals/render and verify saved data; unavailable engine stays unverified."
+    },
+    {
+      "skill": "writing",
+      "request": "Edit this personal statement so it sounds like me.",
+      "nearby_negative": "Create a typed Canvas layout from these note IDs.",
+      "expected_result": "Read current instructed voice profile, select relevant route, preserve facts and authored throughline, return prose without publishing."
+    },
+    {
+      "skill": "writing-for-agents",
+      "request": "Use writing-for-agents to improve these skill instructions.",
+      "nearby_negative": "Rewrite this customer email in a warmer register.",
+      "expected_result": "Review triggers, steps/references, co-location, completion, pruning and fresh-agent behaviour; preserve meaning and authority."
+    },
+    {
+      "skill": "compare",
+      "request": "Develop competing approaches to replacing our event bus against this fixed brief and compare them fairly.",
+      "nearby_negative": "Give me a quick comparison of JSON and YAML.",
+      "expected_result": "Produce independent candidates, one shared comparison, a coherent synthesis and evidence limits; nearby request stays ordinary research."
+    },
+    {
+      "skill": "data-analysis",
+      "request": "Analyse this retention CSV and test whether the claimed cohort effect survives the raw data checks.",
+      "nearby_negative": "Rewrite the wording of this retention update without analysing the data.",
+      "expected_result": "Reproducible computation and independent validation with grain, period, data limitations, and supported decision implications."
+    },
+    {
+      "skill": "data-visualization",
+      "request": "Make this revenue comparison into an accessible chart and inspect the rendered result.",
+      "nearby_negative": "Redesign the navigation and typography of my dashboard.",
+      "expected_result": "Rendered chart with truthful scales, explicit units/sources/uncertainty, accessible distinctions, and observed layout inspection."
+    },
+    {
+      "skill": "defuddle",
+      "request": "The article fetch is mostly navigation; extract the readable article for this research.",
+      "nearby_negative": "Read this already clean raw README.md URL.",
+      "expected_result": "Use Defuddle as extraction support for noisy HTML; fetch raw Markdown directly and report incomplete extraction honestly."
+    },
+    {
+      "skill": "doc-review",
+      "request": "Review this migration plan for contradictions and feasibility; fix mechanical errors and surface decisions.",
+      "nearby_negative": "Make this migration announcement sound more natural.",
+      "expected_result": "Independent coherence/feasibility review with conditional lenses, evidenced findings, safe fixes, and explicit substantive decisions."
+    },
+    {
+      "skill": "how",
+      "request": "Trace how checkout submission reaches payment persistence in this codebase.",
+      "nearby_negative": "Why did the team choose this payment retry strategy?",
+      "expected_result": "Evidence-backed runtime trace and file map; rationale request routes to why and ordinary explanations do not edit documents."
+    },
+    {
+      "skill": "ideate",
+      "request": "Generate grounded ideas for improving this onboarding experience and show the strongest three.",
+      "nearby_negative": "Challenge whether this one onboarding product idea is worth building.",
+      "expected_result": "Three grounded divergent survivors, recommended choice and rejected alternatives; validation request routes to product-thinking."
+    },
+    {
+      "skill": "product-thinking",
+      "request": "Pressure-test my subscription idea for independent language tutors before I build it.",
+      "nearby_negative": "Generate ten unrelated startup ideas.",
+      "expected_result": "Attributed evidence-grounded challenge of one idea and a verdict with cheapest falsifying test; no test execution or note write without authority."
+    },
+    {
+      "skill": "research",
+      "request": "Research the current official API limits and save a cited note in this repo.",
+      "nearby_negative": "Explain the control flow of this local parser function.",
+      "expected_result": "Primary-source investigation and verified cited note/answer; background agent where supported, same direct method otherwise."
+    },
+    {
+      "skill": "strategy",
+      "request": "Update only the positioning section of our existing strategy; preserve the other sections.",
+      "nearby_negative": "Break this approved feature spec into implementation tickets.",
+      "expected_result": "Grounded bounded interview and reviewed STRATEGY.md update under ownership rules, using session date and leaving unrelated sections intact."
+    },
+    {
+      "skill": "to-questionnaire",
+      "request": "Prepare a questionnaire for our hosting provider about the capacity facts we need for launch.",
+      "nearby_negative": "Interview me until we agree on this design.",
+      "expected_result": "Local questionnaire aimed at recipient knowledge gaps, with answer stubs and coverage of required decisions; no transmission."
+    },
+    {
+      "skill": "why",
+      "request": "Why does retry.ts use a 128 KiB limit? Reconstruct the recorded rationale.",
+      "nearby_negative": "Trace how retry.ts enforces the 128 KiB limit at runtime.",
+      "expected_result": "Cited direct evidence, labelled inference/hypotheses, gaps and actual source coverage; empty search proves only no match in that search."
+    },
+    {
+      "skill": "grilling",
+      "request": "Grill my proposal until we have settled every consequential decision.",
+      "nearby_negative": "Explain what the Grilling skill does; do not run it.",
+      "expected_result": "Evidence-grounded frontier rounds with recommendations and eventual confirmed agreement; discussion stays explanatory."
+    },
+    {
+      "skill": "handoff",
+      "request": "Save a handoff so a fresh session can continue this work tomorrow.",
+      "nearby_negative": "Summarise this meeting for its attendees.",
+      "expected_result": "Self-contained dated handoff in the private project folder with evidence pointers and an exact absolute-path pickup command."
+    },
+    {
+      "skill": "learn",
+      "request": "Use Learn to build a sustained journey toward independently shipping reliable services.",
+      "nearby_negative": "Explain what an HTTP timeout is in two sentences.",
+      "expected_result": "Private journey destination/track/evidence coordination, exactly one primary track, Teach handoff, and supported independent capability claims."
+    },
+    {
+      "skill": "pickup",
+      "request": "Pick up this handoff and continue the approved local fix.",
+      "nearby_negative": "Modernize this aging PR against the current main branch.",
+      "expected_result": "Verified inherited state and exact next action followed by authorized continuation; material divergence is raised and unrelated handoffs are not selected."
+    },
+    {
+      "skill": "retro",
+      "request": "Run Retro on this coding session and identify concrete environment improvements.",
+      "nearby_negative": "Fix the parser regression from the last commit.",
+      "expected_result": "Ranked evidence-backed environment improvements that reuse existing checks and distinguish recommendations from approved changes."
+    },
+    {
+      "skill": "skill-authoring",
+      "request": "Author the approved update to this existing skill with provenance and scenario checks.",
+      "nearby_negative": "Assess whether this new upstream skill belongs in my collection.",
+      "expected_result": "Small valid owned bundle matching the approved decision, accurate attribution and observed evaluations; no unapproved activation."
+    },
+    {
+      "skill": "skill-review",
+      "request": "Assess this upstream skill repository for overlap, useful additions and adoption risk.",
+      "nearby_negative": "Implement the approved wording fixes in this existing skill.",
+      "expected_result": "Complete pinned inventory and per-entrypoint disposition with routing/authority/provenance/evaluation evidence, without applying admission decisions."
+    },
+    {
+      "skill": "teach",
+      "request": "Use Teach to help me learn one coherent skill: writing a tested Python CLI.",
+      "nearby_negative": "Give me a brief definition of a command-line argument.",
+      "expected_result": "Mission-grounded trusted-source lesson and practice with feedback in teaching workspace, reusable assets/references and earned records."
+    },
+    {
+      "skill": "wait-what",
+      "request": "Wait, I do not understand where you have got to. Re-pitch that.",
+      "nearby_negative": "Teach me a new subject over a sequence of lessons.",
+      "expected_result": "Short context-restoring re-pitch in simplified technical English using the applicable glossary terms."
+    },
+    {
+      "skill": "app-audit",
+      "request": "Run App Audit across this mobile app before launch, fixing local defects.",
+      "nearby_negative": "Check the date-filter boundary bug in this function.",
+      "expected_result": "Route/state/device coverage matrix with observed defects, bounded corrections, rechecks, and explicit inaccessible areas."
+    },
+    {
+      "skill": "architecture",
+      "request": "Review how this service should divide ownership of billing state.",
+      "nearby_negative": "Rename this settled local variable.",
+      "expected_result": "Current-system map and chosen responsibilities/contracts with rationale, strongest rejected option, and migration if needed."
+    },
+    {
+      "skill": "babysit-pr",
+      "request": "Watch this PR for checks and review; report when ready.",
+      "nearby_negative": "Explain what a PR watcher does.",
+      "expected_result": "Read-only watch unless existing task authority permits follow-ups; fresh-head gate and honest Waiting/Blocked outcome."
+    },
+    {
+      "skill": "blast-radius",
+      "request": "For this cache change, investigate what could break elsewhere.",
+      "nearby_negative": "Explain the historical reason for the cache design.",
+      "expected_result": "Evidence-ranked safety fact proved with real code or explicitly unproven, real risks and cleared paths."
+    },
+    {
+      "skill": "code-review",
+      "request": "Review this branch against main for Standards and the linked specification.",
+      "nearby_negative": "Help me explain and defend this change myself.",
+      "expected_result": "Independent Standards/Spec reports tied to pinned diff, evidence, depth decision and stable findings."
+    },
+    {
+      "skill": "debug",
+      "request": "Find why this intermittent date filter loses today\u2019s items and fix it.",
+      "nearby_negative": "Change this known < comparison to <= for the already diagnosed bug.",
+      "expected_result": "Reproducer, tested causal hypothesis, focused correction and before/after regression evidence."
+    },
+    {
+      "skill": "defend",
+      "request": "Help me understand and defend this PR.",
+      "nearby_negative": "Review the diff for defects without interviewing me.",
+      "expected_result": "One-question Explain/Challenge/Defend exchange ending with Elias\u2019s accurate reviewer-facing defence."
+    },
+    {
+      "skill": "dogfood",
+      "request": "Dogfood this checkout journey as a real user.",
+      "nearby_negative": "Review the checkout code without running the interface.",
+      "expected_result": "Journey-based report with actions, observations, consequences and rechecked authorized fixes."
+    },
+    {
+      "skill": "domain-modeling",
+      "request": "Help resolve whether Customer and Account represent distinct concepts.",
+      "nearby_negative": "Read the existing glossary so this code uses its terms.",
+      "expected_result": "Resolved domain terms captured lazily in glossary; ADR only for hard-to-reverse, surprising, real tradeoff."
+    },
+    {
+      "skill": "full-send",
+      "request": "Implement the approved ticket. Full send.",
+      "nearby_negative": "Explain how Full Send differs from Full Stop.",
+      "expected_result": "Verified guarded merge after current-head proof/checks/approvals and observed merge commit; unknown gate blocks."
+    },
+    {
+      "skill": "full-stop",
+      "request": "Implement the approved ticket. Full stop.",
+      "nearby_negative": "Stop working now.",
+      "expected_result": "Open unmerged PR ready for human merge/queue action, or evidence-backed Waiting/Blocked; auto-merge off."
+    },
+    {
+      "skill": "grill-with-docs",
+      "request": "Help clarify this nontrivial onboarding feature and preserve the agreed scope.",
+      "nearby_negative": "Stress-test my personal decision about moving house.",
+      "expected_result": "Evidence-grounded approved scope plus domain glossary and consequential ADRs, ready for specification."
+    },
+    {
+      "skill": "implement",
+      "request": "Implement this one approved ticket and commit the reviewed slice locally.",
+      "nearby_negative": "Implement six dependent tickets from an approved specification.",
+      "expected_result": "One slice, claim-to-proof results, two-axis review/fixes, exact reviewed staged snapshot and local commit."
+    },
+    {
+      "skill": "implement-spec",
+      "request": "Use Implement Spec for this approved six-ticket graph.",
+      "nearby_negative": "Implement only this one settled ticket.",
+      "expected_result": "Coordinate approved task graph through integrated proof/review; prepare PR/tracker updates locally and publish only with current-task authority, never from tracker configuration alone."
+    },
+    {
+      "skill": "migration",
+      "request": "Use Migration to plan the staged API compatibility transition.",
+      "nearby_negative": "What is the SQL syntax to rename a column?",
+      "expected_result": "Inventory, per-stage invariant/check, compatibility/retry/rollback plan and observed authorized-stage evidence."
+    },
+    {
+      "skill": "modernize",
+      "request": "Assess whether this aging PR still belongs before rebasing it.",
+      "nearby_negative": "Resume an unchanged handoff from yesterday.",
+      "expected_result": "MODERNIZE/REWORK/CLOSE with current-context evidence; read-only assessment, separate guarded authorized update."
+    },
+    {
+      "skill": "pr",
+      "request": "Write the PR body for this reviewed change.",
+      "nearby_negative": "Publish this branch and monitor CI.",
+      "expected_result": "Brief Summary/Evidence/Merge Danger body with suitable visual, actual proof, privacy inspection and publication handoff."
+    },
+    {
+      "skill": "pr-feedback",
+      "request": "Resolve the existing feedback on this PR within the current scope.",
+      "nearby_negative": "Review this unreviewed branch for new findings.",
+      "expected_result": "Complete unresolved-thread ledger with evidence-backed dispositions, tested fixes, and verified authorized replies or drafts."
+    },
+    {
+      "skill": "refactor",
+      "request": "Simplify this settled module without changing its supported behaviour.",
+      "nearby_negative": "Add a new retry policy to change failure behaviour.",
+      "expected_result": "Simpler final shape plus characterization/equivalence results and separately reported behavioural changes."
+    },
+    {
+      "skill": "release",
+      "request": "Prepare this release and report readiness without publishing.",
+      "nearby_negative": "Write a PR description only.",
+      "expected_result": "Exact revision/target/authority, observed readiness, prepared artifact or authorized release with re-read state."
+    },
+    {
+      "skill": "security-audit",
+      "request": "Use Security Audit for a scoped audit of this repository.",
+      "nearby_negative": "Is this one authorization condition correct?",
+      "expected_result": "Source-pinned coverage ledger and independently verified records/reports, or exact incomplete blockers; no target execution without controls."
+    },
+    {
+      "skill": "tdd",
+      "request": "Build the next approved behaviour test-first at the agreed public seam.",
+      "nearby_negative": "Run the existing integration suite and report failures.",
+      "expected_result": "One failing behavioural test followed by minimal passing implementation per cycle at a confirmed seam."
+    },
+    {
+      "skill": "to-spec",
+      "request": "Turn our agreed discussion into a specification.",
+      "nearby_negative": "Interview me to discover what the product should do.",
+      "expected_result": "Local implementation contract linking settled outcomes, interfaces and independent acceptance evidence; publish only within authority."
+    },
+    {
+      "skill": "to-tickets",
+      "request": "Break this approved specification into dependency-aware tickets.",
+      "nearby_negative": "Implement the first ticket.",
+      "expected_result": "Approved demoable vertical slices with genuine blockers, per-ticket artifacts and authorized tracker read-back."
+    },
+    {
+      "skill": "triage",
+      "request": "Triage issue #42 and recommend its next state.",
+      "nearby_negative": "Review an internal collaborator\u2019s in-flight PR for code quality.",
+      "expected_result": "Evidence-backed category/state recommendation, reproduction and requested authorized state/comment outcomes."
+    },
+    {
+      "skill": "verify",
+      "request": "Prove that this completed feature meets its acceptance criteria.",
+      "nearby_negative": "Explain the code without changing or executing it.",
+      "expected_result": "Claim-to-proof matrix with setup/action/expected/observed/status, actual surface evidence, and honest Fail/Skip gaps."
+    },
+    {
+      "skill": "wayfinder",
+      "request": "Use Wayfinder to map decisions toward this known destination with an uncertain route.",
+      "nearby_negative": "Plan this small settled local fix.",
+      "expected_result": "Named map and dependency frontier, one resolved decision ticket per session except parallel research, local drafts without write authority."
+    },
+    {
+      "skill": "api-design",
+      "request": "Design a paginated API for listing project invoices.",
+      "nearby_negative": "Refactor the internal module boundaries without changing its API.",
+      "expected_result": "A consumer-facing contract covering pagination, errors and compatibility, with boundary checks or explicit gaps."
+    },
+    {
+      "skill": "ci",
+      "request": "Make this GitHub Actions test gate reproducible and least-privilege.",
+      "nearby_negative": "Deploy this already validated release to production.",
+      "expected_result": "The changed gate checked on representative success/failure cases, with inspected permissions/artifacts and unreproduced cases named."
+    },
+    {
+      "skill": "ios",
+      "request": "Build and run this SwiftUI screen on the intended simulator and exercise its empty state.",
+      "nearby_negative": "Choose the visual direction for a new iPhone product.",
+      "expected_result": "Named scheme/destination, build/run evidence and tested interaction states reported PASS, FAIL or PARTIAL."
+    },
+    {
+      "skill": "nextjs",
+      "request": "Fix stale data after saving in this Next.js App Router route.",
+      "nearby_negative": "Redesign a plain React component without routing or caching work.",
+      "expected_result": "Installed-version rendering/cache decisions, production build and exercised refresh behaviour."
+    },
+    {
+      "skill": "observability",
+      "request": "Add useful diagnostics and an actionable alert for failed invoice jobs.",
+      "nearby_negative": "Optimize this slow query with an EXPLAIN baseline.",
+      "expected_result": "A representative event traceable through chosen signals, alerts with owner/runbook and explicit environment gaps."
+    },
+    {
+      "skill": "openai",
+      "request": "Verify this OpenAI tool-calling feature against positive and malformed inputs.",
+      "nearby_negative": "Configure a generic hosted Postgres database.",
+      "expected_result": "Configuration/deterministic checks plus raw repeated model outcomes and named unavailable evaluations."
+    },
+    {
+      "skill": "payments",
+      "request": "Test duplicate Stripe webhook delivery and subscription-renewal entitlements.",
+      "nearby_negative": "Tune generic database query performance.",
+      "expected_result": "Separate signature, intake, authoritative state and lifecycle results; no live charge or provider mutation without authority."
+    },
+    {
+      "skill": "performance",
+      "request": "Measure and improve the p95 response time of this slow endpoint.",
+      "nearby_negative": "Rewrite these functions to look cleaner without a latency target.",
+      "expected_result": "Comparable baseline/profile/retest evidence and a correctness check, with noise rejected."
+    },
+    {
+      "skill": "postgres",
+      "request": "Inspect this query plan and propose an index without weakening tenant isolation.",
+      "nearby_negative": "Choose a backend provider for a new app.",
+      "expected_result": "Access-pattern/invariant decisions, actor checks and comparable query/migration evidence or an explicit gap."
+    },
+    {
+      "skill": "python",
+      "request": "Package this Python library using the existing project tools and validate public imports.",
+      "nearby_negative": "Migrate the repository to a different language.",
+      "expected_result": "Project-convention code with relevant canonical checks and packaging/import behaviour verified."
+    },
+    {
+      "skill": "react",
+      "request": "Narrow this React component API to what live callers actually provide.",
+      "nearby_negative": "Rework the product information architecture.",
+      "expected_result": "Prop contracts derived from live call sites, adapted stories/tests and user/accessibility evidence."
+    },
+    {
+      "skill": "react-native",
+      "request": "Verify this Expo list screen on the target phones, including keyboard and offline states.",
+      "nearby_negative": "Polish an HTML landing page for mobile Safari.",
+      "expected_result": "Target-platform keyboard/safe-area/permission/deep-link/state and performance evidence."
+    },
+    {
+      "skill": "security",
+      "request": "Check whether this resource handler enforces object-level authorization.",
+      "nearby_negative": "Run a deliberate repository-wide security audit with independent hunters and persistent reports.",
+      "expected_result": "A scoped boundary trace with preventing controls, distinct confirmed/needs-validation/rejected/hardening outcomes and abuse/legitimate checks."
+    },
+    {
+      "skill": "shadcn",
+      "request": "Integrate the selected shadcn dialog while preserving existing component edits.",
+      "nearby_negative": "Choose an entirely new brand direction.",
+      "expected_result": "Project-owned primitive matches tokens and interaction contract, with keyboard/responsive/rendered checks."
+    },
+    {
+      "skill": "supabase",
+      "request": "Verify this Supabase RLS migration against the intended development project and actors.",
+      "nearby_negative": "Select Supabase for a product before backend requirements are agreed.",
+      "expected_result": "Confirmed target/environment, source-controlled migration and actor-based result rereads; no guessed production target."
+    },
+    {
+      "skill": "swift",
+      "request": "Fix this Swift actor-isolation error using the installed toolchain.",
+      "nearby_negative": "Design a new Mac window layout.",
+      "expected_result": "Relevant target build and behaviour checks, with unavailable platform/runtime checks named."
+    },
+    {
+      "skill": "typescript",
+      "request": "Model this external JSON payload as unknown and validate it into a discriminated domain union.",
+      "nearby_negative": "Choose between two product concepts without reading or editing TypeScript.",
+      "expected_result": "Local type-boundary guidance used without loading nonexistent skills; project type/behaviour checks and justified assertions."
+    },
+    {
+      "skill": "vercel",
+      "request": "Diagnose this Vercel deployment cache response against the linked project.",
+      "nearby_negative": "Approve and ship a production release without an existing deployment instruction.",
+      "expected_result": "Exact project/environment/deployment and observed logs/response evidence, with rollback and release authority intact."
+    },
+    {
+      "skill": "accessibility",
+      "request": "Audit the checkout journey with keyboard, zoom and a screen reader.",
+      "nearby_negative": "Choose a product brand palette without an accessibility task.",
+      "expected_result": "Journey-specific manual/automated evidence, tested platform/standard and limits; no conformance claim from scanner alone."
+    },
+    {
+      "skill": "apple-design",
+      "request": "Review whether this iPad split-view navigation feels native with keyboard and resizing.",
+      "nearby_negative": "Build and run an Xcode target.",
+      "expected_result": "Current-HIG-grounded platform decisions and running-app observations across relevant input/settings."
+    },
+    {
+      "skill": "interface-design",
+      "request": "Explore a substantial redesign of this booking flow and capture the approved direction in DESIGN.md.",
+      "nearby_negative": "Fix the settled padding discrepancy in this existing component.",
+      "expected_result": "Reference roles, coherent options, durable contract, actual sign-off and rendered evidence or named capture gaps."
+    },
+    {
+      "skill": "libraries-dev",
+      "request": "Review this React project for useful Libraries.dev effects without editing it.",
+      "nearby_negative": "Choose the visual direction for a new product.",
+      "expected_result": "Read-only ranked suggestions by real file/line; apply branch installs only authorized packages and checks actual loading/reduced-motion states."
+    },
+    {
+      "skill": "motion",
+      "request": "Improve this sheet transition so rapid reopening and reduced motion work.",
+      "nearby_negative": "Redesign the product user journey.",
+      "expected_result": "Named motion job, appropriate tool/property/timing choice and normal/repeated/interrupted/reduced-motion observations."
+    },
+    {
+      "skill": "prototype",
+      "request": "Build a throwaway state-model demo so I can test cancellation and retry logic.",
+      "nearby_negative": "Implement the approved production checkout feature.",
+      "expected_result": "Named uncertainty, runnable driveable demo and evidence/verdict; no assumed production integration or issue write."
+    },
+    {
+      "skill": "ui-polish",
+      "request": "Polish this existing dashboard and stress-test it with long realistic names.",
+      "nearby_negative": "Explore a new visual identity from scratch.",
+      "expected_result": "Rendered before/after for relevant modes, realistic content fixtures, preserved behaviour and explicit remaining gaps."
+    },
+    {
+      "skill": "user-research",
+      "request": "Plan a usability test to learn why first-time users abandon checkout.",
+      "nearby_negative": "Implement the settled checkout UI with no open research decision.",
+      "expected_result": "Decision-ready mode, neutral task/script, participant/consent/access plan, evidence/confidence and smallest next test."
+    }
+  ]
+}

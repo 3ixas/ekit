@@ -1,0 +1,9 @@
+Source and licence companions
+
+This bundle's operational guidance is independently authored from EKit requirements. Official source documentation supplies reference-only facts, not redistributed documentation prose, examples or assets. Exact identities, digests and use are recorded in metadata.json. Referenced works retain their own terms; the reference notices do not grant copying permission. Keep this notice, metadata and references/licenses with the complete bundle. Eligible original contributions follow the root licence with upstream exceptions preserved. The former restricted material is excluded from current source and remains only in private preservation/preparation history.
+
+Applicable records:
+- references/licenses/mit-bklit-ui.txt
+- references/licenses/primary-documentation-reference.txt
+
+Detailed primary-source register: references/sources.json

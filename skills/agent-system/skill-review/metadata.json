@@ -1,0 +1,18 @@
+{
+  "id": "skill-review",
+  "group": "agent-system",
+  "origin": "original",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [],
+  "dependencies": {
+    "skills": [],
+    "tools": [
+      "git",
+      "exa-search"
+    ]
+  },
+  "reviewed": "2026-10-26",
+  "owned_changes": "2026-10-26 writing-for-agents pass: Removed generic supporting/evidence paragraph already owned by shared instructions. Made exhaustive disposition coverage and expected-versus-observed evidence checkable. Replaced a truncated or stale UI summary with a complete description of the current workflow. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed."
+}

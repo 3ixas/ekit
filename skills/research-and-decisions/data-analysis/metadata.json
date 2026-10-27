@@ -1,0 +1,54 @@
+{
+  "id": "data-analysis",
+  "group": "research-and-decisions",
+  "origin": "synthesized",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://felixrieseberg.com",
+      "ref": "published-2026-10-13",
+      "path": "how-to-be-more-ambitious-a-tutorial-for-humans-with-models/",
+      "digest": "version:published-2026-10-13",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Added a deepen-the-brief step, adversarial testing of the prevailing explanation, and held-out validation for predictive claims; independently written, no text copied."
+    },
+    {
+      "repository": "https://pandas.pydata.org",
+      "ref": "pandas-2.3.3",
+      "path": "pandas-docs/version/2.3.3/reference/api/pandas.merge.html",
+      "digest": "sha256:daaeb631fa9081cfacaa3917a93f4af3085a6cd178331df803ebf583b37ac6a2",
+      "license": "primary-documentation-reference",
+      "use": "informed-by",
+      "changes": "Public primary documentation consulted for concepts/API facts; independently authored analytical-methods.md. No source prose, code examples, images or runtime copied. Digest identifies the retrieved response, not an immutable web revision; exact reviewed response is retained privately."
+    },
+    {
+      "repository": "https://www.itl.nist.gov",
+      "ref": "retrieved-2026-10-27",
+      "path": "div898/handbook/eda/section3/eda352.htm",
+      "digest": "sha256:de2fef9175dd0afbf8cf9af383b0d16d82273d4c00ae21ca4f22b04e10e4d8f0",
+      "license": "primary-documentation-reference",
+      "use": "informed-by",
+      "changes": "Public primary documentation consulted for concepts/API facts; independently authored analytical-methods.md. No source prose, code examples, images or runtime copied. Digest identifies the retrieved response, not an immutable web revision; exact reviewed response is retained privately."
+    },
+    {
+      "repository": "https://scikit-learn.org",
+      "ref": "scikit-learn-1.7",
+      "path": "1.7/common_pitfalls.html",
+      "digest": "sha256:d565b1ef30e88ce406c27d28a02bc5a61af28cd65f2c6959676dbfb3509f807b",
+      "license": "primary-documentation-reference",
+      "use": "informed-by",
+      "changes": "Public primary documentation consulted for concepts/API facts; independently authored analytical-methods.md. No source prose, code examples, images or runtime copied. Digest identifies the retrieved response, not an immutable web revision; exact reviewed response is retained privately."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": [
+      "python"
+    ]
+  },
+  "reviewed": "2026-10-27",
+  "owned_changes": "2026-10-27 EKit ticket 5: replaced the restricted OpenAI source snapshot with independently authored methods derived from the approved capability requirements and public primary documentation. Preserved owner, invocation and tool/skill dependency contract; added method-depth and disposable preservation cases. Historical restricted copies remain only in the private recovery boundary. No upstream redistribution permission or unavailable runtime capability is asserted."
+}

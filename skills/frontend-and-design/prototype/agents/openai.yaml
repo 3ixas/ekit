@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prototype"
+  short_description: "Build a throwaway reference-led prototype or comparable variants to answer one consequential pro"
+  default_prompt: "Use $prototype for this request."

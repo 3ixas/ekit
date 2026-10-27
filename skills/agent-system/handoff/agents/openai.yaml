@@ -1,0 +1,4 @@
+interface:
+  display_name: "Handoff"
+  short_description: "Save a self-contained handoff for another session"
+  default_prompt: "Use $handoff for this request."

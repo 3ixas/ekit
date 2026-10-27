@@ -1,0 +1,155 @@
+{
+  "id": "motion",
+  "group": "frontend-and-design",
+  "origin": "synthesized",
+  "invocation": [
+    "automatic",
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/pbakaus/impeccable",
+      "ref": "cb56ed6c19a07329a9fa0cd4e657bee040156593",
+      "path": "plugin/skills/impeccable/SKILL.md",
+      "digest": "git-blob:4ae57d2a8ce47cc8fee8eac0e6332ccd56091889",
+      "license": "apache-2.0-impeccable",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned motion capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/vercel-labs/agent-skills",
+      "ref": "063bee94c3f4df8453406c830b0a7df0f2860278",
+      "path": "skills/react-view-transitions",
+      "digest": "git-tree:13063dbbfc1b085cbc11b9bd5d4324aa2f41bb3a",
+      "license": "declared-mit-vercel-labs",
+      "use": "copied",
+      "changes": "Pinned source bodies retained in source-method snapshots with an owned heading/fence and boundary-newline normalization only: vercel-view-transitions.md. Exact paths, upstream blob IDs, byte hashes and declaration/notice blockers are recorded in docs/provenance/retained-sources.json. The pinned README declares MIT; no upstream copyright notice is invented."
+    },
+    {
+      "repository": "https://github.com/emilkowalski/skills",
+      "ref": "d16ebe60d09a5ba2afcb7054ede9d0a10c9f6128",
+      "path": "skills/animate",
+      "digest": "git-tree:a92e36f28d741aee4ff77d1a001300d7e86e07fe",
+      "license": "mit-emilkowalski",
+      "use": "adapted",
+      "changes": "Pinned verbatim as an owned source snapshot with the Initial Response greeting removed; decision order, easing, duration, interruption, reduced-motion and pointer-gating rules paraphrased into motion-design.md."
+    },
+    {
+      "repository": "https://github.com/emilkowalski/skills",
+      "ref": "d16ebe60d09a5ba2afcb7054ede9d0a10c9f6128",
+      "path": "skills/review-animations",
+      "digest": "git-tree:0e0d3cb3e07ca307fe946ccaf57f6c82eb75124a",
+      "license": "mit-emilkowalski",
+      "use": "adapted",
+      "changes": "Pinned verbatim as an owned source snapshot with the Initial Response greeting removed; the standards (frequency, ease-out, sub-300ms, origin, scale(0), interruptibility, GPU properties, asymmetric timing, cohesion) paraphrased into motion-design.md."
+    },
+    {
+      "repository": "https://github.com/emilkowalski/skills",
+      "ref": "d16ebe60d09a5ba2afcb7054ede9d0a10c9f6128",
+      "path": "skills/improve-animations",
+      "digest": "git-tree:cf1f7aabac34c08f2cf833f039fa99af2f415183",
+      "license": "mit-emilkowalski",
+      "use": "copied",
+      "changes": "Pinned verbatim as an owned source snapshot with the Initial Response greeting removed; opened for whole-codebase motion audits."
+    },
+    {
+      "repository": "https://github.com/emilkowalski/skills",
+      "ref": "d16ebe60d09a5ba2afcb7054ede9d0a10c9f6128",
+      "path": "skills/find-animation-opportunities",
+      "digest": "git-tree:e6443880f38e33cf78e5d678471eed35e8566763",
+      "license": "mit-emilkowalski",
+      "use": "copied",
+      "changes": "Pinned verbatim as an owned source snapshot with the Initial Response greeting removed; opened for opportunity and restraint checks."
+    },
+    {
+      "repository": "https://github.com/emilkowalski/skills",
+      "ref": "d16ebe60d09a5ba2afcb7054ede9d0a10c9f6128",
+      "path": "skills/animation-vocabulary",
+      "digest": "git-tree:d49565744427887a1f719de1ceee04d941d4e681",
+      "license": "mit-emilkowalski",
+      "use": "copied",
+      "changes": "Pinned verbatim as an owned source snapshot with the Initial Response greeting removed; opened for precise motion vocabulary."
+    },
+    {
+      "repository": "https://github.com/emilkowalski/skills",
+      "ref": "d16ebe60d09a5ba2afcb7054ede9d0a10c9f6128",
+      "path": "performance-cheatsheet.md",
+      "digest": "git-blob:5b279577685cebabbfbb0197bd6b3a74591b3392",
+      "license": "mit-emilkowalski",
+      "use": "adapted",
+      "changes": "Appended to the animate snapshot; the ref-style rule is paraphrased into motion-design.md."
+    },
+    {
+      "repository": "https://x.com/flxrnc",
+      "ref": "published-2026-09-30",
+      "path": "status/2105311836190978392",
+      "digest": "version:published-2026-09-30",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Its Motion Lab article informed rendered-motion.md (directed prompts, numbers, render contract, frame-by-frame review, engine choice, sound and export) and the hero-move, damping-ratio, note-translation, and flash-limit rules in motion-design.md. Paraphrased; no text or prompts copied."
+    },
+    {
+      "repository": "https://swestack.bles-software.com",
+      "ref": "sha256:900ac1ed99a77319c25786a58d488c0aa75efb2a2ec73e22d9e8013926b63599",
+      "path": "skills/smooth-web-video/scripts/encode.cjs",
+      "digest": "sha256:d21d631671d0e3cad2e3af5edf3db42523437acae1e4dc6b458e670f63d22597",
+      "license": "mit-bles-designer-stack",
+      "use": "informed-by",
+      "changes": "Informed independently written video_diagnostics.py and video-diagnostics.md: bounded decoded-frame sample, MP4 box order, optional coarse poster comparison, and explicit measurement limits; no gate or encoder adopted. Source is designer-stack.zip?v=6, pinned by archive hash; no upstream text or code copied."
+    },
+    {
+      "repository": "https://swestack.bles-software.com",
+      "ref": "sha256:900ac1ed99a77319c25786a58d488c0aa75efb2a2ec73e22d9e8013926b63599",
+      "path": "skills/smooth-web-video/SKILL.md",
+      "digest": "sha256:4e9cbc886e944ac22a588fccf6a399295485290d1cc8eb9745e2229248f5f603",
+      "license": "mit-bles-designer-stack",
+      "use": "informed-by",
+      "changes": "Informed separating file measurements from actual-page playback evidence. Fixed fps/flatness rules and load-independent-layout claims are excluded. Source is designer-stack.zip?v=6, pinned by archive hash; no upstream text or code copied."
+    },
+    {
+      "repository": "https://github.com/Leonxlnx/taste-skill",
+      "ref": "6010f91a9935f1c167dfc500fb1a475681892e6b",
+      "path": "skills/taste-skill",
+      "digest": "git-tree:2a22452297d559ea5ad97c178879d30ee3ec8022",
+      "license": "mit-taste-skill",
+      "use": "informed-by",
+      "changes": "Uses the single interface-design-owned toolkit through its guide; no duplicate scripts, library or entrypoint. Project contract and existing specialist boundaries govern."
+    },
+    {
+      "repository": "https://github.com/motiondivision/ai-kit",
+      "ref": "78a83b1485fa70dab9037c480de0c7cf53930df7",
+      "path": "plugins/motion/skills/motion",
+      "digest": "git-tree:ca37f8d7e940eb62b44b1a15fb6a6f71ec9f920b",
+      "license": "motion-ai-kit-reference",
+      "use": "informed-by",
+      "changes": "Independently synthesized version-aware Motion API, presence/layout, MotionValue and primitive integration guidance. No upstream text/code copied; unconditional migration and premium tools excluded."
+    },
+    {
+      "repository": "https://github.com/juliangarnier/anime",
+      "ref": "01b81be1df6843ccfe0a71c0699a746bf740dd77",
+      "path": "README.md",
+      "digest": "git-blob:14403f081e2ba79daaaa68b09fc4bcf04e0ee5f0",
+      "license": "mit-animejs",
+      "use": "informed-by",
+      "changes": "Added conditional SVG/timeline engine guidance under motion; no package or third-party skill installed and no upstream code copied."
+    },
+    {
+      "repository": "https://github.com/rive-app/rive-docs",
+      "ref": "0242d8711c9994dd87a8e2405f295ded967a25eb",
+      "path": "cli/agents.mdx",
+      "digest": "git-blob:d34ce200f0f422284233c4d5ed9026ce97d7963b",
+      "license": "design-resource-reference",
+      "use": "informed-by",
+      "changes": "Added conditional staged agent authoring and verification guidance under motion; account/export terms checked at use, generated project instructions reviewed, no docs prose copied."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "accessibility"
+    ],
+    "tools": [
+      "browser"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

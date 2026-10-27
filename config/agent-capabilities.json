@@ -1,0 +1,69 @@
+{
+  "schema": 1,
+  "catalog": {
+    "chars_per_estimated_token": 4,
+    "warning_threshold_tokens": null,
+    "limit_note": "OpenAI public guidance says many or long skill descriptions can be shortened; no numeric catalog token limit was found in the public docs reviewed. Any configured threshold is a local early-warning value, not a product limit."
+  },
+  "agents": {
+    "codex": {
+      "label": "Codex",
+      "routing": {
+        "automatic": {"status": "available", "detail": "Skill name and description guide automatic selection."},
+        "explicit": {"status": "available", "detail": "User-requested skills stay model-loadable. Descriptions and instructions recognize natural-language requests; slash/dollar commands are optional. Recognition is model-guided, not an enforced permission boundary."},
+        "supporting": {"status": "unsupported", "detail": "There is no native supporting-only restriction; AGENTS.md and owning-skill instructions provide guidance.", "fallback": "Treat supporting status as routing guidance, not an enforced permission boundary."}
+      },
+      "orchestration": {
+        "subagents": {"status": "available", "detail": "Supported when enabled by the Codex surface or session."},
+        "worktrees": {"status": "available", "detail": "Codex app supports managed Git worktrees."},
+        "model_roles": {"status": "unverified", "detail": "Per-child model selection depends on the active Codex surface and session configuration."},
+        "issue_tracker": {"status": "unverified", "detail": "The report can check shared GitHub CLI authentication, but not whether the active Codex session permits it."}
+      },
+      "entrypoint": {"kind": "session", "detail": "The active Codex desktop or remote session is not queryable from the repository CLI."},
+      "sources": [
+        "https://developers.openai.com/plugins/concepts/skills",
+        "https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra",
+        "https://developers.openai.com/api/docs/guides/agents-api/overview",
+        "https://developers.openai.com/blog/mastering-codex-remote-for-engineering"
+      ]
+    },
+    "claude-code": {
+      "label": "Claude Code",
+      "routing": {
+        "automatic": {"status": "available", "detail": "Claude can load skills automatically when their descriptions match."},
+        "explicit": {"status": "available", "detail": "User-requested skills stay model-loadable. Descriptions and instructions recognize natural-language requests; slash/dollar commands are optional. Recognition is model-guided, not an enforced permission boundary."},
+        "supporting": {"status": "unsupported", "detail": "There is no native supporting-only restriction; managed rules provide guidance.", "fallback": "Treat supporting status as routing guidance, not an enforced permission boundary."}
+      },
+      "orchestration": {
+        "subagents": {"status": "available", "detail": "Claude Code supports custom subagents."},
+        "worktrees": {"status": "available", "detail": "Subagents can use isolated Git worktrees."},
+        "model_roles": {"status": "available", "detail": "Subagents support a per-invocation or configured model."},
+        "issue_tracker": {"status": "unverified", "detail": "The report can check shared GitHub CLI authentication, but not whether the active Claude Code session permits it."}
+      },
+      "entrypoint": {"kind": "executable", "command": "claude"},
+      "sources": [
+        "https://code.claude.com/docs/en/skills",
+        "https://code.claude.com/docs/en/sub-agents"
+      ]
+    },
+    "opencode": {
+      "label": "OpenCode",
+      "routing": {
+        "automatic": {"status": "available", "detail": "The model can select skills from their names and descriptions."},
+        "explicit": {"status": "available", "detail": "User-requested skills stay model-loadable. Descriptions and instructions recognize natural-language requests; slash/dollar commands are optional. Recognition is model-guided, not an enforced permission boundary."},
+        "supporting": {"status": "unsupported", "detail": "There is no native supporting-only restriction; managed instructions provide guidance.", "fallback": "Treat supporting status as routing guidance, not an enforced permission boundary."}
+      },
+      "orchestration": {
+        "subagents": {"status": "available", "detail": "OpenCode supports primary and subagent sessions."},
+        "worktrees": {"status": "unverified", "detail": "The repository report cannot verify whether this OpenCode installation provides the required worktree workflow."},
+        "model_roles": {"status": "available", "detail": "Agent definitions can select a model; a subagent otherwise inherits the session model."},
+        "issue_tracker": {"status": "unverified", "detail": "The report can check shared GitHub CLI authentication, but not whether the active OpenCode session permits it."}
+      },
+      "entrypoint": {"kind": "executable", "command": "opencode"},
+      "sources": [
+        "https://opencode.ai/docs/skills",
+        "https://opencode.ai/docs/agents"
+      ]
+    }
+  }
+}

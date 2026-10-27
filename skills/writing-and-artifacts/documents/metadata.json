@@ -1,0 +1,29 @@
+{
+  "id": "documents",
+  "group": "writing-and-artifacts",
+  "origin": "synthesized",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/python-openxml/python-docx",
+      "ref": "e45454602b53e8e572b179ccf1c91093ec9f4ed7",
+      "path": "docs/user/quickstart.rst",
+      "digest": "sha256:6b1637398b70f1fc31780149245b5a6876afc674a217dd07a49286398c396fcc",
+      "license": "primary-documentation-reference",
+      "use": "informed-by",
+      "changes": "Official library documentation consulted for public API semantics and limitations; independently authored guidance and fixtures. No upstream prose, examples or assets redistributed. Immutable source commit resolved from v1.2.0; response body pinned by digest."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "writing"
+    ],
+    "tools": [
+      "document-runtime"
+    ]
+  },
+  "reviewed": "2026-10-27",
+  "owned_changes": "Replaced restricted-derived operational entrypoint from agreed capability requirements and permitted reference-only API facts; added independently authored branch-specific verification guidance. Original restricted material remains solely in the private preservation record. IDs, invocation and dependency contract retained."
+}

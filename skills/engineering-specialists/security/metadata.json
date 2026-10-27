@@ -1,0 +1,54 @@
+{
+  "id": "security",
+  "group": "engineering-specialists",
+  "origin": "synthesized",
+  "invocation": [
+    "automatic",
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/addyosmani/agent-skills",
+      "ref": "be4e44a9fbc5e8df0beaefadbb28bd22ee61cc39",
+      "path": "skills/security-and-hardening",
+      "digest": "git-tree:b980a75e61d3c74820887c32378e3bd3c4e4e346",
+      "license": "mit-addyosmani",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned security capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/trailofbits/skills",
+      "ref": "321ccfe628eca0d314b0ee4eaffcdd8a05639aaf",
+      "path": "plugins/differential-review/skills/differential-review/SKILL.md",
+      "digest": "git-blob:536e9258092876017b098f1712a92e7d06bb1480",
+      "license": "cc-by-sa-4.0-trailofbits",
+      "use": "copied",
+      "changes": "Pinned source body retained verbatim in references/source-methods/trailofbits-differential-review.md under CC BY-SA 4.0; local changes are the attribution header, Markdown fence and relocation. Owned operational guidance is separate. Corrected the earlier informed-by classification during the 2026-10-26 publication review."
+    },
+    {
+      "repository": "https://github.com/wdm0006/python-skills",
+      "ref": "954796b7fc28e342cf08f80b9a4a39414a419c7a",
+      "path": "skills/python/security-audit/SKILL.md",
+      "digest": "git-blob:b2c167077847ef6d3eb780675d8c54a42fb412c6",
+      "license": "mit-wdm0006",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned security capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/cloudflare/security-audit-skill",
+      "ref": "c1c8a8c1471069fb0e188eeaff69b8e8db6564a8",
+      "path": "skills/security-audit",
+      "digest": "git-tree:ccbc33ed119b28c3ef7b44a7e2081ab191ad63af",
+      "license": "mit-cloudflare-security-audit",
+      "use": "adapted",
+      "changes": "Independently written everyday finding standards: demonstrated trust-boundary impact, separate confirmed/needs-validation/rejected/hardening dispositions, severity only for confirmed issues, source freshness, narrow remediation and independent verification where available. Full audit orchestration belongs to the explicit security-audit workflow."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": [
+      "git"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

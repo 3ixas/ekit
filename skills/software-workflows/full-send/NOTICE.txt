@@ -1,0 +1,6 @@
+Source and licence companions
+
+This bundle contains owned guidance and source-derived material; the root MIT licence does not override upstream terms. Source paths, revisions, digests and use are in metadata.json. Keep references/licenses/ with the whole bundle. Records named declared-*, proprietary-*, restricted-* or reference-* can describe limits/uncertainty rather than a complete permission grant. See the maintained source inventory for unresolved publication gates.
+
+Applicable records:
+- references/licenses/mit-tstack.txt

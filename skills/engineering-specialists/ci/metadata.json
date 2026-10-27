@@ -1,0 +1,39 @@
+{
+  "id": "ci",
+  "group": "engineering-specialists",
+  "origin": "synthesized",
+  "invocation": [
+    "automatic",
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/addyosmani/agent-skills",
+      "ref": "be4e44a9fbc5e8df0beaefadbb28bd22ee61cc39",
+      "path": "skills/shipping-and-launch/SKILL.md",
+      "digest": "git-blob:f3fba8a01265db5547a8755c81902d0aa56c4104",
+      "license": "mit-addyosmani",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned ci capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/wdm0006/python-skills",
+      "ref": "954796b7fc28e342cf08f80b9a4a39414a419c7a",
+      "path": "skills/common/github-actions/SKILL.md",
+      "digest": "git-blob:34d5dcb568ab0dd9df1a6d5ac94274b7c5a67f3d",
+      "license": "mit-wdm0006",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned ci capability; vendor routing and unrelated framework assumptions removed."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "security"
+    ],
+    "tools": [
+      "git",
+      "github"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

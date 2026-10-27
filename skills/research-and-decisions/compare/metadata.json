@@ -1,0 +1,34 @@
+{
+  "id": "compare",
+  "group": "research-and-decisions",
+  "origin": "synthesized",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/EveryInc/compound-engineering-plugin",
+      "ref": "fd8abda7f64ead2f410da2cfd86c0c8e7cbf8187",
+      "path": "skills/ce-bakeoff",
+      "digest": "git-tree:13623f047a03cb671f48e003b28c9fedd0198b6c",
+      "license": "mit-compound-engineering",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned compare capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/cursor/plugins",
+      "ref": "5bf2b1544db739998121a306340631963c2ff3de",
+      "path": ".",
+      "digest": "git-tree:331716e6a03a58540d1d2c204dc282adf7374039",
+      "license": "mit-pstack",
+      "use": "informed-by",
+      "changes": "Repository-wide assessment informed the owned design; no upstream prose or assets were copied."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": []
+  },
+  "reviewed": "2026-10-26",
+  "owned_changes": "2026-10-26 writing-for-agents pass: Removed generic supporting/evidence paragraph already owned by shared instructions. Made candidate isolation, comparison, synthesis, and completion observable without adding orchestration requirements. Clarified that archived upstream plugin instructions do not override the owned workflow. Replaced a truncated or stale UI summary with a complete description of the current workflow. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed."
+}

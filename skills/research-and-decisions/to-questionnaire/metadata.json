@@ -1,0 +1,25 @@
+{
+  "id": "to-questionnaire",
+  "group": "research-and-decisions",
+  "origin": "imported",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",
+      "path": "skills/productivity/to-questionnaire",
+      "digest": "git-tree:46dfbeeba12a9e52eef446676f42e7551023d9a9",
+      "license": "mit-mattpocock",
+      "use": "copied",
+      "changes": "Copied the pinned upstream method into the owned bundle without semantic changes."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": []
+  },
+  "reviewed": "2026-10-26",
+  "owned_changes": "2026-10-26 writing-for-agents pass: Avoided repeat intake and made document creation distinct from sending. Prevented the template from inventing recipient commitments. Replaced a truncated or stale UI summary with a complete description of the current workflow. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed."
+}

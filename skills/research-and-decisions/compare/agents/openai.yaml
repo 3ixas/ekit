@@ -1,0 +1,4 @@
+interface:
+  display_name: "Compare"
+  short_description: "Develop and judge independent alternatives fairly"
+  default_prompt: "Use $compare for this request."

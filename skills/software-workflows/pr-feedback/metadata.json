@@ -1,0 +1,47 @@
+{
+  "id": "pr-feedback",
+  "group": "software-workflows",
+  "origin": "adapted",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/EveryInc/compound-engineering-plugin",
+      "ref": "fd8abda7f64ead2f410da2cfd86c0c8e7cbf8187",
+      "path": "skills/ce-resolve-pr-feedback",
+      "digest": "git-tree:7c593be919375f05d8e0925446c8e597e69d97f0",
+      "license": "mit-compound-engineering",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned pr-feedback capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/t3dotgg/tstack",
+      "ref": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+      "path": "skills/leaving-pr-comments/SKILL.md",
+      "digest": "sha256:1d110343022d0514c101dd942286cce10d6b9f5bd5b899f5a0530620d34cd295",
+      "license": "mit-tstack",
+      "use": "adapted",
+      "changes": "Independently written adaptation. Concise evidence-backed replies, privacy inspection, verified response before resolving; no mandatory model boilerplate."
+    },
+    {
+      "repository": "https://github.com/t3dotgg/tstack",
+      "ref": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+      "path": "skills/babysit-pr/SKILL.md",
+      "digest": "sha256:fbe43ba3ab76a466a88ef8b46dca1b41fb8101347d24a396903849865173a6ac",
+      "license": "mit-tstack",
+      "use": "adapted",
+      "changes": "Independently written adaptation. Reconcile all unresolved findings against current head, including valid older feedback; preserve scope and posting authority."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "verify"
+    ],
+    "tools": [
+      "git",
+      "github"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

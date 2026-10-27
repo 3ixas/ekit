@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "reviewed": "2026-10-27",
+  "authorship": "Independently authored EKit guidance; reference-only consultation, no copied text/code/assets.",
+  "sources": [
+    {
+      "id": "w3c-complex",
+      "url": "https://www.w3.org/WAI/tutorials/images/complex/",
+      "final_url": "https://www.w3.org/WAI/tutorials/images/complex/",
+      "ref": "retrieved-2026-10-27",
+      "digest": "sha256:7414c959d87c8087c94cdaa0dfb8281857ff4ec0a6d1f3b1a1201b2ee4621115",
+      "reviewed": "2026-10-27",
+      "use": "informed-by",
+      "copied_material": false
+    },
+    {
+      "id": "w3c-color",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html",
+      "final_url": "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html",
+      "ref": "WCAG-2.2;retrieved-2026-10-27",
+      "digest": "sha256:a9bab2b8f419ee379b1ab37985d70b03bd6568952251d2f8a55036198990c9e8",
+      "reviewed": "2026-10-27",
+      "use": "informed-by",
+      "copied_material": false
+    },
+    {
+      "id": "gov-charts",
+      "url": "https://analysisfunction.civilservice.gov.uk/policy-store/data-visualisation-charts/",
+      "final_url": "https://analysisfunction.civilservice.gov.uk/policy-store/data-visualisation-charts/",
+      "ref": "published-2022-05-19;retrieved-2026-10-27",
+      "digest": "sha256:ae8ff13d2af9f541009b63a1ec56d26c61562fc568da51a899f86740e6b809a7",
+      "reviewed": "2026-10-27",
+      "use": "informed-by",
+      "copied_material": false
+    }
+  ]
+}

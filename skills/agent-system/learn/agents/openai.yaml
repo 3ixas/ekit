@@ -1,0 +1,6 @@
+interface:
+  display_name: "Learn"
+  short_description: "Coordinate a multi-track learning journey"
+  default_prompt: "Use $learn to coordinate this larger learning goal."
+policy:
+  allow_implicit_invocation: true

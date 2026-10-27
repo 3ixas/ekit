@@ -1,0 +1,4 @@
+interface:
+  display_name: "grilling"
+  short_description: "Settle consequential choices through shared exploration"
+  default_prompt: "Use $grilling for this request."

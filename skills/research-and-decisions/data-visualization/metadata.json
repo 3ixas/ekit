@@ -1,0 +1,57 @@
+{
+  "id": "data-visualization",
+  "group": "research-and-decisions",
+  "origin": "synthesized",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/bklit/bklit-ui",
+      "ref": "71ac819e0ca4e84462722004dd8e10365ca8bb8a",
+      "path": "README.md",
+      "digest": "git-blob:c27243c892f46a3bb447b18ffb3c6ed7d5904b2c",
+      "license": "mit-bklit-ui",
+      "use": "informed-by",
+      "changes": "Added optional product-chart renderer under existing analytical owner with registry, accessibility, data-state and Studio licence boundaries; no component or Studio source copied."
+    },
+    {
+      "repository": "https://www.w3.org",
+      "ref": "retrieved-2026-10-27",
+      "path": "WAI/tutorials/images/complex/",
+      "digest": "sha256:7414c959d87c8087c94cdaa0dfb8281857ff4ec0a6d1f3b1a1201b2ee4621115",
+      "license": "primary-documentation-reference",
+      "use": "informed-by",
+      "changes": "Public primary documentation consulted for concepts/API facts; independently authored chart-methods.md. No source prose, code examples, images or runtime copied. Digest identifies the retrieved response, not an immutable web revision; exact reviewed response is retained privately."
+    },
+    {
+      "repository": "https://www.w3.org",
+      "ref": "WCAG-2.2;retrieved-2026-10-27",
+      "path": "WAI/WCAG22/Understanding/use-of-color.html",
+      "digest": "sha256:a9bab2b8f419ee379b1ab37985d70b03bd6568952251d2f8a55036198990c9e8",
+      "license": "primary-documentation-reference",
+      "use": "informed-by",
+      "changes": "Public primary documentation consulted for concepts/API facts; independently authored chart-methods.md. No source prose, code examples, images or runtime copied. Digest identifies the retrieved response, not an immutable web revision; exact reviewed response is retained privately."
+    },
+    {
+      "repository": "https://analysisfunction.civilservice.gov.uk",
+      "ref": "published-2022-05-19;retrieved-2026-10-27",
+      "path": "policy-store/data-visualisation-charts/",
+      "digest": "sha256:ae8ff13d2af9f541009b63a1ec56d26c61562fc568da51a899f86740e6b809a7",
+      "license": "primary-documentation-reference",
+      "use": "informed-by",
+      "changes": "Public primary documentation consulted for concepts/API facts; independently authored chart-methods.md. No source prose, code examples, images or runtime copied. Digest identifies the retrieved response, not an immutable web revision; exact reviewed response is retained privately."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "accessibility"
+    ],
+    "tools": [
+      "python",
+      "browser"
+    ]
+  },
+  "reviewed": "2026-10-27",
+  "owned_changes": "2026-10-27 EKit ticket 5: replaced the restricted OpenAI source snapshot with independently authored methods derived from the approved capability requirements and public primary documentation. Preserved owner, invocation and tool/skill dependency contract; added method-depth and disposable preservation cases. Historical restricted copies remain only in the private recovery boundary. No upstream redistribution permission or unavailable runtime capability is asserted."
+}

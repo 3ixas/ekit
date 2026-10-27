@@ -1,0 +1,33 @@
+{
+  "id": "domain-modeling",
+  "group": "software-workflows",
+  "origin": "synthesized",
+  "invocation": [
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "24fe0ef7737efae15c87225755e9f6f5965e4888",
+      "path": "skills/engineering/domain-modeling",
+      "digest": "git-tree:ea30ee454ba264543dbe40737973b1a5afb9f0e6",
+      "license": "mit-mattpocock",
+      "use": "adapted",
+      "changes": "Copied the pinned upstream method, including its CONTEXT.md to GLOSSARY.md rename (mattpocock/skills#876, merged into #1120). Added one owned sentence that reads an older CONTEXT.md when a project has no GLOSSARY.md."
+    },
+    {
+      "repository": "https://github.com/cursor/plugins",
+      "ref": "5bf2b1544db739998121a306340631963c2ff3de",
+      "path": ".",
+      "digest": "git-tree:331716e6a03a58540d1d2c204dc282adf7374039",
+      "license": "mit-pstack",
+      "use": "informed-by",
+      "changes": "Repository-wide assessment informed the owned design; no upstream prose or assets were copied."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": []
+  },
+  "reviewed": "2026-10-05"
+}

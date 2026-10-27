@@ -1,0 +1,13 @@
+# Offline archive and bundle preservation
+
+Run this check after all source branches have merged. Record the exact commit and keep all output in a new disposable directory outside the source checkout. The preparation repository remains private and its history must not be published.
+
+1. Ensure intended source files are committed. Record `git rev-parse HEAD`, build a tar archive with `git archive --format=tar HEAD`, and extract it into a new empty directory. This uses committed bytes, so untracked or globally ignored files cannot silently count as shipped. Compare each extracted file's SHA-256 and executable flag with the committed tree. Exclude `PREPARATION_ONLY.md` from the candidate file set at the later sealing step; never include Git administration or private evidence.
+2. From the extracted root run `python3 scripts/skills.py check` and `python3 -m unittest discover -s tests -v`. Retain complete stdout/stderr and actual exit codes, including optional skips. A failing check is not a successful download.
+3. Use the extracted `scripts/skill_bundle.py` to export a simple owner (`how`) and an asset-heavy owner (`interface-design`) into separate new review directories, supplying the recorded full SHA. Read instructions for conditional owners and rerun with `--include` where the requested use needs them. The helper resolves declared dependencies recursively.
+4. Compare every file under each selected bundle, including assets, references, scripts, metadata, evaluation and notices, with the source archive. Check every metadata source's root licence companion and every declared dependency. Verify the resulting manifest hashes and confirm there is no personal `config/`, global `AGENTS.md`/`CLAUDE.md`, installation marker or plugin installation. The maintained docs may describe personal sync; they are reference material, not an instruction to apply it at work.
+5. Review privacy and local links in maintained documents. Retained upstream source snapshots may describe unavailable upstream companions; their historical paths are provenance, not live host dependencies. Independently authored operational guidance must not require the private archive.
+
+The helper's conditional-name list is advisory. A human or receiving agent must read the requested branch's instructions and validate actual host tools. Record any unresolved dependency or licence issue as a blocker before adoption.
+
+This proves local archive/export completeness for the recorded revision. It does not prove anonymous GitHub access, download redirects through the work firewall, actual workstation policy approval, fresh-session skill discovery or application behaviour. Those require the later publication and work-machine acceptance tickets.

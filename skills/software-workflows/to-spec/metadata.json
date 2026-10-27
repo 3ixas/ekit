@@ -1,0 +1,48 @@
+{
+  "id": "to-spec",
+  "group": "software-workflows",
+  "origin": "adapted",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",
+      "path": "skills/engineering/to-spec",
+      "digest": "git-tree:136b9651747cfccbfbb7c50a6b0dfb757e7547d2",
+      "license": "mit-mattpocock",
+      "use": "adapted",
+      "changes": "Copied the pinned upstream method into the owned bundle; only Codex host or explicitly approved Elias workflow gates were added."
+    },
+    {
+      "repository": "https://github.com/humanlayer/humanlayer",
+      "ref": "99abe673498cf8bdcd5f989aebe9406a27185b3b",
+      "path": ".claude/commands/create_plan_generic.md",
+      "digest": "git-blob:b40f0353e20f5cabbeffd306673722c538fb808c",
+      "license": "apache-2.0-humanlayer",
+      "use": "adapted",
+      "changes": "Kept as an owned copy of the pinned source method; only the tracker fallback and Codex host note are local adaptations."
+    },
+    {
+      "repository": "https://felixrieseberg.com",
+      "ref": "published-2026-10-13",
+      "path": "how-to-be-more-ambitious-a-tutorial-for-humans-with-models/",
+      "digest": "version:published-2026-10-13",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Readiness check requires each acceptance claim to be judged by something other than the implementer's say-so; independently written, no text copied."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "architecture",
+      "domain-modeling"
+    ],
+    "tools": [
+      "git",
+      "github"
+    ]
+  },
+  "reviewed": "2026-10-15"
+}

@@ -1,0 +1,59 @@
+{
+  "id": "babysit-pr",
+  "group": "software-workflows",
+  "origin": "synthesized",
+  "invocation": [
+    "explicit"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/EveryInc/compound-engineering-plugin",
+      "ref": "fd8abda7f64ead2f410da2cfd86c0c8e7cbf8187",
+      "path": "skills/ce-babysit-pr/SKILL.md",
+      "digest": "git-blob:431d9735268aba63278fd0ee4a8779912fffda30",
+      "license": "mit-compound-engineering",
+      "use": "informed-by",
+      "changes": "Rewritten 2026-10-02 as a compact owned skill after its nine references and bundled pr-snapshot script were lost or never imported, and the upstream bundle (12 files, ~4,190 lines) proved heavily tied to Compound Engineering. Kept feedback-before-CI ordering, stale-head cancellation, flaky-rerun versus real-failure handling, consumption-only branch currency, honest terminal states, and the resume command; dropped stack postures and merging. Pushes need one per-run approval; the Claude app's CI monitor is used when available."
+    },
+    {
+      "repository": "https://www.youtube.com/watch?v=5Bmp9cz1JN8",
+      "ref": "video:5Bmp9cz1JN8;published:2026-10-26",
+      "path": "transcript#t=1527-1613,1681-1697",
+      "digest": "sha256:3e073bc9fa97ba8b33f1b700cd2bb450bfe843ed279f347dbb15924f888e0ffa",
+      "license": "reference-only-no-copied-text",
+      "use": "informed-by",
+      "changes": "Theo, These 3 skills changed my life (2026-10-26), YouTube 5Bmp9cz1JN8. Transcript inspected 25:27\u201326:53 and 28:01\u201328:17. Trigger descriptions and model-loadable workflows; optional command syntax. Independently written adaptation; no transcript text copied. Digest identifies this bounded evidence note, not video bytes or a full transcript."
+    },
+    {
+      "repository": "https://github.com/t3dotgg/tstack",
+      "ref": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+      "path": "skills/babysit-pr/SKILL.md",
+      "digest": "sha256:fbe43ba3ab76a466a88ef8b46dca1b41fb8101347d24a396903849865173a6ac",
+      "license": "mit-tstack",
+      "use": "adapted",
+      "changes": "Independently written adaptation. Extend existing owner with authority reuse, bounded host-aware waiting and independent full readiness. No vendor bot assumptions, script import or merge authority."
+    },
+    {
+      "repository": "https://github.com/t3dotgg/tstack",
+      "ref": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+      "path": "skills/full-stop/SKILL.md",
+      "digest": "sha256:243ed08a040df888e35a5db8da704dced345270efdd0afa74252a766e05a4b09",
+      "license": "mit-tstack",
+      "use": "adapted",
+      "changes": "Independently written adaptation. Non-merging delivery must prevent auto-merge before push; no duplicate approval when caller already holds task authority."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "code-review",
+      "debug",
+      "pr-feedback",
+      "verify"
+    ],
+    "tools": [
+      "git",
+      "github"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

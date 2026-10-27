@@ -1,0 +1,47 @@
+{
+  "id": "wayfinder",
+  "group": "software-workflows",
+  "origin": "adapted",
+  "invocation": [
+    "explicit"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",
+      "path": "skills/engineering/wayfinder",
+      "digest": "git-tree:8ec0462658381bd1606d3f9db14ffc67df6a2a43",
+      "license": "mit-mattpocock",
+      "use": "adapted",
+      "changes": "Copied the pinned upstream method into the owned bundle; only Codex host or explicitly approved Elias workflow gates were added."
+    },
+    {
+      "repository": "https://github.com/cursor/plugins",
+      "ref": "5bf2b1544db739998121a306340631963c2ff3de",
+      "path": ".",
+      "digest": "git-tree:331716e6a03a58540d1d2c204dc282adf7374039",
+      "license": "mit-pstack",
+      "use": "adapted",
+      "changes": "Retained local derivative compared against the pinned source, not claimed as an exact upstream version. Source paths, blob identities, complete local comparison diffs and file hashes are in docs/provenance/retained-sources.json; historical authorship of each delta is not asserted. MIT notice retained."
+    },
+    {
+      "repository": "https://www.youtube.com/watch?v=5Bmp9cz1JN8",
+      "ref": "video:5Bmp9cz1JN8;published:2026-10-26",
+      "path": "transcript#t=1527-1613,1681-1697",
+      "digest": "sha256:3e073bc9fa97ba8b33f1b700cd2bb450bfe843ed279f347dbb15924f888e0ffa",
+      "license": "reference-only-no-copied-text",
+      "use": "informed-by",
+      "changes": "Theo, These 3 skills changed my life (2026-10-26), YouTube 5Bmp9cz1JN8. Transcript inspected 25:27–26:53 and 28:01–28:17. Trigger descriptions and model-loadable workflows; optional command syntax. Independently written adaptation; no transcript text copied. Digest identifies this bounded evidence note, not video bytes or a full transcript."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "research",
+      "prototype"
+    ],
+    "tools": [
+      "github"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "to-spec"
+  short_description: "Convert confirmed scope into one implementation contract with behaviour, interfaces, constraints"
+  default_prompt: "Use $to-spec for this request."

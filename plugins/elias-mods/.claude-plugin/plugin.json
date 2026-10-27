@@ -1,0 +1,42 @@
+{
+  "name": "elias-mods",
+  "version": "0.1.3",
+  "description": "Elias's personal Claude Code mods for the Desktop app: a shared band above the prompt that each feature adds a row to",
+  "author": {
+    "name": "Elias"
+  },
+  "userConfig": {
+    "barometer": {
+      "type": "boolean",
+      "title": "Context barometer",
+      "description": "Show context fill and plan limits in the band above the prompt",
+      "default": true
+    },
+    "handoff_at": {
+      "type": "number",
+      "title": "Handoff threshold",
+      "description": "Context percent at which the barometer offers a Handoff button",
+      "default": 70,
+      "min": 1,
+      "max": 100
+    },
+    "skill_route": {
+      "type": "boolean",
+      "title": "Skill route",
+      "description": "Show the skills loaded this turn and warn on supporting-only loads",
+      "default": true
+    },
+    "skill_guard_refuse": {
+      "type": "boolean",
+      "title": "Skill guard refuses",
+      "description": "Refuse a supporting-only skill loaded with no primary skill this turn, instead of only warning",
+      "default": false
+    },
+    "answer_sheet": {
+      "type": "boolean",
+      "title": "Grilling answer sheet",
+      "description": "Offer a pane to answer grilling rounds question by question",
+      "default": true
+    }
+  }
+}

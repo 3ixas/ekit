@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pickup"
+  short_description: "Resume inherited work against current evidence"
+  default_prompt: "Use $pickup for this request."

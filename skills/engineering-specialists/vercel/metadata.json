@@ -1,0 +1,38 @@
+{
+  "id": "vercel",
+  "group": "engineering-specialists",
+  "origin": "synthesized",
+  "invocation": [
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/vercel-labs/agent-skills",
+      "ref": "063bee94c3f4df8453406c830b0a7df0f2860278",
+      "path": "skills/deploy-to-vercel",
+      "digest": "git-tree:1378aa506439f26c809dbcfc61515cbd70f93d69",
+      "license": "declared-mit-vercel-labs",
+      "use": "copied",
+      "changes": "Pinned source bodies retained in source-method snapshots with an owned heading/fence and boundary-newline normalization only: source-1-deploy-to-vercel.md. Exact paths, upstream blob IDs, byte hashes and declaration/notice blockers are recorded in docs/provenance/retained-sources.json. The pinned README declares MIT; no upstream copyright notice is invented."
+    },
+    {
+      "repository": "openai://curated-skills",
+      "ref": "reviewed-2026-09-14",
+      "path": "skills/deploy-to-vercel",
+      "digest": "version:reviewed-2026-09-14",
+      "license": "proprietary-reference",
+      "use": "informed-by",
+      "changes": "Methods selectively consolidated into Elias's owned vercel capability; vendor routing and unrelated framework assumptions removed."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "release"
+    ],
+    "tools": [
+      "vercel",
+      "official-docs"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

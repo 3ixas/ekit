@@ -1,0 +1,19 @@
+{
+  "id": "defend",
+  "group": "software-workflows",
+  "origin": "original",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [],
+  "dependencies": {
+    "skills": [
+      "how",
+      "why"
+    ],
+    "tools": [
+      "git"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

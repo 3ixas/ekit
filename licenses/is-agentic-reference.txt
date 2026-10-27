@@ -1,0 +1,7 @@
+Is Agentic public documentation and skill reference: https://is-agentic.com/
+
+Reference-only use. No upstream licence grant was established. The owned
+agent-readiness guidance is independently written from the published interface
+contracts and concepts; no upstream skill prose, code implementation, or assets
+are imported. URLs, public field names, and invocation syntax identify the
+service interface. Public availability is not treated as an open-source licence.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "to-tickets"
+  short_description: "Split an approved specification into dependency-aware vertical slices and prepare GitHub Issues"
+  default_prompt: "Use $to-tickets for this request."

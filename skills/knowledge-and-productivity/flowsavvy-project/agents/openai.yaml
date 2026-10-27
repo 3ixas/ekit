@@ -1,0 +1,6 @@
+interface:
+  display_name: "FlowSavvy Project"
+  short_description: "Turn complex FlowSavvy tasks into project lists"
+  default_prompt: "Use $flowsavvy-project to turn this FlowSavvy task into a project."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,117 @@
+{
+  "browser": {
+    "kind": "connector",
+    "capability": "inspect and operate a rendered browser surface"
+  },
+  "calendar": {
+    "kind": "connector",
+    "capability": "read fixed commitments"
+  },
+  "claude-design": {
+    "kind": "connector",
+    "capability": "create and iterate interface designs on a Claude Design canvas through the host's Design artifact type"
+  },
+  "defuddle": {
+    "kind": "executable",
+    "probe": [
+      "defuddle",
+      "--version"
+    ]
+  },
+  "design-references": {
+    "kind": "connector",
+    "capability": "search real product screens, flows, and visual styles in a design reference library such as Mobbin or Refero"
+  },
+  "document-runtime": {
+    "kind": "workspace-runtime",
+    "capability": "read, edit, render, and validate office documents"
+  },
+  "exa-search": {
+    "kind": "connector",
+    "capability": "search and fetch current web sources"
+  },
+  "flowsavvy": {
+    "kind": "connector",
+    "capability": "read and modify FlowSavvy tasks and schedules"
+  },
+  "git": {
+    "kind": "executable",
+    "probe": [
+      "git",
+      "--version"
+    ]
+  },
+  "github": {
+    "kind": "executable",
+    "probe": [
+      "gh",
+      "auth",
+      "status"
+    ]
+  },
+  "gmail": {
+    "kind": "connector",
+    "capability": "discover personal Gmail accounts; read messages, full available threads and label counts; execute explicitly approved email changes and verify state"
+  },
+  "imagegen": {
+    "kind": "connector",
+    "capability": "generate and edit images"
+  },
+  "node": {
+    "kind": "executable",
+    "probe": [
+      "node",
+      "--version"
+    ]
+  },
+  "obsidian": {
+    "kind": "executable",
+    "probe": [
+      "obsidian",
+      "--help"
+    ]
+  },
+  "official-docs": {
+    "kind": "connector",
+    "capability": "retrieve current authoritative product documentation"
+  },
+  "pdf-runtime": {
+    "kind": "workspace-runtime",
+    "capability": "extract, create, render, and inspect PDFs"
+  },
+  "python": {
+    "kind": "executable",
+    "probe": [
+      "python3",
+      "--version"
+    ]
+  },
+  "slide-runtime": {
+    "kind": "workspace-runtime",
+    "capability": "create and render presentation files"
+  },
+  "spreadsheet-runtime": {
+    "kind": "workspace-runtime",
+    "capability": "read, calculate, render, and write workbooks"
+  },
+  "stitch": {
+    "kind": "connector",
+    "capability": "create and iterate reference-led interface designs and design systems in Google Stitch"
+  },
+  "todoist": {
+    "kind": "connector",
+    "capability": "read and modify Todoist projects and tasks through the connected Todoist plugin"
+  },
+  "vercel": {
+    "kind": "connector",
+    "capability": "inspect and operate Vercel projects and deployments"
+  },
+  "web": {
+    "kind": "connector",
+    "capability": "browse public web sources"
+  },
+  "xcode": {
+    "kind": "connector",
+    "capability": "build, run, debug, and inspect Apple applications"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "id": "debug",
+  "group": "software-workflows",
+  "origin": "synthesized",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "24fe0ef7737efae15c87225755e9f6f5965e4888",
+      "path": "skills/engineering/diagnosing-bugs",
+      "digest": "git-tree:de4236cf34757c4e9ea7afe78d46c023213ff254",
+      "license": "mit-mattpocock",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned debug capability; vendor routing and unrelated framework assumptions removed. Re-pinned to v1.3.1 on 2026-10-05; the only upstream change was the CONTEXT.md to GLOSSARY.md rename, already applied. Writing-for-agents pass on 2026-10-26 makes the existing method stages and completion evidence explicit; removes duplicated shared-instruction boilerplate without changing workflow intent."
+    },
+    {
+      "repository": "https://github.com/cursor/plugins",
+      "ref": "5bf2b1544db739998121a306340631963c2ff3de",
+      "path": ".",
+      "digest": "git-tree:331716e6a03a58540d1d2c204dc282adf7374039",
+      "license": "mit-pstack",
+      "use": "adapted",
+      "changes": "Retained local derivative compared against the pinned source, not claimed as an exact upstream version. Source paths, blob identities, complete local comparison diffs and file hashes are in docs/provenance/retained-sources.json; historical authorship of each delta is not asserted. MIT notice retained."
+    },
+    {
+      "repository": "https://github.com/humanlayer/humanlayer",
+      "ref": "99abe673498cf8bdcd5f989aebe9406a27185b3b",
+      "path": ".claude/commands/debug.md",
+      "digest": "git-blob:ebd436b73f6f521a29f2347e73cfd74014099b9a",
+      "license": "apache-2.0-humanlayer",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned debug capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/addyosmani/agent-skills",
+      "ref": "be4e44a9fbc5e8df0beaefadbb28bd22ee61cc39",
+      "path": "skills/observability-and-instrumentation/SKILL.md",
+      "digest": "git-blob:84d9cb373467fe0e15236e190833ecc90f840c38",
+      "license": "mit-addyosmani",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned debug capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/EveryInc/compound-engineering-plugin",
+      "ref": "fd8abda7f64ead2f410da2cfd86c0c8e7cbf8187",
+      "path": "skills/ce-debug/SKILL.md",
+      "digest": "git-blob:a9c195d41fdd838977b48995c0f58b2c2e01c4b3",
+      "license": "mit-compound-engineering",
+      "use": "adapted",
+      "changes": "Upstream-derived method retained in references/source-methods/compound-debug.md. The 2026-10-26 publication review compared the full local body with this pinned source and retained its adaptation diff; the source was missing from the bundle provenance. Local text changes and the wrapper are adaptations, not a claimed verbatim copy. The existing MIT notice is retained in licenses/mit-compound-engineering.txt."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "verify"
+    ],
+    "tools": [
+      "git"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

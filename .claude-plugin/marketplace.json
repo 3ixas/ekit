@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "elias-agent-skills",
+  "description": "Elias's own Claude Code plugins, installed from this repository",
+  "owner": { "name": "Elias" },
+  "plugins": [
+    {
+      "name": "elias-mods",
+      "description": "Elias's personal Claude Code mods for the Desktop app: a shared band above the prompt that each feature adds a row to",
+      "source": "./plugins/elias-mods"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Migration"
+  short_description: "Plan and execute substantial data, API, or cross-system migrations through compatible, verifiabl"
+  default_prompt: "Use $migration for this request."
+policy:
+  allow_implicit_invocation: true

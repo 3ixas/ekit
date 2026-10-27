@@ -1,0 +1,38 @@
+{
+  "id": "slides",
+  "group": "writing-and-artifacts",
+  "origin": "synthesized",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/scanny/python-pptx",
+      "ref": "278b47b1dedd5b46ee84c286e77cdfb0bf4594be",
+      "path": "docs/user/text.rst",
+      "digest": "sha256:dda0c721f4093b437dc066c8c18195351718b3bbefb83fef0b8024d2b47cf131",
+      "license": "primary-documentation-reference",
+      "use": "informed-by",
+      "changes": "Official library documentation consulted for public API semantics and limitations; independently authored guidance and fixtures. No upstream prose, examples or assets redistributed. Immutable source commit resolved from v1.0.2; response body pinned by digest."
+    },
+    {
+      "repository": "https://felixrieseberg.com",
+      "ref": "published-2026-10-13",
+      "path": "how-to-be-more-ambitious-a-tutorial-for-humans-with-models/",
+      "digest": "version:published-2026-10-13",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "State the deck's job as an activity rather than an artefact; independently written, no text copied."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "writing"
+    ],
+    "tools": [
+      "slide-runtime"
+    ]
+  },
+  "reviewed": "2026-10-27",
+  "owned_changes": "Replaced restricted-derived operational entrypoint from agreed capability requirements and permitted reference-only API facts; added independently authored branch-specific verification guidance. Original restricted material remains solely in the private preservation record. IDs, invocation and dependency contract retained."
+}

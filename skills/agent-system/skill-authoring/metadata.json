@@ -1,0 +1,48 @@
+{
+  "id": "skill-authoring",
+  "group": "agent-system",
+  "origin": "synthesized",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "openai://curated-skills",
+      "ref": "reviewed-2026-09-14",
+      "path": "skill-creator",
+      "digest": "version:reviewed-2026-09-14",
+      "license": "proprietary-reference",
+      "use": "informed-by",
+      "changes": "Methods selectively consolidated into Elias's owned skill-authoring capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/trailofbits/skills",
+      "ref": "321ccfe628eca0d314b0ee4eaffcdd8a05639aaf",
+      "path": "plugins/code-improver/skills/skill-improver/SKILL.md",
+      "digest": "git-blob:bffc5208934a5179ea804df2ae1a23966bc6974b",
+      "license": "cc-by-sa-4.0-trailofbits",
+      "use": "copied",
+      "changes": "Pinned source body retained verbatim in references/source-methods/source-2-skill.md under CC BY-SA 4.0; local changes are the attribution header, Markdown fence and relocation. Owned operational guidance is separate. Corrected the earlier informed-by classification during the 2026-10-26 publication review."
+    },
+    {
+      "repository": "https://www.youtube.com/watch?v=5Bmp9cz1JN8",
+      "ref": "video:5Bmp9cz1JN8;published:2026-10-26",
+      "path": "transcript#t=1527-1613,1681-1697",
+      "digest": "sha256:3e073bc9fa97ba8b33f1b700cd2bb450bfe843ed279f347dbb15924f888e0ffa",
+      "license": "reference-only-no-copied-text",
+      "use": "informed-by",
+      "changes": "Theo, These 3 skills changed my life (2026-10-26), YouTube 5Bmp9cz1JN8. Transcript inspected 25:27–26:53 and 28:01–28:17. Trigger descriptions and model-loadable workflows; optional command syntax. Independently written adaptation; no transcript text copied. Digest identifies this bounded evidence note, not video bytes or a full transcript."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "writing-for-agents",
+      "skill-review"
+    ],
+    "tools": [
+      "git"
+    ]
+  },
+  "reviewed": "2026-10-26",
+  "owned_changes": "2026-10-26 writing-for-agents pass: Removed generic supporting/evidence paragraph already owned by shared instructions. Clarified that archived upstream plugin instructions do not override the owned workflow. Made approval, authoring, provenance, and behavioural completion distinct checkable steps. Replaced a truncated or stale UI summary with a complete description of the current workflow. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed."
+}

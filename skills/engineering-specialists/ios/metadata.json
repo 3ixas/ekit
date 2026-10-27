@@ -1,0 +1,31 @@
+{
+  "id": "ios",
+  "group": "engineering-specialists",
+  "origin": "adapted",
+  "invocation": [
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "openai://curated-skills",
+      "ref": "reviewed-2026-09-14",
+      "path": "build-ios-apps",
+      "digest": "version:reviewed-2026-09-14",
+      "license": "proprietary-reference",
+      "use": "informed-by",
+      "changes": "Methods selectively consolidated into Elias's owned ios capability; vendor routing and unrelated framework assumptions removed."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "swift",
+      "apple-design",
+      "accessibility"
+    ],
+    "tools": [
+      "xcode",
+      "official-docs"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

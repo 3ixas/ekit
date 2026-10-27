@@ -1,0 +1,38 @@
+{
+  "id": "doc-review",
+  "group": "research-and-decisions",
+  "origin": "synthesized",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/EveryInc/compound-engineering-plugin",
+      "ref": "fd8abda7f64ead2f410da2cfd86c0c8e7cbf8187",
+      "path": "skills/ce-doc-review",
+      "digest": "git-tree:336d56d200696086c56ff731a7e79cba4c226613",
+      "license": "mit-compound-engineering",
+      "use": "informed-by",
+      "changes": "Rewritten 2026-10-02 as a compact owned skill after its eight references were lost in d6f0ef4 and the upstream bundle (27 files, ~7,150 lines) proved heavily tied to Compound Engineering. Kept the always-on coherence and feasibility lenses, the five conditional lenses and their activation signals, independent review, and the apply/decide/FYI tiers; decisions now run as a grilling round."
+    },
+    {
+      "repository": "https://github.com/humanlayer/humanlayer",
+      "ref": "2f66a45b186d88488fa356862be0117db1ccae9f",
+      "path": ".claude/skills/grind-design-discussion/SKILL.md",
+      "digest": "sha256:be3746fbfb46f63f885df29d375c3e64b55263987af780cb326238694af0c8b8",
+      "license": "apache-2.0-humanlayer-2026",
+      "use": "adapted",
+      "changes": "Independently written additions to the feasibility lens: mine implicit assumptions, verify actual patterns, expose competing patterns as decisions and preserve resolved decisions unless contradicted by new evidence. Retained Apply/Decide/FYI, existing routing and scope; no HumanLayer task storage, document precedence or templates. Full Apache-2.0 and current upstream NOTICE retained in licenses/."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "grilling"
+    ],
+    "tools": [
+      "git"
+    ]
+  },
+  "reviewed": "2026-10-26",
+  "owned_changes": "2026-10-26 writing-for-agents pass: Removed generic supporting/evidence paragraph already owned by shared instructions. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed."
+}

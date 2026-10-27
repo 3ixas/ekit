@@ -1,0 +1,110 @@
+{
+  "id": "code-review",
+  "group": "software-workflows",
+  "origin": "adapted",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",
+      "path": "skills/engineering/code-review",
+      "digest": "git-tree:d8e341cee7980127dddda05159bedf25dc853615",
+      "license": "mit-mattpocock",
+      "use": "adapted",
+      "changes": "Copied the pinned upstream method into the owned bundle and added Codex support for reviewing an exact staged slice from its fixed base before final commit."
+    },
+    {
+      "repository": "https://github.com/cursor/plugins",
+      "ref": "5bf2b1544db739998121a306340631963c2ff3de",
+      "path": "pstack/skills/show-me-your-work",
+      "digest": "git-tree:e1f90145ade0129913297a187566435d535f33a8",
+      "license": "mit-pstack",
+      "use": "adapted",
+      "changes": "Retained local derivative compared against the pinned source, not claimed as an exact upstream version. Source paths, blob identities, complete local comparison diffs and file hashes are in docs/provenance/retained-sources.json; historical authorship of each delta is not asserted. MIT notice retained."
+    },
+    {
+      "repository": "https://github.com/EveryInc/compound-engineering-plugin",
+      "ref": "fd8abda7f64ead2f410da2cfd86c0c8e7cbf8187",
+      "path": "skills/ce-code-review/SKILL.md",
+      "digest": "git-blob:ca0427ffd416fb9e84707d67c7ff339c31ae9c4c",
+      "license": "mit-compound-engineering",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned code-review capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/humanlayer/humanlayer",
+      "ref": "99abe673498cf8bdcd5f989aebe9406a27185b3b",
+      "path": ".claude/commands/local_review.md",
+      "digest": "git-blob:97ab1353a6555e5500efaecceb3fa76448c45144",
+      "license": "apache-2.0-humanlayer",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned code-review capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/trailofbits/skills",
+      "ref": "321ccfe628eca0d314b0ee4eaffcdd8a05639aaf",
+      "path": "plugins/differential-review/skills/differential-review/SKILL.md",
+      "digest": "git-blob:536e9258092876017b098f1712a92e7d06bb1480",
+      "license": "cc-by-sa-4.0-trailofbits",
+      "use": "copied",
+      "changes": "Pinned source body retained verbatim in references/source-methods/trailofbits-differential-review.md under CC BY-SA 4.0; local changes are the attribution header, Markdown fence and relocation. Owned operational guidance is separate. Corrected the earlier informed-by classification during the 2026-10-26 publication review."
+    },
+    {
+      "repository": "https://github.com/addyosmani/agent-skills",
+      "ref": "be4e44a9fbc5e8df0beaefadbb28bd22ee61cc39",
+      "path": ".",
+      "digest": "git-tree:58df3a6d8a1683df3e8bb5682de717693b668758",
+      "license": "mit-addyosmani",
+      "use": "informed-by",
+      "changes": "Repository-wide assessment informed the owned design; no upstream prose or assets were copied."
+    },
+    {
+      "repository": "https://felixrieseberg.com",
+      "ref": "published-2026-10-13",
+      "path": "how-to-be-more-ambitious-a-tutorial-for-humans-with-models/",
+      "digest": "version:published-2026-10-13",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Spec reviewer judges a caller-supplied proof plan and flags missing, failed, or non-exercising proof; independently written, no text copied."
+    },
+    {
+      "repository": "https://github.com/cursor/plugins",
+      "ref": "190d28736eff128ec94f502a22c7fe0c4b56cd37",
+      "path": "cursor-team-kit/skills/thermo-nuclear-code-quality-review/SKILL.md",
+      "digest": "git-blob:ac76a2bc88bb2d895e83ab1788aa584a82346cfc",
+      "license": "mit-cursor-team-kit",
+      "use": "adapted",
+      "changes": "Retained local derivative compared against the pinned source, not claimed as an exact upstream version. Source paths, blob identities, complete local comparison diffs and file hashes are in docs/provenance/retained-sources.json; historical authorship of each delta is not asserted. MIT notice retained."
+    },
+    {
+      "repository": "https://github.com/DietrichGebert/ponytail",
+      "ref": "09c434ab73ca43761c5d8b0c5d341926c2fba710",
+      "path": "skills/ponytail-review/SKILL.md",
+      "digest": "sha256:33fe4ebe22a460924e5d4a261e223df22e409cc94ab76182bee9fb91a3ef022e",
+      "license": "mit-ponytail",
+      "use": "adapted",
+      "changes": "Independently written adaptation of expected-deployment and workload calibration in structural review and the Standards reviewer brief. Check shared state, persistence, background work and large inputs against concrete failure cases; retain fixed review scope, separate Standards and Spec axes, and distinguish hypothetical scale from demonstrated regressions. No upstream prose, scripts or report format copied."
+    },
+    {
+      "repository": "https://github.com/t3dotgg/tstack",
+      "ref": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+      "path": "skills/sol-loop/SKILL.md",
+      "digest": "sha256:1db1eb4c4a156ee666070e9a12623d520cd1bd9b19c3fc21003fe5a440ba0b10",
+      "license": "mit-tstack",
+      "use": "adapted",
+      "changes": "Independently written adaptation. Bounded shared review budget, stable findings, evidence-backed disagreement and focused re-review; preserves two axes, selected model and snapshot gates. Rejects rare-case dismissal, vendor orchestration and attribution."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "blast-radius"
+    ],
+    "tools": [
+      "git",
+      "github"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

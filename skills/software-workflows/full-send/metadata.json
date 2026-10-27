@@ -1,0 +1,38 @@
+{
+  "id": "full-send",
+  "group": "software-workflows",
+  "origin": "adapted",
+  "invocation": [
+    "explicit"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/t3dotgg/tstack",
+      "ref": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+      "path": "skills/full-send/SKILL.md",
+      "digest": "sha256:ba585e47cd901506b0e2de13025b0e39bc02462c136cf27491ad3efbdfe66020",
+      "license": "mit-tstack",
+      "use": "adapted",
+      "changes": "Independently written adaptation. Explicit verified-merge endpoint on the shared owned lifecycle; guarded current-head merge, no protection bypass or blanket test/provider authority."
+    },
+    {
+      "repository": "https://github.com/t3dotgg/tstack",
+      "ref": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
+      "path": "skills/full-stop/SKILL.md",
+      "digest": "sha256:243ed08a040df888e35a5db8da704dced345270efdd0afa74252a766e05a4b09",
+      "license": "mit-tstack",
+      "use": "adapted",
+      "changes": "Independently written adaptation. Explicit verified-merge endpoint on the shared owned lifecycle; guarded current-head merge, no protection bypass or blanket test/provider authority."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "full-stop"
+    ],
+    "tools": [
+      "git",
+      "github"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

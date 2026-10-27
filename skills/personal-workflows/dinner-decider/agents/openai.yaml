@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dinner Decider"
+  short_description: "Choose dinner for Elias and a dinner companion through a focused intake, Exa-backed options, and an exact rec"
+  default_prompt: "Use $dinner-decider for this request."

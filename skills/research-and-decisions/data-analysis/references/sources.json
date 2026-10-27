@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "reviewed": "2026-10-27",
+  "authorship": "Independently authored EKit guidance; reference-only consultation, no copied text/code/assets.",
+  "sources": [
+    {
+      "id": "pandas-merge",
+      "url": "https://pandas.pydata.org/pandas-docs/version/2.3.3/reference/api/pandas.merge.html",
+      "final_url": "https://pandas.pydata.org/pandas-docs/version/2.3.3/reference/api/pandas.merge.html",
+      "ref": "pandas-2.3.3",
+      "digest": "sha256:daaeb631fa9081cfacaa3917a93f4af3085a6cd178331df803ebf583b37ac6a2",
+      "reviewed": "2026-10-27",
+      "use": "informed-by",
+      "copied_material": false
+    },
+    {
+      "id": "nist-ci",
+      "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm",
+      "final_url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm",
+      "ref": "retrieved-2026-10-27",
+      "digest": "sha256:de2fef9175dd0afbf8cf9af383b0d16d82273d4c00ae21ca4f22b04e10e4d8f0",
+      "reviewed": "2026-10-27",
+      "use": "informed-by",
+      "copied_material": false
+    },
+    {
+      "id": "sklearn-leakage",
+      "url": "https://scikit-learn.org/1.7/common_pitfalls.html",
+      "final_url": "https://scikit-learn.org/1.7/common_pitfalls.html",
+      "ref": "scikit-learn-1.7",
+      "digest": "sha256:d565b1ef30e88ce406c27d28a02bc5a61af28cd65f2c6959676dbfb3509f807b",
+      "reviewed": "2026-10-27",
+      "use": "informed-by",
+      "copied_material": false
+    }
+  ]
+}

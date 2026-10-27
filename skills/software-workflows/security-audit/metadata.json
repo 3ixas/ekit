@@ -1,0 +1,38 @@
+{
+  "id": "security-audit",
+  "group": "software-workflows",
+  "origin": "adapted",
+  "invocation": [
+    "explicit"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/cloudflare/security-audit-skill",
+      "ref": "c1c8a8c1471069fb0e188eeaff69b8e8db6564a8",
+      "path": "skills/security-audit",
+      "digest": "git-tree:ccbc33ed119b28c3ef7b44a7e2081ab191ad63af",
+      "license": "mit-cloudflare-security-audit",
+      "use": "adapted",
+      "changes": "Explicit-only owned audit workflow; concise entrypoint, preserved six-phase methods and conditional domain companions. Moved validators/schema to scripts and tests to evals; adjusted paths and removed broad upstream guidance routing. Added host capability preflight and explicit incomplete-run handling. Per-file source identities and dispositions are in the 2026-10-23 assessment inventory."
+    },
+    {
+      "repository": "https://www.youtube.com/watch?v=5Bmp9cz1JN8",
+      "ref": "video:5Bmp9cz1JN8;published:2026-10-26",
+      "path": "transcript#t=1527-1613,1681-1697",
+      "digest": "sha256:3e073bc9fa97ba8b33f1b700cd2bb450bfe843ed279f347dbb15924f888e0ffa",
+      "license": "reference-only-no-copied-text",
+      "use": "informed-by",
+      "changes": "Theo, These 3 skills changed my life (2026-10-26), YouTube 5Bmp9cz1JN8. Transcript inspected 25:27\u201326:53 and 28:01\u201328:17. Trigger descriptions and model-loadable workflows; optional command syntax. Independently written adaptation; no transcript text copied. Digest identifies this bounded evidence note, not video bytes or a full transcript."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "security"
+    ],
+    "tools": [
+      "git",
+      "node"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

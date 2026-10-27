@@ -1,0 +1,26 @@
+{
+  "id": "swift",
+  "group": "engineering-specialists",
+  "origin": "original",
+  "invocation": [
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/emilkowalski/skills",
+      "ref": "d16ebe60d09a5ba2afcb7054ede9d0a10c9f6128",
+      "path": "skills/write-swift",
+      "digest": "git-tree:bdefda3891d347b8a183bdc727e4a1de2be3c82b",
+      "license": "mit-emilkowalski",
+      "use": "adapted",
+      "changes": "Pinned verbatim as an owned source snapshot with the Initial Response greeting removed; value types, single-threaded-until-profiled concurrency, the Swift 6.2 async isolation rule, and Swift Testing default added to the method."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": [
+      "xcode"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

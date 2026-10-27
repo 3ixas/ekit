@@ -1,0 +1,6 @@
+interface:
+  display_name: "Full Stop"
+  short_description: "Take approved work to a PR ready for human merging"
+  default_prompt: "Use $full-stop to implement this approved work and leave its PR ready for me to merge."
+policy:
+  allow_implicit_invocation: true

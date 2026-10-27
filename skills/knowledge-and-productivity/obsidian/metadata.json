@@ -1,0 +1,34 @@
+{
+  "id": "obsidian",
+  "group": "knowledge-and-productivity",
+  "origin": "adapted",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/kepano/obsidian-skills",
+      "ref": "8ccef29ae8624eccc734e77ced4a6e54baf5d83a",
+      "path": "skills",
+      "digest": "git-tree:c3a1d07143b2e07a7f73583af917112082c36578",
+      "license": "mit-kepano",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned obsidian capability; vendor routing and unrelated framework assumptions removed."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": [
+      "obsidian",
+      "todoist",
+      "calendar"
+    ]
+  },
+  "reviewed": "2026-10-26",
+  "owned_changes": {
+    "date": "2026-10-25",
+    "method": "Independently written from the user-approved planning design; no additional upstream text copied. Existing upstream provenance and licence unchanged.",
+    "changes": "Retains commitment reviews; adds direction/focus/week/tomorrow entry points, deliberate selection, transition-aware provider resolution, field-preserving task bookkeeping and bounded persistence. Personal priorities and provider status remain in the live vault.",
+    "maintained_contract": "skills/knowledge-and-productivity/obsidian/references/personal-planning.md"
+  }
+}

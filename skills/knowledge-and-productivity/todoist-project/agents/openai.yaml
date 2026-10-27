@@ -1,0 +1,6 @@
+interface:
+  display_name: "Todoist Project"
+  short_description: "Break an idea or task into a Todoist child project"
+  default_prompt: "Use $todoist-project to plan and create a Todoist child project for this."
+policy:
+  allow_implicit_invocation: true

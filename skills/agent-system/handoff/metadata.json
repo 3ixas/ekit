@@ -1,0 +1,37 @@
+{
+  "id": "handoff",
+  "group": "agent-system",
+  "origin": "adapted",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",
+      "path": "skills/productivity/handoff",
+      "digest": "git-tree:2242e8f05424b8c2ae94194a90d97b88d16108ec",
+      "license": "mit-mattpocock",
+      "use": "adapted",
+      "changes": "Copied the pinned upstream method into the owned bundle; only Codex host or explicitly approved Elias workflow gates were added. 2026-10-02: saves to ~/.agents/handoffs/<project>/<timestamp>-<topic>.md instead of the OS temporary directory, and ends with the absolute path and resume command."
+    },
+    {
+      "repository": "https://github.com/humanlayer/humanlayer",
+      "ref": "99abe673498cf8bdcd5f989aebe9406a27185b3b",
+      "path": ".claude/commands/create_handoff.md",
+      "digest": "git-blob:2ad43feeb0bf7b895ce9eaf6fdd784ca76969f17",
+      "license": "apache-2.0-humanlayer",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned handoff capability; vendor routing and unrelated framework assumptions removed. 2026-10-02: saves to ~/.agents/handoffs/<project>/<timestamp>-<topic>.md instead of the OS temporary directory, and ends with the absolute path and resume command."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": [
+      "git",
+      "github"
+    ]
+  },
+  "reviewed": "2026-10-26",
+  "owned_changes": "2026-10-26 writing-for-agents pass: Removed dependence on a host-specific Skill tool. Specified the minimum continuation context needed to make self-contained checkable. Replaced a truncated or stale UI summary with a complete description of the current workflow. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed."
+}

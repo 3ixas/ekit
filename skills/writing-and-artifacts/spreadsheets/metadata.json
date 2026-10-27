@@ -1,0 +1,29 @@
+{
+  "id": "spreadsheets",
+  "group": "writing-and-artifacts",
+  "origin": "synthesized",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/jmcnamara/XlsxWriter",
+      "ref": "e943bee8c9cdf0661cfdb83d5497e0725390e41e",
+      "path": "dev/docs/source/working_with_formulas.rst",
+      "digest": "sha256:1fa3ca70c46c81503e180b027ed2c6950ae83e1af575022a7334f911d7b4b788",
+      "license": "primary-documentation-reference",
+      "use": "informed-by",
+      "changes": "Official library documentation consulted for public API semantics and limitations; independently authored guidance and fixtures. No upstream prose, examples or assets redistributed. Immutable source commit resolved from RELEASE_3.2.9; response body pinned by digest."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "data-analysis"
+    ],
+    "tools": [
+      "spreadsheet-runtime"
+    ]
+  },
+  "reviewed": "2026-10-27",
+  "owned_changes": "Replaced restricted-derived operational entrypoint from agreed capability requirements and permitted reference-only API facts; added independently authored branch-specific verification guidance. Original restricted material remains solely in the private preservation record. IDs, invocation and dependency contract retained."
+}

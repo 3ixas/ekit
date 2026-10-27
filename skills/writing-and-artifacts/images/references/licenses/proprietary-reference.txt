@@ -1,0 +1,5 @@
+Proprietary upstream package reference; no redistribution grant is asserted here.
+
+This treatment permits a source to be recorded as a reference; it does not certify that any retained contents are independently authored or allow copying package prose, code or assets. Restricted source snapshots and their old metadata belong in the private preservation boundary. Replacement methods must record their actual independent sources and output-preservation evidence.
+
+If content-based review finds copied proprietary package text without applicable permission, exclude it or resolve its rights before publication. Access to a package, a renamed source record, or altered wording is not a new grant. See docs/provenance/retained-source-treatment.md for the maintained source boundary; historical details remain private.

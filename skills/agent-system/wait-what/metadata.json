@@ -1,0 +1,24 @@
+{
+  "id": "wait-what",
+  "group": "agent-system",
+  "origin": "imported",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "24fe0ef7737efae15c87225755e9f6f5965e4888",
+      "path": "skills/productivity/wait-what",
+      "digest": "git-tree:c8b050e6b8c711be1a9008ceacb2126914f0763e",
+      "license": "mit-mattpocock",
+      "use": "copied",
+      "changes": "Copied the pinned upstream method into the owned bundle without semantic changes. Re-pinned to v1.3.1 on 2026-10-05; the only upstream change was the CONTEXT.md to GLOSSARY.md rename, already applied."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": []
+  },
+  "reviewed": "2026-10-26"
+}

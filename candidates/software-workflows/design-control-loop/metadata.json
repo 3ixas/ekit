@@ -1,0 +1,31 @@
+{
+  "id": "design-control-loop",
+  "group": "software-workflows",
+  "origin": "adapted",
+  "invocation": [
+    "explicit"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/humanlayer/skills",
+      "ref": "ca7c8088db69e315a8b2deea43820270457f8f3c",
+      "path": "plugins/design-control-loop/skills/design-control-loop",
+      "digest": "git-tree:a8a023f8f62a384a76297b31d9f844c5ad3adf95",
+      "license": "mit-humanlayer-skills",
+      "use": "adapted",
+      "changes": "SKILL.md kept nearly verbatim with linked references, an explicit authority boundary for pushes, secrets, schedules, and PRs, and CodeLayer as one option among the runners; references copied verbatim. references/example-skill.md is wrapped in a fence under a short header so its paths and frontmatter read as an example of a separate skill. The owned entrypoint explicitly requires adapting runner/prompt examples to current task authority rather than inheriting push or permission-bypass commands."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "skill-authoring",
+      "ci",
+      "verify"
+    ],
+    "tools": [
+      "git",
+      "github"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

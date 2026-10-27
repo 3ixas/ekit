@@ -1,0 +1,7 @@
+# Licence scope
+
+The root MIT licence covers only Elias Bennett's eligible original contributions. It does not relicense any upstream copied or adapted text, code, assets, fonts, media, package snapshots, or notices, whether or not an inventory entry is complete. Upstream terms and notice requirements continue to apply; a root licence cannot supply missing permission.
+
+Every bundle records source identity and use in metadata.json. Its references/licenses directory carries the recorded upstream notices or limitation records for offline use. NOTICE.txt identifies this boundary. Keep these companions with a downloaded bundle. Creative Commons share-alike material remains under CC BY-SA 4.0; Apache-2.0 material retains its licence and any applicable notices. Adaptations do not become MIT merely because the owned entrypoint is original.
+
+See docs/provenance/retained-sources.json and retained-source-treatment.md for byte comparisons, adaptations and unresolved gates. The declared-MIT records preserve the actual pinned README declarations and standard terms without inventing missing upstream copyright lines; lack of a standalone file does not negate those declarations. Reference-only links do not authorise copying their content. The former restricted artifact entrypoints and analytical snapshots are replaced/excluded from current source by tickets 4 and 5. Their originals remain in private preservation and preparation history, which is excluded from the independent public baseline. Original package access grants no redistribution permission.

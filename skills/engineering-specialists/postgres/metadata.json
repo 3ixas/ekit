@@ -1,0 +1,37 @@
+{
+  "id": "postgres",
+  "group": "engineering-specialists",
+  "origin": "synthesized",
+  "invocation": [
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/supabase/agent-skills",
+      "ref": "8331f910845103c08d51f6ca1d86ebb7d1f745e3",
+      "path": "skills/supabase-postgres-best-practices",
+      "digest": "git-tree:27bde25111c4cd5e6f803fc9db5fbffe27bb26cf",
+      "license": "mit-supabase",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned postgres capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "openai://curated-skills",
+      "ref": "reviewed-2026-09-14",
+      "path": "skills/supabase-postgres-best-practices",
+      "digest": "version:reviewed-2026-09-14",
+      "license": "proprietary-reference",
+      "use": "informed-by",
+      "changes": "Methods selectively consolidated into Elias's owned postgres capability; vendor routing and unrelated framework assumptions removed."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "migration"
+    ],
+    "tools": [
+      "official-docs"
+    ]
+  },
+  "reviewed": "2026-10-26"
+}

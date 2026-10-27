@@ -1,0 +1,26 @@
+{
+  "id": "react-native",
+  "group": "engineering-specialists",
+  "origin": "adapted",
+  "invocation": [
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/vercel-labs/agent-skills",
+      "ref": "063bee94c3f4df8453406c830b0a7df0f2860278",
+      "path": "skills/react-native-skills",
+      "digest": "git-tree:8b4c6a51914e2111ab6f4f00cb81778652aa241d",
+      "license": "declared-mit-vercel-labs",
+      "use": "copied",
+      "changes": "Pinned source bodies retained in source-method snapshots with an owned heading/fence and boundary-newline normalization only: vercel-react-native.md. Exact paths, upstream blob IDs, byte hashes and declaration/notice blockers are recorded in docs/provenance/retained-sources.json. The pinned README declares MIT; no upstream copyright notice is invented."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "accessibility"
+    ],
+    "tools": []
+  },
+  "reviewed": "2026-10-26"
+}

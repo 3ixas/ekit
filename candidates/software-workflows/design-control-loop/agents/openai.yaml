@@ -1,0 +1,6 @@
+interface:
+  display_name: "Design Control Loop"
+  short_description: "Design a scheduled agent loop that drives a codebase property toward a target"
+  default_prompt: "Use $design-control-loop to design an agentic control loop for this repository."
+policy:
+  allow_implicit_invocation: false

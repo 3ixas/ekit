@@ -1,0 +1,6 @@
+interface:
+  display_name: "Modernize PR"
+  short_description: "Reassess and update an aging PR within authority"
+  default_prompt: "Use $modernize to reassess this PR and update its branch if the original approach still fits."
+policy:
+  allow_implicit_invocation: true

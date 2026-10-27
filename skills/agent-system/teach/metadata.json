@@ -1,0 +1,33 @@
+{
+  "id": "teach",
+  "group": "agent-system",
+  "origin": "adapted",
+  "invocation": [
+    "explicit"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",
+      "path": "skills/productivity/teach",
+      "digest": "git-tree:2ab11f2f51f3c29771edb5d4258d807a49462491",
+      "license": "mit-mattpocock",
+      "use": "copied",
+      "changes": "Copied the pinned upstream method and companion templates. Companion links are moved under the repository's runtime references directory; a short Elias learn handoff boundary clarifies the track workspace and evidence return without changing the teaching method. Lists GLOSSARY.md in the workspace inventory and links the companion glossary format, which the entrypoint did not reference."
+    },
+    {
+      "repository": "https://www.youtube.com/watch?v=5Bmp9cz1JN8",
+      "ref": "video:5Bmp9cz1JN8;published:2026-10-26",
+      "path": "transcript#t=1527-1613,1681-1697",
+      "digest": "sha256:3e073bc9fa97ba8b33f1b700cd2bb450bfe843ed279f347dbb15924f888e0ffa",
+      "license": "reference-only-no-copied-text",
+      "use": "informed-by",
+      "changes": "Theo, These 3 skills changed my life (2026-10-26), YouTube 5Bmp9cz1JN8. Transcript inspected 25:27–26:53 and 28:01–28:17. Trigger descriptions and model-loadable workflows; optional command syntax. Independently written adaptation; no transcript text copied. Digest identifies this bounded evidence note, not video bytes or a full transcript."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": []
+  },
+  "reviewed": "2026-10-26"
+}

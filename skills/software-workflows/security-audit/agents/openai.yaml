@@ -1,0 +1,6 @@
+interface:
+  display_name: "Security Audit"
+  short_description: "Audit repository security with explicit coverage and independently verified findings"
+  default_prompt: "Use $security-audit for this repository audit."
+policy:
+  allow_implicit_invocation: true

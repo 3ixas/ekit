@@ -1,0 +1,20 @@
+Source and licence companions
+
+This bundle contains owned guidance and source-derived material; the root MIT licence does not override upstream terms. Source paths, revisions, digests and use are in metadata.json. Keep references/licenses/ with the whole bundle. Records named declared-*, proprietary-*, restricted-* or reference-* can describe limits/uncertainty rather than a complete permission grant. See the maintained source inventory for unresolved publication gates.
+
+Applicable records:
+- references/licenses/apache-2.0-anthropic.txt
+- references/licenses/apache-2.0-google-labs.txt
+- references/licenses/apache-2.0-impeccable.txt
+- references/licenses/declared-mit-vercel-labs.txt
+- references/licenses/mit-addyosmani.txt
+- references/licenses/mit-better-design.txt
+- references/licenses/mit-bklit-ui.txt
+- references/licenses/mit-design-taste.txt
+- references/licenses/mit-hallmark.txt
+- references/licenses/mit-kokonut-ui.txt
+- references/licenses/mit-magic-ui.txt
+- references/licenses/mit-superdesign.txt
+- references/licenses/mit-taste-skill.txt
+- references/licenses/published-works-reference.txt
+- references/licenses/react-bits-commons-clause.txt

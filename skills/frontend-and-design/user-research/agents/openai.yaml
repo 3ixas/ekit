@@ -1,0 +1,4 @@
+interface:
+  display_name: "User Research"
+  short_description: "Plan and synthesize user interviews or usability studies with neutral prompts, an evidence ladde"
+  default_prompt: "Use $user-research for this request."

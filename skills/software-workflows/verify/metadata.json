@@ -1,0 +1,72 @@
+{
+  "id": "verify",
+  "group": "software-workflows",
+  "origin": "synthesized",
+  "invocation": [
+    "automatic",
+    "supporting"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/cursor/plugins",
+      "ref": "190d28736eff128ec94f502a22c7fe0c4b56cd37",
+      "path": "pstack/skills/create-verification-skill",
+      "digest": "git-tree:5aa2dae2726d09d219397fbbedc1e9500a239d28",
+      "license": "mit-pstack",
+      "use": "adapted",
+      "changes": "Retained local derivative compared against the pinned source, not claimed as an exact upstream version. Source paths, blob identities, complete local comparison diffs and file hashes are in docs/provenance/retained-sources.json; historical authorship of each delta is not asserted. MIT notice retained."
+    },
+    {
+      "repository": "https://github.com/humanlayer/humanlayer",
+      "ref": "99abe673498cf8bdcd5f989aebe9406a27185b3b",
+      "path": ".",
+      "digest": "git-tree:7980b371fdc29abf532b847bd58808628054eb1b",
+      "license": "apache-2.0-humanlayer",
+      "use": "informed-by",
+      "changes": "Repository-wide assessment informed the owned design; no upstream prose or assets were copied."
+    },
+    {
+      "repository": "https://github.com/addyosmani/agent-skills",
+      "ref": "be4e44a9fbc5e8df0beaefadbb28bd22ee61cc39",
+      "path": "skills/shipping-and-launch/SKILL.md",
+      "digest": "git-blob:f3fba8a01265db5547a8755c81902d0aa56c4104",
+      "license": "mit-addyosmani",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned verify capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/wdm0006/python-skills",
+      "ref": "954796b7fc28e342cf08f80b9a4a39414a419c7a",
+      "path": "skills/common/verifying-external-behavior/SKILL.md",
+      "digest": "git-blob:c7eac29a0332bdf86582afcd3bc03891513ad579",
+      "license": "mit-wdm0006",
+      "use": "adapted",
+      "changes": "Methods selectively consolidated into Elias's owned verify capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/cursor/plugins",
+      "ref": "190d28736eff128ec94f502a22c7fe0c4b56cd37",
+      "path": "pstack/skills/maintain-verification-skill",
+      "digest": "git-tree:b6ce4dcdc378492f9acd55a4e56ae111204b4f11",
+      "license": "mit-pstack",
+      "use": "adapted",
+      "changes": "Retained local derivative compared against the pinned source, not claimed as an exact upstream version. Source paths, blob identities, complete local comparison diffs and file hashes are in docs/provenance/retained-sources.json; historical authorship of each delta is not asserted. MIT notice retained."
+    },
+    {
+      "repository": "https://github.com/humanlayer/humanlayer",
+      "ref": "2f66a45b186d88488fa356862be0117db1ccae9f",
+      "path": ".claude/hooks/block-test-output-filtering.sh",
+      "digest": "sha256:4c3169deb105f31f8eb5db20d3924301bfaed21e82938e73deec974b6bfdbe0d",
+      "license": "apache-2.0-humanlayer-2026",
+      "use": "adapted",
+      "changes": "Independently written host-neutral output-capture guidance in references/check-output.md: preserve both streams, completion and actual check status before filtering; distinguish capture failures and interrupted runs. No upstream hook, matcher or executable copied; generic Bash example is owned. Full Apache-2.0 and current upstream NOTICE retained in licenses/."
+    }
+  ],
+  "dependencies": {
+    "skills": [],
+    "tools": [
+      "browser"
+    ]
+  },
+  "reviewed": "2026-10-24"
+}

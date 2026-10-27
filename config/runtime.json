@@ -1,0 +1,15 @@
+{
+  "skills": "~/.agents/skills",
+  "global_agents": "~/.codex/AGENTS.md",
+  "backups": "~/.agents/skill-backups",
+  "claude_skills": "~/.claude/skills",
+  "claude_runtime": "~/.claude/agent-skills-runtime",
+  "claude_rules": "~/.claude/rules/elias-agent-skills.md",
+  "claude_global": "~/.claude/CLAUDE.md",
+  "claude_settings": "~/.claude/settings.json",
+  "claude_backups": "~/.claude/skill-backups/elias-agent-skills",
+  "opencode_agents": "~/.config/opencode/AGENTS.md",
+  "opencode_backups": "~/.config/opencode/skill-backups/elias-agent-skills",
+  "handoffs": "~/.agents/handoffs",
+  "codex_config": "~/.codex/config.toml"
+}

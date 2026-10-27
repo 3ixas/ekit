@@ -1,0 +1,6 @@
+interface:
+  display_name: "Email Assistant"
+  short_description: "Review email and choose prepared actions"
+  default_prompt: "Use $email-assistant to review my personal inboxes and prepare actions for me to approve or skip."
+policy:
+  allow_implicit_invocation: true
