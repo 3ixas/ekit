@@ -50,11 +50,20 @@
       "license": "published-works-reference",
       "use": "informed-by",
       "changes": "Name the piece's job as an activity the reader is moved through; independently written, no text copied."
+    },
+    {
+      "repository": "original owned writing-profile requirements",
+      "ref": "sha256:5e01bcac51785b87a3cf1489ac3c8580ffa7d2224c5937f8368e08242fddcbe4",
+      "path": "docs/provenance/writing-voice-development.md",
+      "digest": "sha256:5e01bcac51785b87a3cf1489ac3c8580ffa7d2224c5937f8368e08242fddcbe4",
+      "license": "user-approved-writing-preferences",
+      "use": "informed-by",
+      "changes": "Independently written contextual voice handling: observed traits versus chosen development preferences, optional companion loading, fact-preserving calibration and missing-evidence behaviour. Personal selections and private assessments remain outside this publication source. Existing upstream sources and notices unchanged."
     }
   ],
   "dependencies": {
     "skills": [],
     "tools": []
   },
-  "reviewed": "2026-10-26"
+  "reviewed": "2026-10-27"
 }

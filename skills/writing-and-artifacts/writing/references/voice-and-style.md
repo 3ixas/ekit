@@ -10,12 +10,26 @@ Use several representative samples written or explicitly approved by the author.
 
 Useful evidence includes how the author opens, develops claims, uses examples, expresses uncertainty, varies rhythm, handles humour, addresses readers, and ends. Record phrases or habits to avoid only when the author has rejected them.
 
+## Chosen development preferences
+
+Keep three things distinct: observed habits supported by the author's writing; qualities the author explicitly wants to develop; and requirements of a particular publication or project. A selected influence is evidence of a desired direction, not proof that the author already writes that way, has read every cited work, or shares the reference writer's experiences and views.
+
+Translate approved references into decisions an editor can apply: lead with the decision and its consequence; replace a vague benefit with a tangible outcome; make a scene carry an emotion; vary sentence rhythm where it serves the piece. Identify general craft qualities rather than reproducing a named writer's distinctive style. Keep personal selections in the author's own profile or knowledge system, not in this reusable skill.
+
+Keep the core profile short enough for everyday use. Link detailed context preferences and source examples from an optional companion, then read only the relevant section when needed. Do not search for or require a companion the profile does not name. Neither a long reference library nor a preference questionnaire is a prerequisite for an ordinary draft.
+
 ## Apply profiles
 
 Authority order is: the current request, supplied facts and source material, project `STYLE.md`, author `VOICE.md`, then general editorial judgment. A profile guides decisions; it does not override the purpose or force every characteristic into every sentence.
 
 If the source draft conflicts with a profile, preserve the source unless the task asks for alignment. Never infer biography, beliefs, or experiences from stylistic patterns.
 
+Select the expressive level from the approved profile and the piece's job. Technical decisions may need more restraint than a product page; narrative, humour and poetry may need different rhythm and detail. A product's brand voice can differ from its founder's personal voice. Stronger expression does not justify stronger factual claims, invented proof, artificial urgency, or unsupported promises.
+
+When calibrating a reusable preference, compare original variants on the same supplied or clearly hypothetical brief. Keep facts, uncertainty and the intended reader consistent; vary the craft choice being tested. Record exactly what the author selects and the contexts it applies to. Agreement with a shortlist is not a measured improvement or approval of every future output. Once the choice is settled, apply it without repeating the calibration process on each task.
+
 ## Maintain
 
 Update a profile from repeated evidence or explicit feedback, not one isolated edit. Keep it brief enough to use. Examples should show the principle without becoming reusable copy that makes future writing repetitive.
+
+Preserve the observed evidence when adding chosen preferences. If the profile or companion is unavailable, say which evidence is missing and use the available draft, facts and current request; do not reconstruct private preferences from memory or expand retrieval into unrelated personal material.
