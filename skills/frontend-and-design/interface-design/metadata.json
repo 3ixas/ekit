@@ -139,7 +139,7 @@
       "digest": "git-blob:efa7eecf93b7c08dff3c33f7a2bf7b1f6f8ae554",
       "license": "mit-design-taste",
       "use": "informed-by",
-      "changes": "Informed the interface-copy section of the DESIGN.md contract; independently written, no text copied."
+      "changes": "Informed independently written interface-copy guidance in the DESIGN.md contract; no text copied."
     },
     {
       "repository": "https://github.com/marvkr/better-design",
@@ -157,7 +157,7 @@
       "use": "informed-by",
       "path": "skills/taste-skill/references/critique.md",
       "digest": "git-blob:8f955f6a70bcec88723d4c3897461d5bd8c8668a",
-      "changes": "Its screenshot passes informed screenshot-critique.md, keeping only passes its blind-test record supports; scores, caps, and house-style bans not adopted. No text copied."
+      "changes": "Its screenshot critique informed independently written shared, website and app lenses; numeric caps and house-style bans are not acceptance gates. No text copied."
     },
     {
       "repository": "https://github.com/Leonxlnx/taste-skill",
@@ -175,7 +175,7 @@
       "use": "informed-by",
       "path": "skills/taste-skill/references/research.md",
       "digest": "git-blob:2e45b174b2918cdb0e842ff94112f6d46adcd985",
-      "changes": "Its blind-test record decided what was adopted: juror-rewarded and juror-punished findings in, owner-taste bans (monospace labels, index numbering, hairlines as a blanket rule) out. No text copied."
+      "changes": "Its model-judged comparisons informed the independently written critique and AI-default guidance; they do not validate every criterion or establish human usability outcomes. No text copied."
     },
     {
       "repository": "https://github.com/Leonxlnx/taste-skill",
@@ -284,6 +284,6 @@
       "stitch"
     ]
   },
-  "reviewed": "2026-10-26",
-  "owned_changes": "Independently authored 2026-10-22 adaptation: load grilling collaborative exploration for open design decisions; explain inspectable trade-offs, develop user reasoning and distinguish taste from usability evidence within existing checkpoints."
+  "reviewed": "2026-10-28",
+  "owned_changes": "Independently authored adaptation: explain consequential design trade-offs, use grilling when exhaustive exploration is warranted or requested, and distinguish taste from usability evidence within proportionate checkpoints."
 }
