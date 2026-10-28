@@ -6,3 +6,4 @@ Applicable records:
 - references/licenses/mit-compound-engineering.txt
 - references/licenses/mit-mattpocock.txt
 - references/licenses/mit-pstack.txt
+- references/licenses/ub-mode-reference.txt

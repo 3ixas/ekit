@@ -1,0 +1,1 @@
+unclebob/ub-mode: no licence was found in the reviewed repository at the pinned revision. Reference only: independently written synthesis of ideas; no source text or assets are copied, and no redistribution permission is asserted.

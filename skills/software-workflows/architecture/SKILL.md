@@ -13,7 +13,8 @@ A grounded target structure or a prioritized structural review with rationale.
 
 1. Map affected entrypoints, owners, data flow, contracts, and constraints. Separate observed structure from assumptions; identify the decisions on which correctness depends.
 2. Sketch responsibilities, types, signatures, modules, and flows. Compare materially different options only where a real tradeoff remains; assess coupling, state, lifecycle, operability, and migration.
-3. Record the chosen shape and rationale, the strongest rejected alternative, and any staged migration. For a review, return prioritized structural risks with the concrete failure or change pressure that exposes each one.
+3. For a consequential new requirement, compare a focused patch with a coherent target shape as if the requirement had been known earlier; weigh migration and scope, then deliver the chosen shape in verifiable stages. When concurrent writes matter, first consider partitioning ownership; if state must be shared, specify coordination and recovery from partial failure.
+4. Record the chosen shape and rationale, the strongest rejected alternative, and any staged migration. For a review, return prioritized structural risks with the concrete failure or change pressure that exposes each one.
 
 Read [references/architecture-method.md](references/architecture-method.md) for substantial design or structural review.
 

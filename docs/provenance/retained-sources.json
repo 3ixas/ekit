@@ -2284,6 +2284,18 @@
       "disposition": "retained under recorded upstream terms; preserve companions"
     },
     {
+      "bundle": "skills/software-workflows/architecture",
+      "repository": "https://github.com/unclebob/ub-mode",
+      "ref": "57a8bdd28e45ed41900ace0bafa2ff76dd9ed70f",
+      "path": "SKILL.md",
+      "digest": "git-blob:9ac940b23b61d77e8e5192721d7b6066357f892c",
+      "license": "ub-mode-reference",
+      "use": "informed-by",
+      "changes": "Independently written, proportionate guidance informed by the reviewed principles; no upstream prose or assets copied. Mandatory tools, thresholds and publication actions were not adopted.",
+      "notice": "references/licenses/ub-mode-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/software-workflows/babysit-pr",
       "repository": "https://github.com/EveryInc/compound-engineering-plugin",
       "ref": "fd8abda7f64ead2f410da2cfd86c0c8e7cbf8187",
@@ -2464,6 +2476,18 @@
       "disposition": "retained under recorded upstream terms; preserve companions"
     },
     {
+      "bundle": "skills/software-workflows/code-review",
+      "repository": "https://github.com/unclebob/ub-mode",
+      "ref": "57a8bdd28e45ed41900ace0bafa2ff76dd9ed70f",
+      "path": "SKILL.md",
+      "digest": "git-blob:9ac940b23b61d77e8e5192721d7b6066357f892c",
+      "license": "ub-mode-reference",
+      "use": "informed-by",
+      "changes": "Independently written, proportionate guidance informed by the reviewed principles; no upstream prose or assets copied. Mandatory tools, thresholds and publication actions were not adopted.",
+      "notice": "references/licenses/ub-mode-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/software-workflows/debug",
       "repository": "https://github.com/mattpocock/skills",
       "ref": "24fe0ef7737efae15c87225755e9f6f5965e4888",
@@ -2544,6 +2568,18 @@
       "license": "reference-only-no-copied-text",
       "use": "informed-by",
       "changes": "Theo, These 3 skills changed my life (2026-10-26), YouTube 5Bmp9cz1JN8. Transcript inspected 25:27–26:53 and 28:01–28:17. Trigger descriptions and model-loadable workflows; optional command syntax. Independently written adaptation; no transcript text copied. Digest identifies this bounded evidence note, not video bytes or a full transcript.",
+      "notice": "references/licenses/reference-only-no-copied-text.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/software-workflows/dogfood",
+      "repository": "https://x.com/roundtablespace/status/2111717667228770611",
+      "ref": "status:2111717667228770611",
+      "path": "user-supplied post text",
+      "digest": "sha256:cb7466ca3b6b4c1bac882100b46d0bbd3f31f922f0dd78ff4606e0bce501970d",
+      "license": "reference-only-no-copied-text",
+      "use": "informed-by",
+      "changes": "User-supplied post text reviewed 2026-10-27; independently written first-use pass adapts contrasting browser journeys with proportional coverage, evidence, authority and retest boundaries. Digest identifies the bounded evidence note, not the full post. Original post was not independently retrieved.",
       "notice": "references/licenses/reference-only-no-copied-text.txt",
       "disposition": "reference-only; no copying grant asserted"
     },
@@ -3268,6 +3304,18 @@
       "disposition": "retained under recorded upstream terms; preserve companions"
     },
     {
+      "bundle": "skills/software-workflows/verify",
+      "repository": "https://github.com/unclebob/ub-mode",
+      "ref": "57a8bdd28e45ed41900ace0bafa2ff76dd9ed70f",
+      "path": "SKILL.md",
+      "digest": "git-blob:9ac940b23b61d77e8e5192721d7b6066357f892c",
+      "license": "ub-mode-reference",
+      "use": "informed-by",
+      "changes": "Independently written, proportionate guidance informed by the reviewed principles; no upstream prose or assets copied. Mandatory tools, thresholds and publication actions were not adopted.",
+      "notice": "references/licenses/ub-mode-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/software-workflows/wayfinder",
       "repository": "https://github.com/mattpocock/skills",
       "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",
@@ -3390,12 +3438,12 @@
     {
       "bundle": "skills/writing-and-artifacts/writing",
       "repository": "original owned writing-profile requirements",
-      "ref": "sha256:5e01bcac51785b87a3cf1489ac3c8580ffa7d2224c5937f8368e08242fddcbe4",
+      "ref": "sha256:c1be9cfe0f83472e2fdc88c8132a33dfeddce295e54348a87d6be657dd44b931",
       "path": "docs/provenance/writing-voice-development.md",
-      "digest": "sha256:5e01bcac51785b87a3cf1489ac3c8580ffa7d2224c5937f8368e08242fddcbe4",
+      "digest": "sha256:c1be9cfe0f83472e2fdc88c8132a33dfeddce295e54348a87d6be657dd44b931",
       "license": "user-approved-writing-preferences",
       "use": "informed-by",
-      "changes": "Independently written contextual voice handling: observed traits versus chosen development preferences, optional companion loading, fact-preserving calibration and missing-evidence behaviour. Personal selections and private assessments remain outside this publication source. Existing upstream sources and notices unchanged.",
+      "changes": "Independently written contextual voice handling: observed traits versus chosen development preferences, mandatory full reads of both personal context files on every invocation, truncation recovery and explicit missing-file disclosure, fact-preserving calibration and missing-evidence behaviour. Personal selections and private assessments remain outside this publication source. Existing upstream sources and notices unchanged.",
       "notice": "references/licenses/user-approved-writing-preferences.txt",
       "disposition": "reference-only; no copying grant asserted"
     },
