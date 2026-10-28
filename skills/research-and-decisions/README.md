@@ -14,7 +14,6 @@ Find evidence, understand systems, develop options, make decisions, and analyze 
 | `to-questionnaire` | automatic | Turn unresolved decisions that require another stakeholder into a concise structured questionnaire with enough context to answer well. |
 | `research` | automatic | Find, evaluate, and synthesize external or current evidence for a question, recommendation, or decision using the strongest available sources. |
 | `strategy` | automatic | Define product purpose, users, positioning, success measures, investment themes, and boundaries before feature-level planning. |
-| `defuddle` | supporting | Extract clean readable content and metadata from webpages when normal fetching is noisy, incomplete, or cluttered. |
 | `why` | automatic, supporting | Reconstruct why code or a system exists using bounded history and evidence while preserving epistemic confidence. |
 
 ## Common paths

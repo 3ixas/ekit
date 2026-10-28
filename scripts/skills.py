@@ -1644,7 +1644,11 @@ def doctor(root: Path, target: Path, global_target: Path, *, probe_tools: bool =
         errors.append("global AGENTS.md differs from canonical source")
     if probe_tools:
         tools = read_json(root / "config" / "tools.json")
+        bundles = discover(root)
+        active_tools = {tool for item in bundles if item["lifecycle"] == "skills" for tool in read_json(item["path"] / "metadata.json").get("dependencies", {}).get("tools", [])}
+        inactive_tools = {tool for item in bundles if item["lifecycle"] != "skills" for tool in read_json(item["path"] / "metadata.json").get("dependencies", {}).get("tools", [])}
         for name, definition in tools.items():
+            if name in inactive_tools and name not in active_tools: continue
             if definition.get("kind") != "executable": continue
             probe = definition.get("probe", [])
             if not isinstance(probe, list) or not probe or not all(isinstance(v, str) for v in probe): errors.append(f"invalid executable probe for {name}")

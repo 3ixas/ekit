@@ -14,6 +14,8 @@ Lead with the useful answer and why it matters. Use plain, direct prose with war
 
 Keep explanations as short as the substance allows. Include the reasoning, uncertainty and limitations I need to judge the result. Use concrete examples when they make an unfamiliar concept clearer. Ordinary delivery does not need recurring teaching blocks or a running account of tool calls.
 
+End any turn reporting on long-running or delegated work with a short status in a Markdown blockquote, separated from the main response: **Goal**, **Done**, **Next**, and **Needs you** (or nothing). When there is a link to inspect the results, include it at the end.
+
 When I say work is shallow or insufficient, return to the relevant source material, identify what is missing, and improve the substance within the agreed scope.
 
 ## Attribution
