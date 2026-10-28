@@ -174,6 +174,14 @@ Concrete evidence that the change works. Show a before and after.
 
 Screenshots are S-tier - when the environment is set up for it and the change is visual.
 
+`gh pr create` and `gh pr comment` cannot upload images, and the GitHub API has no endpoint for them. Attach screenshots in this order:
+
+1. **Browser upload (preferred).** When a browser tool signed in to GitHub is available, open the PR, drag or file-attach the images into a comment box and submit it. GitHub hosts them as durable `user-attachments` URLs. Posting the comment is a publication step, so the delivery caller's authority applies.
+2. **Assets branch (fallback).** With no browser, commit the images to a throwaway branch such as `pr-assets/<pr-number>` (never the PR's own branch, the target or the default branch), push it, and link the `raw.githubusercontent.com` URLs from the body. This works for public repositories; in a private one the images do not render for other viewers. Say in the PR that the branch can be deleted after merge.
+3. **Preview link.** If neither is possible, link the deployment preview and name the routes and viewports to check, and say the images are not attached.
+
+Check each image for secrets and private information before it is published, and keep the files small.
+
 Execution-based evidence is A-tier. Test results, console output. Show the exact test that now fails and passes, using pseudocode.
 
 ### Merge Danger
