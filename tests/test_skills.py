@@ -240,6 +240,24 @@ class SyncTests(unittest.TestCase):
     def tearDown(self) -> None:
         self.temporary.cleanup()
 
+    def test_doctor_skips_tools_used_only_by_inactive_skills(self) -> None:
+        tools_path = self.root / "config" / "tools.json"
+        tools = skills.read_json(tools_path)
+        tools["missing"] = {"kind": "executable", "probe": ["missing-test-executable"]}
+        write_json(tools_path, tools)
+        paused = add_skill(self.root, "paused-example", lifecycle="paused")
+        metadata_path = paused / "metadata.json"
+        metadata = skills.read_json(metadata_path)
+        metadata["dependencies"]["tools"] = ["missing"]
+        write_json(metadata_path, metadata)
+        skills.sync_apply(self.root, self.target, self.global_target, self.backups)
+        self.assertFalse(any("missing-test-executable" in error for error in skills.doctor(self.root, self.target, self.global_target)))
+        active_metadata = self.bundle / "metadata.json"
+        metadata = skills.read_json(active_metadata)
+        metadata["dependencies"]["tools"] = ["missing"]
+        write_json(active_metadata, metadata)
+        self.assertTrue(any("missing-test-executable" in error for error in skills.doctor(self.root, self.target, self.global_target)))
+
     def test_preview_reports_exact_add_change_remove_sets(self) -> None:
         self.target.mkdir()
         (self.target / "example").mkdir()

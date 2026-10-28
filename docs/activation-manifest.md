@@ -83,7 +83,6 @@ This is the reviewed source-to-runtime contract after the 2026-09-15 fidelity an
 | `compare` | automatic | synthesized |
 | `data-analysis` | automatic | adapted |
 | `data-visualization` | automatic | adapted |
-| `defuddle` | supporting | imported |
 | `doc-review` | automatic | synthesized |
 | `how` | automatic, supporting | adapted |
 | `ideate` | automatic | synthesized |
@@ -140,6 +139,7 @@ This is the reviewed source-to-runtime contract after the 2026-09-15 fidelity an
 
 | Group | Skill | Origin | Reason |
 |---|---|---|---|
+| research-and-decisions | `defuddle` | imported | Paused: executable absent and no observed use; source retained. |
 | agent-system | `parallel` | adapted | Owned source retained for future use; excluded from runtime because it is a harness concern. |
 
 ## Candidate disposition

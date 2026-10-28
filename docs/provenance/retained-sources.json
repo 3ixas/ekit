@@ -1672,7 +1672,7 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
-      "bundle": "skills/research-and-decisions/defuddle",
+      "bundle": "paused/research-and-decisions/defuddle",
       "repository": "https://github.com/kepano/obsidian-skills",
       "ref": "8ccef29ae8624eccc734e77ced4a6e54baf5d83a",
       "path": "skills/defuddle",
