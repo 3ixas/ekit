@@ -4,7 +4,7 @@ References supply taste, product precedent, and concrete constraints. They do no
 
 ## Establish the reference set
 
-Use the existing product as a reference for a small consistency change. For a substantial new surface or redesign, require external references before fixing the direction. The user and agent build the set together: the user contributes taste and product context; the agent can find high-signal examples when a category or decision is missing. Collect a small set with distinct jobs:
+Use the existing product as a reference for a small consistency change. For a substantial new surface or redesign with an open direction, use external references before fixing it. Reuse the recorded references when the direction is already approved; seek more only for a remaining decision. The user and agent build the set together: the user contributes taste and product context; the agent can find high-signal examples when a category or decision is missing. Collect a small set with distinct jobs:
 
 - a product or flow reference for information architecture and interaction;
 - one or more visual references for hierarchy, density, typography, colour, and surfaces;
@@ -29,9 +29,9 @@ Separate what is useful from what belongs to the source brand. Do not copy a who
 
 ## Converge deliberately
 
-When the direction is open or consequential, turn the extracted DNA into a small set of coherent alternatives. Vary meaningful axes such as composition, density, typography, colour temperature, or signature interaction; do not ask for random alternatives. Compare each direction against the product job, references, constraints, states, and likely implementation cost, then converge with the user on one direction and record the rejected choices and anti-goals.
+When a consequential direction decision remains unresolved, turn the extracted DNA into a small set of coherent alternatives. Vary meaningful axes such as composition, density, typography, colour temperature, or signature interaction; do not ask for random alternatives. Compare each direction against the product job, references, constraints, states, and likely implementation cost, then converge with the user on one direction and record the rejected choices and anti-goals.
 
-The chosen direction should have one memorable product-specific signature and restraint everywhere else. Distinctiveness should come from the subject, content, and references rather than novelty for its own sake or familiar AI defaults.
+Choose a product-specific signature when it helps the product; deliberate restraint can also be the direction. Distinctiveness should come from the subject, content, and references rather than novelty for its own sake or familiar AI defaults.
 
 ## Design the product
 
