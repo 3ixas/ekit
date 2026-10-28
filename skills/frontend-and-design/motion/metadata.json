@@ -141,6 +141,15 @@
       "license": "design-resource-reference",
       "use": "informed-by",
       "changes": "Added conditional staged agent authoring and verification guidance under motion; account/export terms checked at use, generated project instructions reviewed, no docs prose copied."
+    },
+    {
+      "repository": "https://www.subframe.com",
+      "ref": "sha256:b141baed5acd6b4c34445a3cc49569902c3d1b60bb8f2c3f92ca0c6ea77684d0",
+      "path": "motion",
+      "digest": "sha256:b141baed5acd6b4c34445a3cc49569902c3d1b60bb8f2c3f92ca0c6ea77684d0",
+      "license": "design-resource-reference",
+      "use": "informed-by",
+      "changes": "Independently written optional discovery and evaluation guidance for the live Motion library; no example code or upstream prose retained. Check each example’s licence at use."
     }
   ],
   "dependencies": {
@@ -151,5 +160,5 @@
       "browser"
     ]
   },
-  "reviewed": "2026-10-26"
+  "reviewed": "2026-10-28"
 }
