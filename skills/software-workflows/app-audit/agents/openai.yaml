@@ -1,6 +1,0 @@
-interface:
-  display_name: "App Audit"
-  short_description: "Audit and fix final web or mobile app quality across routes, states, and screens"
-  default_prompt: "Use $app-audit for this request."
-policy:
-  allow_implicit_invocation: true

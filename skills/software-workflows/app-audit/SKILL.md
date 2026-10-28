@@ -1,19 +1,17 @@
 ---
 name: app-audit
-description: "Use when Elias requests App Audit or a deliberate whole-app readiness pass with local fixes and rechecking across web or mobile surfaces. Do not select for a focused bug fix or design question."
+description: "Use for a whole-app readiness pass with local fixes, rechecking and lasting CI gates across web or mobile surfaces: when Elias asks, and at the checkpoints in his instructions (before a first release or deploy, before calling an app-launch task done, before the PR for an initial build). Do not select for a focused bug fix or design question."
 ---
-
-Explicit means user-requested. Ordinary language and dictation count; slash/dollar syntax is optional. Load only for a clear request for this workflow or a supporting handoff within an authorized workflow. Discussion, quoted mentions, negation, and adjacent questions do not request execution. Loading this skill grants no additional action authority.
 
 # App Audit
 
 ## Outcome
 
-A remediated app with evidence across its relevant routes, states, and device sizes, plus a concise account of remaining risks.
+A remediated app with evidence across its relevant routes, states, and device sizes, the checks that proved it kept as CI gates, and a concise account of remaining risks.
 
 ## When to use
 
-Use for a deliberate whole-app final pass, launch-readiness sweep, or a search for the small defects that make a product feel unfinished or template-generated. Use verify for a bounded change and ui-polish for a focused visual refinement.
+Use when asked, and at the checkpoints in Elias's instructions, for a whole-app final pass, launch-readiness sweep, or a search for the small defects that make a product feel unfinished or template-generated. Use verify for a bounded change and ui-polish for a focused visual refinement.
 
 ## Method
 
@@ -31,8 +29,10 @@ Use for a deliberate whole-app final pass, launch-readiness sweep, or a search f
 
 7. **Fix and recheck.** Fix clear, local defects in the app, not just report them. Prefer the smallest coherent correction that preserves the product’s identity and intended behaviour. Use the relevant owned accessibility, dogfood, ui-polish, performance, security, ios, react-native, or vercel specialist when a finding needs deeper work; this skill still owns the coverage matrix and final result. Re-run the affected checks and verify the finished interface. If a larger design decision, unavailable environment, or external setting blocks a safe fix, describe the evidence and the smallest next action.
 
+8. **Keep what you proved.** The repository should already have the `ci` baseline from when it was created; if it does not, hand that to `ci` first. Then pick, from what this pass passed, the checks that are cheap, deterministic and need no live service, and give them to `ci` to add to the repository's single check command (for a web app: route and metadata checks, accessibility and copy checks, and the guard that fails when a verify script is not run by CI). Checks that are slow, subjective or need a live site stay as work done in a pass; a recurring live one can be a scheduled workflow. Write `docs/review/APP-AUDIT.md`: the date, the commit, and each area's Pass, Fixed, Blocked or Not applicable, so the next pass and any freshness check can read it.
+
 ## Boundaries
 
-This is an audit and local remediation workflow. It does not authorize deployment, publication, DNS or domain changes, external account changes, or destructive actions. Never expose secret values. Do not treat a source scan or successful build as proof of the rendered product, or treat a screenshot at one size as responsive verification.
+This is an audit and local remediation workflow. Running at a checkpoint is not authority to deploy or publish: proposing CI changes is local, but pushing them is not. It does not authorize deployment, publication, DNS or domain changes, external account changes, or destructive actions. Never expose secret values. Do not treat a source scan or successful build as proof of the rendered product, or treat a screenshot at one size as responsive verification.
 
 Report what was checked, the routes/devices/states exercised, fixes made and rechecked, commands or tools used, and remaining failures or skips. Mark each material area Pass, Fixed, Blocked, or Not applicable, with brief evidence.

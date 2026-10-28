@@ -12,7 +12,7 @@ This is the reviewed source-to-runtime contract after the 2026-09-15 fidelity an
 
 | Skill | Invocation | Origin |
 |---|---|---|
-| `app-audit` | explicit | original |
+| `app-audit` | automatic | original |
 | `security-audit` | explicit | adapted |
 | `architecture` | automatic, supporting | synthesized |
 | `pr` | automatic | adapted |
