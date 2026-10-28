@@ -49,7 +49,16 @@
       "digest": "sha256:3e073bc9fa97ba8b33f1b700cd2bb450bfe843ed279f347dbb15924f888e0ffa",
       "license": "reference-only-no-copied-text",
       "use": "informed-by",
-      "changes": "Theo, These 3 skills changed my life (2026-10-26), YouTube 5Bmp9cz1JN8. Transcript inspected 25:27\u201326:53 and 28:01\u201328:17. Trigger descriptions and model-loadable workflows; optional command syntax. Independently written adaptation; no transcript text copied. Digest identifies this bounded evidence note, not video bytes or a full transcript."
+      "changes": "Theo, These 3 skills changed my life (2026-10-26), YouTube 5Bmp9cz1JN8. Transcript inspected 25:27–26:53 and 28:01–28:17. Trigger descriptions and model-loadable workflows; optional command syntax. Independently written adaptation; no transcript text copied. Digest identifies this bounded evidence note, not video bytes or a full transcript."
+    },
+    {
+      "repository": "https://x.com/emilkowalski/status/2115531147853607214",
+      "ref": "post:2115531147853607214",
+      "path": "post",
+      "digest": "sha256:215215f4da59e947d9cd0e989bae7fb6403d8618562beeeea0aede3d55b0dcdd",
+      "license": "reference-only-no-copied-text",
+      "use": "informed-by",
+      "changes": "Emil Kowalski, X post 2115531147853607214, 2026-10-28: UI stress testing, state scenarios, before-and-after captures, questioning, variants, and quality monitoring. Read via signed-in browser; independently written adaptation, no post text copied. Digest identifies this bounded evidence note, not post bytes; reviewed 2026-10-28."
     }
   ],
   "dependencies": {
