@@ -15,6 +15,8 @@ Decide in order: whether it should animate at all given how often it is seen, wh
 
 Read [motion design](references/motion-design.md) for the concrete rules, physical correctness, choreography, and review. When the deliverable is an animation or video drawn by code and recorded frame by frame, read [rendered motion](references/rendered-motion.md) for directed prompts, numbers, the render contract, and the frame-by-frame review loop. It links the source snapshots holding exact curves, durations, spring configurations, and recipes.
 
+For web interaction references or a suitable React starting point, consult [Subframe Motion](references/subframe-motion.md) when it fits the task.
+
 For Motion APIs, presence/layout behaviour, MotionValues, Base UI/Radix integration, or a conditional Anime.js/Rive engine, read [implementation sources](references/motion-implementation.md). Match installed versions, preserve the owned design rules, and verify free versus premium access.
 
 For final video files, hero posters or reported video stutter, use [video diagnostics](references/video-diagnostics.md) for bounded file measurements and separate evidence from actual page playback.
