@@ -5,3 +5,4 @@ This bundle contains owned guidance and source-derived material; the root MIT li
 Applicable records:
 - references/licenses/is-agentic-reference.txt
 - references/licenses/reference-only-no-copied-text.txt
+- references/licenses/x-post-reference.txt

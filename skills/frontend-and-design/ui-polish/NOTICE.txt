@@ -12,3 +12,4 @@ Applicable records:
 - references/licenses/mit-hallmark.txt
 - references/licenses/mit-taste-skill.txt
 - references/licenses/published-works-reference.txt
+- references/licenses/x-post-reference.txt
