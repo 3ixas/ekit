@@ -75,6 +75,7 @@ The Standards reviewer may escalate regular to deep when new evidence warrants i
 At either depth, supplement the smell baseline with these structural checks:
 
 - Avoidable branching, flags, or wrappers; unclear type contracts; responsibility leaking across layers; and duplication of canonical utilities. Show the practical cost and a concrete simpler shape before raising a finding.
+- Complexity and duplication measurements are leads for investigation, not findings by themselves. Use existing project tools and thresholds when applicable; identify a concrete maintenance cost and remedy before recommending a change.
 - Size, casts, and optionality are signals to investigate, not violations on their own. A file crossing 1,000 lines is not a blocker without a demonstrated problem or an applicable documented rule.
 - Distinguish **demonstrated regressions** from **optional improvements**. A plausible alternative design alone does not block approval. Structural findings identify the affected file/hunk, evidence, consequence, and remedy. Keep concrete optional proposals separate from blocking findings and omit speculative or cosmetic advice.
 

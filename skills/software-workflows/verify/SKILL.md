@@ -17,6 +17,8 @@ Read-only questions do not trigger setup. Documentation and artifact changes use
 
 Translate each material acceptance claim into observable setup, action, expected result, observed result, and Pass, Fail, or Skip. Exercise the real path and inspect resulting state and side effects. Read [acceptance evidence](references/acceptance-evidence.md) when preparing the proof matrix or judging evidence.
 
+When important test sensitivity is uncertain and the risk warrants the cost, consider a scoped mutation run using an appropriate project-supported tool. Establish a passing baseline and inspect its side effects first; investigate meaningful survivors, distinguishing equivalent, irrelevant, invalid, and timed-out mutants. Report the scope and limitations; mutation scores do not prove correctness. Do not install or require a particular tool by default.
+
 For tests, typechecks, lint, and builds, preserve complete stdout/stderr and the check's actual exit status before summarizing or filtering; use [check output](references/check-output.md). An interrupted run or missing evidence cannot establish a pass.
 
 A build, checkmark, another agent's report, or final screenshot alone is not integrated proof. Separate product failures, harness failures, and unavailable environments. Report concrete blockers and continue independent checks; inaccessible required surfaces remain Skip, never Pass.

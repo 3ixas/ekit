@@ -33,6 +33,15 @@
       "license": "mit-compound-engineering",
       "use": "adapted",
       "changes": "Methods selectively consolidated into Elias's owned architecture capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/unclebob/ub-mode",
+      "ref": "57a8bdd28e45ed41900ace0bafa2ff76dd9ed70f",
+      "path": "SKILL.md",
+      "digest": "git-blob:9ac940b23b61d77e8e5192721d7b6066357f892c",
+      "license": "ub-mode-reference",
+      "use": "informed-by",
+      "changes": "Independently written, proportionate guidance informed by the reviewed principles; no upstream prose or assets copied. Mandatory tools, thresholds and publication actions were not adopted."
     }
   ],
   "dependencies": {
@@ -44,5 +53,5 @@
       "git"
     ]
   },
-  "reviewed": "2026-10-26"
+  "reviewed": "2026-10-28"
 }
