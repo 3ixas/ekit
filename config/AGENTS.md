@@ -18,6 +18,10 @@ End any turn reporting on long-running or delegated work with a short status in 
 
 When I say work is shallow or insufficient, return to the relevant source material, identify what is missing, and improve the substance within the agreed scope.
 
+## Quality gates
+
+When creating a repository, or first working in one with no `.github/workflows`, load `ci` and propose its baseline workflow. Run `app-audit` before an app's first release or deploy, before calling an app-launch task done, and before opening the PR for an app's initial build, then keep what it proves as gates. `docs/review/APP-AUDIT.md` records when it last ran. Proposing is not pushing: nothing is published or enabled without my say-so.
+
 ## Attribution
 
 Never add generated-tool attribution to commits or pull requests: no agent `Co-Authored-By` trailers or “Generated with” lines.

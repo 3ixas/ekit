@@ -9,7 +9,7 @@ GitHub issue and pull-request state is handled through the local `gh` CLI or its
 | Skill | Invocation | Purpose |
 |---|---|---|
 | `security-audit` | explicit | Audit repository security with deterministic coverage, isolated hunters, independent verification, validated findings, and explicit execution blockers. |
-| app-audit | explicit | Run a whole-app web or mobile readiness pass, fix material defects, and recheck routes, metadata, agent readiness, interactions, accessibility, craft, and runtime hygiene. |
+| `app-audit` | automatic | Run a whole-app web or mobile readiness pass at Elias's checkpoints or on request, fix material defects, recheck routes, metadata, agent readiness, interactions, accessibility, craft and runtime hygiene, and keep what it proved as CI gates. |
 | `architecture` | automatic, supporting | Design or review software architecture when responsibilities, boundaries, interfaces, data flow, dependencies, or structural tradeoffs materially affect the result. |
 | `code-review` | automatic | Review a diff or PR along Standards and Spec axes; automatically choose regular or deep structural review, honour explicit depth requests, and separate regressions from optional improvements. |
 | `debug` | automatic | Diagnose and fix unexpected software behaviour through reproduction, causal evidence, root-cause correction, and regression proof. |

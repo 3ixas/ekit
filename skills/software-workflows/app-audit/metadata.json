@@ -3,7 +3,7 @@
   "group": "software-workflows",
   "origin": "original",
   "invocation": [
-    "explicit"
+    "automatic"
   ],
   "sources": [
     {
@@ -54,12 +54,13 @@
   ],
   "dependencies": {
     "skills": [
-      "verify"
+      "verify",
+      "ci"
     ],
     "tools": [
       "browser",
       "official-docs"
     ]
   },
-  "reviewed": "2026-10-26"
+  "reviewed": "2026-10-28"
 }
