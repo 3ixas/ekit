@@ -9,3 +9,4 @@ Applicable records:
 - references/licenses/mit-pstack.txt
 - references/licenses/mit-wdm0006.txt
 - references/licenses/ub-mode-reference.txt
+- references/licenses/x-post-reference.txt
