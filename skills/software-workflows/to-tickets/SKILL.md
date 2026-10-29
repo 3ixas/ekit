@@ -59,11 +59,11 @@ Iterate until the user approves the breakdown.
 Publish the approved tickets. **How** depends on the repository tracker configuration; the tickets are the same either way, only the shape of the blocking edges changes. Use the most efficient supported tracker capability available on this host, preferring `gh`/`gh api` for structured GitHub state.
 
 - **Local files** → write one file per ticket under `.scratch/<feature-slug>/issues/<NN>-<slug>.md`, numbered from `01` in dependency order (blockers first). Each file's "Blocked by" lists the numbers/titles it depends on. Use the per-ticket file template below: one ticket per file, never a single combined file.
-- **A real issue tracker (GitHub, Linear, …)** → publish one issue per ticket in dependency order (blockers first) so each ticket's blocking edges can reference real identifiers. Use the platform's native blocking / sub-issue relationship where it has one; otherwise set each ticket's "Blocked by" to the blocking issues. Apply the `ready-for-agent` triage label unless instructed otherwise; the tickets are agent-grabbable by construction.
+- **A real issue tracker (GitHub, Linear, …)** → publish one issue per ticket in dependency order (blockers first) so each ticket's blocking edges can reference real identifiers. Use the platform's native blocking relationship where available, omitting the body's `Blocked by` section; otherwise use that section to list blocking issues. When the source is an existing issue, make each ticket its native sub-issue where supported; otherwise link the parent in the body. Apply the `ready-for-agent` triage label unless instructed otherwise; the tickets are agent-grabbable by construction.
 
 Work the **frontier**: any ticket whose blockers are all done. For a purely linear chain that means top to bottom.
 
-Do NOT close or modify any parent issue.
+Do not close or edit a parent issue or its existing fields. An authorized native sub-issue relationship is the only parent relationship change made here.
 
 <local-ticket-template>
 
@@ -84,7 +84,7 @@ Do NOT close or modify any parent issue.
 
 ## Parent
 
-A reference to the parent issue on the tracker (if the source was an existing issue, otherwise omit this section).
+Include only when the source was an existing issue and the tracker lacks native sub-issues; link the parent issue.
 
 ## What to build
 
@@ -97,7 +97,7 @@ The end-to-end behaviour this ticket makes work, from the user's perspective, no
 
 ## Blocked by
 
-- A reference to each blocking ticket, or "None (can start immediately)".
+Include this section only when the tracker lacks native blocking relationships. List each blocking ticket, or "None (can start immediately)".
 
 </issue-template>
 

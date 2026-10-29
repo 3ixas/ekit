@@ -23,6 +23,15 @@
       "license": "apache-2.0-humanlayer",
       "use": "adapted",
       "changes": "Kept as an owned copy of the pinned source method; only the tracker capability wording is a local host adaptation."
+    },
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "d1478fcb140db0b93c0c8df17bcfd311844749d0",
+      "path": "skills/engineering/to-tickets/SKILL.md",
+      "digest": "git-blob:9b77a01db9460c99c22d03c910c349f890f12c0e",
+      "license": "mit-mattpocock",
+      "use": "informed-by",
+      "changes": "Independently written adaptation of v1.3.2: Prefer native parent and blocking edges, avoiding duplicate textual dependency state."
     }
   ],
   "dependencies": {
@@ -33,5 +42,5 @@
       "github"
     ]
   },
-  "reviewed": "2026-10-26"
+  "reviewed": "2026-10-29"
 }

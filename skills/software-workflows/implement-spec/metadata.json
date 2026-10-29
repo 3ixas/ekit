@@ -41,6 +41,15 @@
       "license": "mit-tstack",
       "use": "adapted",
       "changes": "Independently written adaptation. Bounded shared review budget, stable findings, evidence-backed disagreement and focused re-review; preserves two axes, selected model and snapshot gates. Rejects rare-case dismissal, vendor orchestration and attribution."
+    },
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "d1478fcb140db0b93c0c8df17bcfd311844749d0",
+      "path": "skills/engineering/implement-spec/SKILL.md",
+      "digest": "git-blob:77bf59b02e7d3a43afbd7035ad77879cf3ebe783",
+      "license": "mit-mattpocock",
+      "use": "informed-by",
+      "changes": "Independently written adaptation of v1.3.2: Use fresh worker contexts with explicit task, authority, constraints and evidence pointers."
     }
   ],
   "dependencies": {
@@ -55,7 +64,7 @@
       "github"
     ]
   },
-  "reviewed": "2026-10-26",
+  "reviewed": "2026-10-29",
   "owned_changes": {
     "date": "2026-10-26",
     "method": "Independently written clarification explicitly selected by Elias after the writing-for-agents review; pinned upstream sources unchanged.",

@@ -41,6 +41,15 @@
       "license": "mit-wdm0006",
       "use": "adapted",
       "changes": "Methods selectively consolidated into Elias's owned tdd capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "d1478fcb140db0b93c0c8df17bcfd311844749d0",
+      "path": "skills/engineering/tdd/SKILL.md",
+      "digest": "git-blob:01eadaa34e7c9a63a67d6dc3cce1cc81b0e49985",
+      "license": "mit-mattpocock",
+      "use": "informed-by",
+      "changes": "Independently written adaptation of v1.3.2: Explain the coverage and limits of proposed test seams."
     }
   ],
   "dependencies": {
@@ -49,5 +58,5 @@
     ],
     "tools": []
   },
-  "reviewed": "2026-10-26"
+  "reviewed": "2026-10-29"
 }
