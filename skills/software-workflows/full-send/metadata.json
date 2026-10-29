@@ -13,7 +13,7 @@
       "digest": "sha256:ba585e47cd901506b0e2de13025b0e39bc02462c136cf27491ad3efbdfe66020",
       "license": "mit-tstack",
       "use": "adapted",
-      "changes": "Independently written adaptation. Explicit verified-merge endpoint on the shared owned lifecycle; guarded current-head merge, no protection bypass or blanket test/provider authority."
+      "changes": "Independently written adaptation. Explicit verified-merge endpoint on the shared owned lifecycle; guarded current-head merge, pinned auto-merge so a green PR finishes merged without a wake, no protection bypass or blanket test/provider authority."
     },
     {
       "repository": "https://github.com/t3dotgg/tstack",
@@ -34,5 +34,5 @@
       "github"
     ]
   },
-  "reviewed": "2026-10-26"
+  "reviewed": "2026-10-29"
 }
