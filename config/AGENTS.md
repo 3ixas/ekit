@@ -30,6 +30,10 @@ Never add generated-tool attribution to commits or pull requests: no agent `Co-A
 
 For my personal knowledge and durable notes, use the Obsidian vault at `/Users/elias/_LifeOS/07_KNOWLEDGE/Obsidian/Personal Knowledge`.
 
+## My agent skills
+
+My own agent skills, their routing and these shared instructions live in the ekit repository: `/Users/elias/_LifeOS/03_ENGINEERING/repos/personal/ekit` (GitHub `3ixas/ekit`). It is the only source; change a skill there, in a worktree, never in the generated copies under `~/.claude/skills`, `~/.claude/agent-skills-runtime` or `~/.agents/skills`. The old `elias-agent-skills` repository is archived: do not read, edit or recommend it.
+
 ## Writing as me
 
 When writing as me, read the current voice profile at `/Users/elias/_LifeOS/07_KNOWLEDGE/Obsidian/Personal Knowledge/99 System/voice-profile.md` and match the register to the task.
