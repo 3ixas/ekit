@@ -104,6 +104,15 @@
       "license": "ub-mode-reference",
       "use": "informed-by",
       "changes": "Independently written, proportionate guidance informed by the reviewed principles; no upstream prose or assets copied. Mandatory tools, thresholds and publication actions were not adopted."
+    },
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "d1478fcb140db0b93c0c8df17bcfd311844749d0",
+      "path": "skills/engineering/code-review/SKILL.md",
+      "digest": "git-blob:83183e0ad36fd0eef25d37c7e483284b7e34c1f0",
+      "license": "mit-mattpocock",
+      "use": "informed-by",
+      "changes": "Independently written adaptation of v1.3.2: Discover applicable standards and provide independent reviewers with fresh context and focused evidence."
     }
   ],
   "dependencies": {
@@ -115,5 +124,5 @@
       "github"
     ]
   },
-  "reviewed": "2026-10-28"
+  "reviewed": "2026-10-29"
 }

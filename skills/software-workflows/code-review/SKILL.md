@@ -39,7 +39,7 @@ Look for the originating spec, in this order:
 
 ### 3. Identify the standards sources
 
-Anything in the repo that documents how code should be written, such as `CODING_STANDARDS.md` or `CONTRIBUTING.md`.
+Search the repository for applicable standards sources, including `CODING_STANDARDS.md` and `CONTRIBUTING.md` at the root and in affected directories. Read and pass every applicable source to the Standards reviewer; include other project instructions that govern the changed paths.
 
 On top of whatever the repo documents, the Standards axis always carries the **smell baseline** below: a fixed set of Fowler code smells (_Refactoring_, ch.3) that applies even when a repo documents nothing. Two rules bind it:
 
@@ -82,6 +82,8 @@ At either depth, supplement the smell baseline with these structural checks:
 When a change affects shared state, persistence, background work or a potentially large input, establish the expected deployment and workload from project evidence before judging scale. Check whether process-local state, check-then-write sequences, unbounded growth or repeated per-item work can fail there. State any material assumption, tie findings to a concrete failure case, and keep hypothetical future scale separate from demonstrated regressions.
 
 ### 5. Spawn both sub-agents in parallel
+
+Start each reviewer in a fresh context without the parent conversation or the other reviewer’s findings. Give each the task, scope, authority, fixed revision and evidence listed below; do not pass the implementer’s conclusions as facts. If the host cannot provide fresh context, report that review independence is limited.
 
 **Standards sub-agent prompt** should include:
 

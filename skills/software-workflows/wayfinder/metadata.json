@@ -32,6 +32,15 @@
       "license": "reference-only-no-copied-text",
       "use": "informed-by",
       "changes": "Theo, These 3 skills changed my life (2026-10-26), YouTube 5Bmp9cz1JN8. Transcript inspected 25:27–26:53 and 28:01–28:17. Trigger descriptions and model-loadable workflows; optional command syntax. Independently written adaptation; no transcript text copied. Digest identifies this bounded evidence note, not video bytes or a full transcript."
+    },
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "d1478fcb140db0b93c0c8df17bcfd311844749d0",
+      "path": "skills/engineering/wayfinder/SKILL.md",
+      "digest": "git-blob:975d6bf9c0a49d18a651f3335e0b4dcf8650fe31",
+      "license": "mit-mattpocock",
+      "use": "informed-by",
+      "changes": "Independently written adaptation of v1.3.2: isolate research worker context, use real tracker IDs, preserve ticket type, and avoid research PRs and ready-for-agent labels."
     }
   ],
   "dependencies": {
@@ -43,5 +52,5 @@
       "github"
     ]
   },
-  "reviewed": "2026-10-26"
+  "reviewed": "2026-10-29"
 }

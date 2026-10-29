@@ -32,12 +32,21 @@
       "license": "published-works-reference",
       "use": "informed-by",
       "changes": "Independently wrote the depth-pass reference and linked it before the first round and from the closing gap check. The 2026-10-21 refinement ties expert and adjacent-discipline methods to concrete activities and useful outputs, selects specialists for their contribution, and grounds stretch targets in evidence and constraints; no text copied."
+    },
+    {
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "d1478fcb140db0b93c0c8df17bcfd311844749d0",
+      "path": "skills/productivity/grilling/SKILL.md",
+      "digest": "git-blob:d2f09a18e6a6c65c55f1271ba08dfeaf06f0bed3",
+      "license": "mit-mattpocock",
+      "use": "informed-by",
+      "changes": "Independently written adaptation of v1.3.2: Use clear affirmative recommendation wording and fresh context for fact-finding workers."
     }
   ],
   "dependencies": {
     "skills": [],
     "tools": []
   },
-  "reviewed": "2026-10-26",
+  "reviewed": "2026-10-29",
   "owned_changes": "Independently authored from the user-approved 2026-10-22 exploration agreement: shared collaborative reasoning, adaptive explanation, concrete alternatives, proportionate evidence, decision-ready stopping and a brief grounded reflection. No new external source text used.\n\n2026-10-26 writing-for-agents pass: Replaced vague any-trigger-phrase matching with intended shared-exploration requests and discussion exclusion. Replaced a truncated or stale UI summary with a complete description of the current workflow. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed."
 }
