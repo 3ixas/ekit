@@ -40,6 +40,18 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
+      "bundle": "skills/agent-system/grilling",
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "d1478fcb140db0b93c0c8df17bcfd311844749d0",
+      "path": "skills/productivity/grilling/SKILL.md",
+      "digest": "git-blob:d2f09a18e6a6c65c55f1271ba08dfeaf06f0bed3",
+      "license": "mit-mattpocock",
+      "use": "informed-by",
+      "changes": "Independently written adaptation of v1.3.2: Use clear affirmative recommendation wording and fresh context for fact-finding workers.",
+      "notice": "references/licenses/mit-mattpocock.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/agent-system/handoff",
       "repository": "https://github.com/mattpocock/skills",
       "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",
@@ -62,6 +74,18 @@
       "changes": "Methods selectively consolidated into Elias's owned handoff capability; vendor routing and unrelated framework assumptions removed. 2026-10-02: saves to ~/.agents/handoffs/<project>/<timestamp>-<topic>.md instead of the OS temporary directory, and ends with the absolute path and resume command.",
       "notice": "references/licenses/apache-2.0-humanlayer.txt",
       "disposition": "retained under recorded upstream terms; preserve companions"
+    },
+    {
+      "bundle": "skills/agent-system/handoff",
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "d1478fcb140db0b93c0c8df17bcfd311844749d0",
+      "path": "skills/productivity/handoff/SKILL.md",
+      "digest": "git-blob:a224edc643a20ddb989f9bca1547440169159810",
+      "license": "mit-mattpocock",
+      "use": "informed-by",
+      "changes": "Independently written adaptation of v1.3.2: Specify the platform temporary-directory fallback.",
+      "notice": "references/licenses/mit-mattpocock.txt",
+      "disposition": "reference-only; no copying grant asserted"
     },
     {
       "bundle": "skills/agent-system/learn",
@@ -193,6 +217,18 @@
       "use": "informed-by",
       "changes": "Theo, These 3 skills changed my life (2026-10-26), YouTube 5Bmp9cz1JN8. Transcript inspected 25:27–26:53 and 28:01–28:17. Trigger descriptions and model-loadable workflows; optional command syntax. Independently written adaptation; no transcript text copied. Digest identifies this bounded evidence note, not video bytes or a full transcript.",
       "notice": "references/licenses/reference-only-no-copied-text.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/agent-system/teach",
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "d1478fcb140db0b93c0c8df17bcfd311844749d0",
+      "path": "skills/productivity/teach/SKILL.md",
+      "digest": "git-blob:493fa3bae0dada971c4dfb965790e56920b1dced",
+      "license": "mit-mattpocock",
+      "use": "informed-by",
+      "changes": "Independently written adaptation of v1.3.2: Vary correct quiz answer position.",
+      "notice": "references/licenses/mit-mattpocock.txt",
       "disposition": "reference-only; no copying grant asserted"
     },
     {
@@ -947,7 +983,7 @@
       "digest": "git-blob:efa7eecf93b7c08dff3c33f7a2bf7b1f6f8ae554",
       "license": "mit-design-taste",
       "use": "informed-by",
-      "changes": "Informed the interface-copy section of the DESIGN.md contract; independently written, no text copied.",
+      "changes": "Informed independently written interface-copy guidance in the DESIGN.md contract; no text copied.",
       "notice": "references/licenses/mit-design-taste.txt",
       "disposition": "reference-only; no copying grant asserted"
     },
@@ -971,7 +1007,7 @@
       "use": "informed-by",
       "path": "skills/taste-skill/references/critique.md",
       "digest": "git-blob:8f955f6a70bcec88723d4c3897461d5bd8c8668a",
-      "changes": "Its screenshot passes informed screenshot-critique.md, keeping only passes its blind-test record supports; scores, caps, and house-style bans not adopted. No text copied.",
+      "changes": "Its screenshot critique informed independently written shared, website and app lenses; numeric caps and house-style bans are not acceptance gates. No text copied.",
       "notice": "references/licenses/mit-taste-skill.txt",
       "disposition": "reference-only; no copying grant asserted"
     },
@@ -995,7 +1031,7 @@
       "use": "informed-by",
       "path": "skills/taste-skill/references/research.md",
       "digest": "git-blob:2e45b174b2918cdb0e842ff94112f6d46adcd985",
-      "changes": "Its blind-test record decided what was adopted: juror-rewarded and juror-punished findings in, owner-taste bans (monospace labels, index numbering, hairlines as a blanket rule) out. No text copied.",
+      "changes": "Its model-judged comparisons informed the independently written critique and AI-default guidance; they do not validate every criterion or establish human usability outcomes. No text copied.",
       "notice": "references/licenses/mit-taste-skill.txt",
       "disposition": "reference-only; no copying grant asserted"
     },
@@ -1308,6 +1344,18 @@
       "license": "design-resource-reference",
       "use": "informed-by",
       "changes": "Added conditional staged agent authoring and verification guidance under motion; account/export terms checked at use, generated project instructions reviewed, no docs prose copied.",
+      "notice": "references/licenses/design-resource-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/frontend-and-design/motion",
+      "repository": "https://www.subframe.com",
+      "ref": "sha256:b141baed5acd6b4c34445a3cc49569902c3d1b60bb8f2c3f92ca0c6ea77684d0",
+      "path": "motion",
+      "digest": "sha256:b141baed5acd6b4c34445a3cc49569902c3d1b60bb8f2c3f92ca0c6ea77684d0",
+      "license": "design-resource-reference",
+      "use": "informed-by",
+      "changes": "Independently written optional discovery and evaluation guidance for the live Motion library; no example code or upstream prose retained. Check each example’s licence at use.",
       "notice": "references/licenses/design-resource-reference.txt",
       "disposition": "reference-only; no copying grant asserted"
     },
@@ -1670,18 +1718,6 @@
       "changes": "Repository-wide assessment informed the owned design; no upstream prose or assets were copied.",
       "notice": "references/licenses/mit-pstack.txt",
       "disposition": "reference-only; no copying grant asserted"
-    },
-    {
-      "bundle": "paused/research-and-decisions/defuddle",
-      "repository": "https://github.com/kepano/obsidian-skills",
-      "ref": "8ccef29ae8624eccc734e77ced4a6e54baf5d83a",
-      "path": "skills/defuddle",
-      "digest": "git-tree:db0b775af7e7d603f59fa2b67bdef615baf1a48f",
-      "license": "mit-kepano",
-      "use": "adapted",
-      "changes": "Copied Kepano’s pinned Defuddle method into the owned supporting bundle; only the owned name changed from `web-extract` to the source tool name.",
-      "notice": "references/licenses/mit-kepano.txt",
-      "disposition": "retained under recorded upstream terms; preserve companions"
     },
     {
       "bundle": "skills/research-and-decisions/doc-review",
@@ -2488,6 +2524,18 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
+      "bundle": "skills/software-workflows/code-review",
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "d1478fcb140db0b93c0c8df17bcfd311844749d0",
+      "path": "skills/engineering/code-review/SKILL.md",
+      "digest": "git-blob:83183e0ad36fd0eef25d37c7e483284b7e34c1f0",
+      "license": "mit-mattpocock",
+      "use": "informed-by",
+      "changes": "Independently written adaptation of v1.3.2: Discover applicable standards and provide independent reviewers with fresh context and focused evidence.",
+      "notice": "references/licenses/mit-mattpocock.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/software-workflows/debug",
       "repository": "https://github.com/mattpocock/skills",
       "ref": "24fe0ef7737efae15c87225755e9f6f5965e4888",
@@ -2615,7 +2663,7 @@
       "digest": "sha256:ba585e47cd901506b0e2de13025b0e39bc02462c136cf27491ad3efbdfe66020",
       "license": "mit-tstack",
       "use": "adapted",
-      "changes": "Independently written adaptation. Explicit verified-merge endpoint on the shared owned lifecycle; guarded current-head merge, no protection bypass or blanket test/provider authority.",
+      "changes": "Independently written adaptation. Explicit verified-merge endpoint on the shared owned lifecycle; guarded current-head merge, pinned auto-merge so a green PR finishes merged without a wake, no protection bypass or blanket test/provider authority.",
       "notice": "references/licenses/mit-tstack.txt",
       "disposition": "retained under recorded upstream terms; preserve companions"
     },
@@ -2800,6 +2848,18 @@
       "disposition": "retained under recorded upstream terms; preserve companions"
     },
     {
+      "bundle": "skills/software-workflows/implement",
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "d1478fcb140db0b93c0c8df17bcfd311844749d0",
+      "path": "skills/engineering/implement/SKILL.md",
+      "digest": "git-blob:bd49e472984c7b99aac40286fdae749bb955a842",
+      "license": "mit-mattpocock",
+      "use": "informed-by",
+      "changes": "Independently written adaptation of v1.3.2: Resolve and identify supplied tracker references before editing.",
+      "notice": "references/licenses/mit-mattpocock.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/software-workflows/implement-spec",
       "repository": "https://github.com/mattpocock/skills",
       "ref": "24fe0ef7737efae15c87225755e9f6f5965e4888",
@@ -2846,6 +2906,18 @@
       "changes": "Independently written adaptation. Bounded shared review budget, stable findings, evidence-backed disagreement and focused re-review; preserves two axes, selected model and snapshot gates. Rejects rare-case dismissal, vendor orchestration and attribution.",
       "notice": "references/licenses/mit-tstack.txt",
       "disposition": "retained under recorded upstream terms; preserve companions"
+    },
+    {
+      "bundle": "skills/software-workflows/implement-spec",
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "d1478fcb140db0b93c0c8df17bcfd311844749d0",
+      "path": "skills/engineering/implement-spec/SKILL.md",
+      "digest": "git-blob:77bf59b02e7d3a43afbd7035ad77879cf3ebe783",
+      "license": "mit-mattpocock",
+      "use": "informed-by",
+      "changes": "Independently written adaptation of v1.3.2: Use fresh worker contexts with explicit task, authority, constraints and evidence pointers.",
+      "notice": "references/licenses/mit-mattpocock.txt",
+      "disposition": "reference-only; no copying grant asserted"
     },
     {
       "bundle": "skills/software-workflows/migration",
@@ -2915,7 +2987,7 @@
       "digest": "git-tree:00b896d811adffad747c7ca30078d909d60c7f93",
       "license": "mit-mattpocock",
       "use": "adapted",
-      "changes": "Adopted the graduated upstream skill from the open v1.3 pull request (mattpocock/skills#1120), keeping its CREDITS.md attribution to Dex Horthy's show-me. Owned change: read an older CONTEXT.md when a project has no GLOSSARY.md. The upstream CREDITS.md lives at references/credits.md because owned bundles only allow standard entries.",
+      "changes": "Adopted the graduated upstream skill from the open v1.3 pull request (mattpocock/skills#1120), keeping its CREDITS.md attribution to Dex Horthy's show-me. Owned changes: read an older CONTEXT.md when a project has no GLOSSARY.md; require a visual before-and-after comparison for every PR and distinguish illustrations from observed evidence. The upstream CREDITS.md lives at references/credits.md because owned bundles only allow standard entries.",
       "notice": "references/licenses/mit-mattpocock.txt",
       "disposition": "retained under recorded upstream terms; preserve companions"
     },
@@ -3136,6 +3208,18 @@
       "disposition": "retained under recorded upstream terms; preserve companions"
     },
     {
+      "bundle": "skills/software-workflows/tdd",
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "d1478fcb140db0b93c0c8df17bcfd311844749d0",
+      "path": "skills/engineering/tdd/SKILL.md",
+      "digest": "git-blob:01eadaa34e7c9a63a67d6dc3cce1cc81b0e49985",
+      "license": "mit-mattpocock",
+      "use": "informed-by",
+      "changes": "Independently written adaptation of v1.3.2: Explain the coverage and limits of proposed test seams.",
+      "notice": "references/licenses/mit-mattpocock.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/software-workflows/to-spec",
       "repository": "https://github.com/mattpocock/skills",
       "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",
@@ -3194,6 +3278,18 @@
       "changes": "Kept as an owned copy of the pinned source method; only the tracker capability wording is a local host adaptation.",
       "notice": "references/licenses/apache-2.0-humanlayer.txt",
       "disposition": "retained under recorded upstream terms; preserve companions"
+    },
+    {
+      "bundle": "skills/software-workflows/to-tickets",
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "d1478fcb140db0b93c0c8df17bcfd311844749d0",
+      "path": "skills/engineering/to-tickets/SKILL.md",
+      "digest": "git-blob:9b77a01db9460c99c22d03c910c349f890f12c0e",
+      "license": "mit-mattpocock",
+      "use": "informed-by",
+      "changes": "Independently written adaptation of v1.3.2: Prefer native parent and blocking edges, avoiding duplicate textual dependency state.",
+      "notice": "references/licenses/mit-mattpocock.txt",
+      "disposition": "reference-only; no copying grant asserted"
     },
     {
       "bundle": "skills/software-workflows/triage",
@@ -3352,6 +3448,18 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
+      "bundle": "skills/software-workflows/wayfinder",
+      "repository": "https://github.com/mattpocock/skills",
+      "ref": "d1478fcb140db0b93c0c8df17bcfd311844749d0",
+      "path": "skills/engineering/wayfinder/SKILL.md",
+      "digest": "git-blob:975d6bf9c0a49d18a651f3335e0b4dcf8650fe31",
+      "license": "mit-mattpocock",
+      "use": "informed-by",
+      "changes": "Independently written adaptation of v1.3.2: isolate research worker context, use real tracker IDs, preserve ticket type, and avoid research PRs and ready-for-agent labels.",
+      "notice": "references/licenses/mit-mattpocock.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/writing-and-artifacts/images",
       "repository": "openai://curated-skills",
       "ref": "reviewed-2026-09-14",
@@ -3448,6 +3556,18 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
+      "bundle": "skills/writing-and-artifacts/writing",
+      "repository": "https://x.com/nickabraham12/status/2113630365772284075",
+      "ref": "status:2113630365772284075",
+      "path": "post image",
+      "digest": "sha256:35390c1905246ced94e44458a1bc1cc7f844872a52e0d41c9c7297a57319783f",
+      "license": "reference-only-no-copied-text",
+      "use": "informed-by",
+      "changes": "Nick Abraham, X status 2113630365772284075, image: cold email advice on verified research, recipient problems, concise writing and easy asks; inspected 2026-11-01. Digest identifies this bounded evidence note, not the image bytes. Independently written cold-outreach guidance adapts the advice without universal length or subject-line rules.",
+      "notice": "references/licenses/reference-only-no-copied-text.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/writing-and-artifacts/writing-for-agents",
       "repository": "https://github.com/mattpocock/skills",
       "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",
@@ -3493,6 +3613,18 @@
       "use": "adapted",
       "changes": "Retained local derivative compared against the pinned source, not claimed as an exact upstream version. Source paths, blob identities, complete local comparison diffs and file hashes are in docs/provenance/retained-sources.json; historical authorship of each delta is not asserted. MIT notice retained.",
       "notice": "references/licenses/mit-pstack.txt",
+      "disposition": "retained under recorded upstream terms; preserve companions"
+    },
+    {
+      "bundle": "paused/research-and-decisions/defuddle",
+      "repository": "https://github.com/kepano/obsidian-skills",
+      "ref": "8ccef29ae8624eccc734e77ced4a6e54baf5d83a",
+      "path": "skills/defuddle",
+      "digest": "git-tree:db0b775af7e7d603f59fa2b67bdef615baf1a48f",
+      "license": "mit-kepano",
+      "use": "adapted",
+      "changes": "Copied Kepano’s pinned Defuddle method into the owned supporting bundle; only the owned name changed from `web-extract` to the source tool name.",
+      "notice": "references/licenses/mit-kepano.txt",
       "disposition": "retained under recorded upstream terms; preserve companions"
     }
   ],
