@@ -14,11 +14,20 @@
       "license": "mit-libraries-dev",
       "use": "adapted",
       "changes": "Owned copy of the public free skill and seven references. Preserves the reveal, read-only review, and apply workflows; removes Pro-only guidance and installer instructions, adds the reference-led design boundary, and keeps future skill updates in the canonical repository."
+    },
+    {
+      "repository": "https://github.com/Jakubantalik/Libraries.dev",
+      "ref": "bad63221ebafa08d830586aa1721ecbd4ea02fcb",
+      "path": "skills/libraries-dev",
+      "digest": "git-tree:01e6d0411895b2519bc919e2b64f7cb32af900dd",
+      "license": "mit-libraries-dev",
+      "use": "informed-by",
+      "changes": "Updated public free Swift package guidance and version-dependent avatar default."
     }
   ],
   "dependencies": {
     "skills": [],
     "tools": []
   },
-  "reviewed": "2026-10-26"
+  "reviewed": "2026-11-01"
 }

@@ -11,7 +11,7 @@ A verified Supabase change against the intended project and environment.
 
 ## Method
 
-Confirm project and local/remote target; inspect current schema and policies; make migrations source-controlled; test RLS by actor; preserve auth and storage boundaries; use logs and official docs; preview mutations and re-read results.
+Confirm project and local/remote target; use scoped personal access tokens for Management API, CLI, and MCP where supported, limited to the task; distinguish direct database credentials and their separate authority; inspect current schema and policies; make migrations source-controlled; test RLS by actor; preserve auth and storage boundaries; use logs and official docs; preview mutations and re-read results.
 
 ## Boundaries
 

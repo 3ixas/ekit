@@ -86,6 +86,15 @@
       "license": "user-supplied-screenshot-reference",
       "use": "informed-by",
       "changes": "Screenshot supplied and inspected 2026-11-01; origin and author not established. Independently written guidance favours natural wording, avoids rhetorical agency and aphorisms, and preserves meaningful technical precision; image and source prose not reproduced."
+    },
+    {
+      "repository": "https://github.com/EveryInc/compound-writing",
+      "ref": "8fd0ec88c00976cf0274cb76552dc7ad9405ca92",
+      "path": "references/context-contract.md",
+      "digest": "git-blob:57dd1949720ebadf349a8f0dd3b8ea6b508d5cdc",
+      "license": "declared-mit-compound-writing",
+      "use": "informed-by",
+      "changes": "Independently written optional audience evidence and assignment precedence guidance."
     }
   ],
   "dependencies": {

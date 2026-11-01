@@ -15,6 +15,8 @@ Inspect current workflow and repository commands; reproduce failures locally whe
 
 For a new repository, or one with no workflow, start from the [bootstrap baseline](references/bootstrap.md): propose it on day one and add gates as they are proved; `app-audit` hands over its lasting checks to add. Proposing is not pushing.
 
+When modifying an established required gate or comparing CI failure against a base checkout, read the established-gate controls in [bootstrap](references/bootstrap.md#changing-established-gates).
+
 Done when the changed gate runs against representative success and failure cases, its permissions and artifact paths are inspected, and any check not reproduced is named.
 
 ## Boundaries

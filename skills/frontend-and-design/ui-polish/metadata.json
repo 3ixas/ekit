@@ -149,6 +149,15 @@
       "license": "published-works-reference",
       "use": "informed-by",
       "changes": "Reviewed 2026-11-01. Independently written proportionate component verification checkpoint informed by the public post; no text or media copied. Status identifies a public post, not an immutable content digest."
+    },
+    {
+      "repository": "https://github.com/Leonxlnx/taste-skill",
+      "ref": "12af471f627f866411b4bd785b19646d3672784c",
+      "path": "skills/taste-skill/SKILL.md",
+      "digest": "git-blob:d8444f13b76be100b3b088dfdae738e85288d6b6",
+      "license": "mit-taste-skill",
+      "use": "informed-by",
+      "changes": "Independently written conditional production-build visual verification guidance."
     }
   ],
   "dependencies": {

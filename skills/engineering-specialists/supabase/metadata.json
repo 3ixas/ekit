@@ -23,6 +23,15 @@
       "license": "proprietary-reference",
       "use": "informed-by",
       "changes": "Methods selectively consolidated into Elias's owned supabase capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/supabase/agent-skills",
+      "ref": "c9be0e931b7930f7d02126d04774d904c381e7d7",
+      "path": "skills/supabase/SKILL.md",
+      "digest": "git-blob:66093e0a0f8d9268094c1a4b38c04419b787ca89",
+      "license": "mit-supabase",
+      "use": "informed-by",
+      "changes": "Independently written scoped token and separate database credential guidance."
     }
   ],
   "dependencies": {
@@ -34,5 +43,5 @@
       "official-docs"
     ]
   },
-  "reviewed": "2026-10-26"
+  "reviewed": "2026-11-01"
 }

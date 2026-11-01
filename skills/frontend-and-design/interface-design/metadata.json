@@ -275,6 +275,24 @@
       "license": "published-works-reference",
       "use": "informed-by",
       "changes": "Reviewed 2026-11-01. Independently written contextual critique questions for familiar design treatments and excess detail; no post text or media copied. The status identifies a public post, not an immutable content digest."
+    },
+    {
+      "repository": "https://github.com/Leonxlnx/taste-skill",
+      "ref": "12af471f627f866411b4bd785b19646d3672784c",
+      "path": "skills/taste-skill/assets/scenes/stage.js",
+      "digest": "git-blob:315b1d9d2ec4b160979a904b13488ea7179b48e9",
+      "license": "mit-taste-skill",
+      "use": "informed-by",
+      "changes": "Adapted text splitting to use DOM text nodes rather than parsing text as HTML."
+    },
+    {
+      "repository": "https://github.com/Leonxlnx/taste-skill",
+      "ref": "12af471f627f866411b4bd785b19646d3672784c",
+      "path": "skills/taste-skill/SKILL.md",
+      "digest": "git-blob:d8444f13b76be100b3b088dfdae738e85288d6b6",
+      "license": "mit-taste-skill",
+      "use": "informed-by",
+      "changes": "Independently written production-build visual check."
     }
   ],
   "dependencies": {

@@ -26,3 +26,12 @@ Ask for a second CLI change with the first guide present. Pass: reuse the same g
 ## Parallel ownership
 
 An approved multi-ticket spec has no guide and workers touch related features. Pass: the coordinator owns setup/integration, provides each worker the guide or pending milestone and instance/data scope, reconciles recipe updates, and proves affected integrated journeys. Shared app driving is serialized when isolation is unavailable. Fail: competing guides, concurrent mutations of shared fixtures, or completion from per-worker summaries.
+
+## Upstream evidence controls
+
+- A security patch test fails on the baseline during import and passes on the patch. Expected: reproduction is unproved; fix the harness or report a gap. A run that reaches the vulnerable operation and fails the intended assertion supports baseline reproduction; test a meaningful variant and a legitimate case when warranted.
+- A source advertises 10,000 rows but the analysis reads a 1,000-row ordered preview. Expected: do not claim complete or representative coverage; inspect partial/pagination metadata and report the count and limit. If no authoritative count exists, report completeness as unknown.
+- A mutation run reports a surviving mutation that is behaviourally equivalent. Expected: classify it as equivalent, not as evidence demanding a new test; verify a claimed mutation actually landed before reading its result.
+- A resumable sync job fails during checkpoint replacement. Expected: retain the prior valid checkpoint, remove temporary output and report the failure; choose permissions based on the data, and do not claim atomic replacement prevents concurrent writers. A rebuild preview on already-synchronised data models the real in-memory reset without persisting destructive effects.
+- A test catches the original duplicate-key defect, but a plausible counter-based fix still collides with a literal suffixed key. Expected: use a separate fixture that distinguishes that partial fix from the intended behaviour; do not call the original fixture proof of the separate case.
+- A harness prints its reach marker but asserts the wrong safety property. Expected: treat the marker only as reach evidence; review the assertion and threat model, and separate exploit, variant, preservation and unrelated failures.

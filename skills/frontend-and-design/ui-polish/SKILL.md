@@ -11,7 +11,7 @@ A visibly stronger interface that preserves the product's established direction 
 
 ## Method
 
-Inspect rendered baseline and references; choose relevant audit, polish, redesign, typography, colour, layout, surface, copy, native-feel, mobile-web, or hardening mode; fix the highest-impact craft problems in coherent batches; test content extremes and responsive states; re-render and compare.
+Inspect rendered baseline and references; choose relevant audit, polish, redesign, typography, colour, layout, surface, copy, native-feel, mobile-web, or hardening mode; fix the highest-impact craft problems in coherent batches; test content extremes and responsive states; re-render and compare. When a production build exists, inspect the built result as well as the development output before the final visual verdict.
 
 Read [polish modes](references/polish-modes.md) to choose the useful lenses and stopping criteria. Apply only modes supported by observed problems.
 

@@ -11,7 +11,7 @@ A demonstrated improvement in a load-bearing metric without correctness regressi
 
 ## Method
 
-Choose the user-perceived metric and target, proposing the target an expert would set as a stretch alongside the stated one as the floor (200 ms where 5 s was asked, when the baseline and platform make it plausible); capture a baseline; profile CPU, memory, I/O, database, bundle, or trace evidence; form a causal hypothesis; change one mechanism; measure again under comparable conditions; retain wins and revert noise.
+Choose the user-perceived metric and target, proposing the target an expert would set as a stretch alongside the stated one as the floor (200 ms where 5 s was asked, when the baseline and platform make it plausible); name the decision the measurement supports and check that the workload measures the intended work; capture a baseline; profile CPU, memory, I/O, database, bundle, or trace evidence; form a causal hypothesis; change one mechanism; measure again under comparable conditions; explain consequential results against the observed or plausible limiting factor, without inventing a precise model; retain wins and revert noise.
 
 ## Boundaries
 

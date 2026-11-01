@@ -41,6 +41,15 @@
       "license": "primary-documentation-reference",
       "use": "informed-by",
       "changes": "Public primary documentation consulted for concepts/API facts; independently authored analytical-methods.md. No source prose, code examples, images or runtime copied. Digest identifies the retrieved response, not an immutable web revision; exact reviewed response is retained privately."
+    },
+    {
+      "repository": "https://github.com/wdm0006/python-skills",
+      "ref": "c095b43dfac8ca059c6e593bfa1095232c0fa9ff",
+      "path": "skills/common/verifying-external-behavior/SKILL.md",
+      "digest": "git-blob:d7c2ab62f2c23804548c7a41d0c3c447efbf8646",
+      "license": "mit-wdm0006",
+      "use": "informed-by",
+      "changes": "Independently written partial input and reconciliation guidance."
     }
   ],
   "dependencies": {
@@ -49,6 +58,6 @@
       "python"
     ]
   },
-  "reviewed": "2026-10-27",
+  "reviewed": "2026-11-01",
   "owned_changes": "2026-10-27 EKit ticket 5: replaced the restricted OpenAI source snapshot with independently authored methods derived from the approved capability requirements and public primary documentation. Preserved owner, invocation and tool/skill dependency contract; added method-depth and disposable preservation cases. Historical restricted copies remain only in the private recovery boundary. No upstream redistribution permission or unavailable runtime capability is asserted."
 }

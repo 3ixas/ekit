@@ -69,6 +69,33 @@
       "license": "ub-mode-reference",
       "use": "informed-by",
       "changes": "Independently written, proportionate guidance informed by the reviewed principles; no upstream prose or assets copied. Mandatory tools, thresholds and publication actions were not adopted."
+    },
+    {
+      "repository": "https://github.com/wdm0006/python-skills",
+      "ref": "c095b43dfac8ca059c6e593bfa1095232c0fa9ff",
+      "path": "skills/common/verifying-external-behavior/SKILL.md",
+      "digest": "git-blob:d7c2ab62f2c23804548c7a41d0c3c447efbf8646",
+      "license": "mit-wdm0006",
+      "use": "informed-by",
+      "changes": "Independently written input completeness and partial preview checks."
+    },
+    {
+      "repository": "https://github.com/wdm0006/python-skills",
+      "ref": "c095b43dfac8ca059c6e593bfa1095232c0fa9ff",
+      "path": "skills/python/testing-strategy/SKILL.md",
+      "digest": "git-blob:0876f35aecf4892a5e9245619a52598e032bff85",
+      "license": "mit-wdm0006",
+      "use": "informed-by",
+      "changes": "Independently written regression and mutation evidence guidance."
+    },
+    {
+      "repository": "https://github.com/trailofbits/skills",
+      "ref": "2be6433b39e009cd2b6fd3be1895f6b1faa5af9a",
+      "path": "plugins/post-patch-validation/skills/post-patch-validation/references/evidence-model.md",
+      "digest": "git-blob:341229a0788b7fad6e93d85303a619af08ece5c7",
+      "license": "cc-by-sa-4.0-trailofbits",
+      "use": "informed-by",
+      "changes": "Independently written baseline and patched assertion evidence guidance; no runner imported."
     }
   ],
   "dependencies": {
@@ -77,5 +104,5 @@
       "browser"
     ]
   },
-  "reviewed": "2026-10-28"
+  "reviewed": "2026-11-01"
 }

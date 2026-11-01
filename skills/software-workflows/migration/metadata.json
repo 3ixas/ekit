@@ -42,6 +42,24 @@
       "license": "reference-only-no-copied-text",
       "use": "informed-by",
       "changes": "Theo, These 3 skills changed my life (2026-10-26), YouTube 5Bmp9cz1JN8. Transcript inspected 25:27\u201326:53 and 28:01\u201328:17. Trigger descriptions and model-loadable workflows; optional command syntax. Independently written adaptation; no transcript text copied. Digest identifies this bounded evidence note, not video bytes or a full transcript."
+    },
+    {
+      "repository": "https://github.com/wdm0006/python-skills",
+      "ref": "c095b43dfac8ca059c6e593bfa1095232c0fa9ff",
+      "path": "skills/common/sync-jobs/SKILL.md",
+      "digest": "git-blob:2e2d5b06a82a2397d2c789820d55461f3d3d8671",
+      "license": "mit-wdm0006",
+      "use": "informed-by",
+      "changes": "Independently written resumable checkpoint safeguards."
+    },
+    {
+      "repository": "https://github.com/wdm0006/python-skills",
+      "ref": "c095b43dfac8ca059c6e593bfa1095232c0fa9ff",
+      "path": "skills/common/destructive-operations/SKILL.md",
+      "digest": "git-blob:729a7acb8ffd2fdd8bbe6aaca0ab0cb05c83b177",
+      "license": "mit-wdm0006",
+      "use": "informed-by",
+      "changes": "Independently written rebuild preview semantics."
     }
   ],
   "dependencies": {
@@ -53,5 +71,5 @@
       "git"
     ]
   },
-  "reviewed": "2026-10-26"
+  "reviewed": "2026-11-01"
 }

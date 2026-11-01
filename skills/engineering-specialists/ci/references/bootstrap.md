@@ -37,3 +37,9 @@ Detect the stack from the repository; do not copy another repository's file.
 ## Receiving checks from app-audit
 
 `app-audit` hands over checks it proved. Keep only those that are cheap, deterministic and need no live service; add each to the single `check` command (or the build-reading step), then run the whole gate against a passing case and a deliberately failing one before it is relied on.
+
+## Changing established gates
+
+Before splitting or renaming a required job, inspect the actual rulesets and required check names. Preserve the required name with an aggregate that waits for every promised job, runs after failure, cancellation or skip, and fails unless each dependency succeeded. Avoid workflow-level filters that prevent the required check from starting. Verify a passing case and a failing or skipped dependency where authorised; report inaccessible protection settings rather than assuming no requirements.
+
+When reproducing CI on a base checkout, use CI's dependency installation and tool versions. If an editable install or import hook could point back to the changed checkout, inspect the imported module's actual path in the control before treating it as base evidence.

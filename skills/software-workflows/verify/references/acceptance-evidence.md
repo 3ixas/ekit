@@ -29,3 +29,9 @@ Do not convert either of the latter two to Pass.
 ## Finish at exact head
 
 After integration or a fix, rerun every check whose inputs changed. Record the exact revision when possible and inspect the final diff for unverified changes. Summarize evidence by claim and call out skipped surfaces. Screenshots and logs support a claim only when their origin and state are clear.
+
+## Completeness and discriminating controls
+
+When a conclusion depends on a large or paginated input, check for truncation, partial-preview flags and pagination completion. Compare processed counts with an authoritative expected count when one exists; record unknown completeness and avoid treating an ordered prefix as a representative sample.
+
+For a regression or security fix, run the same assertion against the vulnerable baseline and fixed version where feasible. Confirm the relevant operation was reached and the baseline failed for the intended assertion, not a setup, import or build error. Check a meaningful root-cause variant and a legitimate use where risk warrants; report exploit, variant, preservation and unrelated failures separately. A reach marker establishes only that the check reached that point, not that its assertion or threat model is correct. Distinguish source, build and runtime evidence. For mutation, verify the change actually landed, distinguish a plausible wrong fix from the original defect, and classify equivalent or invalid mutations without inventing tests for unobservable differences.
