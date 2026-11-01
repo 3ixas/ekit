@@ -6,3 +6,4 @@ Applicable records:
 - references/licenses/mit-humanlayer-skills.txt
 - references/licenses/mit-mattpocock.txt
 - references/licenses/mit-tstack.txt
+- references/licenses/published-works-reference.txt

@@ -2536,6 +2536,18 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
+      "bundle": "skills/software-workflows/code-review",
+      "repository": "https://claude.dev",
+      "ref": "published-2026-10-15-fetched-2026-11-01",
+      "path": "blog/solving-code-review-at-anthropic/",
+      "digest": "sha256:ff7dddba4a6cf25e21923d36cf9f6858e67e3a790a7e37ec9837886b1485cb51",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Independently written project-specific review guidance and evaluation ideas; no article text or assets copied.",
+      "notice": "references/licenses/published-works-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/software-workflows/debug",
       "repository": "https://github.com/mattpocock/skills",
       "ref": "24fe0ef7737efae15c87225755e9f6f5965e4888",
@@ -3014,6 +3026,18 @@
       "changes": "Independently written adaptation. Publication handoff checks existing PR, context/privacy and actual proof; retains owned prose/template and omits model attribution.",
       "notice": "references/licenses/mit-tstack.txt",
       "disposition": "retained under recorded upstream terms; preserve companions"
+    },
+    {
+      "bundle": "skills/software-workflows/pr",
+      "repository": "https://claude.dev",
+      "ref": "published-2026-10-15-fetched-2026-11-01",
+      "path": "blog/solving-code-review-at-anthropic/",
+      "digest": "sha256:ff7dddba4a6cf25e21923d36cf9f6858e67e3a790a7e37ec9837886b1485cb51",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Independently written proportionate rollback guidance; no article text or assets copied.",
+      "notice": "references/licenses/published-works-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
     },
     {
       "bundle": "skills/software-workflows/pr-feedback",

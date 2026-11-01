@@ -21,7 +21,7 @@ An explicitly requested Full Stop or Full Send coordinator carries this approved
 
 ## Steps
 
-1. Read the spec and tickets to understand the task graph. Use `verify` to discover reusable project guidance and harnesses and plan acceptance proof. The coordinator owns missing guide setup and its integration: establish the needed baseline before implementation where feasible, or once a new app's first journey runs. Keep setup proportional to the spec and use artifact checks for documentation-only work.
+1. Read the spec and tickets to understand the task graph. Use `verify` to discover reusable project guidance and harnesses and plan acceptance proof. The coordinator owns missing guide setup and its integration: establish the needed baseline before implementation where feasible, or once a new app's first journey runs. Keep setup proportional to the spec and use artifact checks for documentation-only work. Discover or maintain review guidance using the reference linked from `code-review` when guide upkeep is in scope; include any change in the integrated proof and review.
 
 2. (optional) Use an **exploration subagent** to conduct any exploration required by the tickets - relevant codebase files or external documentation. Ensure the exploration subagent can save files - it should save its markdown notes in a directory outside the repo, accessible by all future subagents. This lets **implementer subagents** focus on implementation rather than exploration.
 

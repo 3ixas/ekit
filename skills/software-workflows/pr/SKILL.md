@@ -199,6 +199,8 @@ Describe whether it's a one-way or two-way door. You can walk back through two-w
 
 The blast radius is the potential impact or scope of the changes introduced by this PR. Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc.
 
+For a consequential change, briefly state the practical rollback or disable path and identify effects a code revert cannot undo, such as migrated or deleted data. If the route is unknown or untested, say so; do not imply it was exercised. Omit a rollback runbook for routine changes.
+
 ## Authorized publication handoff
 
 This skill writes the body; it does not authorize publishing it. Before a delivery caller submits it, check for an existing PR for the exact branch/base, follow the repository template/title conventions, and inspect all text and attachments for secrets and unrelated private details. Include observed proof and honest gaps, preserve human contributor credit, and omit generated-tool attribution. The delivery caller owns submission, returned-URL verification, chat attachment where available, and subsequent CI/review monitoring.
