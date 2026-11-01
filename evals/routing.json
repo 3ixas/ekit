@@ -349,5 +349,45 @@
     "supports": [],
     "explicit": true,
     "authority_stop": "Prepare evidence and checklist; do not publish, push, deploy or merge."
+  },
+  {
+    "request": "Use Craft Review on this working settings interface; explain why it feels unfinished and prioritise improvements without changing it",
+    "owner": "craft-review",
+    "supports": [],
+    "authority_stop": "Inspect safe states and return evidenced findings, up to three priorities and owner handoffs; no product edits, external uploads or readiness claim.",
+    "candidate": true,
+    "explicit": true
+  },
+  {
+    "request": "Polish the spacing and typography on this established screen, keeping its approved direction",
+    "owner": "ui-polish",
+    "supports": [],
+    "authority_stop": "Make the authorised focused refinement and verify affected states; do not substitute a diagnostic craft review or reopen direction."
+  },
+  {
+    "request": "Redesign this product dashboard with a substantially different visual direction",
+    "owner": "interface-design",
+    "supports": [],
+    "authority_stop": "Establish the new direction and approval through the design contract; craft-review is not the redesign owner."
+  },
+  {
+    "request": "Run a whole-app launch readiness audit and fix local defects before release",
+    "owner": "app-audit",
+    "supports": [],
+    "authority_stop": "Own coverage, local remediation and rechecks; do not substitute a craft brief or deploy."
+  },
+  {
+    "request": "Measure why typing in this table is slow and optimise the demonstrated bottleneck",
+    "owner": "performance",
+    "supports": [],
+    "authority_stop": "Capture baseline, profile, change one mechanism and remeasure; no diagnosis from screenshots or craft score."
+  },
+  {
+    "request": "Use Craft Review on these screenshots; I cannot provide a running browser",
+    "owner": "craft-review",
+    "supports": [],
+    "authority_stop": "Assess only visible composition, distinguish preferences and hypotheses, and mark behaviour, keyboard and performance unverified; no invented walkthrough.",
+    "candidate": true,
+    "explicit": true
   }
 ]

@@ -13,7 +13,7 @@ A visibly stronger interface that preserves the product's established direction 
 
 Inspect rendered baseline and references; choose relevant audit, polish, redesign, typography, colour, layout, surface, copy, native-feel, mobile-web, or hardening mode; fix the highest-impact craft problems in coherent batches; test content extremes and responsive states; re-render and compare. When a production build exists, inspect the built result as well as the development output before the final visual verdict.
 
-Read [polish modes](references/polish-modes.md) to choose the useful lenses and stopping criteria. Apply only modes supported by observed problems.
+Read [polish modes](references/polish-modes.md) to choose the useful lenses and stopping criteria. Apply only modes supported by observed problems. When craft problems span several modes, use [focused craftsmanship passes](references/craft-passes.md) to diagnose and prioritise them without imposing a full audit.
 
 For an affected component, use the component verification checkpoint in polish modes before finishing, even when a full resilience pass is unnecessary. Select combinations relevant to the change and report what was exercised and what was unavailable.
 

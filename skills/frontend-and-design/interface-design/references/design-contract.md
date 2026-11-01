@@ -10,6 +10,8 @@ Keep an exploration trail for each options round: options and axes, selection an
 
 ## Add when needed
 
+- **Direction across screens:** Before treating a substantial direction as settled, stress-test it on contrasting real screens and reachable states: for example a dense working view and a sparse or error view, at relevant container sizes. Compare hierarchy, density, semantic surfaces and shared interaction rules; record differences that are intentional and revise rules that fail elsewhere. Use existing screens and evidence rather than a mandatory new prototype. A single attractive screen does not establish system coherence; unavailable renders remain a named limit.
+
 - **Redesign:** Follow [redesign preservation](redesign-preservation.md); link the baseline, authorized changes, behaviour checks and before/after evidence.
 - **Distinctive material or interaction:** Map the important regions to their implementation medium, real asset source, responsive and accessibility treatment, and any material change from the approved concept. Explain missing assets and obtain agreement on a changed direction; do not quietly substitute one.
 - **Taste toolkit:** Record only decisions actually used: website subject and claims or app question, finding and action; data assumptions; chosen assets and direction; and intentional exceptions. Link any supporting sheet or policy. Approved project decisions govern generated records.

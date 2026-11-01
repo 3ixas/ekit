@@ -532,6 +532,54 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
+      "bundle": "skills/engineering-specialists/performance",
+      "repository": "private:user-supplied-research",
+      "ref": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "path": "The Anatomy of Digital Craftsmanship.md",
+      "digest": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "license": "private-intake-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01. Independently written craft review, prioritisation and cross-screen quality methods; private input fingerprint only, no source text or private location retained. Illustrative values and research-count claims are not adopted as standards or verified evidence.",
+      "notice": "references/licenses/private-intake-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/engineering-specialists/performance",
+      "repository": "https://developer.chrome.com",
+      "ref": "sha256:747f445204e28315c0faf5185f7f107b06ee21a9ed97904b397d6d491d88db85",
+      "path": "blog/font-fallbacks",
+      "digest": "sha256:747f445204e28315c0faf5185f7f107b06ee21a9ed97904b397d6d491d88db85",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Font stability investigation.",
+      "notice": "references/licenses/web-craft-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/engineering-specialists/performance",
+      "repository": "https://web.dev",
+      "ref": "sha256:3988de2cf7ff7dfd3960cca6c5005727a5c050573315da45df933fbe4c22419a",
+      "path": "articles/animations-guide",
+      "digest": "sha256:3988de2cf7ff7dfd3960cca6c5005727a5c050573315da45df933fbe4c22419a",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Rendering-pipeline evidence for animation costs.",
+      "notice": "references/licenses/web-craft-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/engineering-specialists/performance",
+      "repository": "https://web.dev",
+      "ref": "sha256:fcad2198747f8fb4fb7144edb7f1d3518abc40b5e8afd55e94597c3ba54375e8",
+      "path": "articles/vitals",
+      "digest": "sha256:fcad2198747f8fb4fb7144edb7f1d3518abc40b5e8afd55e94597c3ba54375e8",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Distinguish field metrics from lab observations without introducing a design score.",
+      "notice": "references/licenses/web-craft-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/engineering-specialists/postgres",
       "repository": "https://github.com/supabase/agent-skills",
       "ref": "8331f910845103c08d51f6ca1d86ebb7d1f745e3",
@@ -1240,6 +1288,30 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
+      "bundle": "skills/frontend-and-design/interface-design",
+      "repository": "private:user-supplied-research",
+      "ref": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "path": "The Anatomy of Digital Craftsmanship.md",
+      "digest": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "license": "private-intake-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01. Independently written craft review, prioritisation and cross-screen quality methods; private input fingerprint only, no source text or private location retained. Illustrative values and research-count claims are not adopted as standards or verified evidence.",
+      "notice": "references/licenses/private-intake-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/frontend-and-design/interface-design",
+      "repository": "https://linear.app",
+      "ref": "sha256:f593148680b67ea3090838c1d2ad6a6e843409330fa463936d9128d414314a3d",
+      "path": "now/how-we-redesigned-the-linear-ui",
+      "digest": "sha256:f593148680b67ea3090838c1d2ad6a6e843409330fa463936d9128d414314a3d",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Stress-test direction across contrasting real views and states before treating it as a coherent system.",
+      "notice": "references/licenses/web-craft-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/frontend-and-design/libraries-dev",
       "repository": "https://github.com/Jakubantalik/Libraries.dev",
       "ref": "f20116327f4e3b28d0fb70b04437dfd092bf88fe",
@@ -1453,6 +1525,30 @@
       "use": "informed-by",
       "changes": "Independently written optional discovery and evaluation guidance for the live Motion library; no example code or upstream prose retained. Check each example’s licence at use.",
       "notice": "references/licenses/design-resource-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/frontend-and-design/motion",
+      "repository": "private:user-supplied-research",
+      "ref": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "path": "The Anatomy of Digital Craftsmanship.md",
+      "digest": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "license": "private-intake-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01. Independently written craft review, prioritisation and cross-screen quality methods; private input fingerprint only, no source text or private location retained. Illustrative values and research-count claims are not adopted as standards or verified evidence.",
+      "notice": "references/licenses/private-intake-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/frontend-and-design/motion",
+      "repository": "https://web.dev",
+      "ref": "sha256:3988de2cf7ff7dfd3960cca6c5005727a5c050573315da45df933fbe4c22419a",
+      "path": "articles/animations-guide",
+      "digest": "sha256:3988de2cf7ff7dfd3960cca6c5005727a5c050573315da45df933fbe4c22419a",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Prefer compositor-friendly visual movement; justify and profile genuine layout changes instead of rejecting them from property names alone.",
+      "notice": "references/licenses/web-craft-reference.txt",
       "disposition": "reference-only; no copying grant asserted"
     },
     {
@@ -1717,6 +1813,54 @@
       "use": "informed-by",
       "changes": "Independently written conditional production-build visual verification guidance.",
       "notice": "references/licenses/mit-taste-skill.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/frontend-and-design/ui-polish",
+      "repository": "private:user-supplied-research",
+      "ref": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "path": "The Anatomy of Digital Craftsmanship.md",
+      "digest": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "license": "private-intake-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01. Independently written craft review, prioritisation and cross-screen quality methods; private input fingerprint only, no source text or private location retained. Illustrative values and research-count claims are not adopted as standards or verified evidence.",
+      "notice": "references/licenses/private-intake-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/frontend-and-design/ui-polish",
+      "repository": "https://vercel.com",
+      "ref": "sha256:11357acc42efeb2ef68a39f3e90cf5255b4fd345c766645bae6ad40230a8ceb0",
+      "path": "design/guidelines",
+      "digest": "sha256:11357acc42efeb2ef68a39f3e90cf5255b4fd345c766645bae6ad40230a8ceb0",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Optical alignment and truthful, stable feedback.",
+      "notice": "references/licenses/web-craft-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/frontend-and-design/ui-polish",
+      "repository": "https://developer.chrome.com",
+      "ref": "sha256:747f445204e28315c0faf5185f7f107b06ee21a9ed97904b397d6d491d88db85",
+      "path": "blog/font-fallbacks",
+      "digest": "sha256:747f445204e28315c0faf5185f7f107b06ee21a9ed97904b397d6d491d88db85",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Observe fallback/final geometry and investigate measured font metric differences.",
+      "notice": "references/licenses/web-craft-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/frontend-and-design/ui-polish",
+      "repository": "https://www.joshwcomeau.com",
+      "ref": "sha256:a523b95a1f1f8391495f12c20f88013ee1d447a212aa5f18f9b3f2a0f21c0eb2",
+      "path": "css/designing-shadows/",
+      "digest": "sha256:a523b95a1f1f8391495f12c20f88013ee1d447a212aa5f18f9b3f2a0f21c0eb2",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Consistent elevation relationships; layering remains contextual.",
+      "notice": "references/licenses/web-craft-reference.txt",
       "disposition": "reference-only; no copying grant asserted"
     },
     {
@@ -2401,6 +2545,42 @@
       "use": "informed-by",
       "changes": "Theo, These 3 skills changed my life (2026-10-26), YouTube 5Bmp9cz1JN8. Transcript inspected 25:27–26:53 and 28:01–28:17. Trigger descriptions and model-loadable workflows; optional command syntax. Independently written adaptation; no transcript text copied. Digest identifies this bounded evidence note, not video bytes or a full transcript.",
       "notice": "references/licenses/reference-only-no-copied-text.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/software-workflows/app-audit",
+      "repository": "private:user-supplied-research",
+      "ref": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "path": "The Anatomy of Digital Craftsmanship.md",
+      "digest": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "license": "private-intake-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01. Independently written craft review, prioritisation and cross-screen quality methods; private input fingerprint only, no source text or private location retained. Illustrative values and research-count claims are not adopted as standards or verified evidence.",
+      "notice": "references/licenses/private-intake-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/software-workflows/app-audit",
+      "repository": "https://vercel.com",
+      "ref": "sha256:11357acc42efeb2ef68a39f3e90cf5255b4fd345c766645bae6ad40230a8ceb0",
+      "path": "design/guidelines",
+      "digest": "sha256:11357acc42efeb2ef68a39f3e90cf5255b4fd345c766645bae6ad40230a8ceb0",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Truthful feedback, recovery, native navigation and repeated-input checks.",
+      "notice": "references/licenses/web-craft-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/software-workflows/app-audit",
+      "repository": "https://linear.app",
+      "ref": "sha256:f593148680b67ea3090838c1d2ad6a6e843409330fa463936d9128d414314a3d",
+      "path": "now/how-we-redesigned-the-linear-ui",
+      "digest": "sha256:f593148680b67ea3090838c1d2ad6a6e843409330fa463936d9128d414314a3d",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Cross-screen coherence and shared-component refinement.",
+      "notice": "references/licenses/web-craft-reference.txt",
       "disposition": "reference-only; no copying grant asserted"
     },
     {
@@ -3902,6 +4082,42 @@
       "changes": "Retained local derivative compared against the pinned source, not claimed as an exact upstream version. Source paths, blob identities, complete local comparison diffs and file hashes are in docs/provenance/retained-sources.json; historical authorship of each delta is not asserted. MIT notice retained.",
       "notice": "references/licenses/mit-pstack.txt",
       "disposition": "retained under recorded upstream terms; preserve companions"
+    },
+    {
+      "bundle": "candidates/frontend-and-design/craft-review",
+      "repository": "private:user-supplied-research",
+      "ref": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "path": "The Anatomy of Digital Craftsmanship.md",
+      "digest": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "license": "private-intake-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01. Independently written craft review, prioritisation and cross-screen quality methods; private input fingerprint only, no source text or private location retained. Illustrative values and research-count claims are not adopted as standards or verified evidence.",
+      "notice": "references/licenses/private-intake-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "candidates/frontend-and-design/craft-review",
+      "repository": "https://vercel.com",
+      "ref": "sha256:11357acc42efeb2ef68a39f3e90cf5255b4fd345c766645bae6ad40230a8ceb0",
+      "path": "design/guidelines",
+      "digest": "sha256:11357acc42efeb2ef68a39f3e90cf5255b4fd345c766645bae6ad40230a8ceb0",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Multi-dimensional evidence lenses and behaviour checks.",
+      "notice": "references/licenses/web-craft-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "candidates/frontend-and-design/craft-review",
+      "repository": "https://linear.app",
+      "ref": "sha256:f593148680b67ea3090838c1d2ad6a6e843409330fa463936d9128d414314a3d",
+      "path": "now/how-we-redesigned-the-linear-ui",
+      "digest": "sha256:f593148680b67ea3090838c1d2ad6a6e843409330fa463936d9128d414314a3d",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Cross-screen coherence and prioritising system-level corrections.",
+      "notice": "references/licenses/web-craft-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
     },
     {
       "bundle": "candidates/software-workflows/design-control-loop",

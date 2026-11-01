@@ -50,6 +50,33 @@
       "license": "reference-only-no-copied-text",
       "use": "informed-by",
       "changes": "Theo, These 3 skills changed my life (2026-10-26), YouTube 5Bmp9cz1JN8. Transcript inspected 25:27\u201326:53 and 28:01\u201328:17. Trigger descriptions and model-loadable workflows; optional command syntax. Independently written adaptation; no transcript text copied. Digest identifies this bounded evidence note, not video bytes or a full transcript."
+    },
+    {
+      "repository": "private:user-supplied-research",
+      "ref": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "path": "The Anatomy of Digital Craftsmanship.md",
+      "digest": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "license": "private-intake-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01. Independently written craft review, prioritisation and cross-screen quality methods; private input fingerprint only, no source text or private location retained. Illustrative values and research-count claims are not adopted as standards or verified evidence."
+    },
+    {
+      "repository": "https://vercel.com",
+      "ref": "sha256:11357acc42efeb2ef68a39f3e90cf5255b4fd345c766645bae6ad40230a8ceb0",
+      "path": "design/guidelines",
+      "digest": "sha256:11357acc42efeb2ef68a39f3e90cf5255b4fd345c766645bae6ad40230a8ceb0",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Truthful feedback, recovery, native navigation and repeated-input checks."
+    },
+    {
+      "repository": "https://linear.app",
+      "ref": "sha256:f593148680b67ea3090838c1d2ad6a6e843409330fa463936d9128d414314a3d",
+      "path": "now/how-we-redesigned-the-linear-ui",
+      "digest": "sha256:f593148680b67ea3090838c1d2ad6a6e843409330fa463936d9128d414314a3d",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Cross-screen coherence and shared-component refinement."
     }
   ],
   "dependencies": {
@@ -62,5 +89,5 @@
       "official-docs"
     ]
   },
-  "reviewed": "2026-10-28"
+  "reviewed": "2026-11-01"
 }
