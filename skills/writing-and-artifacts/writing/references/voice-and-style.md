@@ -6,7 +6,7 @@ On every writing-skill invocation, first read the complete personal voice profil
 
 ## Build from evidence
 
-Use several representative samples written or explicitly approved by the author. Separate stable tendencies from traits caused by one format. Record observable choices and useful examples; avoid labels such as “warm” or “professional” unless they are translated into decisions an editor can apply.
+Use several representative samples written or explicitly approved by the author. Prefer recent, representative examples the author considers successful for current voice, and examples suited to the requested format for structure. Label older or otherwise mismatched examples as structure-only when their voice no longer fits; do not let them override current voice evidence. Separate stable tendencies from traits caused by one format. Record observable choices and useful examples; avoid labels such as “warm” or “professional” unless they are translated into decisions an editor can apply.
 
 Useful evidence includes how the author opens, develops claims, uses examples, expresses uncertainty, varies rhythm, handles humour, addresses readers, and ends. Record phrases or habits to avoid only when the author has rejected them.
 
@@ -30,6 +30,6 @@ When calibrating a reusable preference, compare original variants on the same su
 
 ## Maintain
 
-Update a profile from repeated evidence or explicit feedback, not one isolated edit. Keep it brief enough to use. Examples should show the principle without becoming reusable copy that makes future writing repetitive.
+Update a profile from repeated evidence or explicit feedback, not one isolated edit. For an explicit evaluation of revisions or a proposed guidance change, use [Calibration](calibration.md); propose durable changes for the author to review rather than silently updating personal preferences. Keep it brief enough to use. Examples should show the principle without becoming reusable copy that makes future writing repetitive.
 
 Preserve the observed evidence when adding chosen preferences. If the profile or companion is unavailable, say which evidence is missing and use the available draft, facts and current request; do not reconstruct private preferences from memory or expand retrieval into unrelated personal material.
