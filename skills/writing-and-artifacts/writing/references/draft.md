@@ -13,6 +13,7 @@ Draft from an agreed brief or infer a compact brief from the request and evidenc
 - Vary sentence length because the thought demands it, not to manufacture style.
 - Connect claims only as strongly as the evidence permits.
 - Match the form: an email should make the request and next step easy to find; an essay can earn a slower development; a post needs a sharp promise without distorting the content.
+- For cold outreach, give a credible reason for contacting this person, connect it to their likely interests without inventing familiarity, and make one proportionate, easy-to-answer ask. Verify personalisation; keep the length, subject line, and request appropriate to the purpose and relationship.
 - End at the point of resolution, decision, invitation, or consequence.
 
 ## Preserve authorship
