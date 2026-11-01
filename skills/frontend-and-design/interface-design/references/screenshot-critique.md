@@ -6,6 +6,8 @@ Inspect rendered screens, not source or intent. Use representative target sizes 
 
 Check the user's main task and next action, hierarchy, readable content, coherence with the approved direction, responsive changes, and collisions or clipping. Inspect relevant empty, loading, error and long-content states. Check keyboard, accessibility and actual interactions on the real surface; screenshots alone cannot prove them.
 
+Look for redundant taglines, secondary labels and helper text. Where copy compensates for confusing hierarchy, grouping or controls, improve the design; retain text that helps people understand, decide, act or avoid errors.
+
 ## Choose a lens
 
 - **Website:** Is the subject and main message clear? Does the composition, imagery, copy and signature support the claims throughout the page? Does the phone layout work as a composition? Compare sections, spacing, alignment and type with the references.
