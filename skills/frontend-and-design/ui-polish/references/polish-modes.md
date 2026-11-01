@@ -32,6 +32,7 @@ Small interaction details compound (Emil Kowalski). Buttons respond on press, fo
 
 Interface text is part of the design. Give it one voice and check every string on the journey:
 
+- **Purpose:** Remove taglines, secondary labels, and helper text that repeat what the screen already communicates or add no useful meaning. If copy compensates for a confusing layout, grouping, label, or control, improve the design first. Keep concise text that helps people understand an unfamiliar concept, make a decision, complete a task, or avoid an error; judge it against the audience, product, and approved direction.
 - **Actions** name what happens: "Save changes", "Start my trial", "Delete project". Avoid "Submit" and "OK" where a real verb exists. A destructive action names what it destroys and sits beside an equally visible cancel.
 - **Errors** say what happened, why in one clause, and how to fix it, next to the field that caused it. Never blame the reader or show a bare code.
 - **Empty states** name the emptiness, say why it is empty, and offer one next action. An empty state with no next step is a dead end.
