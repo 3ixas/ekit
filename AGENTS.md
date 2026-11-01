@@ -17,6 +17,8 @@ Run `python3 scripts/skills.py check` and `python3 -m unittest discover -s tests
 
 Use `doctor`, `claude-doctor`, and `opencode-doctor` to check the generated host projections. Read [the cross-agent portability guide](docs/agent-portability.md) before changing setup or interpreting a live-session limitation.
 
+When an EKit skill or shared-instruction change is merged during your work, merging authorizes its routine local activation: verify the merge, fast-forward the clean canonical checkout, review all host previews and rollback paths, apply the affected projections, and run all three doctors. Do this for an authorized merge or a merge observed during the active handoff; do not wait for a separate sync request. Stop and report unexpected drift, unrelated proposed removals, conflicts, an unsafe checkout, or host/sandbox denial without overwriting unrelated work. Report the merged commit, sync and doctor results, and any host not verified; a merged but unsynced change is incomplete. Structural doctors do not prove fresh-session behavior. This rule does not authorize a merge, promotion of a candidate, or publication by itself.
+
 Upstream updates are review inputs. `updates` never overwrites owned work. Use `skill-review`, then `skill-authoring`, then validate and sync.
 
 Preserve unrelated user changes. Commits use concise conventional messages without generated-tool attribution.

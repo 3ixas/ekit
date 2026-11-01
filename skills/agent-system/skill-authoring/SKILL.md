@@ -18,7 +18,7 @@ A valid owned bundle whose routing and observable behaviour match the approved c
 
 ## Boundaries
 
-This skill does not admit itself, activate candidates, sync runtime, or publish without the corresponding decision and authority.
+This skill does not admit itself, activate candidates, or publish without the corresponding decision and authority. For a merged EKit skill or shared-instruction change, follow the repository's post-merge activation rule; an authorized merge includes its routine local sync, subject to the preview and safety checks.
 
 
 ## Owned source methods
