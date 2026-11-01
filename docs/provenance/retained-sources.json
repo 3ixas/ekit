@@ -2344,6 +2344,18 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
+      "bundle": "skills/software-workflows/architecture",
+      "repository": "https://x.com/mazeincoding",
+      "ref": "status-2115575731585507796",
+      "path": "status/2115575731585507796",
+      "digest": "version:status-2115575731585507796",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01. Independently written contextual checks for structural risks and useful boundaries; no post text or media copied. Status identifies a public post, not an immutable content digest.",
+      "notice": "references/licenses/published-works-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/software-workflows/babysit-pr",
       "repository": "https://github.com/EveryInc/compound-engineering-plugin",
       "ref": "fd8abda7f64ead2f410da2cfd86c0c8e7cbf8187",
@@ -2556,6 +2568,18 @@
       "license": "published-works-reference",
       "use": "informed-by",
       "changes": "Independently written project-specific review guidance and evaluation ideas; no article text or assets copied.",
+      "notice": "references/licenses/published-works-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/software-workflows/code-review",
+      "repository": "https://x.com/mazeincoding",
+      "ref": "status-2115575731585507796",
+      "path": "status/2115575731585507796",
+      "digest": "version:status-2115575731585507796",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01. Independently written contextual checks for structural risks and useful boundaries; no post text or media copied. Status identifies a public post, not an immutable content digest.",
       "notice": "references/licenses/published-works-reference.txt",
       "disposition": "reference-only; no copying grant asserted"
     },

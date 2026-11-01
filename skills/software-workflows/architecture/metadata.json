@@ -42,6 +42,15 @@
       "license": "ub-mode-reference",
       "use": "informed-by",
       "changes": "Independently written, proportionate guidance informed by the reviewed principles; no upstream prose or assets copied. Mandatory tools, thresholds and publication actions were not adopted."
+    },
+    {
+      "repository": "https://x.com/mazeincoding",
+      "ref": "status-2115575731585507796",
+      "path": "status/2115575731585507796",
+      "digest": "version:status-2115575731585507796",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01. Independently written contextual checks for structural risks and useful boundaries; no post text or media copied. Status identifies a public post, not an immutable content digest."
     }
   ],
   "dependencies": {
@@ -53,5 +62,5 @@
       "git"
     ]
   },
-  "reviewed": "2026-10-28"
+  "reviewed": "2026-11-01"
 }
