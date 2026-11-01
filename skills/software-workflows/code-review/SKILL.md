@@ -45,6 +45,7 @@ On top of whatever the repo documents, the Standards axis always carries the **s
 
 - **The repo overrides.** A documented repo standard always wins; where it endorses something the baseline would flag, suppress the smell.
 - **Always a judgement call.** Each smell is a labelled heuristic ("possible Feature Envy"), never a hard violation. Like any standard here, skip anything tooling already enforces.
+- **Test the remedy too.** The suggested remedies are candidates, not automatic edits: preserve useful boundaries, independent concepts and intentional duplication when extraction or indirection would add coupling or change behaviour.
 
 Each smell reads *what it is* → *how to fix*; match it against the diff:
 
@@ -75,6 +76,7 @@ The Standards reviewer may escalate regular to deep when new evidence warrants i
 At either depth, supplement the smell baseline with these structural checks:
 
 - Avoidable branching, flags, or wrappers; unclear type contracts; responsibility leaking across layers; and duplication of canonical utilities. Show the practical cost and a concrete simpler shape before raising a finding.
+- Trace hidden ordering, shared state and dependencies; check whether reachable invalid states or late validation can produce a concrete failure at a trust boundary. Assess folder layout and scattered changes by their actual maintenance cost, not by layer-first organisation alone. A wrapper may preserve a contract, policy or integration seam; size alone does not make a file incoherent.
 - Complexity and duplication measurements are leads for investigation, not findings by themselves. Use existing project tools and thresholds when applicable; identify a concrete maintenance cost and remedy before recommending a change.
 - Size, casts, and optionality are signals to investigate, not violations on their own. A file crossing 1,000 lines is not a blocker without a demonstrated problem or an applicable documented rule.
 - Distinguish **demonstrated regressions** from **optional improvements**. A plausible alternative design alone does not block approval. Structural findings identify the affected file/hunk, evidence, consequence, and remedy. Keep concrete optional proposals separate from blocking findings and omit speculative or cosmetic advice.

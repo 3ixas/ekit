@@ -7,3 +7,4 @@ Applicable records:
 - references/licenses/mit-mattpocock.txt
 - references/licenses/mit-pstack.txt
 - references/licenses/ub-mode-reference.txt
+- references/licenses/published-works-reference.txt
