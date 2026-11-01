@@ -280,6 +280,30 @@
       "disposition": "retained under recorded upstream terms; preserve companions"
     },
     {
+      "bundle": "skills/engineering-specialists/ci",
+      "repository": "https://github.com/wdm0006/python-skills",
+      "ref": "c095b43dfac8ca059c6e593bfa1095232c0fa9ff",
+      "path": "skills/common/github-actions/SKILL.md",
+      "digest": "git-blob:d8d4e7100440de39f42b6d380cc0e7daff90832d",
+      "license": "mit-wdm0006",
+      "use": "informed-by",
+      "changes": "Independently written required-check preservation and failure-control guidance.",
+      "notice": "references/licenses/mit-wdm0006.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/engineering-specialists/ci",
+      "repository": "https://github.com/wdm0006/python-skills",
+      "ref": "c095b43dfac8ca059c6e593bfa1095232c0fa9ff",
+      "path": "skills/common/reproducing-ci-locally/SKILL.md",
+      "digest": "git-blob:8bbf30ac474be12c466c53762af85265346cd49e",
+      "license": "mit-wdm0006",
+      "use": "informed-by",
+      "changes": "Independently written base-control import and dependency parity guidance.",
+      "notice": "references/licenses/mit-wdm0006.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/engineering-specialists/ios",
       "repository": "openai://curated-skills",
       "ref": "reviewed-2026-09-14",
@@ -496,6 +520,18 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
+      "bundle": "skills/engineering-specialists/performance",
+      "repository": "https://github.com/cursor/plugins",
+      "ref": "ae5650febf4320793844c12c4adaa937f417f8da",
+      "path": "pstack/skills/principle-explain-the-number/SKILL.md",
+      "digest": "git-blob:3948ad34092437918f366e2cbb270e9ae31977fb",
+      "license": "mit-pstack",
+      "use": "informed-by",
+      "changes": "Independently written decision and workload measurement controls.",
+      "notice": "references/licenses/mit-pstack.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/engineering-specialists/postgres",
       "repository": "https://github.com/supabase/agent-skills",
       "ref": "8331f910845103c08d51f6ca1d86ebb7d1f745e3",
@@ -685,6 +721,18 @@
       "use": "informed-by",
       "changes": "Methods selectively consolidated into Elias's owned supabase capability; vendor routing and unrelated framework assumptions removed.",
       "notice": "references/licenses/proprietary-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/engineering-specialists/supabase",
+      "repository": "https://github.com/supabase/agent-skills",
+      "ref": "c9be0e931b7930f7d02126d04774d904c381e7d7",
+      "path": "skills/supabase/SKILL.md",
+      "digest": "git-blob:66093e0a0f8d9268094c1a4b38c04419b787ca89",
+      "license": "mit-supabase",
+      "use": "informed-by",
+      "changes": "Independently written scoped token and separate database credential guidance.",
+      "notice": "references/licenses/mit-supabase.txt",
       "disposition": "reference-only; no copying grant asserted"
     },
     {
@@ -1168,6 +1216,30 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
+      "bundle": "skills/frontend-and-design/interface-design",
+      "repository": "https://github.com/Leonxlnx/taste-skill",
+      "ref": "12af471f627f866411b4bd785b19646d3672784c",
+      "path": "skills/taste-skill/assets/scenes/stage.js",
+      "digest": "git-blob:315b1d9d2ec4b160979a904b13488ea7179b48e9",
+      "license": "mit-taste-skill",
+      "use": "informed-by",
+      "changes": "Adapted text splitting to use DOM text nodes rather than parsing text as HTML.",
+      "notice": "references/licenses/mit-taste-skill.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/frontend-and-design/interface-design",
+      "repository": "https://github.com/Leonxlnx/taste-skill",
+      "ref": "12af471f627f866411b4bd785b19646d3672784c",
+      "path": "skills/taste-skill/SKILL.md",
+      "digest": "git-blob:d8444f13b76be100b3b088dfdae738e85288d6b6",
+      "license": "mit-taste-skill",
+      "use": "informed-by",
+      "changes": "Independently written production-build visual check.",
+      "notice": "references/licenses/mit-taste-skill.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/frontend-and-design/libraries-dev",
       "repository": "https://github.com/Jakubantalik/Libraries.dev",
       "ref": "f20116327f4e3b28d0fb70b04437dfd092bf88fe",
@@ -1178,6 +1250,18 @@
       "changes": "Owned copy of the public free skill and seven references. Preserves the reveal, read-only review, and apply workflows; removes Pro-only guidance and installer instructions, adds the reference-led design boundary, and keeps future skill updates in the canonical repository.",
       "notice": "references/licenses/mit-libraries-dev.txt",
       "disposition": "retained under recorded upstream terms; preserve companions"
+    },
+    {
+      "bundle": "skills/frontend-and-design/libraries-dev",
+      "repository": "https://github.com/Jakubantalik/Libraries.dev",
+      "ref": "bad63221ebafa08d830586aa1721ecbd4ea02fcb",
+      "path": "skills/libraries-dev",
+      "digest": "git-tree:01e6d0411895b2519bc919e2b64f7cb32af900dd",
+      "license": "mit-libraries-dev",
+      "use": "informed-by",
+      "changes": "Updated public free Swift package guidance and version-dependent avatar default.",
+      "notice": "references/licenses/mit-libraries-dev.txt",
+      "disposition": "reference-only; no copying grant asserted"
     },
     {
       "bundle": "skills/frontend-and-design/motion",
@@ -1621,6 +1705,18 @@
       "use": "informed-by",
       "changes": "Reviewed 2026-11-01. Independently written proportionate component verification checkpoint informed by the public post; no text or media copied. Status identifies a public post, not an immutable content digest.",
       "notice": "references/licenses/published-works-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/frontend-and-design/ui-polish",
+      "repository": "https://github.com/Leonxlnx/taste-skill",
+      "ref": "12af471f627f866411b4bd785b19646d3672784c",
+      "path": "skills/taste-skill/SKILL.md",
+      "digest": "git-blob:d8444f13b76be100b3b088dfdae738e85288d6b6",
+      "license": "mit-taste-skill",
+      "use": "informed-by",
+      "changes": "Independently written conditional production-build visual verification guidance.",
+      "notice": "references/licenses/mit-taste-skill.txt",
       "disposition": "reference-only; no copying grant asserted"
     },
     {
@@ -3052,6 +3148,30 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
+      "bundle": "skills/software-workflows/migration",
+      "repository": "https://github.com/wdm0006/python-skills",
+      "ref": "c095b43dfac8ca059c6e593bfa1095232c0fa9ff",
+      "path": "skills/common/sync-jobs/SKILL.md",
+      "digest": "git-blob:2e2d5b06a82a2397d2c789820d55461f3d3d8671",
+      "license": "mit-wdm0006",
+      "use": "informed-by",
+      "changes": "Independently written resumable checkpoint safeguards.",
+      "notice": "references/licenses/mit-wdm0006.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/software-workflows/migration",
+      "repository": "https://github.com/wdm0006/python-skills",
+      "ref": "c095b43dfac8ca059c6e593bfa1095232c0fa9ff",
+      "path": "skills/common/destructive-operations/SKILL.md",
+      "digest": "git-blob:729a7acb8ffd2fdd8bbe6aaca0ab0cb05c83b177",
+      "license": "mit-wdm0006",
+      "use": "informed-by",
+      "changes": "Independently written rebuild preview semantics.",
+      "notice": "references/licenses/mit-wdm0006.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/software-workflows/modernize",
       "repository": "https://github.com/t3dotgg/tstack",
       "ref": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
@@ -3146,6 +3266,18 @@
       "changes": "Independently written adaptation. Reconcile all unresolved findings against current head, including valid older feedback; preserve scope and posting authority.",
       "notice": "references/licenses/mit-tstack.txt",
       "disposition": "retained under recorded upstream terms; preserve companions"
+    },
+    {
+      "bundle": "skills/software-workflows/pr-feedback",
+      "repository": "https://github.com/EveryInc/compound-engineering-plugin",
+      "ref": "3449230705a508229a5a298671e9031e489f0278",
+      "path": "skills/ce-resolve-pr-feedback/references/resume.md",
+      "digest": "git-blob:3f8c6888a19c3af8098efca9de750b3e361bfb9e",
+      "license": "mit-compound-engineering",
+      "use": "informed-by",
+      "changes": "Independently written interrupted feedback reconciliation guidance; no scripts imported.",
+      "notice": "references/licenses/mit-compound-engineering.txt",
+      "disposition": "reference-only; no copying grant asserted"
     },
     {
       "bundle": "skills/software-workflows/refactor",
@@ -3313,6 +3445,18 @@
       "use": "informed-by",
       "changes": "Independently written adaptation of v1.3.2: Explain the coverage and limits of proposed test seams.",
       "notice": "references/licenses/mit-mattpocock.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/software-workflows/tdd",
+      "repository": "https://github.com/trailofbits/skills",
+      "ref": "2be6433b39e009cd2b6fd3be1895f6b1faa5af9a",
+      "path": "plugins/post-patch-validation/skills/post-patch-validation/references/evidence-model.md",
+      "digest": "git-blob:341229a0788b7fad6e93d85303a619af08ece5c7",
+      "license": "cc-by-sa-4.0-trailofbits",
+      "use": "informed-by",
+      "changes": "Independently written regression failure attribution guidance.",
+      "notice": "references/licenses/cc-by-sa-4.0-trailofbits.txt",
       "disposition": "reference-only; no copying grant asserted"
     },
     {
@@ -3508,6 +3652,42 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
+      "bundle": "skills/software-workflows/verify",
+      "repository": "https://github.com/wdm0006/python-skills",
+      "ref": "c095b43dfac8ca059c6e593bfa1095232c0fa9ff",
+      "path": "skills/common/verifying-external-behavior/SKILL.md",
+      "digest": "git-blob:d7c2ab62f2c23804548c7a41d0c3c447efbf8646",
+      "license": "mit-wdm0006",
+      "use": "informed-by",
+      "changes": "Independently written input completeness and partial preview checks.",
+      "notice": "references/licenses/mit-wdm0006.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/software-workflows/verify",
+      "repository": "https://github.com/wdm0006/python-skills",
+      "ref": "c095b43dfac8ca059c6e593bfa1095232c0fa9ff",
+      "path": "skills/python/testing-strategy/SKILL.md",
+      "digest": "git-blob:0876f35aecf4892a5e9245619a52598e032bff85",
+      "license": "mit-wdm0006",
+      "use": "informed-by",
+      "changes": "Independently written regression and mutation evidence guidance.",
+      "notice": "references/licenses/mit-wdm0006.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/software-workflows/verify",
+      "repository": "https://github.com/trailofbits/skills",
+      "ref": "2be6433b39e009cd2b6fd3be1895f6b1faa5af9a",
+      "path": "plugins/post-patch-validation/skills/post-patch-validation/references/evidence-model.md",
+      "digest": "git-blob:341229a0788b7fad6e93d85303a619af08ece5c7",
+      "license": "cc-by-sa-4.0-trailofbits",
+      "use": "informed-by",
+      "changes": "Independently written baseline and patched assertion evidence guidance; no runner imported.",
+      "notice": "references/licenses/cc-by-sa-4.0-trailofbits.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/software-workflows/wayfinder",
       "repository": "https://github.com/mattpocock/skills",
       "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",
@@ -3685,6 +3865,18 @@
       "use": "informed-by",
       "changes": "Screenshot supplied and inspected 2026-11-01; origin and author not established. Independently written guidance favours natural wording, avoids rhetorical agency and aphorisms, and preserves meaningful technical precision; image and source prose not reproduced.",
       "notice": "references/licenses/user-supplied-screenshot-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/writing-and-artifacts/writing",
+      "repository": "https://github.com/EveryInc/compound-writing",
+      "ref": "8fd0ec88c00976cf0274cb76552dc7ad9405ca92",
+      "path": "references/context-contract.md",
+      "digest": "git-blob:57dd1949720ebadf349a8f0dd3b8ea6b508d5cdc",
+      "license": "declared-mit-compound-writing",
+      "use": "informed-by",
+      "changes": "Independently written optional audience evidence and assignment precedence guidance.",
+      "notice": "references/licenses/declared-mit-compound-writing.txt",
       "disposition": "reference-only; no copying grant asserted"
     },
     {
@@ -4932,9 +5124,9 @@
       "source": "skills/taste-skill/assets/scenes/stage.js",
       "local": "skills/frontend-and-design/interface-design/assets/taste-toolkit/assets/scenes/stage.js",
       "upstream_sha256": "3012ade75e01a9c0c81b5835a60e9ade965ed310cd58d85a7ad10e4ed4a1ad16",
-      "status": "exact match",
-      "pinned_digest_matches": true,
-      "local_sha256": "3012ade75e01a9c0c81b5835a60e9ade965ed310cd58d85a7ad10e4ed4a1ad16"
+      "status": "adapted",
+      "pinned_digest_matches": false,
+      "local_sha256": "a8254bcce37320014e021ee56dd2747d7f4e94a2f94cdb27aabc4af49b63649b"
     },
     {
       "family": "taste",
@@ -5396,7 +5588,7 @@
       "local": "skills/frontend-and-design/libraries-dev/references/01-border-beam.md",
       "upstream_sha256": "19bd52664f2c98ab64d36cf20496073d4ac714439981643486de01e51db26ac5",
       "status": "adapted/different",
-      "local_sha256": "57b3a7390f7bc4dbe7160446549f845b1eccda943f112bbed0e55f97c1c4bae8"
+      "local_sha256": "c570a9bf26322dd7b280c6f6f1eeb9f30556effbf138be9c8b955918c5e5f89d"
     },
     {
       "family": "libraries",
@@ -5404,7 +5596,7 @@
       "local": "skills/frontend-and-design/libraries-dev/references/02-thinking-orbs.md",
       "upstream_sha256": "d8aebfb00760474eb5edfc1f82209eef9f9223d9202d2019e8cb358cc05de43e",
       "status": "adapted/different",
-      "local_sha256": "4f16ed6647e3459151077d8fa1839ae29c0d8292e6afaba39190254d3e7145bb"
+      "local_sha256": "bdc4756e9a0eb2fcd44fa90b1f842d72d3c21c63002b972187d54c611d551d66"
     },
     {
       "family": "libraries",
@@ -5428,7 +5620,7 @@
       "local": "skills/frontend-and-design/libraries-dev/references/05-bot-avatars.md",
       "upstream_sha256": "4cca84e40875a9fd815105921cf3f3518ad1c8191d67d072d99d78578bcdac51",
       "status": "adapted/different",
-      "local_sha256": "eda2a8ad5b3853035773e788f6aa1aa154990cfdf74e713d3e276e8de2b8d51d"
+      "local_sha256": "d803e649aab2e792e57cac8c0114101b24f1a41f247ceadcb9a0508eb630882f"
     },
     {
       "family": "libraries",
@@ -5436,7 +5628,7 @@
       "local": "skills/frontend-and-design/libraries-dev/references/06-metal-fx.md",
       "upstream_sha256": "dfd07ee746481951512b88a22a6dce901abd2c7a838757a469e8aaf3f6239852",
       "status": "adapted/different",
-      "local_sha256": "34315c0de82d2f13ee346c4ba126f304e8f407461f3ddba8133eadb6c72ac054"
+      "local_sha256": "c351be0e9e882a6f032f00fe9e655d748e25e3c810457b0f9fd3be0c81011e2d"
     },
     {
       "family": "libraries",

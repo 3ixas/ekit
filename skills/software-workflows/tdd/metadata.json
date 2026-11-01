@@ -50,6 +50,15 @@
       "license": "mit-mattpocock",
       "use": "informed-by",
       "changes": "Independently written adaptation of v1.3.2: Explain the coverage and limits of proposed test seams."
+    },
+    {
+      "repository": "https://github.com/trailofbits/skills",
+      "ref": "2be6433b39e009cd2b6fd3be1895f6b1faa5af9a",
+      "path": "plugins/post-patch-validation/skills/post-patch-validation/references/evidence-model.md",
+      "digest": "git-blob:341229a0788b7fad6e93d85303a619af08ece5c7",
+      "license": "cc-by-sa-4.0-trailofbits",
+      "use": "informed-by",
+      "changes": "Independently written regression failure attribution guidance."
     }
   ],
   "dependencies": {
@@ -58,5 +67,5 @@
     ],
     "tools": []
   },
-  "reviewed": "2026-10-29"
+  "reviewed": "2026-11-01"
 }

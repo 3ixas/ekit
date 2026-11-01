@@ -14,7 +14,7 @@ A safe transition with inventory, reconciliation, cutover evidence, and a clear 
 ## Method
 
 1. Inventory producers, consumers, data, and constraints. Record the compatibility window and the invariant each migration stage must preserve.
-2. Sequence expand, backfill, reconcile, cutover, and cleanup. Define idempotent retries, roll-forward and rollback conditions, and an observable check for each stage before executing it.
+2. Sequence expand, backfill, reconcile, cutover, and cleanup. Define idempotent retries, roll-forward and rollback conditions, and an observable check for each stage before executing it. For resumable file checkpoints, preserve the previous valid state on failed writes, choose permissions deliberately, and handle concurrent writers. A rebuild preview must model the real in-memory reset while withholding persistent effects.
 3. Verify each authorized stage against those checks. Record reconciliation and cutover evidence; remove legacy paths only when their consumers and removal-readiness condition have been checked.
 
 ## Boundaries

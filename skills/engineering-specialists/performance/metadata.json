@@ -51,6 +51,15 @@
       "license": "published-works-reference",
       "use": "informed-by",
       "changes": "Propose an expert-level stretch target alongside the stated floor; independently written, no text copied."
+    },
+    {
+      "repository": "https://github.com/cursor/plugins",
+      "ref": "ae5650febf4320793844c12c4adaa937f417f8da",
+      "path": "pstack/skills/principle-explain-the-number/SKILL.md",
+      "digest": "git-blob:3948ad34092437918f366e2cbb270e9ae31977fb",
+      "license": "mit-pstack",
+      "use": "informed-by",
+      "changes": "Independently written decision and workload measurement controls."
     }
   ],
   "dependencies": {
@@ -59,5 +68,5 @@
     ],
     "tools": []
   },
-  "reviewed": "2026-10-26"
+  "reviewed": "2026-11-01"
 }

@@ -38,6 +38,34 @@ class TasteToolkitTests(unittest.TestCase):
             'version': 1, 'designContract': '../DESIGN.md', 'exceptions': exceptions,
         }))
 
+    def test_scene_split_keeps_html_like_text_as_text(self):
+        script = r"""
+const fs = require('node:fs');
+const vm = require('node:vm');
+const assert = require('node:assert/strict');
+const source = fs.readFileSync(process.argv[1], 'utf8');
+const document = {
+  documentElement: {},
+  createElement() { return {style: {}, attrs: {}, setAttribute(k,v) {this.attrs[k]=v;}, textContent: ''}; }
+};
+const window = {};
+vm.runInNewContext(source, {document, window});
+const el = {
+  textContent: 'Hello <img/src=x/onerror=alert(1)>', dataset: {}, attrs: {}, children: [],
+  setAttribute(k,v) {this.attrs[k]=v;},
+  set innerHTML(value) { throw new Error('HTML parsing was invoked'); },
+  replaceChildren(...nodes) { this.nodes=nodes; this.children=nodes.filter(x => typeof x !== 'string'); }
+};
+const first = window.Stage.split(el, 'words');
+assert.equal(el.attrs['aria-label'], 'Hello <img/src=x/onerror=alert(1)>');
+assert.deepEqual(Array.from(first, x => x.textContent), ['Hello', '<img/src=x/onerror=alert(1)>']);
+assert.equal(first[1].attrs['aria-hidden'], 'true');
+assert.equal(window.Stage.split(el, 'words')[1], first[1]);
+"""
+        result = subprocess.run([NODE, '-e', script, str(TOOLKIT / 'assets/scenes/stage.js')],
+                                text=True, capture_output=True, timeout=10)
+        self.assertEqual(result.returncode, 0, result.stderr)
+
     def test_seeded_page_draw_saved_reuse_and_project_history(self):
         args = ('draw', '--sector', 'personal-portfolio', '--brief', 'A portfolio',
                 '--sections', 'work,about,contact', '--direction', 'name-as-monument', '--seed', '42')

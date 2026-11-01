@@ -46,7 +46,9 @@ import { BotAvatar } from 'bot-avatars';
 The detail page also has two ports, both local to the repo (not on npm):
 
 - React Native: `bot-avatars-native` in `packages/bot-avatars/ports/react-native/bot-avatars-native`, needs `@shopify/react-native-skia react-native-reanimated react-native-worklets`. Expo needs `expo run:ios` / `run:android`.
-- SwiftUI (iOS 17+): `BotAvatarsKit` in `packages/bot-avatars/ports/ios/BotAvatarsKit`, added as a local Swift package.
+- SwiftUI (iOS 17+): `BotAvatarsKit` in `packages/bot-avatars/ports/ios/BotAvatarsKit`, available through the repository root Swift package.
+
+For the upstream 0.2.0 release, the React default is `fabric`; use `shading="plastic"` for the earlier glossy look. Native ports use the plastic look. Verify the installed package version and available free options before using these props.
 
 ## Basic usage
 
@@ -73,8 +75,10 @@ import { BotAvatar } from 'bot-avatars-native';
 SwiftUI:
 
 ```swift
-// Package.swift, or Xcode: File > Add Package Dependencies > Add Local...
-.package(path: "packages/bot-avatars/ports/ios/BotAvatarsKit")
+// Package.swift, or Xcode: File > Add Package Dependencies > enter the repository URL and revision
+.package(url: "https://github.com/Jakubantalik/Libraries.dev", revision: "bad63221ebafa08d830586aa1721ecbd4ea02fcb")
+// Add this product to the target dependencies:
+.product(name: "BotAvatarsKit", package: "Libraries.dev")
 ```
 
 ```swift
@@ -88,19 +92,19 @@ The playground's live snippet has this shape (only non-default props are written
 ```tsx
 import { BotAvatar } from 'bot-avatars';
 
-<BotAvatar type="star" state="working" size={96} />
+<BotAvatar type="flower" state="working" size={96} />
 ```
 
 ## Options (free)
 
 | Prop | Values | Default | What it does |
 | --- | --- | --- | --- |
-| `type` | `"clover"`, `"flower"`, `"star"`, `"ghost"`, `"mech"`, `"circle"`, `"hexagon"`, `"square"` | `"clover"` | Body shape. Each type has its own body colour. |
+| `type` | `"clover"`, `"flower"`, `"ghost"`, `"square"` | `"clover"` | Body shape. Each type has its own body colour. |
 | `state` | `"default"`, `"working"` | `"default"` | `default` is idle: looks from corner to corner, blinks, a jump with a full turn now and then. `working` hops, spins every third hop, smiles and laughs now and then. |
 | `size` | `96`, `64`, `32` (px) | `64` | Layout size of the avatar box. Also accepts any CSS length string. |
 | `paused` | `true` / `false` | `false` | Freezes the animation on its current frame. |
 
-Tuner to props: the Type, State and Size tabs set `type`, `state` and `size`. The State tab label "Idle" is the value `"default"`. The Play / Pause button on the stage toggles `paused`; the playground loads paused, so its snippet carries `paused` until you press Play. The playground starts at 96 px; the snippet drops `size` at 64 because 64 is the package default, and drops `state` at `"default"`.
+Tuner to props: the Type, State, Size and Shading tabs set `type`, `state`, `size` and `shading`. The State tab label "Idle" is the value `"default"`. The Play / Pause button on the stage toggles `paused`; the playground loads paused, so its snippet carries `paused` until you press Play. The playground starts at 96 px; the snippet drops `size` at 64 because 64 is the package default, and drops `state` at `"default"`.
 
 State changes are cross-animated: the rig eases from the old pose to the new one, so toggling `state` on every token or tool call is safe.
 

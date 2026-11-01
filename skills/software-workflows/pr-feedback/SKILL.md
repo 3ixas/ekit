@@ -30,3 +30,7 @@ Prefer `gh`/`gh api` for structured PR reads, comments, and updates; use another
 These snapshots preserve the reviewed upstream methods. The steps above are enough for ordinary use; open a snapshot only when the task needs the specific method it names.
 
 - [source-1-ce-resolve-pr-feedback](references/source-methods/source-1-ce-resolve-pr-feedback.md)
+
+## Resume interrupted feedback
+
+Before resuming saved replies or resolutions, re-read the PR identity, current head, complete relevant conversations and publication state. For a reply claiming a fix is published, verify the saved fix is reachable from the actual PR head; an unknown comparison is not publication proof. Reconcile each intended reply with the live submitted conversation before retrying: if a write may have succeeded despite an error, read back and adopt a matching reply instead of posting a duplicate. Recheck whether changed code or new context invalidates the saved response. Keep pending human reviews and unresolved actions intact, and only post or resolve with existing task authority.

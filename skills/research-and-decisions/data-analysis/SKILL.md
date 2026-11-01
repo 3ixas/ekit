@@ -14,7 +14,7 @@ A reproducible analysis whose claims follow from validated data and whose uncert
 Before analysing, deepen the brief: name what an expert analyst would do that was not asked for, the rawest data available, the methods and tools they would use (a database and a statistical model, not a summary table), and the independent evidence that would confirm the answer. Put any change of scope to Elias rather than adopting it.
 
 1. Establish the decision, population, grain, time window, and metric definitions so the result can be reproduced.
-2. Inspect freshness, missingness, joins, duplicates, and bias. Record limitations that could change the conclusion before interpreting the results.
+2. Inspect freshness, missingness, joins, duplicates, and bias. Check pagination, truncation and partial-preview metadata; reconcile rows processed with an authoritative count when available, and report unknown completeness. Record limitations that could change the conclusion before interpreting the results.
 3. Analyse reproducibly in Python or SQL. Test the prevailing explanation adversarially against the raw data, not only alternatives to it.
 4. Validate calculations independently. For a predictive claim, hold data out before fitting and report performance on that held-out data.
 5. Connect findings to the decision and preserve the reproducible artifacts. Done when the conclusion is supported by the validated results and its material uncertainty is explicit.

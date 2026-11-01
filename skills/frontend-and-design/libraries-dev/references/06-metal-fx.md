@@ -45,7 +45,7 @@ import { MetalFx, MetalText, MetalBadge, useMetalBend, useMetalTextReflection } 
 - Requires WebGL2. Without it `<MetalFx>` renders the child as-is inside `div.metal-fx-fallback[data-metal-fx-unsupported]`.
 - Styles are injected into `<head>` on import; no CSS file to add.
 - The package ships no `"use client"` directive. In the Next.js App Router, import it from a file marked `"use client"`.
-- Native ports (shown on the detail page, not on npm): React Native `metal-fx-native` (Skia + Reanimated 4) and SwiftUI `MetalFxKit` (iOS 17+), both in the metal-fx repo under `ports/`.
+- SwiftUI port: `MetalFxKit` (iOS 17+) is available from the repository-root Swift package.
 
 ## Basic usage
 
@@ -61,28 +61,15 @@ import { MetalFx, MetalText, MetalBadge } from 'metal-fx';
 // v1 engine: npm install metal-fx@1
 ```
 
-React Native (not on npm yet; lives at `ports/react-native/metal-fx-native`; Expo needs `expo run:ios` / `run:android`):
-
-```bash
-npm install metal-fx-native @shopify/react-native-skia react-native-reanimated react-native-worklets
-```
-
-```tsx
-import { MetalFx, MetalText, MetalBadge, MetalReflection, MetalEdgeHalo } from 'metal-fx-native';
-<MetalFx variant="circle" preset="chromatic" strength={0.9} innerShadow id="send">
-  <View style={{ width: 40, height: 40 }}><ArrowUp /></View>
-</MetalFx>
-<MetalReflection of="send"><Chip label="Auto" /></MetalReflection>
-<MetalText fontSize={24} fontWeight="500">Pro</MetalText>
-<MetalBadge>New</MetalBadge>
-<MetalEdgeHalo style={styles.card}>…a ring with an id…</MetalEdgeHalo>
-```
+The previously documented React Native port is not present in the current upstream reference. Verify availability before use.
 
 SwiftUI (iOS 17+, build through Xcode so the Metal shader compiles):
 
 ```swift
-// Package.swift — or Xcode: File › Add Package Dependencies… › Add Local…
-.package(path: "ports/ios/MetalFxKit")
+// Package.swift — or Xcode: File › Add Package Dependencies… › enter the repository URL and revision
+.package(url: "https://github.com/Jakubantalik/Libraries.dev", revision: "bad63221ebafa08d830586aa1721ecbd4ea02fcb")
+// Add this product to the target dependencies:
+.product(name: "MetalFxKit", package: "Libraries.dev")
 ```
 
 ```swift

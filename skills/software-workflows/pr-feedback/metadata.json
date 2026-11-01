@@ -32,6 +32,15 @@
       "license": "mit-tstack",
       "use": "adapted",
       "changes": "Independently written adaptation. Reconcile all unresolved findings against current head, including valid older feedback; preserve scope and posting authority."
+    },
+    {
+      "repository": "https://github.com/EveryInc/compound-engineering-plugin",
+      "ref": "3449230705a508229a5a298671e9031e489f0278",
+      "path": "skills/ce-resolve-pr-feedback/references/resume.md",
+      "digest": "git-blob:3f8c6888a19c3af8098efca9de750b3e361bfb9e",
+      "license": "mit-compound-engineering",
+      "use": "informed-by",
+      "changes": "Independently written interrupted feedback reconciliation guidance; no scripts imported."
     }
   ],
   "dependencies": {
@@ -43,5 +52,5 @@
       "github"
     ]
   },
-  "reviewed": "2026-10-26"
+  "reviewed": "2026-11-01"
 }

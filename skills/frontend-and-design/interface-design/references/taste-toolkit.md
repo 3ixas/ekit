@@ -9,7 +9,7 @@ Consult the relevant branch when it helps an unresolved website or web-app desig
 3. When a draw would broaden an unresolved direction, use `draw --options 3` alongside actual references. Judge the proposed compositions against the subject and assets. The draw supplies candidates; Elias's selected direction governs. Choose, combine or reject candidates rather than accepting randomness as authority.
 4. Write the idea sentence: something particular to this subject becomes a compositional device. Substitute its nearest competitor; if it still fits unchanged, sharpen it. Carry the idea beyond the hero into useful content and the close.
 5. Choose imagery from available project assets, generated assets when authorised, or honest contextual imagery found by the asset tool. Record sources and credits. Consider one useful live demonstration when it proves a claim; do not add interaction solely to satisfy a quota.
-6. Build still composition and phone composition first. Give motion a purpose with `motion`; record intentional exceptions to the upstream picture and movement floors. Continue the existing exploration, approval and delivery workflow.
+6. Build still composition and phone composition first. When a production build exists, inspect the built result as well as development output before the final visual verdict. Give motion a purpose with `motion`; record intentional exceptions to the upstream picture and movement floors. Continue the existing exploration, approval and delivery workflow.
 
 ## App direction
 

@@ -24,6 +24,24 @@
       "license": "mit-wdm0006",
       "use": "adapted",
       "changes": "Methods selectively consolidated into Elias's owned ci capability; vendor routing and unrelated framework assumptions removed."
+    },
+    {
+      "repository": "https://github.com/wdm0006/python-skills",
+      "ref": "c095b43dfac8ca059c6e593bfa1095232c0fa9ff",
+      "path": "skills/common/github-actions/SKILL.md",
+      "digest": "git-blob:d8d4e7100440de39f42b6d380cc0e7daff90832d",
+      "license": "mit-wdm0006",
+      "use": "informed-by",
+      "changes": "Independently written required-check preservation and failure-control guidance."
+    },
+    {
+      "repository": "https://github.com/wdm0006/python-skills",
+      "ref": "c095b43dfac8ca059c6e593bfa1095232c0fa9ff",
+      "path": "skills/common/reproducing-ci-locally/SKILL.md",
+      "digest": "git-blob:8bbf30ac474be12c466c53762af85265346cd49e",
+      "license": "mit-wdm0006",
+      "use": "informed-by",
+      "changes": "Independently written base-control import and dependency parity guidance."
     }
   ],
   "dependencies": {
@@ -35,5 +53,5 @@
       "github"
     ]
   },
-  "reviewed": "2026-10-28"
+  "reviewed": "2026-11-01"
 }

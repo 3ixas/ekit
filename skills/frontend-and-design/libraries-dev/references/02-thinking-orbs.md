@@ -87,11 +87,13 @@ import { ThinkingOrb } from 'thinking-orbs-native';
 <ThinkingOrb state="searching" size={64} />
 ```
 
-SwiftUI tab (local Swift package):
+SwiftUI tab (repository-root Swift package):
 
 ```swift
-// Package.swift — or Xcode: File › Add Package Dependencies… › Add Local…
-.package(path: "packages/thinking-orbs/ports/ios/ThinkingOrbsKit")
+// Package.swift — or Xcode: File › Add Package Dependencies… › enter the repository URL and revision
+.package(url: "https://github.com/Jakubantalik/Libraries.dev", revision: "bad63221ebafa08d830586aa1721ecbd4ea02fcb")
+// Add this product to the target dependencies:
+.product(name: "ThinkingOrbsKit", package: "Libraries.dev")
 ```
 
 ```swift
