@@ -24,7 +24,7 @@ GitHub issue and pull-request state is handled through the local `gh` CLI or its
 | `modernize` | explicit | Reassess an aging PR against current intent and architecture before an authorized branch update. |
 | `migration` | explicit, supporting | Plan and execute substantial data, API, or cross-system migrations through compatible, verifiable stages. |
 | `pr-feedback` | automatic | Evaluate and resolve feedback already left on a pull request, preserving the full review conversation and verifying accepted changes. |
-| `pr` | automatic | Write a pull request body with a visual summary, before-and-after evidence, and merge danger. |
+| `pr` | automatic | Write a pull request body with a visual before-and-after comparison, evidence, and merge danger. |
 | `babysit-pr` | explicit | Monitor an open pull request through checks and review activity, taking only the follow-up actions authorized for the run. |
 | `refactor` | automatic, supporting | Improve code structure or simplify settled code while preserving intended behaviour and proving equivalence. |
 | `release` | explicit | Prepare and execute an authorized software release, pull request, deployment, or publication with exact-target evidence and rollback thinking. |
