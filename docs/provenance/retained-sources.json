@@ -1456,6 +1456,30 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
+      "bundle": "skills/frontend-and-design/motion",
+      "repository": "https://github.com/benjitaylor/skills",
+      "ref": "802057409787133703c56001080169e347305572",
+      "path": "stageshow",
+      "digest": "git-tree:5f24a58c1b28ba9d208e576e3c6267ccd1fc1769",
+      "license": "mit-benjitaylor",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01. Independently written poster, payoff and reset checks for authored product demos; no upstream text or assets copied.",
+      "notice": "references/licenses/mit-benjitaylor.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/frontend-and-design/product-demo",
+      "repository": "https://github.com/benjitaylor/skills",
+      "ref": "802057409787133703c56001080169e347305572",
+      "path": "stageshow",
+      "digest": "git-tree:5f24a58c1b28ba9d208e576e3c6267ccd1fc1769",
+      "license": "mit-benjitaylor",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01. Independently written product illustration composition, demo storytelling and rehearsal workflow; no upstream prose, code, examples or third-party assets copied. Kit is optional and subject to separate compatibility and asset rights review.",
+      "notice": "references/licenses/mit-benjitaylor.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/frontend-and-design/prototype",
       "repository": "https://github.com/mattpocock/skills",
       "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",

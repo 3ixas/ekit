@@ -1,0 +1,30 @@
+{
+  "id": "product-demo",
+  "group": "frontend-and-design",
+  "origin": "synthesized",
+  "invocation": [
+    "automatic"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/benjitaylor/skills",
+      "ref": "802057409787133703c56001080169e347305572",
+      "path": "stageshow",
+      "digest": "git-tree:5f24a58c1b28ba9d208e576e3c6267ccd1fc1769",
+      "license": "mit-benjitaylor",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01. Independently written product illustration composition, demo storytelling and rehearsal workflow; no upstream prose, code, examples or third-party assets copied. Kit is optional and subject to separate compatibility and asset rights review."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "interface-design",
+      "motion",
+      "verify"
+    ],
+    "tools": [
+      "browser"
+    ]
+  },
+  "reviewed": "2026-11-01"
+}

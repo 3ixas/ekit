@@ -349,5 +349,38 @@
     "supports": [],
     "explicit": true,
     "authority_stop": "Prepare evidence and checklist; do not publish, push, deploy or merge."
+  },
+  {
+    "request": "Create a feature card showing a customer being assigned in our product, using the approved design direction",
+    "owner": "product-demo",
+    "supports": [
+      "motion"
+    ],
+    "authority_stop": "Build and inspect the asset locally; publication, real customer data and third-party artwork need appropriate authority and rights."
+  },
+  {
+    "request": "Create a scripted cursor walkthrough for the homepage and show its reduced-motion poster",
+    "owner": "product-demo",
+    "supports": [
+      "motion"
+    ],
+    "authority_stop": "A simulated demo is not evidence that the product works; do not claim invented features or publish without authority."
+  },
+  {
+    "request": "Design the new working dashboard and its navigation from references",
+    "owner": "interface-design",
+    "supports": [
+      "accessibility",
+      "verify"
+    ],
+    "authority_stop": "Establish the product direction and approval; a product illustration is not a substitute for the working interface."
+  },
+  {
+    "request": "Build a throwaway prototype to compare two onboarding flows before we decide",
+    "owner": "prototype",
+    "supports": [
+      "interface-design"
+    ],
+    "authority_stop": "Keep the experiment separate from production until a direction is chosen and implementation is authorized."
   }
 ]

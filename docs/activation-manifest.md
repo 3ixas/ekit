@@ -72,6 +72,7 @@ This is the reviewed source-to-runtime contract after the 2026-09-15 fidelity an
 | `interface-design` | automatic | synthesized |
 | `libraries-dev` | supporting | adapted |
 | `motion` | automatic, supporting | synthesized |
+| `product-demo` | automatic | synthesized |
 | `prototype` | automatic | adapted |
 | `ui-polish` | automatic | synthesized |
 | `user-research` | automatic | imported |
