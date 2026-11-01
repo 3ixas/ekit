@@ -3676,6 +3676,18 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
+      "bundle": "skills/writing-and-artifacts/writing",
+      "repository": "user-supplied screenshot",
+      "ref": "sha256:2338f5ac5fa26af0c09b6efb033475e5c2f0632de22cdd9c7d7790c5c51a76f8",
+      "path": "1-Pasted-Image-1.jpg",
+      "digest": "sha256:2338f5ac5fa26af0c09b6efb033475e5c2f0632de22cdd9c7d7790c5c51a76f8",
+      "license": "user-supplied-screenshot-reference",
+      "use": "informed-by",
+      "changes": "Screenshot supplied and inspected 2026-11-01; origin and author not established. Independently written guidance favours natural wording, avoids rhetorical agency and aphorisms, and preserves meaningful technical precision; image and source prose not reproduced.",
+      "notice": "references/licenses/user-supplied-screenshot-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/writing-and-artifacts/writing-for-agents",
       "repository": "https://github.com/mattpocock/skills",
       "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",

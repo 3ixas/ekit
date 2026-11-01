@@ -18,6 +18,8 @@ Preserve code, commands, identifiers, interfaces, paths, error messages, and quo
 
 ## Clarity
 
+Explain the system as a knowledgeable colleague would, adjusting formality to the reader and purpose. Prefer a familiar verb when it communicates the same distinction; retain specialised terms and precise verbs when they explain actual behaviour or responsibility. Avoid making a component or abstraction sound purposeful merely to create a punchy sentence, and avoid turning a local design choice into a general principle. System subjects are useful when they accurately describe what the system does.
+
 Introduce a term when it reduces ambiguity, then use it consistently. Explain causal relationships and tradeoffs in plain language. Keep background proportional to the task. Use diagrams, tables, examples, or headings only when they reduce the reader’s effort.
 
 A finished procedural document includes an observable success condition and the likely recovery path for material failure modes.

@@ -14,6 +14,7 @@ Synthetic writing is usually a reasoning or voice problem before it is a vocabul
 - uniform paragraph and sentence shapes;
 - excessive framing, summaries, headings, or symmetrical lists;
 - abstract praise and inflated importance without evidence;
+- abstractions given exaggerated agency, forceful verbs that obscure an action, or ordinary explanations dressed up as maxims;
 - canned contrasts, throat-clearing, fake questions, and repeated conclusions;
 - confident details, feelings, or anecdotes the author never supplied.
 
