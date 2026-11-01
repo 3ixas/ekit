@@ -1,0 +1,6 @@
+Source and licence companions
+
+This bundle contains independently written guidance informed by the upstream source identified in metadata.json. Keep the licence companion with this bundle. No upstream code, prose or third-party assets are included.
+
+Applicable records:
+- references/licenses/mit-benjitaylor.txt

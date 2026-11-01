@@ -9,6 +9,7 @@ Create reference-led interfaces and validate their experience, craft, motion, ac
 | `interface-design` | automatic | Orchestrate substantial product interface design from references and product intent through `DESIGN.md`, proportionate exploration, user sign-off, and rendered implementation QA. |
 | `libraries-dev` | supporting | Reveal, assess, or integrate the seven public Libraries.dev React effects when one fits the approved visual direction. |
 | `motion` | automatic, supporting | Design and improve meaningful interface motion, gestures, transitions, timing, springs, sequencing, reduced-motion behaviour, and runtime performance, and direct animation or video rendered from code. |
+| `product-demo` | automatic | Create a composed product illustration or scripted demo for a feature, hero, or marketing surface. |
 | `prototype` | automatic | Build a throwaway reference-led prototype or comparable variants to answer one consequential product, interaction, visual, or technical decision. |
 | `ui-polish` | automatic | Refine an existing coherent interface across hierarchy, typography, colour, layout, surfaces, states, interface copy, native feel, resilience, and light motion. |
 | `user-research` | automatic | Plan and synthesize user interviews or usability studies with neutral prompts, an evidence ladder, and explicit confidence. |

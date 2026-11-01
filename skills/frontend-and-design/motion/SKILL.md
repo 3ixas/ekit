@@ -19,6 +19,8 @@ For web interaction references or a suitable React starting point, consult [Subf
 
 For Motion APIs, presence/layout behaviour, MotionValues, Base UI/Radix integration, or a conditional Anime.js/Rive engine, read [implementation sources](references/motion-implementation.md). Match installed versions, preserve the owned design rules, and verify free versus premium access.
 
+For authored product demos, check that the poster communicates the result, the action and payoff remain legible, and a loop resets intelligibly. Use `product-demo` for the composition and rehearsal.
+
 For final video files, hero posters or reported video stutter, use [video diagnostics](references/video-diagnostics.md) for bounded file measurements and separate evidence from actual page playback.
 
 ## Boundaries

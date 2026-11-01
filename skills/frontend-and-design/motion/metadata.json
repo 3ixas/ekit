@@ -149,7 +149,16 @@
       "digest": "sha256:b141baed5acd6b4c34445a3cc49569902c3d1b60bb8f2c3f92ca0c6ea77684d0",
       "license": "design-resource-reference",
       "use": "informed-by",
-      "changes": "Independently written optional discovery and evaluation guidance for the live Motion library; no example code or upstream prose retained. Check each example’s licence at use."
+      "changes": "Independently written optional discovery and evaluation guidance for the live Motion library; no example code or upstream prose retained. Check each example\u2019s licence at use."
+    },
+    {
+      "repository": "https://github.com/benjitaylor/skills",
+      "ref": "802057409787133703c56001080169e347305572",
+      "path": "stageshow",
+      "digest": "git-tree:5f24a58c1b28ba9d208e576e3c6267ccd1fc1769",
+      "license": "mit-benjitaylor",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01. Independently written poster, payoff and reset checks for authored product demos; no upstream text or assets copied."
     }
   ],
   "dependencies": {
@@ -160,5 +169,5 @@
       "browser"
     ]
   },
-  "reviewed": "2026-10-28"
+  "reviewed": "2026-11-01"
 }
