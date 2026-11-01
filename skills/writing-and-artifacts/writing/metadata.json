@@ -59,11 +59,20 @@
       "license": "user-approved-writing-preferences",
       "use": "informed-by",
       "changes": "Independently written contextual voice handling: observed traits versus chosen development preferences, mandatory full reads of both personal context files on every invocation, truncation recovery and explicit missing-file disclosure, fact-preserving calibration and missing-evidence behaviour. Personal selections and private assessments remain outside this publication source. Existing upstream sources and notices unchanged."
+    },
+    {
+      "repository": "https://x.com/nickabraham12/status/2113630365772284075",
+      "ref": "status:2113630365772284075",
+      "path": "post image",
+      "digest": "sha256:35390c1905246ced94e44458a1bc1cc7f844872a52e0d41c9c7297a57319783f",
+      "license": "reference-only-no-copied-text",
+      "use": "informed-by",
+      "changes": "Nick Abraham, X status 2113630365772284075, image: cold email advice on verified research, recipient problems, concise writing and easy asks; inspected 2026-11-01. Digest identifies this bounded evidence note, not the image bytes. Independently written cold-outreach guidance adapts the advice without universal length or subject-line rules."
     }
   ],
   "dependencies": {
     "skills": [],
     "tools": []
   },
-  "reviewed": "2026-10-27"
+  "reviewed": "2026-11-01"
 }
