@@ -18,10 +18,13 @@ Use this template for writing the PR body:
 
 <diagram, diff-sketch, or tree>
 
+## Before and After
+
+<labelled visual comparison of the same scenario or aspect>
+
 ## Evidence
 
-- **Before:** <screenshot/output/failing test run>
-  **After:** <screenshot/output/passing test run>
+<observed results and any evidence gaps>
 
 ## Merge Danger
 
@@ -168,9 +171,15 @@ Place each visual next to the short text it supports. Keep only the calls, files
 
 You may use one of these, you may use several, it is unlikely you will use all of them. Use your judgement and don't overwhelm the user.
 
+### Before and After
+
+Always include a visual comparison of the PR's main change, including for non-UI work. Label both states and show the same scenario or aspect in each. For added or removed behaviour, make the absent state explicit. Choose the smallest clear representation: screenshots for UI changes when practical; paired diagrams, flow sketches, tables, diffs, or input/output examples for other changes. A text-based visual is sufficient; an image file is not required.
+
+An illustrative comparison explains the change but is not itself proof that it works. Label illustrations as such and do not invent observed results. If the actual before state is unavailable, say so and show an accurately labelled illustration or source-based comparison instead.
+
 ### Evidence
 
-Concrete evidence that the change works. Show a before and after.
+Give concrete observed evidence that the change works and name material gaps. Include before-and-after results when available; do not present a sketch or expected output as an observed result.
 
 Screenshots are S-tier - when the environment is set up for it and the change is visual.
 
@@ -182,7 +191,7 @@ Screenshots are S-tier - when the environment is set up for it and the change is
 
 Check each image for secrets and private information before it is published, and keep the files small.
 
-Execution-based evidence is A-tier. Test results, console output. Show the exact test that now fails and passes, using pseudocode.
+Execution-based evidence is A-tier: use actual test results or console output. Show a failing-before and passing-after result only when observed, and identify the test or command.
 
 ### Merge Danger
 
