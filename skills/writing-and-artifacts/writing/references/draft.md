@@ -18,7 +18,7 @@ Draft from an agreed brief or infer a compact brief from the request and evidenc
 
 ## Preserve authorship
 
-Use the author’s supplied wording, experiences, opinions, and degree of certainty as primary evidence. Apply `VOICE.md` or `STYLE.md` when present, but treat the current request as the latest authority. Do not add fake vulnerability, personal anecdotes, rhetorical questions, or provocative certainty to make the prose appear human.
+Use the author’s supplied wording, experiences, opinions, and degree of certainty as primary evidence. When developing notes or a transcript, preserve useful asides, qualifiers, distinctive phrasing, and turns of thought that serve the piece. Follow the requested editing scope: light cleanup stays light. If a needed personal judgment or fact is missing, flag it or leave a clearly marked placeholder rather than guessing. Never borrow facts or stories from voice examples. Apply `VOICE.md` or `STYLE.md` when present, but treat the current request as the latest authority. Do not add fake vulnerability, personal anecdotes, rhetorical questions, or provocative certainty to make the prose appear human.
 
 ## Deliver
 

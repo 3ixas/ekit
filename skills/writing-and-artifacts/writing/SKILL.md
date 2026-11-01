@@ -11,7 +11,7 @@ Usable prose that sounds like Elias or the intended author and does its actual j
 
 ## Method
 
-Name the piece's job as an activity the reader must be moved through (decide, approve, change a belief) rather than the artefact's type; choose the smallest develop, draft, edit, review, humanize, voice, or final route; preserve authorship and sources; structure before line polish; test the argument and intended reader; repair unsupported connective tissue before lexical AI patterns; use optional VOICE and project STYLE evidence when supplied; return the artifact first.
+Name the piece's job as an activity the reader must be moved through (decide, approve, change a belief) rather than the artefact's type; choose the smallest develop, draft, edit, review, humanize, voice, or final route; preserve authorship and sources; structure before line polish; test the argument and intended reader; repair unsupported connective tissue before lexical AI patterns; use optional VOICE and project STYLE evidence when supplied; return the artifact first. When choosing author examples, prefer recent, representative current-voice evidence; label older or mismatched examples structure-only when their voice no longer fits.
 
 For personal or persuasive writing, first find the writer's throughline: the turning point, tension, reason, or point of view that makes the piece theirs. Let that throughline organise the draft. Use concrete actions, choices, and observations to show qualities instead of naming generic strengths. When the writing needs to establish fit or motivation, explain both sides of the connection: what the writer has actually done, why this particular context matters to them, and what the reader can reasonably expect them to contribute. Use the target's language only where the supplied evidence supports it; do not mirror a brief or praise an audience in place of making the writer distinctive.
 
@@ -29,6 +29,7 @@ Read only the route that fits the request:
 - [Review](references/review.md) when the user wants diagnosis, feedback, fact checking, or an editorial decision rather than an automatic rewrite.
 - [Humanize](references/humanize.md) when prose feels generic, synthetic, over-smoothed, or unlike its author.
 - [Technical writing](references/technical-writing.md) for documentation, explanations, proposals, incident writing, and engineering decisions.
+- [Calibration](references/calibration.md) when the author explicitly wants to learn from edits or evaluate a voice-guidance change.
 - [Voice and style](references/voice-and-style.md) when establishing or applying a reusable author or project profile. Optional starting templates live in [VOICE.md](assets/VOICE.md) and [STYLE.md](assets/STYLE.md).
 
 ## Boundaries

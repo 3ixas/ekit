@@ -3640,6 +3640,18 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
+      "bundle": "skills/writing-and-artifacts/writing",
+      "repository": "https://x.com/nateliason/status/2115803497773904292",
+      "ref": "status:2115803497773904292",
+      "path": "linked X article, user-supplied text",
+      "digest": "sha256:93bef34f6ff0123f05f6dfa2a6879861917a75acb5dce8111d5c8aad58027d20",
+      "license": "nat-eliason-reference",
+      "use": "informed-by",
+      "changes": "Independently authored guidance on source-grounded voice, format examples, cautious learning from edits, and held-out evaluation. Digest identifies docs/provenance/nat-eliason-writing-calibration.md, not article bytes; source-text integrity is unverified; full article supplied by the user and reviewed 2026-11-01.",
+      "notice": "references/licenses/nat-eliason-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/writing-and-artifacts/writing-for-agents",
       "repository": "https://github.com/mattpocock/skills",
       "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",
