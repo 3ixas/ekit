@@ -77,6 +77,15 @@
       "license": "nat-eliason-reference",
       "use": "informed-by",
       "changes": "Independently authored guidance on source-grounded voice, format examples, cautious learning from edits, and held-out evaluation. Digest identifies docs/provenance/nat-eliason-writing-calibration.md, not article bytes; source-text integrity is unverified; full article supplied by the user and reviewed 2026-11-01."
+    },
+    {
+      "repository": "user-supplied screenshot",
+      "ref": "sha256:2338f5ac5fa26af0c09b6efb033475e5c2f0632de22cdd9c7d7790c5c51a76f8",
+      "path": "1-Pasted-Image-1.jpg",
+      "digest": "sha256:2338f5ac5fa26af0c09b6efb033475e5c2f0632de22cdd9c7d7790c5c51a76f8",
+      "license": "user-supplied-screenshot-reference",
+      "use": "informed-by",
+      "changes": "Screenshot supplied and inspected 2026-11-01; origin and author not established. Independently written guidance favours natural wording, avoids rhetorical agency and aphorisms, and preserves meaningful technical precision; image and source prose not reproduced."
     }
   ],
   "dependencies": {
