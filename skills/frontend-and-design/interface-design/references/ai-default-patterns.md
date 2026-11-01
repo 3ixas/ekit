@@ -1,6 +1,6 @@
 # AI-default patterns
 
-Independently written for this repository, informed by `madebymustafa/design-taste` (its never list and pre-flight checklist) and TasteSkill v2's dated tells registry and blind-test record (both pinned in `metadata.json`), and framed like `app-audit`'s AI-template patterns. Use these as questions in the distinctiveness check, not as a ban list. A pattern is a problem only when nothing in the product, references, or recorded direction calls for it; a recorded signature that uses one of these on purpose is fine.
+Independently written for this repository, informed by `madebymustafa/design-taste`, TasteSkill v2 and [Ayush Soni's design indicators](https://x.com/ayushsoni_io/status/2115322579187867898) (see `metadata.json`), and framed like `app-audit`'s AI-template patterns. Use these as questions in the distinctiveness check, not as a ban list. Judge their accumulation and purpose against the product, references and recorded direction; familiarity alone is not a defect.
 
 ## The first test
 
@@ -20,6 +20,9 @@ Could this screen have come from typing the page type ("landing page", "settings
 | Generic action copy | "Get started free" or "Submit" regardless of what the action does. |
 | Removable sections | A section could be deleted without losing anything the page argues. |
 | The "editorial fix" | The remedy for the first two waves, now its own default: cream or yellow-cream ground with a terracotta, rust, or clay accent; a small tracked uppercase label above every heading; a pill badge above the hero headline; one headline word in italic serif or colour; hairline rules and zero radius everywhere as newspaper cosplay; performative section labels ("Field notes", "Quietly trusted by"). |
+| Decorative scaffolding | Tags, section numbers, rules, bordered containers or code-like breadcrumbs repeated for atmosphere rather than grouping or navigation. Does each help people orient, compare or act? Keep functional breadcrumbs and meaningful grouping. |
+| Unnecessary detail | Elaborate interface mockups or diagrams, and layers of shades and opacity, that make a simple idea harder to read. Would less detail clarify the actual message without losing information, hierarchy or accessible contrast? Keep diagrams and detail that explain or support the task. |
+| Formulaic type treatment | A fashionable display face, italic emphasis or tight letter spacing applied as a recipe instead of serving the content and identity. Is the choice legible and purposeful? An established face or intentional emphasis is valid. |
 | Long display sentence | A full sentence set at display size over three or more lines, read as a long headline whatever its markup. |
 | Invented proof | Placeholder logos, quotes, star rows, or customer counts. |
 
