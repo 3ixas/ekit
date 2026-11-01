@@ -5,7 +5,7 @@ description: "Review a branch, PR, or staged/working-tree diff from a fixed poin
 
 Two-axis review of the diff between the current checkout and a fixed point the user supplies:
 
-- **Standards**: does the code conform to this repo's documented coding standards?
+- **Standards**: is the changed behaviour correct and compatible with its callers, and does the code conform to this repo's documented standards?
 - **Spec**: does the code faithfully implement the originating issue / spec?
 
 Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings.
@@ -39,7 +39,7 @@ Look for the originating spec, in this order:
 
 ### 3. Identify the standards sources
 
-Search the repository for applicable standards sources, including `CODING_STANDARDS.md` and `CONTRIBUTING.md` at the root and in affected directories. Read and pass every applicable source to the Standards reviewer; include other project instructions that govern the changed paths.
+Search the repository for applicable standards sources, including `CODING_STANDARDS.md`, `CONTRIBUTING.md`, and `REVIEW.md` at the root and in affected directories. Read and pass every applicable source to the Standards reviewer; include other project instructions that govern the changed paths. `REVIEW.md` gives project-specific review guidance, subject to higher-priority instructions and the pinned review scope. Follow [review guidance](references/project-review-guidance.md) for missing guides and evidence-backed lessons; the review itself remains read-only.
 
 On top of whatever the repo documents, the Standards axis always carries the **smell baseline** below: a fixed set of Fowler code smells (_Refactoring_, ch.3) that applies even when a repo documents nothing. Two rules bind it:
 
@@ -78,6 +78,7 @@ At either depth, supplement the smell baseline with these structural checks:
 - Complexity and duplication measurements are leads for investigation, not findings by themselves. Use existing project tools and thresholds when applicable; identify a concrete maintenance cost and remedy before recommending a change.
 - Size, casts, and optionality are signals to investigate, not violations on their own. A file crossing 1,000 lines is not a blocker without a demonstrated problem or an applicable documented rule.
 - Distinguish **demonstrated regressions** from **optional improvements**. A plausible alternative design alone does not block approval. Structural findings identify the affected file/hunk, evidence, consequence, and remedy. Keep concrete optional proposals separate from blocking findings and omit speculative or cosmetic advice.
+- Check correctness of changed behaviour and its interaction with existing callers, including failures not covered by a written standard or the originating spec. Cite the changed code, relevant caller or invariant, and concrete consequence; do not invent requirements.
 
 When a change affects shared state, persistence, background work or a potentially large input, establish the expected deployment and workload from project evidence before judging scale. Check whether process-local state, check-then-write sequences, unbounded growth or repeated per-item work can fail there. State any material assumption, tie findings to a concrete failure case, and keep hypothetical future scale separate from demonstrated regressions.
 
@@ -91,7 +92,7 @@ Start each reviewer in a fresh context without the parent conversation or the ot
 - The list of standards-source files you found in step 3, **plus the smell baseline from step 3** pasted in full (the sub-agent has no other access to it).
 - The selected depth, reason, any explicit depth constraint, and all step 4 structural checks and scope boundaries. For deep review, include the linked reference's contents; otherwise supply its path so the reviewer can read it if escalation is justified. Keep the model and reasoning selected for the calling run.
 - When step 4's workload check applies, include the expected deployment and workload evidence or material assumptions, and its checks for process-local state, check-then-write races, unbounded growth and repeated per-item work. Keep hypothetical future scale separate from demonstrated regressions.
-- The brief: "Report, per file/hunk where relevant, (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) concrete baseline smells or structural problems: label the heuristic and quote the hunk. Explain practical consequences and a concrete remedy. Distinguish documented violations, demonstrated regressions, and optional improvements; a documented repo standard overrides the baseline. Skip anything tooling enforces. Return final depth and reason, including any escalation. Keep the report under 400 words; prioritize material findings and state any coverage limit rather than silently omitting them."
+- The brief: "Report, per file/hunk where relevant, (a) incorrect changed behaviour or regressions, including impact on existing callers even without a violated standard or spec line; (b) violations of documented standards: cite the standard (file + rule); and (c) concrete baseline smells or structural problems: label the heuristic and quote the hunk. Give evidence, practical consequences and a concrete remedy. Distinguish documented violations, demonstrated regressions, and optional improvements; a documented repo standard overrides the baseline. Skip anything tooling enforces. Return final depth and reason, including any escalation. Keep the report under 400 words; prioritize material findings and state any coverage limit rather than silently omitting them."
 
 **Spec sub-agent prompt** should include:
 

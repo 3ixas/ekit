@@ -113,6 +113,15 @@
       "license": "mit-mattpocock",
       "use": "informed-by",
       "changes": "Independently written adaptation of v1.3.2: Discover applicable standards and provide independent reviewers with fresh context and focused evidence."
+    },
+    {
+      "repository": "https://claude.dev",
+      "ref": "published-2026-10-15-fetched-2026-11-01",
+      "path": "blog/solving-code-review-at-anthropic/",
+      "digest": "sha256:ff7dddba4a6cf25e21923d36cf9f6858e67e3a790a7e37ec9837886b1485cb51",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Independently written project-specific review guidance and evaluation ideas; no article text or assets copied."
     }
   ],
   "dependencies": {
@@ -124,5 +133,5 @@
       "github"
     ]
   },
-  "reviewed": "2026-10-29"
+  "reviewed": "2026-11-01"
 }
