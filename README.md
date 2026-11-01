@@ -94,12 +94,13 @@ The [activation manifest](docs/activation-manifest.md) lists the active, candida
 
 I edit the source in this repository, then generate the installed copies for each agent. Installed files are generated output; changes belong here.
 
-After a source change, run the checks:
+After a source change, run the checks (requires Python 3, Node, Git, actionlint, and FFmpeg/ffprobe with `libx264` and `aac` encoders):
 
 ```sh
-python3 scripts/skills.py check --list
-python3 -m unittest discover -s tests -v
+bash scripts/check.sh
 ```
+
+The same command runs in CI on Ubuntu with Python 3.14.6, Node 20.19.6 and actionlint 1.7.12. The test output reports conditional skips: Claude CLI plugin checks require Claude, generated-type checks also require its generated types and TypeScript, and real-browser tests require an explicit opt-in and browser setup. Host projection previews and fresh-session checks remain local.
 
 Then preview the host projections:
 
