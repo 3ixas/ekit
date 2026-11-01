@@ -15,6 +15,8 @@ Inspect rendered baseline and references; choose relevant audit, polish, redesig
 
 Read [polish modes](references/polish-modes.md) to choose the useful lenses and stopping criteria. Apply only modes supported by observed problems.
 
+For an affected component, use the component verification checkpoint in polish modes before finishing, even when a full resilience pass is unnecessary. Select combinations relevant to the change and report what was exercised and what was unavailable.
+
 Use interface-design's shared Taste toolkit for source lint, browser measurements and screenshot critique when relevant; load that skill's `references/taste-toolkit.md` for commands and project policy. Preserve the approved direction and inspect website versus app composition by its own criteria. A polish pass does not redraw or reopen approved art direction.
 
 When generic or unnecessarily elaborate treatments appear in the rendered interface, load interface-design and consult its AI-default patterns reference as contextual critique questions. Keep treatments that serve the task, content or established direction; do not mechanically remove familiar elements.
