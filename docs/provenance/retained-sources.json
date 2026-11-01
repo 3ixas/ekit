@@ -1612,6 +1612,18 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
+      "bundle": "skills/frontend-and-design/ui-polish",
+      "repository": "https://x.com/preetsuthar17",
+      "ref": "status-2115689337140789507",
+      "path": "status/2115689337140789507",
+      "digest": "version:status-2115689337140789507",
+      "license": "published-works-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01. Independently written proportionate component verification checkpoint informed by the public post; no text or media copied. Status identifies a public post, not an immutable content digest.",
+      "notice": "references/licenses/published-works-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/frontend-and-design/user-research",
       "repository": "https://github.com/hueyexe/frontend-agent-skills",
       "ref": "2841c079dd8a9c634882227194dc42e25227710d",

@@ -26,6 +26,10 @@ Assign colours by role: canvas, surface, text, border, action, selection, status
 
 Normalize control height, icon scale, labels, affordances, focus, hover, pressed, disabled, loading, success, error, and empty states. Make click targets match their visual grouping. Remove one-off variants that should use an existing project component. Use one icon family across the product, preferring the one already installed; mixed stroke weights and styles read as assembled by accident.
 
+### Component verification checkpoint
+
+For the affected component, select the variants and states exposed to the change and the combinations most likely to fail; don't require a full Cartesian matrix. Render in its actual container, including relevant narrow and wide layouts; compare supported light and dark themes when affected. Exercise interactive controls with keyboard only, including focus and applicable error handling. Try plausible long content using known input limits and the relevant empty state. Preserve meaningful content rather than hiding it to pass. Record the variants, states, sizes, themes and interactions actually checked, plus unavailable evidence. Screenshots do not prove keyboard operation or accessibility. Use the resilience mode below when deeper content stress is warranted.
+
 Small interaction details compound (Emil Kowalski). Buttons respond on press, for example a slight scale on `:active`. Popovers and dropdowns grow from their trigger. Nothing appears from `scale(0)`. After the first tooltip, later ones show without delay. Prefer semi-transparent shadows and borders over solid ones where they separate surfaces. [The design-engineering snapshot](source-methods/emil-design-eng.md) has the full before-and-after catalogue and review format.
 
 ## Copy
