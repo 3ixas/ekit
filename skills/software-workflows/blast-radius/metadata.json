@@ -14,6 +14,15 @@
       "license": "mit-pstack",
       "use": "adapted",
       "changes": "Retained local derivative compared against the pinned source, not claimed as an exact upstream version. Source paths, blob identities, complete local comparison diffs and file hashes are in docs/provenance/retained-sources.json; historical authorship of each delta is not asserted. MIT notice retained."
+    },
+    {
+      "repository": "https://github.com/davidondrej/skills",
+      "ref": "674b9ca866433222a332630dd89104003a47edff",
+      "path": "skills/ops-and-setup/risky-changes",
+      "digest": "git-tree:a3f0847345318626aeb2a5aa8551e900b89643a3",
+      "license": "mit-davidondrej",
+      "use": "informed-by",
+      "changes": "Independently written, conditional population-impact comparison inspired by risky-changes; no upstream text copied."
     }
   ],
   "dependencies": {
@@ -24,5 +33,5 @@
       "git"
     ]
   },
-  "reviewed": "2026-10-26"
+  "reviewed": "2026-11-01"
 }

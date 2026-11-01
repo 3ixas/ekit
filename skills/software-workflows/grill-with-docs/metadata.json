@@ -32,6 +32,15 @@
       "license": "published-works-reference",
       "use": "informed-by",
       "changes": "Scope contract now records the expert-level target and independent evidence of success from grilling's depth pass; independently written, no text copied."
+    },
+    {
+      "repository": "https://github.com/davidondrej/skills",
+      "ref": "674b9ca866433222a332630dd89104003a47edff",
+      "path": "skills/thinking-and-docs/adr-verbatim",
+      "digest": "git-tree:eec1711cc8e80dc2f07b2d0dd37d10a81e80d0b2",
+      "license": "mit-davidondrej",
+      "use": "informed-by",
+      "changes": "Independently written distinction between agreed decisions, proposals and unresolved questions inspired by adr-verbatim; no upstream text copied."
     }
   ],
   "dependencies": {
@@ -43,6 +52,6 @@
       "git"
     ]
   },
-  "reviewed": "2026-10-26",
+  "reviewed": "2026-11-01",
   "owned_changes": "Independently authored 2026-10-22 adaptation: apply grilling collaborative exploration to software behavior, repository evidence and failure cases within existing rounds; keep project documents focused on decisions and rationale."
 }

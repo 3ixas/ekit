@@ -26,6 +26,6 @@ Use domain modeling when unclear nouns, states, ownership, or transitions are ca
 
 ## Produce a durable scope
 
-Write the scope in the project's canonical location. Link the evidence that explains current behavior. Preserve decisions and rationale; omit speculative implementation detail. Mark assumptions clearly and do not call the scope approved until Elias has explicitly confirmed the complete result.
+Write the scope in the project's canonical location. Link the evidence that explains current behavior. Distinguish agreed decisions from proposals and unresolved questions; preserve the rationale supported by the discussion and evidence. Omit speculative implementation detail. Mark assumptions clearly and do not call the scope approved until Elias has explicitly confirmed the complete result.
 
 The scope is ready for `to-spec` when an implementer would not need to make a new product decision. It is not ready while any unresolved question could produce meaningfully different user behavior.

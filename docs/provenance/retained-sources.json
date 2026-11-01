@@ -2428,6 +2428,18 @@
       "disposition": "retained under recorded upstream terms; preserve companions"
     },
     {
+      "bundle": "skills/software-workflows/blast-radius",
+      "repository": "https://github.com/davidondrej/skills",
+      "ref": "674b9ca866433222a332630dd89104003a47edff",
+      "path": "skills/ops-and-setup/risky-changes",
+      "digest": "git-tree:a3f0847345318626aeb2a5aa8551e900b89643a3",
+      "license": "mit-davidondrej",
+      "use": "informed-by",
+      "changes": "Independently written, conditional population-impact comparison inspired by risky-changes; no upstream text copied.",
+      "notice": "references/licenses/mit-davidondrej.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/software-workflows/code-review",
       "repository": "https://github.com/mattpocock/skills",
       "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",
@@ -2821,6 +2833,18 @@
       "use": "informed-by",
       "changes": "Scope contract now records the expert-level target and independent evidence of success from grilling's depth pass; independently written, no text copied.",
       "notice": "references/licenses/published-works-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/software-workflows/grill-with-docs",
+      "repository": "https://github.com/davidondrej/skills",
+      "ref": "674b9ca866433222a332630dd89104003a47edff",
+      "path": "skills/thinking-and-docs/adr-verbatim",
+      "digest": "git-tree:eec1711cc8e80dc2f07b2d0dd37d10a81e80d0b2",
+      "license": "mit-davidondrej",
+      "use": "informed-by",
+      "changes": "Independently written distinction between agreed decisions, proposals and unresolved questions inspired by adr-verbatim; no upstream text copied.",
+      "notice": "references/licenses/mit-davidondrej.txt",
       "disposition": "reference-only; no copying grant asserted"
     },
     {
