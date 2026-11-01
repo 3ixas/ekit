@@ -60,6 +60,42 @@
       "license": "mit-pstack",
       "use": "informed-by",
       "changes": "Independently written decision and workload measurement controls."
+    },
+    {
+      "repository": "private:user-supplied-research",
+      "ref": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "path": "The Anatomy of Digital Craftsmanship.md",
+      "digest": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "license": "private-intake-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01. Independently written craft review, prioritisation and cross-screen quality methods; private input fingerprint only, no source text or private location retained. Illustrative values and research-count claims are not adopted as standards or verified evidence."
+    },
+    {
+      "repository": "https://developer.chrome.com",
+      "ref": "sha256:747f445204e28315c0faf5185f7f107b06ee21a9ed97904b397d6d491d88db85",
+      "path": "blog/font-fallbacks",
+      "digest": "sha256:747f445204e28315c0faf5185f7f107b06ee21a9ed97904b397d6d491d88db85",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Font stability investigation."
+    },
+    {
+      "repository": "https://web.dev",
+      "ref": "sha256:3988de2cf7ff7dfd3960cca6c5005727a5c050573315da45df933fbe4c22419a",
+      "path": "articles/animations-guide",
+      "digest": "sha256:3988de2cf7ff7dfd3960cca6c5005727a5c050573315da45df933fbe4c22419a",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Rendering-pipeline evidence for animation costs."
+    },
+    {
+      "repository": "https://web.dev",
+      "ref": "sha256:fcad2198747f8fb4fb7144edb7f1d3518abc40b5e8afd55e94597c3ba54375e8",
+      "path": "articles/vitals",
+      "digest": "sha256:fcad2198747f8fb4fb7144edb7f1d3518abc40b5e8afd55e94597c3ba54375e8",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Distinguish field metrics from lab observations without introducing a design score."
     }
   ],
   "dependencies": {

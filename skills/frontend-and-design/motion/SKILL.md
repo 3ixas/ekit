@@ -11,7 +11,7 @@ Motion that clarifies cause, continuity, hierarchy, or feedback without harming 
 
 ## Method
 
-Decide in order: whether it should animate at all given how often it is seen, what job it does, the cheapest tool, transform and opacity properties, curve and duration or spring, interruption and asymmetric exit, then reduced-motion and hover gating. Prototype when uncertain, measure jank and input responsiveness, and inspect the real interaction.
+Decide in order: whether it should animate at all given how often it is seen, what job it does, the cheapest tool, property choice with measured layout changes where needed, curve and duration or spring, interruption and asymmetric exit, then reduced-motion and hover gating. Prototype when uncertain, measure jank and input responsiveness, and inspect the real interaction.
 
 Read [motion design](references/motion-design.md) for the concrete rules, physical correctness, choreography, and review. When the deliverable is an animation or video drawn by code and recorded frame by frame, read [rendered motion](references/rendered-motion.md) for directed prompts, numbers, the render contract, and the frame-by-frame review loop. It links the source snapshots holding exact curves, durations, spring configurations, and recipes.
 

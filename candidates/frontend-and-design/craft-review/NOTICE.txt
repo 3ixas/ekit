@@ -1,0 +1,7 @@
+Source and licence companions
+
+Independently written guidance informed by the sources identified in metadata.json. No reference-only source text or media is included. Keep the licence companions with this bundle.
+
+Applicable records:
+- references/licenses/private-intake-reference.txt
+- references/licenses/web-craft-reference.txt

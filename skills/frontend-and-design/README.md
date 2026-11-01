@@ -13,6 +13,8 @@ Create reference-led interfaces and validate their experience, craft, motion, ac
 | `ui-polish` | automatic | Refine an existing coherent interface across hierarchy, typography, colour, layout, surfaces, states, interface copy, native feel, resilience, and light motion. |
 | `user-research` | automatic | Plan and synthesize user interviews or usability studies with neutral prompts, an evidence ladder, and explicit confidence. |
 
+The diagnostic [craft-review candidate](../../candidates/frontend-and-design/craft-review/SKILL.md) is source-owned and uninstalled; ordinary refinement continues through the active owners below.
+
 ## Common paths
 
 - Whole-app final quality pass: app-audit owns the coverage matrix, relevant fixes, and recheck across web or native mobile surfaces.

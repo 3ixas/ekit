@@ -18,3 +18,5 @@ Applicable records:
 - references/licenses/mit-taste-skill.txt
 - references/licenses/published-works-reference.txt
 - references/licenses/react-bits-commons-clause.txt
+- references/licenses/private-intake-reference.txt
+- references/licenses/web-craft-reference.txt

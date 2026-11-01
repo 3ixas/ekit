@@ -150,6 +150,24 @@
       "license": "design-resource-reference",
       "use": "informed-by",
       "changes": "Independently written optional discovery and evaluation guidance for the live Motion library; no example code or upstream prose retained. Check each example’s licence at use."
+    },
+    {
+      "repository": "private:user-supplied-research",
+      "ref": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "path": "The Anatomy of Digital Craftsmanship.md",
+      "digest": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "license": "private-intake-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01. Independently written craft review, prioritisation and cross-screen quality methods; private input fingerprint only, no source text or private location retained. Illustrative values and research-count claims are not adopted as standards or verified evidence."
+    },
+    {
+      "repository": "https://web.dev",
+      "ref": "sha256:3988de2cf7ff7dfd3960cca6c5005727a5c050573315da45df933fbe4c22419a",
+      "path": "articles/animations-guide",
+      "digest": "sha256:3988de2cf7ff7dfd3960cca6c5005727a5c050573315da45df933fbe4c22419a",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Prefer compositor-friendly visual movement; justify and profile genuine layout changes instead of rejecting them from property names alone."
     }
   ],
   "dependencies": {
@@ -160,5 +178,5 @@
       "browser"
     ]
   },
-  "reviewed": "2026-10-28"
+  "reviewed": "2026-11-01"
 }

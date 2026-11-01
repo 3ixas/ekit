@@ -293,6 +293,24 @@
       "license": "mit-taste-skill",
       "use": "informed-by",
       "changes": "Independently written production-build visual check."
+    },
+    {
+      "repository": "private:user-supplied-research",
+      "ref": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "path": "The Anatomy of Digital Craftsmanship.md",
+      "digest": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "license": "private-intake-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01. Independently written craft review, prioritisation and cross-screen quality methods; private input fingerprint only, no source text or private location retained. Illustrative values and research-count claims are not adopted as standards or verified evidence."
+    },
+    {
+      "repository": "https://linear.app",
+      "ref": "sha256:f593148680b67ea3090838c1d2ad6a6e843409330fa463936d9128d414314a3d",
+      "path": "now/how-we-redesigned-the-linear-ui",
+      "digest": "sha256:f593148680b67ea3090838c1d2ad6a6e843409330fa463936d9128d414314a3d",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Stress-test direction across contrasting real views and states before treating it as a coherent system."
     }
   ],
   "dependencies": {

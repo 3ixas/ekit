@@ -158,6 +158,42 @@
       "license": "mit-taste-skill",
       "use": "informed-by",
       "changes": "Independently written conditional production-build visual verification guidance."
+    },
+    {
+      "repository": "private:user-supplied-research",
+      "ref": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "path": "The Anatomy of Digital Craftsmanship.md",
+      "digest": "sha256:4e2ba472e28fe800eb8e2a8f39dc801f1fc058d29f0f2179be5cfad91e52d768",
+      "license": "private-intake-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01. Independently written craft review, prioritisation and cross-screen quality methods; private input fingerprint only, no source text or private location retained. Illustrative values and research-count claims are not adopted as standards or verified evidence."
+    },
+    {
+      "repository": "https://vercel.com",
+      "ref": "sha256:11357acc42efeb2ef68a39f3e90cf5255b4fd345c766645bae6ad40230a8ceb0",
+      "path": "design/guidelines",
+      "digest": "sha256:11357acc42efeb2ef68a39f3e90cf5255b4fd345c766645bae6ad40230a8ceb0",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Optical alignment and truthful, stable feedback."
+    },
+    {
+      "repository": "https://developer.chrome.com",
+      "ref": "sha256:747f445204e28315c0faf5185f7f107b06ee21a9ed97904b397d6d491d88db85",
+      "path": "blog/font-fallbacks",
+      "digest": "sha256:747f445204e28315c0faf5185f7f107b06ee21a9ed97904b397d6d491d88db85",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Observe fallback/final geometry and investigate measured font metric differences."
+    },
+    {
+      "repository": "https://www.joshwcomeau.com",
+      "ref": "sha256:a523b95a1f1f8391495f12c20f88013ee1d447a212aa5f18f9b3f2a0f21c0eb2",
+      "path": "css/designing-shadows/",
+      "digest": "sha256:a523b95a1f1f8391495f12c20f88013ee1d447a212aa5f18f9b3f2a0f21c0eb2",
+      "license": "web-craft-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Consistent elevation relationships; layering remains contextual."
     }
   ],
   "dependencies": {

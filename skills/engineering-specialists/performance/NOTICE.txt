@@ -8,3 +8,5 @@ Applicable records:
 - references/licenses/mit-pstack.txt
 - references/licenses/mit-wdm0006.txt
 - references/licenses/published-works-reference.txt
+- references/licenses/private-intake-reference.txt
+- references/licenses/web-craft-reference.txt
