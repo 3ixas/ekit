@@ -5,6 +5,10 @@ cd "$(dirname "$0")/.."
 for tool in python3 node ffmpeg ffprobe actionlint git; do
   command -v "$tool" >/dev/null || { echo "Missing required tool: $tool" >&2; exit 1; }
 done
+if ! node -e 'if (Number(process.versions.node.split(".")[0]) < 22) process.exit(1)'; then
+  echo 'Node 22 or newer is required for the Taste toolkit tests.' >&2
+  exit 1
+fi
 encoders=$(ffmpeg -hide_banner -encoders 2>/dev/null)
 for codec in libx264 aac; do
   if ! printf '%s\n' "$encoders" | awk -v codec="$codec" '$2 == codec { found=1 } END { exit !found }'; then
