@@ -373,7 +373,6 @@
     "owner": "craft-review",
     "supports": [],
     "authority_stop": "Inspect safe states and return evidenced findings, up to three priorities and owner handoffs; no product edits, external uploads or readiness claim.",
-    "candidate": true,
     "explicit": true
   },
   {
@@ -405,7 +404,6 @@
     "owner": "craft-review",
     "supports": [],
     "authority_stop": "Assess only visible composition, distinguish preferences and hypotheses, and mark behaviour, keyboard and performance unverified; no invented walkthrough.",
-    "candidate": true,
     "explicit": true
   }
 ]

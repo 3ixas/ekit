@@ -4,9 +4,9 @@
 
 This is the reviewed source-to-runtime contract after the 2026-09-15 fidelity and harness migration. Only the **active** collection is projected into `~/.agents/skills`. Candidate and paused bundles remain source-owned but unavailable to normal routing.
 
-- Active: **88** skills
-- Candidates: **2** skills
-- Paused: **1** skill
+- Active: **90** skills
+- Candidates: **1** skill
+- Paused: **2** skills
 
 ## Software Workflows
 
@@ -70,6 +70,7 @@ This is the reviewed source-to-runtime contract after the 2026-09-15 fidelity an
 |---|---|---|
 | `accessibility` | automatic, supporting | synthesized |
 | `apple-design` | supporting | adapted |
+| `craft-review` | explicit | synthesized |
 | `interface-design` | automatic | synthesized |
 | `libraries-dev` | supporting | adapted |
 | `motion` | automatic, supporting | synthesized |
@@ -144,7 +145,5 @@ This is the reviewed source-to-runtime contract after the 2026-09-15 fidelity an
 | agent-system | `parallel` | adapted | Owned source retained for future use; excluded from runtime because it is a harness concern. |
 
 ## Candidate disposition
-
-`craft-review` is a frontend-and-design candidate for explicitly requested diagnostic craftsmanship reviews. It returns evidenced findings and priorities without implementing fixes or replacing ui-polish, interface-design or app-audit. It remains outside runtime projections pending behavioural evaluation and an explicit promotion decision.
 
 `design-control-loop` is a software-workflows candidate: retained source for an explicit scheduled agent loop, not an installed active workflow. Promote only through `skill-review` and `skill-authoring` for an actual need. Paused and candidate owners remain outside every runtime projection. Current metadata and the maintained provenance inventory record sources and treatment; historical curation assessments remain private.

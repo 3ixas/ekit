@@ -49,6 +49,7 @@ Naming a workflow counts as requesting it; `$skill-name` in Codex and `/skill-na
 | Aging PR | Explicit `modernize` → reassess current intent → authorized rebase/update, or REWORK/CLOSE recommendation |
 | Destination known, route uncertain | `wayfinder` → research/prototypes → `grill-with-docs` |
 | New or substantially changed interface | `interface-design` (references → `DESIGN.md` → proportionate exploration and sign-off) → `to-spec` → `to-tickets` → one-ticket `implement` per invocation → `ui-polish` → `verify` → `retro` |
+| Diagnose why an interface feels unfinished | Explicit `craft-review` → evidenced priorities and existing-owner handoffs |
 | Existing interface needs craft | `ui-polish`, with `motion` and `accessibility` when relevant |
 | Writing | `writing`; the file-format skill owns DOCX, PDF, spreadsheet, slide, or image output |
 | Quick understanding | ask normally; Codex may use `how` or `why` |
