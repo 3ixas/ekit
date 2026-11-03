@@ -6,7 +6,7 @@ Describe motion as a state transition with a product job. Useful jobs include pr
 
 Each step gates the next. Do not pick a curve before deciding whether anything animates at all.
 
-1. **Should it animate?** Weigh how often it is seen. Keyboard-driven and very frequent actions (many times a day) get no animation. Frequent ones get minimal motion. Occasional ones get standard motion. Rare or first-time moments can carry delight. Deleting an animation is often the strongest improvement.
+1. **Should it animate?** Weigh how often it is seen. Keyboard-driven and very frequent actions are strong candidates for no or minimal animation; retain motion where it provides meaningful feedback or continuity. Occasional ones get standard motion. Rare or first-time moments can carry delight. Deleting an animation is often the strongest improvement.
 2. **What is its job?** Name the job from the list above. "It looks nice" on a frequently seen element fails.
 3. **Which tool?** Use the cheapest that works: a CSS transition before keyframes, keyframes before a library. Don't install a motion library for a fade. Extend the codebase's existing easing and duration tokens rather than adding a parallel set.
 4. **Which properties?** Prefer `transform` and `opacity` for purely visual movement. A genuine content expansion or reflow may need layout changes; justify that choice, constrain the affected work and profile the actual interaction before calling it a defect or a success. A transform that distorts content or misrepresents its space is not automatically better. Avoid unnecessary layer promotion; it can consume memory. [The browser animation guide](https://web.dev/articles/animations-guide) explains rendering costs and profiling; the reviewed response fingerprint is in metadata.
@@ -37,7 +37,7 @@ Write review notes as specific changes, not feelings: "it feels sluggish" become
 
 ## Source snapshots
 
-Open a snapshot only when the task needs its specific material:
+Open a snapshot only when the task needs its specific material. These are historical sources, not current performance guidance: ignore blanket claims that Motion transform shorthands cannot accelerate or that every layout animation is defective. Check the installed version and profile the actual interaction.
 
 - [Building an animation](source-methods/emil-animate.md): the full build sequence with easing, duration, and spring tables, recipes, a never-ship list, and the performance cheatsheet.
 - [Reviewing animation code](source-methods/emil-review-animations.md): the ten standards, escalation triggers, and a tiered review format, with a standards catalogue for exact values.
