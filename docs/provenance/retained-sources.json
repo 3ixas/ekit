@@ -1552,6 +1552,30 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
+      "bundle": "skills/frontend-and-design/motion",
+      "repository": "https://github.com/emilkowalski/skills",
+      "ref": "f1090bec277140d02ed202440185ad9d02ac1490",
+      "path": "skills/remove-animations/SKILL.md",
+      "digest": "git-blob:100b7b7666f7d09c69a75ebb793e30e607058e77",
+      "license": "mit-emilkowalski",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-03; independently synthesized sweep, keep/remove judgment and removal hazards in motion-audit.md. Automatic deletion rules and mandatory output format excluded.",
+      "notice": "references/licenses/mit-emilkowalski.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/frontend-and-design/motion",
+      "repository": "https://github.com/emilkowalski/skills",
+      "ref": "f1090bec277140d02ed202440185ad9d02ac1490",
+      "path": "skills/animation-performance/SKILL.md",
+      "digest": "git-blob:74c421e4e673cab84490f8b17b89735c30b0f555",
+      "license": "mit-emilkowalski",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-03; independently synthesized diagnostic hypotheses and version-aware cautions in motion-audit.md. Measurement and visual correctness override property-only rules; no upstream text retained.",
+      "notice": "references/licenses/mit-emilkowalski.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/frontend-and-design/prototype",
       "repository": "https://github.com/mattpocock/skills",
       "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",

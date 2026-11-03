@@ -13,6 +13,8 @@ Motion that clarifies cause, continuity, hierarchy, or feedback without harming 
 
 Decide in order: whether it should animate at all given how often it is seen, what job it does, the cheapest tool, property choice with measured layout changes where needed, curve and duration or spring, interruption and asymmetric exit, then reduced-motion and hover gating. Prototype when uncertain, measure jank and input responsiveness, and inspect the real interaction.
 
+For an app-wide motion pass, first assess unnecessary motion and safe removal, then improve retained motion, then profile performance where needed. Use [motion audit and diagnostics](references/motion-audit.md); a focused interaction needs only the relevant steps.
+
 Read [motion design](references/motion-design.md) for the concrete rules, physical correctness, choreography, and review. When the deliverable is an animation or video drawn by code and recorded frame by frame, read [rendered motion](references/rendered-motion.md) for directed prompts, numbers, the render contract, and the frame-by-frame review loop. It links the source snapshots holding exact curves, durations, spring configurations, and recipes.
 
 For web interaction references or a suitable React starting point, consult [Subframe Motion](references/subframe-motion.md) when it fits the task.
@@ -28,7 +30,7 @@ Avoid decorative motion without a product job and never hide state or delay esse
 
 ## Owned source methods
 
-These snapshots preserve the reviewed upstream methods. The steps above are enough for ordinary use; open a snapshot only when the task needs the specific method it names.
+These snapshots preserve historical upstream methods; the owned guidance and current installed-version documentation take precedence, especially for acceleration and layout claims. The steps above are enough for ordinary use; open a snapshot only when the task needs the specific method it names.
 
 - [emil-animate](references/source-methods/emil-animate.md): building a new animation with exact values.
 - [emil-review-animations](references/source-methods/emil-review-animations.md): reviewing motion code.
