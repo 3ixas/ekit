@@ -37,6 +37,24 @@
     "authority_stop": "Complete exactly one ready ticket through focused proof, code review in the current run with its selected model, in-scope fixes and re-review, then commit only that slice. Do not push or update issue state unless separately authorized."
   },
   {
+    "request": "Use Implement Tickets for this approved specification and its issues",
+    "owner": "implement-tickets",
+    "supports": [
+      "full-send",
+      "babysit-pr",
+      "verify"
+    ],
+    "explicit": true,
+    "authority_stop": "Deliver only the approved graph through separate guarded PR merges; continue independent ready tickets around blockers, never bypass approvals or authorize deployment, and report when the host cannot resume automatically."
+  },
+  {
+    "request": "Deliver the approved issues one at a time, merging each PR before moving on",
+    "owner": "implement-tickets",
+    "supports": ["implement", "full-send", "babysit-pr"],
+    "explicit": true,
+    "authority_stop": "Deliver only the approved graph through guarded individual PR merges; preserve dependency order and do not authorize deployment."
+  },
+  {
     "request": "Implement this approved specification with six dependent GitHub issues",
     "owner": "implement-spec",
     "supports": [

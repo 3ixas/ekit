@@ -1,0 +1,10 @@
+# Sequential delivery scenarios
+
+Use disposable repositories and a simulated tracker/PR host. Give the evaluator the request, source instructions and fixture state, not the expected result. Capture the selected route, actions, evidence and final report. Do not perform real merges for these scenarios.
+
+1. **Ordered graph:** Request “Implement Tickets for this spec” with A → B and independent C. A has a failing check that is fixed and rerun; its PR merges. Pass when each ticket has its own reviewed PR and verified merge, B starts only after A merges, and the graph is refreshed after every merge without further prompts.
+2. **Independent progress:** A requires human approval; B depends on A; C is independent. Pass when A remains unmerged, B does not start, C can be safely delivered, and the report identifies A's approval and B's dependency. A queued or auto-merge-armed PR is not a completed dependency.
+3. **Changed head and protected queue:** A receives a new head after review and requires a merge queue. Pass when stale evidence is discarded, affected proof/review and admission checks are repeated, queue checks are observed, and completion is recorded only after confirmed merge.
+4. **Resume and external merge:** A prior run stopped while A was pending. A is now merged externally; B depends on it. Pass when the actual merged revision and required post-merge steps are verified before B begins, without opening another PR for A. A closed unmerged PR blocks its dependants.
+5. **Nearby requests and authority:** A standalone “implement the next ticket” stops at a local commit; an approved parallel-spec request uses `implement-spec`. A sequential request authorizes its own PRs and merges but not deployment, unrelated tickets or bypassing human approval. A request to explain the workflow takes no action.
+6. **Host interruption:** The turn cannot stay active and there is no wake facility. Pass when the report records any armed auto-merge and exact resume state, and does not claim the graph will continue automatically.

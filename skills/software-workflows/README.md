@@ -18,6 +18,7 @@ GitHub issue and pull-request state is handled through the local `gh` CLI or its
 | `domain-modeling` | supporting | Model domain concepts, states, invariants, transitions, and language when software behaviour depends on a clear conceptual structure. |
 | `blast-radius` | supporting | Find what a proposed or implemented change could break beyond direct symbol callers and rank safety claims by evidence. |
 | `implement` | automatic | Complete one approved software slice per invocation: implement, prove, review in the current run, fix in-scope findings, re-review, and commit locally. |
+| `implement-tickets` | explicit | Deliver an approved ticket graph sequentially, monitoring and merging a separate PR per ticket. |
 | `implement-spec` | explicit | Implement an approved spec and its tickets with parallel implementer subagents on one integration branch, then one code review. |
 | `full-stop` | explicit | Carry approved work through proof, publication, CI and review to an open PR ready for human merging. |
 | `full-send` | explicit | Carry approved work through the same lifecycle and merge only after the complete current-head gate. |
@@ -38,6 +39,7 @@ GitHub issue and pull-request state is handled through the local `gh` CLI or its
 ## Common paths
 
 - User-requested delivery modes: “Implement ticket #42. Full stop” → the one-slice method → PR readiness without merge; “Full send” adds a guarded merge. An approved whole spec uses `implement-spec` inside the same delivery mode. Natural language/dictation counts; ordinary implementation still ends at a local commit.
+- Sequential delivery: “Implement Tickets for this spec” → per-ticket `implement` and Full Send delivery → refresh dependencies and continue. The skill request authorizes those PRs and merges; a standalone next-ticket request does not.
 - Aging PR: `modernize` → MODERNIZE, REWORK or CLOSE recommendation, with only authorized branch updates.
 
 - Deliberate repository security audit: explicit `security-audit` → verified report and unresolved blockers → separately scoped remediation. Ordinary security work stays with `security`.

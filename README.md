@@ -43,6 +43,7 @@ Naming a workflow counts as requesting it; `$skill-name` in Codex and `/skill-na
 | New product idea | `product-thinking` (verdict, riskiest assumption, cheapest test) → `grill-with-docs` when it earns a build |
 | Nontrivial or unclear product work | `grill-with-docs` → `to-spec` → `to-tickets` → one-ticket `implement` per invocation → final `verify` → `retro` |
 | Approved multi-slice specification | `implement-spec` (parallel implementer subagents → one code review of the integration branch) → `retro` |
+| Approved tickets delivered one at a time | `implement-tickets` → implement, monitor and merge each ticket's PR → refresh dependencies and continue |
 | Approved work through PR readiness | Explicit “Full stop” → `implement` for one slice or `implement-spec` for an approved graph → proof/review → publish and monitor → human merge handoff |
 | Approved work through merge | Explicit “Full send” → the same delivery lifecycle → guarded merge once all gates pass |
 | Aging PR | Explicit `modernize` → reassess current intent → authorized rebase/update, or REWORK/CLOSE recommendation |
@@ -60,6 +61,8 @@ Naming a workflow counts as requesting it; `$skill-name` in Codex and `/skill-na
 | Change this skill system | `skill-review` → `skill-authoring` |
 
 Full Stop and Full Send accept natural language or dictation; slash/dollar commands are optional. Discussion and quoted mentions do not invoke them. Their delivery endpoint never expands the approved scope.
+
+“Implement Tickets” authorizes the approved graph's individual PRs and guarded merges. A request for one ticket or the next ticket alone still ends at a local commit unless a delivery mode is requested.
 
 `grilling` is the general exhaustive alignment workflow. It works with codebases, product ideas, writing, documents, and personal or life decisions. `grill-with-docs` is the software wrapper that runs `grilling` with `domain-modeling` and durable project documents.
 
