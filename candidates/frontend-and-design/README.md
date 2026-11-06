@@ -1,5 +1,3 @@
 # Frontend and design candidates
 
-| Candidate | Invocation | Disposition |
-|---|---|---|
-| `craft-review` | explicit | Diagnostic web craftsmanship review with evidenced priorities and existing-owner handoffs. Not installed; promotion requires an explicit decision after behavioural evaluation. |
+No candidates currently remain in this group. Active craftsmanship diagnosis belongs to `craft-review` in `skills/frontend-and-design/`.

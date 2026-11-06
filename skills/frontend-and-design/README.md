@@ -6,6 +6,7 @@ Create reference-led interfaces and validate their experience, craft, motion, ac
 |---|---|---|
 | `accessibility` | automatic, supporting | Design, implement, or audit accessible interfaces across semantics, keyboard and focus, forms, errors, layout, media, motion, and assistive technology. |
 | `apple-design` | supporting | Design or review Apple-platform interfaces using current Human Interface Guidelines, native interaction patterns, accessibility, and supplied references. |
+| `craft-review` | explicit | Diagnose why a working web interface feels unfinished and return evidenced priorities with existing-owner handoffs; product changes remain separately authorised. |
 | `interface-design` | automatic | Orchestrate substantial product interface design from references and product intent through `DESIGN.md`, proportionate exploration, user sign-off, and rendered implementation QA. |
 | `libraries-dev` | supporting | Reveal, assess, or integrate the seven public Libraries.dev React effects when one fits the approved visual direction. |
 | `motion` | automatic, supporting | Design and improve meaningful interface motion, gestures, transitions, timing, springs, sequencing, reduced-motion behaviour, and runtime performance, and direct animation or video rendered from code. |
@@ -13,7 +14,7 @@ Create reference-led interfaces and validate their experience, craft, motion, ac
 | `ui-polish` | automatic | Refine an existing coherent interface across hierarchy, typography, colour, layout, surfaces, states, interface copy, native feel, resilience, and light motion. |
 | `user-research` | automatic | Plan and synthesize user interviews or usability studies with neutral prompts, an evidence ladder, and explicit confidence. |
 
-The diagnostic [craft-review candidate](../../candidates/frontend-and-design/craft-review/SKILL.md) is source-owned and uninstalled; ordinary refinement continues through the active owners below.
+Use [craft-review](craft-review/SKILL.md) when explicitly requested for a diagnostic craftsmanship review; ordinary refinement continues through `ui-polish`.
 
 ## Common paths
 
