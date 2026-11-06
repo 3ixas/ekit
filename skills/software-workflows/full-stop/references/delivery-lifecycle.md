@@ -1,6 +1,6 @@
 # Shared delivery lifecycle
 
-Use from an explicitly requested Full Stop or Full Send entrypoint. Record the selected endpoint and current-task authority before acting. The caller owns the complete lifecycle; implementation, monitoring and review helpers do not inherit broader authority.
+Use from an explicitly requested Full Stop or Full Send entrypoint, or through Full Send as the supporting delivery method for an explicitly requested sequential ticket graph. Record the selected endpoint and current-task authority before acting. The caller owns the complete lifecycle; implementation, monitoring and review helpers do not inherit broader authority.
 
 ## 1. Resolve scope and state
 
@@ -12,7 +12,7 @@ Check the actual host's GitHub access, testing tools and waiting facilities. Use
 
 ## 2. Build, prove and review once
 
-- One approved slice: call `implement` and let it finish that slice's proof, review, fixes and local commit. Do not start the next ticket merely because a delivery mode is active.
+- One approved slice: call `implement` and let it finish that slice's proof, review, fixes and local commit. Do not start the next ticket merely because a delivery mode is active; an explicitly requested sequential graph is coordinated separately by `implement-tickets`.
 - Approved whole spec and ticket graph: use `implement-spec`'s coordinated method, including its existing delegation and integrated proof/review. Load requested/supporting methods directly; natural language and dictation count, and commands are optional. Do not add speculative tickets or bypass its gates.
 - Unknown bug cause: use `debug` to establish cause and proof, then finish only the approved fix. Unsettled product scope needs alignment, not an invented implementation.
 - Already implemented: reconcile existing checks/review with the exact current diff. Reuse valid evidence; run missing or invalidated proof before publication.

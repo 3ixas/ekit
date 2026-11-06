@@ -26,6 +26,7 @@ This is the reviewed source-to-runtime contract after the 2026-09-15 fidelity an
 | `grill-with-docs` | automatic | adapted |
 | `implement` | automatic | adapted |
 | `implement-spec` | explicit | adapted |
+| `implement-tickets` | explicit | original |
 | `full-stop` | explicit | adapted |
 | `full-send` | explicit | adapted |
 | `modernize` | explicit | adapted |

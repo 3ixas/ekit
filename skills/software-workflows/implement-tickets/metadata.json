@@ -1,0 +1,21 @@
+{
+  "id": "implement-tickets",
+  "group": "software-workflows",
+  "origin": "original",
+  "invocation": [
+    "explicit"
+  ],
+  "sources": [],
+  "dependencies": {
+    "skills": [
+      "implement",
+      "full-send",
+      "babysit-pr"
+    ],
+    "tools": [
+      "git",
+      "github"
+    ]
+  },
+  "reviewed": "2026-11-06"
+}

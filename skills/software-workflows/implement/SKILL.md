@@ -5,9 +5,11 @@ description: "Implement one approved software slice end to end: focused checks, 
 
 Complete one approved software slice or ticket per invocation. A normal invocation implements the slice, runs focused checks, invokes the owned `code-review` skill in the current run, fixes confirmed in-scope findings, and commits the reviewed slice. Then stop; another invocation handles the next ticket. Keep the model and reasoning selected for this run throughout; do not launch a separate review worker or override the model for review.
 
+For an explicitly requested sequential ticket graph with a separate PR and merge per ticket, use `implement-tickets` as coordinator; it uses this one-slice method for each ticket.
+
 If the user asks for the “next ticket,” use the approved spec or issue graph to select one ready, unblocked ticket. Do not invent a ticket or expand its scope.
 
-An explicit Full Stop or Full Send request selects a separate delivery coordinator around this one-slice method. Return the reviewed local commit and evidence to that coordinator; its accepted task-specific authority owns publishing and the final endpoint. Without that request, this skill still stops at the local commit.
+An explicit Full Stop, Full Send or Implement Tickets request selects a delivery coordinator around this one-slice method. Return the reviewed local commit and evidence to that coordinator; its accepted task-specific authority owns publishing and the final endpoint. Without a requested delivery coordinator, this skill stops at the local commit.
 
 ## Implement and prove
 
@@ -27,7 +29,7 @@ An explicit Full Stop or Full Send request selects a separate delivery coordinat
 
 ## Orchestration boundary
 
-`implement` handles one ticket per invocation. `implement-spec` is the parallel alternative for a whole spec: its own implementer subagents build tickets with `tdd`, and it runs one `code-review` over the integration branch at the end, so it does not call this skill.
+`implement` handles one ticket per invocation. `implement-tickets` repeats this method sequentially through separate PR merges. `implement-spec` is the parallel alternative for a whole spec: its own implementer subagents build tickets with `tdd`, and it runs one `code-review` over the integration branch at the end, so it does not call this skill.
 
 ## Report
 

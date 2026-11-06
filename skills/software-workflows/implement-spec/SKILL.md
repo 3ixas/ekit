@@ -3,7 +3,7 @@ name: implement-spec
 description: "Use when Elias requests Implement Spec or asks to implement an approved specification and ticket graph through coordinated parallel implementers. A settled single slice uses implement."
 ---
 
-Explicit means user-requested. Ordinary language and dictation count; slash/dollar syntax is optional. Load only for a clear request for this workflow or a supporting handoff within an authorized workflow. Discussion, quoted mentions, negation, and adjacent questions do not request execution. Loading this skill grants no additional action authority.
+Explicit means user-requested. Ordinary language and dictation count; slash/dollar syntax is optional. Load only for a clear request for this workflow or a supporting handoff within an authorized workflow. For sequential delivery with a separate PR and merge per ticket, use `implement-tickets` instead. Discussion, quoted mentions, negation, and adjacent questions do not request execution. Loading this skill grants no additional action authority.
 
 You have been provided a spec. This spec should have tickets associated with it, describing how to implement the spec.
 
