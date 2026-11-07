@@ -54,7 +54,8 @@
   ],
   "dependencies": {
     "skills": [
-      "verify"
+      "verify",
+      "app-audit"
     ],
     "tools": [
       "git"

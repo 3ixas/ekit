@@ -15,6 +15,8 @@ A reproduced failure, supported causal chain, focused correction, and evidence t
 2. Localize with logs, data, history, and instrumentation. Write falsifiable hypotheses and test the riskiest fact; after repeated failed fixes, revisit the premise before trying another patch.
 3. Correct the supported cause within scope. Re-run the reproducer, check relevant sibling cases, and report before/after evidence and remaining uncertainty.
 
+For a suspected state or transition failure, use the state-machine investigation method: find the installed `app-audit` skill bundle and read its `state-machine-investigation.md` file in its references directory within the affected flow; this does not start a whole-app audit.
+
 Read [references/causal-debugging.md](references/causal-debugging.md) for intermittent, multi-layer, production-only, or repeatedly misdiagnosed failures.
 
 ## Boundaries
