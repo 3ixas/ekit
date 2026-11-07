@@ -28,7 +28,7 @@ For software work, I want the agent to understand the task, make a focused chang
 
 **Work through the problem → write the spec → break it into tickets → implement each slice → verify → review the session.**
 
-That maps to [`grill-with-docs`](skills/software-workflows/grill-with-docs/SKILL.md) → [`to-spec`](skills/software-workflows/to-spec/SKILL.md) → [`to-tickets`](skills/software-workflows/to-tickets/SKILL.md) → [`implement`](skills/software-workflows/implement/SKILL.md) → [`verify`](skills/software-workflows/verify/SKILL.md) → [`retro`](skills/agent-system/retro/SKILL.md). Smaller, settled changes can go straight to `implement`. `implement-spec` handles an approved set of tickets with parallel agents.
+That maps to [`grill-with-docs`](skills/software-workflows/grill-with-docs/SKILL.md) → [`to-spec`](skills/software-workflows/to-spec/SKILL.md) → [`to-tickets`](skills/software-workflows/to-tickets/SKILL.md) → [`implement`](skills/software-workflows/implement/SKILL.md) → [`verify`](skills/software-workflows/verify/SKILL.md) → [`retro`](skills/agent-system/retro/SKILL.md). Smaller, settled changes can go straight to `implement`. `implement-ticket` delivers one ticket, `implement-series` delivers them sequentially, and `implement-parallel` delivers independent tickets concurrently with a separate PR for each.
 
 Naming a workflow counts as requesting it; `$skill-name` in Codex and `/skill-name` in Claude Code are optional shortcuts. The agent can combine requested workflows and supporting skills, but loading a skill does not grant permission to publish, send messages or take other actions outside the task. See the [portability guide](docs/agent-portability.md) for each host’s behaviour and limits.
 
@@ -39,12 +39,13 @@ Naming a workflow counts as requesting it; `$skill-name` in Codex and `/skill-na
 |---|---|
 | Deliberate repository security audit | Explicit `security-audit` (coverage, independent verification, reports) → separately scoped remediation |
 | App nearing release | app-audit (whole-app checks, fixes, and evidence) → release when authorized |
-| Small clear software change | `implement` (one slice, same-model review, fixes, and commit) → `verify` |
+| Small clear software change | `implement` (one slice, review, fixes, PR and guarded merge) |
 | New product idea | `product-thinking` (verdict, riskiest assumption, cheapest test) → `grill-with-docs` when it earns a build |
 | Nontrivial or unclear product work | `grill-with-docs` → `to-spec` → `to-tickets` → one-ticket `implement` per invocation → final `verify` → `retro` |
-| Approved multi-slice specification | `implement-spec` (parallel implementer subagents → one code review of the integration branch) → `retro` |
-| Approved tickets delivered one at a time | `implement-tickets` → implement, monitor and merge each ticket's PR → refresh dependencies and continue |
-| Approved work through PR readiness | Explicit “Full stop” → `implement` for one slice or `implement-spec` for an approved graph → proof/review → publish and monitor → human merge handoff |
+| One ticket | `implement-ticket` → review, monitor and merge its PR |
+| Approved tickets in parallel | `implement-parallel` → independent ticket PRs and serialized guarded merges |
+| Approved tickets delivered one at a time | `implement-series` → implement, monitor and merge each ticket's PR → refresh dependencies and continue |
+| Approved work through PR readiness | Add “Full stop” to the implementation workflow → proof/review → publish and monitor → human merge handoff |
 | Approved work through merge | Explicit “Full send” → the same delivery lifecycle → guarded merge once all gates pass |
 | Aging PR | Explicit `modernize` → reassess current intent → authorized rebase/update, or REWORK/CLOSE recommendation |
 | Destination known, route uncertain | `wayfinder` → research/prototypes → `grill-with-docs` |
@@ -63,7 +64,7 @@ Naming a workflow counts as requesting it; `$skill-name` in Codex and `/skill-na
 
 Full Stop and Full Send accept natural language or dictation; slash/dollar commands are optional. Discussion and quoted mentions do not invoke them. Their delivery endpoint never expands the approved scope.
 
-“Implement Tickets” authorizes the approved graph's individual PRs and guarded merges. A request for one ticket or the next ticket alone still ends at a local commit unless a delivery mode is requested.
+Implementation requests authorize in-scope PRs and guarded merges by default. Add “Full Stop” to leave each PR ready for human merge.
 
 `grilling` is the general exhaustive alignment workflow. It works with codebases, product ideas, writing, documents, and personal or life decisions. `grill-with-docs` is the software wrapper that runs `grilling` with `domain-modeling` and durable project documents.
 

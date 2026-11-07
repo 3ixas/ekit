@@ -5,7 +5,7 @@ Exercise these against the entrypoint and conditional deep reference. For each, 
 | Case | Request and evidence | Expected behaviour |
 |---|---|---|
 | Local slice | `implement` supplies base HEAD, one staged guard change from `<` to `<=`, a matching ticket and passing boundary test. | Regular; no deep reference needed; Standards and Spec remain independent; no extra review stage or edits. |
-| Integrated feature | `implement-spec` supplies the complete feature diff: payment state ownership moves across service and persistence layers, with the same new `manual` flag checked in three modules. | Deep automatically; investigate shared state/policy ownership and caller compatibility; report within the existing integration review. |
+| Integrated feature | A caller supplies the complete feature diff: payment state ownership moves across service and persistence layers, with the same new `manual` flag checked in three modules. | Deep automatically; investigate shared state/policy ownership and caller compatibility; report within the existing integration review. |
 | Explicit deep | "Thermonuclear review this two-file branch against main." | Deep even for a small diff; read the reference; no obligation to invent findings. |
 | Escalation | Initial diff looks like a local helper change. Caller inspection reveals the same state dispatch duplicated in three changed flows. No explicit depth constraint. | Standards escalates to deep, reads the reference, returns revised reason; coordinator reports final depth. |
 | Regular constraint | Same evidence as escalation, but request says "regular only". | Remain regular, report grounded findings, recommend a specific deep-review target/base for unresolved structural investigation. |

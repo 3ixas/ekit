@@ -12,9 +12,9 @@ Both axes run as **parallel sub-agents** so they don't pollute each other's cont
 
 Read the repository tracker configuration. If `docs/agents/issue-tracker.md` is missing, use the most efficient supported tracker capability available on this host; prefer `gh`/`gh api` for structured GitHub state, and report when no tracker is configured.
 
-**When another skill calls this one.** `implement`, `implement-spec`, and other pipelines run this review unattended and pass the fixed point, the staged paths or diff, the spec pointer, and, when they have one, a proof plan mapping each acceptance claim to a check with its observed result. In that mode never ask the user anything: use what was supplied, and if the spec is missing, skip the Spec sub-agent and report "no spec available".
+**When another skill calls this one.** `implement`, `implement-parallel`, and other pipelines run this review unattended and pass the fixed point, the staged paths or diff, the spec pointer, and, when they have one, a proof plan mapping each acceptance claim to a check with its observed result. In that mode never ask the user anything: use what was supplied, and if the spec is missing, skip the Spec sub-agent and report "no spec available".
 
-Review is read-only at either depth: report findings without editing or committing. The calling workflow owns fixes and re-review; depth does not grant wider implementation authority. `implement` supplies one slice; `implement-spec` supplies the integrated feature. Judge the supplied scope, without adding review stages, another coordinator, or model/reasoning overrides.
+Review is read-only at either depth: report findings without editing or committing. The calling workflow owns fixes and re-review; depth does not grant wider implementation authority. `implement` and its ticket coordinators supply the exact slice under review. Judge the supplied scope, without adding review stages, another coordinator, or model/reasoning overrides.
 
 For repeated implementation/delivery review, the caller uses [bounded review-loop controls](references/review-loop.md). Return stable finding IDs and the reviewed snapshot so later rounds can focus on changes and unresolved findings without losing either axis. A standalone review remains one read-only pass.
 

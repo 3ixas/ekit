@@ -15,7 +15,7 @@
       "typescript",
       "verify"
     ],
-    "authority_stop": "Continue through the local fix, review, and commit; stop only if the fix needs an unsettled product decision or an external action."
+    "authority_stop": "Complete approved implementation through proof, review, PR and guarded merge; separately authorize deployment and other unrelated actions."
   },
   {
     "request": "Build a fuzzy new multi-screen onboarding feature",
@@ -29,16 +29,37 @@
   },
   {
     "request": "Implement the next ready ticket from this approved spec, review the slice, fix any valid findings, and commit it",
-    "owner": "implement",
+    "owner": "implement-ticket",
     "supports": [
       "code-review",
       "verify"
     ],
-    "authority_stop": "Complete exactly one ready ticket through focused proof, code review in the current run with its selected model, in-scope fixes and re-review, then commit only that slice. Do not push or update issue state unless separately authorized."
+    "authority_stop": "Respect the explicit commit endpoint: prove, review and commit one ready ticket without publishing.",
+    "explicit": true
   },
   {
-    "request": "Use Implement Tickets for this approved specification and its issues",
-    "owner": "implement-tickets",
+    "request": "Use Implement Ticket for issue #42",
+    "owner": "implement-ticket",
+    "supports": [
+      "implement",
+      "full-send"
+    ],
+    "explicit": true,
+    "authority_stop": "Deliver one approved ticket through a reviewed PR and guarded merge; Full Stop instead leaves it open and ready for human merge."
+  },
+  {
+    "request": "Implement these approved tickets in parallel, one PR for each",
+    "owner": "implement-parallel",
+    "supports": [
+      "implement",
+      "full-send"
+    ],
+    "explicit": true,
+    "authority_stop": "Deliver independent tickets concurrently, merge each PR through current-head gates, and wait for blockers to merge before starting dependants."
+  },
+  {
+    "request": "Use Implement Series for this approved specification and its issues",
+    "owner": "implement-series",
     "supports": [
       "full-send",
       "babysit-pr",
@@ -49,21 +70,24 @@
   },
   {
     "request": "Deliver the approved issues one at a time, merging each PR before moving on",
-    "owner": "implement-tickets",
-    "supports": ["implement", "full-send", "babysit-pr"],
+    "owner": "implement-series",
+    "supports": [
+      "implement",
+      "full-send",
+      "babysit-pr"
+    ],
     "explicit": true,
     "authority_stop": "Deliver only the approved graph through guarded individual PR merges; preserve dependency order and do not authorize deployment."
   },
   {
     "request": "Implement this approved specification with six dependent GitHub issues",
-    "owner": "implement-spec",
+    "owner": "implement-series",
     "supports": [
-      "code-review",
-      "tdd",
-      "verify"
+      "implement",
+      "full-send"
     ],
     "explicit": true,
-    "authority_stop": "Implement the approved task graph on one integration branch. Give final code-review the combined proof matrix, observed results and exact reviewed state; rerun affected proof and re-review after fixes. Do not substitute per-slice implement calls or model overrides. External writes remain limited to current task authority."
+    "authority_stop": "Deliver the approved graph sequentially when no concurrency is specified, with a separate guarded PR merge per ticket; Full Stop leaves the frontier unmerged."
   },
   {
     "request": "Help me understand and defend this completed pull request",
@@ -270,14 +294,14 @@
   },
   {
     "request": "Implement this approved multi-ticket spec in parallel; the app has no verification guide",
-    "owner": "implement-spec",
+    "owner": "implement-parallel",
     "supports": [
       "verify",
       "code-review",
       "tdd"
     ],
     "explicit": true,
-    "authority_stop": "The coordinator owns shared guide setup/integration and gives workers its location and journey/instance scope; isolate data and instances or serialize driving. Prove integrated acceptance claims before completion; external actions retain task authority."
+    "authority_stop": "Deliver each approved ticket through its own reviewed PR; parallelize only safely independent tickets, serialize guarded merges, and respect Full Stop and current-task authority."
   },
   {
     "request": "Fix this settled label typo in the settings screen",
@@ -285,7 +309,7 @@
     "supports": [
       "verify"
     ],
-    "authority_stop": "Complete the small settled edit with proportional proof, review and local commit; do not add an ambition interview, specialist team or broader redesign."
+    "authority_stop": "Complete the approved edit with proportional proof, review, PR and guarded merge; do not expand into a redesign."
   },
   {
     "request": "Suggest ways to make onboarding easier to finish; I think adding another tutorial screen would help",
@@ -302,15 +326,15 @@
     "authority_stop": "Name the keyboard-completion activity and its useful output before selecting accessibility support; use observed focus and interaction failures to inform the scope. Do not add personas or specialists without distinct contributions, silently expand scope or submit live purchases."
   },
   {
-    "request": "Implement-spec: the integrated acceptance matrix contains a missing check and a failed user journey; review also requested a code fix",
-    "owner": "implement-spec",
+    "request": "Implement Parallel: a ticket acceptance matrix contains a missing check and failed user journey; review also requested a code fix",
+    "owner": "implement-parallel",
     "supports": [
       "verify",
       "code-review",
       "tdd"
     ],
     "explicit": true,
-    "authority_stop": "Supply the matrix and observed results tied to the exact integrated state to review. Missing or failed required proof prevents completion; after the fix rerun affected proof and re-review the changed state. Report unavailable required proof as Skip, never Pass; escalate a finding after two unsuccessful fix attempts."
+    "authority_stop": "Deliver each approved ticket through its own reviewed PR; parallelize only safely independent tickets, serialize guarded merges, and respect Full Stop and current-task authority."
   },
   {
     "request": "Retro: I keep bringing you individual crash reports to investigate",

@@ -10,6 +10,28 @@ SCRIPT = pathlib.Path(__file__).resolve().parents[1] / 'scripts' / 'skill_bundle
 
 
 class SkillBundleTests(unittest.TestCase):
+    def test_implement_export_contains_its_delivery_lifecycle_and_required_skills(self):
+        with tempfile.TemporaryDirectory() as temp:
+            output = pathlib.Path(temp) / 'review'
+            result = subprocess.run([sys.executable, str(SCRIPT), '--revision', 'a' * 40,
+                                     '--output-dir', str(output), 'implement'],
+                                    capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            manifest = json.loads((output / 'bundle-manifest.json').read_text())
+            self.assertTrue({'implement', 'babysit-pr', 'pr', 'pr-feedback', 'pickup'}
+                            <= set(manifest['skills']))
+            lifecycle = output / 'skills/software-workflows/implement/references/delivery-lifecycle.md'
+            self.assertTrue(lifecycle.is_file())
+            self.assertIn('Verified merge endpoint', lifecycle.read_text())
+            self.assertIn('For **human merge**, skip directly to Report and close', lifecycle.read_text())
+
+            stop_output = pathlib.Path(temp) / 'stop-review'
+            stop_result = subprocess.run([sys.executable, str(SCRIPT), '--revision', 'a' * 40,
+                                          '--output-dir', str(stop_output), 'full-stop'],
+                                         capture_output=True, text=True)
+            self.assertEqual(stop_result.returncode, 0, stop_result.stderr)
+            self.assertTrue((stop_output / 'skills/software-workflows/implement/references/delivery-lifecycle.md').is_file())
+
     def test_downloaded_source_retains_dependency_assets_notices_and_revision(self):
         with tempfile.TemporaryDirectory() as temp:
             root = pathlib.Path(temp) / 'source'
