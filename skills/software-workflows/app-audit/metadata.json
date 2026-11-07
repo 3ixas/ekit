@@ -49,7 +49,7 @@
       "digest": "sha256:3e073bc9fa97ba8b33f1b700cd2bb450bfe843ed279f347dbb15924f888e0ffa",
       "license": "reference-only-no-copied-text",
       "use": "informed-by",
-      "changes": "Theo, These 3 skills changed my life (2026-10-26), YouTube 5Bmp9cz1JN8. Transcript inspected 25:27\u201326:53 and 28:01\u201328:17. Trigger descriptions and model-loadable workflows; optional command syntax. Independently written adaptation; no transcript text copied. Digest identifies this bounded evidence note, not video bytes or a full transcript."
+      "changes": "Theo, These 3 skills changed my life (2026-10-26), YouTube 5Bmp9cz1JN8. Transcript inspected 25:27–26:53 and 28:01–28:17. Trigger descriptions and model-loadable workflows; optional command syntax. Independently written adaptation; no transcript text copied. Digest identifies this bounded evidence note, not video bytes or a full transcript."
     },
     {
       "repository": "private:user-supplied-research",
@@ -77,6 +77,15 @@
       "license": "web-craft-reference",
       "use": "informed-by",
       "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Cross-screen coherence and shared-component refinement."
+    },
+    {
+      "repository": "private:user-supplied-prompt",
+      "ref": "sha256:918aeba865bd2f4068dbe69eb66c0d07a462d0859a0cdc1941c4a37708ea65fc",
+      "path": "conversation prompt (state-machine bug hunting)",
+      "digest": "sha256:918aeba865bd2f4068dbe69eb66c0d07a462d0859a0cdc1941c4a37708ea65fc",
+      "license": "private-intake-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-07. Independently written investigation guidance informed by a user-supplied quotation; no source text copied or author or URL asserted. Digest fingerprints the quoted prompt as UTF-8 without surrounding quotation marks."
     }
   ],
   "dependencies": {
@@ -89,5 +98,5 @@
       "official-docs"
     ]
   },
-  "reviewed": "2026-11-01"
+  "reviewed": "2026-11-07"
 }

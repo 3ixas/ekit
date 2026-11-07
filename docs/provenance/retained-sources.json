@@ -4178,6 +4178,18 @@
       "changes": "Copied Kepano’s pinned Defuddle method into the owned supporting bundle; only the owned name changed from `web-extract` to the source tool name.",
       "notice": "references/licenses/mit-kepano.txt",
       "disposition": "retained under recorded upstream terms; preserve companions"
+    },
+    {
+      "bundle": "skills/software-workflows/app-audit",
+      "repository": "private:user-supplied-prompt",
+      "ref": "sha256:918aeba865bd2f4068dbe69eb66c0d07a462d0859a0cdc1941c4a37708ea65fc",
+      "path": "conversation prompt (state-machine bug hunting)",
+      "digest": "sha256:918aeba865bd2f4068dbe69eb66c0d07a462d0859a0cdc1941c4a37708ea65fc",
+      "license": "private-intake-reference",
+      "use": "informed-by",
+      "changes": "Reviewed 2026-11-07. Independently written investigation guidance informed by a user-supplied quotation; no source text copied or author or URL asserted. Digest fingerprints the quoted prompt as UTF-8 without surrounding quotation marks.",
+      "notice": "references/licenses/private-intake-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
     }
   ],
   "method_snapshots": [
