@@ -81,7 +81,13 @@
   ],
   "dependencies": {
     "skills": [
+      "babysit-pr",
       "code-review",
+      "debug",
+      "pickup",
+      "pr",
+      "pr-feedback",
+      "retro",
       "verify"
     ],
     "tools": [
