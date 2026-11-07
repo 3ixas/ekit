@@ -17,9 +17,10 @@ GitHub issue and pull-request state is handled through the local `gh` CLI or its
 | `dogfood` | explicit | Exercise a running product change as a real user to find experience, coherence, and quality problems beyond functional correctness. |
 | `domain-modeling` | supporting | Model domain concepts, states, invariants, transitions, and language when software behaviour depends on a clear conceptual structure. |
 | `blast-radius` | supporting | Find what a proposed or implemented change could break beyond direct symbol callers and rank safety claims by evidence. |
-| `implement` | automatic | Complete one approved software slice per invocation: implement, prove, review in the current run, fix in-scope findings, re-review, and commit locally. |
-| `implement-tickets` | explicit | Deliver an approved ticket graph sequentially, monitoring and merging a separate PR per ticket. |
-| `implement-spec` | explicit | Implement an approved spec and its tickets with parallel implementer subagents on one integration branch, then one code review. |
+| `implement` | automatic | Implement and review one approved slice, then deliver through guarded merge by default. |
+| `implement-ticket` | explicit | Deliver one approved ticket through its own PR. |
+| `implement-series` | explicit | Deliver an approved graph sequentially through separate PRs. |
+| `implement-parallel` | explicit | Deliver independent tickets concurrently through separate PRs and serialized merges. |
 | `full-stop` | explicit | Carry approved work through proof, publication, CI and review to an open PR ready for human merging. |
 | `full-send` | explicit | Carry approved work through the same lifecycle and merge only after the complete current-head gate. |
 | `modernize` | explicit | Reassess an aging PR against current intent and architecture before an authorized branch update. |
@@ -38,19 +39,19 @@ GitHub issue and pull-request state is handled through the local `gh` CLI or its
 | `wayfinder` | explicit | Navigate large work whose destination is known but whose route requires research, prototypes, or dependent decisions before a specification can exist. |
 ## Common paths
 
-- User-requested delivery modes: “Implement ticket #42. Full stop” → the one-slice method → PR readiness without merge; “Full send” adds a guarded merge. An approved whole spec uses `implement-spec` inside the same delivery mode. Natural language/dictation counts; ordinary implementation still ends at a local commit.
-- Sequential delivery: “Implement Tickets for this spec” → per-ticket `implement` and Full Send delivery → refresh dependencies and continue. The skill request authorizes those PRs and merges; a standalone next-ticket request does not.
+- Delivery modes: implementation requests default to Full Send and guarded merge. Add “Full Stop” to monitor and fix each PR until ready for human merge. Natural language and dictation count.
+- Sequential delivery: “Implement Series for this spec” → per-ticket `implement` and delivery → refresh dependencies and continue. “Implement Parallel” delivers independent tickets concurrently through separate PRs.
 - Aging PR: `modernize` → MODERNIZE, REWORK or CLOSE recommendation, with only authorized branch updates.
 
 - Deliberate repository security audit: explicit `security-audit` → verified report and unresolved blockers → separately scoped remediation. Ordinary security work stays with `security`.
 
 - App nearing release: app-audit → local fixes and recheck → release when separately authorized.
 
-- Small clear feature or settled change: `implement` (one slice, including review, fixes, and commit) → `verify`.
+- Small clear feature or settled change: `implement` (one slice, proof, review, PR and guarded merge).
 - Unexpected or broken behaviour: `debug` → supporting specialists → `verify`.
-- Nontrivial product work: `grill-with-docs` → `to-spec` → `to-tickets` → one-ticket `implement` per invocation → final `verify` → `retro`.
-- Nontrivial interface work: `grill-with-docs` → `interface-design` with project `DESIGN.md` and a Claude Design or Stitch exploration loop → `to-spec` → `to-tickets` → one-ticket `implement` per invocation → `ui-polish` → `verify` → `retro`.
-- Approved multi-slice specification: explicit `implement-spec` → parallel implementer subagents with `tdd` → one `code-review` of the integration branch → `retro`.
+- Nontrivial product work: `grill-with-docs` → `to-spec` → `to-tickets` → `implement-ticket`, `implement-series` or `implement-parallel` → final `verify` → `retro`.
+- Nontrivial interface work: `grill-with-docs` → `interface-design` with project `DESIGN.md` and a Claude Design or Stitch exploration loop → `to-spec` → `to-tickets` → `implement-ticket`, `implement-series` or `implement-parallel` → `ui-polish` → `verify` → `retro`.
+- Approved multi-slice specification: explicit `implement-parallel` → isolated ticket workers and separate reviewed PRs → serialized guarded merges → `retro`.
 - Unclear route: `wayfinder` → research or prototypes → `grill-with-docs`.
 - Completed change: `code-review` when review is needed; `defend` when understanding is needed; then `release` when authorized.
 

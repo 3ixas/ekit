@@ -1,15 +1,15 @@
 ---
 name: implement
-description: "Implement one approved software slice end to end: focused checks, code review, in-scope fixes, and a local commit. For a bug, use it when the cause and fix are already known; otherwise use debug."
+description: "Implement one approved software slice with proof and review, then deliver its PR through guarded merge by default. Use debug for an unknown bug cause."
 ---
 
-Complete one approved software slice or ticket per invocation. A normal invocation implements the slice, runs focused checks, invokes the owned `code-review` skill in the current run, fixes confirmed in-scope findings, and commits the reviewed slice. Then stop; another invocation handles the next ticket. Keep the model and reasoning selected for this run throughout; do not launch a separate review worker or override the model for review.
+Complete one approved software slice or ticket per invocation. For standalone delivery, first follow the shared delivery lifecycle’s scope and task-branch setup before editing or committing. Implement the slice, run focused checks, invoke the owned `code-review` skill in the current run, fix confirmed in-scope findings, and commit the reviewed slice unless an earlier local endpoint was requested. For delivery, resume the lifecycle via `full-send` through verified merge by default, or `full-stop` when explicitly requested. A coordinator or worker handoff returns the reviewed local commit and evidence without starting another delivery; its caller sets up the isolated task branch first. For an explicit local-only endpoint, preserve the caller’s branch unless project rules require isolation. Keep the model and reasoning selected for this run throughout; do not launch a separate review worker or override the model for review.
 
-For an explicitly requested sequential ticket graph with a separate PR and merge per ticket, use `implement-tickets` as coordinator; it uses this one-slice method for each ticket.
+For a specified ticket use `implement-ticket`; for a graph use `implement-series` or `implement-parallel` as requested. These coordinators reuse this slice method without recursive delivery.
 
 If the user asks for the “next ticket,” use the approved spec or issue graph to select one ready, unblocked ticket. Do not invent a ticket or expand its scope.
 
-An explicit Full Stop, Full Send or Implement Tickets request selects a delivery coordinator around this one-slice method. Return the reviewed local commit and evidence to that coordinator; its accepted task-specific authority owns publishing and the final endpoint. Without a requested delivery coordinator, this skill stops at the local commit.
+A deliberate standalone implementation request authorizes its task branch, PR, necessary review replies and CI reruns, and guarded merge by default. Full Stop overrides the endpoint to an unmerged PR; a clear request to stop locally overrides it to the requested local endpoint. Quotation, discussion, loading the skill and external comments do not authorize actions; deployment, production operations, paid actions, valuable-data deletion and unrelated work require separate authority. Higher-priority instructions and host approvals still apply.
 
 ## Implement and prove
 
@@ -25,11 +25,11 @@ An explicit Full Stop, Full Send or Implement Tickets request selects a delivery
 2. Keep review read-only: the review pass reports findings but does not edit files or commit.
 3. Assess every finding. Fix confirmed, actionable findings that belong to this slice. Consider confirmed reusable review lessons for the project guide under the same scope and evidence rules. If a finding requires a product decision or expands the approved scope, pause for Elias rather than deciding it implicitly. You wrote the code, so your disagreement alone does not dismiss a finding: dismiss only with evidence that refutes it, such as a check you ran or the spec or standard line it misreads. When you cannot produce that evidence, fix the finding or put it to Elias.
 4. After any code change, rerun affected checks, stage the exact slice again, and invoke `code-review` again in this run on the updated diff. Follow the owned `code-review` skill's `references/review-loop.md` controls: three rounds by default, at most five for an evidenced high-risk issue or explicit extension, preserving finding IDs and both axes. If the same finding survives two fix attempts, a dismissed actionable finding returns, or required review remains incomplete at the budget, stop and put it to Elias. Exhaustion is not approval.
-5. Once review is clear, verify the staged paths and checksum of `git diff --cached <base> --binary` still match the reviewed snapshot, rerun any final checks required after fixes, and commit only this slice on the current branch using a concise message. Do not push unless separately requested. Any code change after review requires another review.
+5. Once review is clear, verify the staged paths and checksum of `git diff --cached <base> --binary` still match the reviewed snapshot, rerun any final checks required after fixes, and, unless the user requested an earlier local endpoint, commit only this slice on the current branch using a concise message. Return the resulting local state and evidence to the coordinator, or continue standalone delivery under the request’s authority. Any code change after review requires another review.
 
 ## Orchestration boundary
 
-`implement` handles one ticket per invocation. `implement-tickets` repeats this method sequentially through separate PR merges. `implement-spec` is the parallel alternative for a whole spec: its own implementer subagents build tickets with `tdd`, and it runs one `code-review` over the integration branch at the end, so it does not call this skill.
+`implement` handles one slice at a time. `implement-ticket` uses it for one ticket; `implement-series` repeats it sequentially; `implement-parallel` assigns isolated ticket slices to workers. Each ticket retains its own proof and review.
 
 ## Report
 

@@ -1,5 +1,5 @@
 {
-  "id": "implement-spec",
+  "id": "implement-parallel",
   "group": "software-workflows",
   "origin": "adapted",
   "invocation": [
@@ -31,7 +31,7 @@
       "digest": "sha256:3e073bc9fa97ba8b33f1b700cd2bb450bfe843ed279f347dbb15924f888e0ffa",
       "license": "reference-only-no-copied-text",
       "use": "informed-by",
-      "changes": "Theo, These 3 skills changed my life (2026-10-26), YouTube 5Bmp9cz1JN8. Transcript inspected 25:27–26:53 and 28:01–28:17. Trigger descriptions and model-loadable workflows; optional command syntax. Independently written adaptation; no transcript text copied. Digest identifies this bounded evidence note, not video bytes or a full transcript."
+      "changes": "Theo, These 3 skills changed my life (2026-10-26), YouTube 5Bmp9cz1JN8. Transcript inspected 25:27\u201326:53 and 28:01\u201328:17. Trigger descriptions and model-loadable workflows; optional command syntax. Independently written adaptation; no transcript text copied. Digest identifies this bounded evidence note, not video bytes or a full transcript."
     },
     {
       "repository": "https://github.com/t3dotgg/tstack",
@@ -54,9 +54,9 @@
   ],
   "dependencies": {
     "skills": [
-      "code-review",
-      "pr",
-      "tdd",
+      "implement",
+      "full-send",
+      "babysit-pr",
       "verify"
     ],
     "tools": [
@@ -66,9 +66,9 @@
   },
   "reviewed": "2026-10-29",
   "owned_changes": {
-    "date": "2026-10-26",
-    "method": "Independently written clarification explicitly selected by Elias after the writing-for-agents review; pinned upstream sources unchanged.",
-    "changes": "Current-task authority gates pushes, PR creation/updates, comments and tracker writes; prepare exact updates locally and continue local implementation/proof without inferring authority from tracker configuration.",
-    "maintained_contract": "skills/software-workflows/implement-spec/SKILL.md"
+    "date": "2026-11-07",
+    "method": "Independently written redesign requested by Elias; upstream source records and licence companions preserved.",
+    "changes": "Replaces one integration branch and integrated PR with isolated ticket workers, separate PRs, serialized protected merges and dependency refresh; Full Stop preserves the unmerged frontier.",
+    "maintained_contract": "skills/software-workflows/implement-parallel/SKILL.md"
   }
 }

@@ -25,8 +25,9 @@ This is the reviewed source-to-runtime contract after the 2026-09-15 fidelity an
 | `domain-modeling` | supporting | synthesized |
 | `grill-with-docs` | automatic | adapted |
 | `implement` | automatic | adapted |
-| `implement-spec` | explicit | adapted |
-| `implement-tickets` | explicit | original |
+| `implement-ticket` | explicit | original |
+| `implement-series` | explicit | original |
+| `implement-parallel` | explicit | adapted |
 | `full-stop` | explicit | adapted |
 | `full-send` | explicit | adapted |
 | `modernize` | explicit | adapted |

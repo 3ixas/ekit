@@ -1,5 +1,5 @@
 {
-  "id": "implement-tickets",
+  "id": "implement-ticket",
   "group": "software-workflows",
   "origin": "original",
   "invocation": [
@@ -9,13 +9,12 @@
   "dependencies": {
     "skills": [
       "implement",
-      "full-send",
-      "babysit-pr"
+      "full-send"
     ],
     "tools": [
       "git",
       "github"
     ]
   },
-  "reviewed": "2026-11-06"
+  "reviewed": "2026-11-07"
 }

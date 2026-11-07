@@ -3280,7 +3280,7 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
-      "bundle": "skills/software-workflows/implement-spec",
+      "bundle": "skills/software-workflows/implement-parallel",
       "repository": "https://github.com/mattpocock/skills",
       "ref": "24fe0ef7737efae15c87225755e9f6f5965e4888",
       "path": "skills/engineering/implement-spec",
@@ -3292,7 +3292,7 @@
       "disposition": "retained under recorded upstream terms; preserve companions"
     },
     {
-      "bundle": "skills/software-workflows/implement-spec",
+      "bundle": "skills/software-workflows/implement-parallel",
       "repository": "https://felixrieseberg.com",
       "ref": "published-2026-10-13",
       "path": "how-to-be-more-ambitious-a-tutorial-for-humans-with-models/",
@@ -3304,7 +3304,7 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
-      "bundle": "skills/software-workflows/implement-spec",
+      "bundle": "skills/software-workflows/implement-parallel",
       "repository": "https://www.youtube.com/watch?v=5Bmp9cz1JN8",
       "ref": "video:5Bmp9cz1JN8;published:2026-10-26",
       "path": "transcript#t=1527-1613,1681-1697",
@@ -3316,7 +3316,7 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
-      "bundle": "skills/software-workflows/implement-spec",
+      "bundle": "skills/software-workflows/implement-parallel",
       "repository": "https://github.com/t3dotgg/tstack",
       "ref": "7de017b3fc9d50c03cf3ecb98fb71e0ca65a78bd",
       "path": "skills/sol-loop/SKILL.md",
@@ -3328,7 +3328,7 @@
       "disposition": "retained under recorded upstream terms; preserve companions"
     },
     {
-      "bundle": "skills/software-workflows/implement-spec",
+      "bundle": "skills/software-workflows/implement-parallel",
       "repository": "https://github.com/mattpocock/skills",
       "ref": "d1478fcb140db0b93c0c8df17bcfd311844749d0",
       "path": "skills/engineering/implement-spec/SKILL.md",

@@ -35,4 +35,4 @@ When a substitute environment is used, list setup supplied by that environment t
 
 ## Shared work
 
-The `implement-spec` coordinator owns shared guide setup and integration. Give workers its location, fixture/instance ownership rules, and their journey scope. Workers may propose affected recipe updates with their slice, but must not independently scaffold competing guides. Use isolated instances/storage; serialize driving when isolation is unavailable. Re-prove affected instructions on the integrated revision.
+The `implement-parallel` coordinator owns shared guide setup and integration. Give workers its location, fixture/instance ownership rules, and their journey scope. Workers may propose affected recipe updates with their slice, but must not independently scaffold competing guides. Use isolated instances/storage; serialize driving when isolation is unavailable. Re-prove affected instructions on each final ticket revision.
