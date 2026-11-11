@@ -20,6 +20,10 @@ End any turn reporting on long-running or delegated work with a short status in 
 
 When I say work is shallow or insufficient, return to the relevant source material, identify what is missing, and improve the substance within the agreed scope.
 
+## Interface copy
+
+When designing or changing a UI, default to less text. Avoid eyebrows or kickers above headings, and omit subheadings, helper text and other copy that repeats what the interface already communicates or adds no useful meaning. Do not fill a template slot or narrate the work for the sake of completeness. Keep concise labels, instructions, context and errors when people need them to understand, decide, act or avoid mistakes, including for accessibility.
+
 ## Quality gates
 
 When creating a repository, or first working in one with no `.github/workflows`, load `ci` and propose its baseline workflow. Run `app-audit` before an app's first release or deploy, before calling an app-launch task done, and before opening the PR for an app's initial build, then keep what it proves as gates. `docs/review/APP-AUDIT.md` records when it last ran. Proposing is not pushing: nothing is published or enabled without my say-so.
