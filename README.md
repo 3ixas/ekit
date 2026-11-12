@@ -39,6 +39,7 @@ Naming a workflow counts as requesting it; `$skill-name` in Codex and `/skill-na
 |---|---|
 | Deliberate repository security audit | Explicit `security-audit` (coverage, independent verification, reports) → separately scoped remediation |
 | App nearing release | app-audit (whole-app checks, fixes, and evidence) → release when authorized |
+| Difficult feature, bug fix or uncertain target | `hill-climb` (refine through Grilling → establish proof → bounded attempts using existing owners → confirm) |
 | Small clear software change | `implement` (one slice, review, fixes, PR and guarded merge) |
 | New product idea | `product-thinking` (verdict, riskiest assumption, cheapest test) → `grill-with-docs` when it earns a build |
 | Nontrivial or unclear product work | `grill-with-docs` → `to-spec` → `to-tickets` → one-ticket `implement` per invocation → final `verify` → `retro` |

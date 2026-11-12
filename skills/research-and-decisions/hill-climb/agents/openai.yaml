@@ -1,0 +1,6 @@
+interface:
+  display_name: "Hill Climb"
+  short_description: "Refine and work through difficult features, bugs and goals"
+  default_prompt: "Use $hill-climb to refine this goal, establish proof and work through it within a finite budget."
+policy:
+  allow_implicit_invocation: true

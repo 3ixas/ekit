@@ -1,0 +1,55 @@
+{
+  "id": "hill-climb",
+  "group": "research-and-decisions",
+  "origin": "synthesized",
+  "invocation": [
+    "explicit"
+  ],
+  "sources": [
+    {
+      "repository": "https://github.com/anthropics/skills",
+      "ref": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/claude-api/shared/evals/eval-hillclimb.md",
+      "digest": "git-blob:7e16832bef17a195ee87da35a4fd4df1b6fc9264",
+      "license": "apache-2.0-anthropic",
+      "use": "informed-by",
+      "changes": "Independently written bounded evaluation improvement workflow with validity checks, tuning/confirmation separation and usage accounting; no upstream text or assets copied."
+    },
+    {
+      "repository": "https://github.com/Bil0000/Hill-Climb",
+      "ref": "551c997e9eb3ae81fed9edf1d8a66bd32cd0dbf8",
+      "path": "skills/hill-climb/SKILL.md",
+      "digest": "git-blob:7a0411a2a7ce0912a63f5b2ab899bfa320c81d9b",
+      "license": "mit-bil0000-hill-climb",
+      "use": "informed-by",
+      "changes": "Independently written one-hypothesis attempts, persistent history and guarded retain/discard decisions. Hard small budgets replace unlimited/soft limits; runner, judges, auto-commit, multi-repo rollback and kits are not imported."
+    },
+    {
+      "repository": "private:user-supplied-screenshot",
+      "ref": "sha256:33d6d98c601156aee6c937ffb590fc227cbb539646ff3f54c85f2bb09315112e",
+      "path": "sharpen-workflow.jpg",
+      "digest": "sha256:33d6d98c601156aee6c937ffb590fc227cbb539646ff3f54c85f2bb09315112e",
+      "license": "user-supplied-screenshot-reference",
+      "use": "informed-by",
+      "changes": "User-supplied workflow image consulted for frozen evidence and separation of building from verification. Independently written synthesis; no image or text copied, author/licence not established. Fixed three-round councils and named models not adopted."
+    }
+  ],
+  "dependencies": {
+    "skills": [
+      "grilling",
+      "grill-with-docs",
+      "debug",
+      "implement",
+      "compare",
+      "verify",
+      "performance",
+      "skill-authoring",
+      "code-review"
+    ],
+    "tools": [
+      "git"
+    ]
+  },
+  "reviewed": "2026-11-12",
+  "owned_changes": "2026-11-12: Selective bounded hill-climbing adaptation; independently authored conditional guidance and evaluation cases, with existing owners and authority preserved. Candidate remains uninstalled.\n\n2026-11-12 follow-up: User-requested extension for rough-goal preparation, difficult feature/fix experiments, existing-owner handoffs and proactive recommendations. Outcomes and acceptance proof are settled before looping; ordinary-work and planning authority stay intact. Independently authored from the current user instructions; no new external source or retained snapshot changed. Candidate remains inactive.\n\n2026-11-12 promotion: Elias explicitly authorised activation and Full Send. Admitted as an active user-requested workflow after synthetic feature/fix, preparation, recommendation and authority evidence; no global-optimum, token-saving or pre-merge host-discovery claim. Conditional candidate-unavailability guidance remains applicable to other hosts. Source entrypoint method unchanged apart from removing inactive-status statements."
+}

@@ -1,0 +1,8 @@
+Source and licence companions
+
+Independently written owned guidance informed by the pinned sources in metadata.json. No upstream prose, scripts or screenshot assets copied. Keep the licence companions with this bundle; the root licence does not override upstream terms.
+
+Applicable records:
+- references/licenses/apache-2.0-anthropic.txt
+- references/licenses/mit-bil0000-hill-climb.txt
+- references/licenses/user-supplied-screenshot-reference.txt
