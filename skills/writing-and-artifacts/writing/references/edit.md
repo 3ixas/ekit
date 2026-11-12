@@ -16,6 +16,8 @@ Do not polish a sentence that should be removed. Do not turn a light edit into a
 
 Keep code, commands, identifiers, paths, quotes, error text, citations, dates, numerical values, and legal or contractual wording exact unless changing them is part of the request. Do not strengthen certainty or causality. If a correction changes meaning, flag it.
 
+After a substantive rewrite, compare the source and result claim by claim. Preserve the scope, ranking, comparison, conditions, negation, and degree of certainty as well as the facts and the author's judgment. A stylistic construction may carry one of these; retain its meaning even if its form changes. Flag contradictions separately rather than silently choosing which claim is true.
+
 ## Return a useful result
 
 For a normal edit, return clean copy first. For a consequential edit, briefly call out material changes and unresolved questions. Use tracked changes or a compact before/after only when the user needs to inspect the editorial decisions.

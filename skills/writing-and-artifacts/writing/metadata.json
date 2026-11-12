@@ -95,11 +95,29 @@
       "license": "declared-mit-compound-writing",
       "use": "informed-by",
       "changes": "Independently written optional audience evidence and assignment precedence guidance."
+    },
+    {
+      "repository": "https://github.com/oaustegard/claude-skills",
+      "ref": "366e2f2c61fbd4291774ae4d35f32bf66e3ee2e9",
+      "path": "declauding",
+      "digest": "git-tree:c0a7fc3c3ea44f3ba3e86334b7a39f3bd2d05c99",
+      "license": "mit-oaustegard",
+      "use": "informed-by",
+      "changes": "Reviewed SKILL.md, register and exceptions on 2026-11-12; independently written guidance adapts staged-prose diagnosis, contextual exceptions and claim-preserving review. Scripts, hooks, model profiles and source text are not imported."
+    },
+    {
+      "repository": "user-supplied screenshot",
+      "ref": "sha256:3a72fbdf9485b6b295c9b7581d95031d16fe6457ce96fb14aa3b5849ef52987b",
+      "path": "1-Pasted-Image-1.jpg",
+      "digest": "sha256:3a72fbdf9485b6b295c9b7581d95031d16fe6457ce96fb14aa3b5849ef52987b",
+      "license": "user-supplied-screenshot-reference",
+      "use": "informed-by",
+      "changes": "Screenshot supplied and inspected 2026-11-12; origin and author not established. Independently written guidance addresses staged significance, delayed subjects, rhetorical framing and cadence; image and source prose not reproduced."
     }
   ],
   "dependencies": {
     "skills": [],
     "tools": []
   },
-  "reviewed": "2026-11-01"
+  "reviewed": "2026-11-12"
 }

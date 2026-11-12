@@ -7,6 +7,7 @@ Applicable records:
 - references/licenses/declared-mit-vercel-labs.txt
 - references/licenses/mit-compound-engineering.txt
 - references/licenses/mit-pstack.txt
+- references/licenses/mit-oaustegard.txt
 - references/licenses/nat-eliason-reference.txt
 - references/licenses/published-works-reference.txt
 - references/licenses/reference-only-no-copied-text.txt

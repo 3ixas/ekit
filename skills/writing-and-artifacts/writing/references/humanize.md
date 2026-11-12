@@ -16,6 +16,7 @@ Synthetic writing is usually a reasoning or voice problem before it is a vocabul
 - abstract praise and inflated importance without evidence;
 - abstractions given exaggerated agency, forceful verbs that obscure an action, or ordinary explanations dressed up as maxims;
 - canned contrasts, throat-clearing, fake questions, and repeated conclusions;
+- discoveries staged through delayed subjects, claims of importance, dramatic headings or closers, or repeated fragments where a direct statement would serve the reader;
 - confident details, feelings, or anecdotes the author never supplied.
 
 ## Repair
@@ -26,6 +27,8 @@ When a piece is meant to present a person, restore the causal arc that makes the
 
 Remove a recognizable AI phrase only when it weakens the prose. A banned-word list alone produces different generic writing. Never add slang, fragments, typos, personal memories, or contrived opinions as a disguise.
 
+Check the function of a suspicious construction before changing it. Keep a contrast that resolves a real ambiguity, a metaphor that clarifies, a factual closer, and an author's deliberate rhythm or repetition. A shorter rewrite is not better if noun stacks or omitted connections make it harder to understand. Keep supported confidence and individual judgment; do not replace rhetorical certainty with unsupported certainty of a different kind.
+
 ## Check
 
-Read the result for meaning drift. Confirm that every personal detail and factual claim came from the author or a cited source. The final prose should sound authored because it contains a real point of view expressed precisely, not because it performs informality.
+Compare the result with the source claim by claim, including rankings, comparisons, scope, conditions, negation, and uncertainty. Flag contradictions instead of silently resolving them. Confirm that every personal detail and factual claim came from the author or a cited source. The final prose should sound authored because it contains a real point of view expressed precisely, not because it performs informality.
