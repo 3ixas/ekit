@@ -23,15 +23,27 @@
       "license": "published-works-reference",
       "use": "informed-by",
       "changes": "Added the Altitude improvement category with the crash-free example paraphrased. The 2026-10-21 refinement requires a concrete recurring outcome, missing data or tools, bounded authority, and a specific setup recommendation; no monitoring or permission is created. Independently written, no text copied."
+    },
+    {
+      "repository": "https://github.com/emilkowalski/skills",
+      "ref": "f7ce8c02d6e3c8f0d980a44c57bcc41a40254349",
+      "path": "skills/learn-taste/SKILL.md",
+      "digest": "sha256:3f972e374bdadc14111589d757ba55114dcb2c25d09499fa56e7cd7dae8b6a43",
+      "license": "mit-emilkowalski",
+      "use": "adapted",
+      "changes": "Adapted the correction collection, evidence, narrow generalisation, confirmed rationale, selective approval, check-first persistence and pruning method into Retro. Broadened beyond UI taste to reusable design, writing and working preferences; retained automatic invocation and existing environment review. Added authorship uncertainty, discoverability diagnosis, authoritative-owner routing, private-evidence handling and reuse of concrete approval. Did not retain host-specific transcript paths, disable-model-invocation, mandatory output sections, automatic stricter wording or the fixed section-length threshold."
     }
   ],
   "dependencies": {
     "skills": [
       "writing-for-agents",
-      "skill-review"
+      "skill-review",
+      "skill-authoring",
+      "writing",
+      "obsidian"
     ],
     "tools": []
   },
-  "reviewed": "2026-10-26",
-  "owned_changes": "2026-10-26 writing-for-agents pass: Removed host-specific Skill tool assumption. Removed contradictory claim that review never needs exploration; retained implementation/review responsibility split. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed."
+  "reviewed": "2026-11-12",
+  "owned_changes": "2026-10-26 writing-for-agents pass: Removed host-specific Skill tool assumption. Removed contradictory claim that review never needs exploration; retained implementation/review responsibility split. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed. 2026-11-12: Integrated Learn Taste as a conditional correction-learning and pruning branch; broadened routing and destinations while preserving all environment categories and recommendation-first authority."
 }

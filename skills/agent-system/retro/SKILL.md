@@ -1,15 +1,15 @@
 ---
 name: retro
-description: "Conduct a retrospective on a coding session and suggest improvements to the agent's environment."
+description: "Review a session for environment and workflow improvements and reusable user preferences; learn from corrections or prune existing preference guidance. Use the relevant design, writing or engineering skill to change the work itself."
 ---
 
-The user has asked for a **retrospective**. You are suggesting improvements to the coding agent's **environment** to improve future runs.
+Suggest evidence-backed improvements to future runs: the agent's environment and workflow, and reusable preferences expressed by the user. A focused request to learn from corrections or prune preference guidance runs that branch without requiring a full environment review.
 
 ## Steps
 
 1. Load `writing-for-agents` through the host's available skill mechanism, or read its installed `SKILL.md`, for the instruction-writing method.
 
-2. Read the primary sources for the session the user specifies. This may mean searching through session logs on this machine. If the user doesn't specify a session, default to the current one.
+2. Read the primary sources for the specified session, defaulting to the current one. Use the host's available conversation history or local transcripts; include earlier sessions when requested and accessible. State missing or partial coverage rather than claiming every turn was reviewed.
 
 3. Look for candidates for improvement in these categories.
 
@@ -22,7 +22,11 @@ The user has asked for a **retrospective**. You are suggesting improvements to t
 - **Information access**: look for opportunities to increase the agent's access to information. Teeing dev server logs, readonly access to third-party services. _Use when_ a crucial piece of information was not available to the agent.
 - **Altitude**: when this task is an instance of recurring work, name the recurring outcome an agent could own, the missing evidence or tools, the bounded authority needed, and the specific setup change that would reduce repeated human intervention. For example, keeping an app crash-free needs accessible crash reports, versions mapped to commits, and a reproducible environment; distinguish authorised local diagnosis and fixes from release authority. Recommend a concrete setup change using the session's evidence. A recommendation does not create monitoring, change permissions, or authorise external actions. _Use when_ the user handed the agent one instance of a recurring kind of work.
 
-4. Present these candidates to the user, in order of severity. Route any accepted change to a shared skill through `skill-review` before editing it.
+4. When corrections or confirmed reusable choices appear, read [learning from corrections](references/learning-from-corrections.md). Include evidence-backed preference candidates alongside environment findings. For a focused pruning request, use that reference's pruning method instead. If there is no reusable preference evidence, say so briefly; do not manufacture rules.
+
+5. Present numbered candidates in order of consequence, with the evidence, proposed change, reason, scope and destination. Include unresolved questions, conflicts and useful skipped corrections without empty sections. Before persistence, resolve inferred reasons and scope conflicts and confirm which concrete proposals are approved; reuse existing approval without asking again. A Retro request alone authorizes recommendations, not durable preference writes.
+
+6. Apply only approved items through their existing owners. Route shared-skill changes through `skill-review` and `skill-authoring`; use `writing` for personal writing context and `obsidian` for personal knowledge. Show the resulting diff and check added guardrails against the codebase. Report existing violations; do not fix application code or silently weaken enforcement as part of preference capture. External actions still need their own authority.
 
 ## Reference
 

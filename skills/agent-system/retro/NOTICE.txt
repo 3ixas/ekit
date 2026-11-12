@@ -5,3 +5,4 @@ This bundle contains owned guidance and source-derived material; the root MIT li
 Applicable records:
 - references/licenses/mit-mattpocock.txt
 - references/licenses/published-works-reference.txt
+- references/licenses/mit-emilkowalski.txt

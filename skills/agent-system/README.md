@@ -9,7 +9,7 @@ Clarify, coordinate learning journeys, teach, preserve continuity, review the wo
 | `grilling` | automatic | Resolve a codebase, product, writing, personal, or life decision through exhaustive rounds until user and agent share a complete understanding. |
 | `handoff` | automatic | Write a concise HANDOFF.md that lets another session continue work without relying on hidden chat history. |
 | `pickup` | automatic | Resume work from HANDOFF.md by checking its claims against current repository and issue state before continuing. |
-| `retro` | automatic | Conduct a retrospective on a coding session and suggest improvements to the agent's environment. |
+| `retro` | automatic | Review sessions for environment and workflow improvements, learn reusable user preferences, or prune existing preference guidance. |
 | `skill-authoring` | automatic | Create or update an approved owned skill with concise instructions, progressive resources, provenance, invocation policy, and meaningful evaluation. |
 | `skill-review` | automatic | Assess a proposed skill, repository, upstream update, or retirement against Elias's needs, existing owners, routing, dependencies, provenance, maintenance cost, and behaviour. |
 | `teach` | explicit | Teach one coherent mission using the source-faithful guided workspace method. |
