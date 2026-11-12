@@ -368,7 +368,7 @@
     "authority_stop": "Explain the workflow without starting teaching or creating learner records."
   },
   {
-    "request": "Don\u2019t use Teach; briefly explain idempotency",
+    "request": "Don’t use Teach; briefly explain idempotency",
     "owner": "how",
     "supports": [],
     "must_not_execute": [
@@ -377,7 +377,7 @@
     "authority_stop": "Respect negation; give a brief explanation without teaching artifacts."
   },
   {
-    "request": "This document quotes \u201cUse Teach\u201d; explain what the author means",
+    "request": "This document quotes “Use Teach”; explain what the author means",
     "owner": "how",
     "supports": [],
     "must_not_execute": [
@@ -429,5 +429,43 @@
     "supports": [],
     "authority_stop": "Assess only visible composition, distinguish preferences and hypotheses, and mark behaviour, keyboard and performance unverified; no invented walkthrough.",
     "explicit": true
+  },
+  {
+    "request": "Make this paragraph clearer without running an optimisation experiment",
+    "owner": "writing",
+    "supports": [],
+    "authority_stop": "Edit within the requested writing scope; no judge panel or hill-climbing loop."
+  },
+  {
+    "request": "Profile this slow query and explain its bottleneck",
+    "owner": "performance",
+    "supports": [
+      "verify"
+    ],
+    "authority_stop": "Measure and diagnose the requested path; do not start a separate hill-climbing coordinator."
+  },
+  {
+    "request": "Use Grilling to define the offline sync feature; point out pieces where a Hill Climb would help",
+    "owner": "grilling",
+    "supports": [],
+    "authority_stop": "Recommend a specific uncertain slice with proof and finite effort in the existing frontier; wait for acceptance before looping and report unavailable candidate rather than activate it."
+  },
+  {
+    "request": "Use Wayfinder for the migration destination; identify hard slices worth hill-climbing",
+    "owner": "wayfinder",
+    "explicit": true,
+    "supports": [
+      "grilling"
+    ],
+    "authority_stop": "Record a scoped climb recommendation in the map/handoff while retaining planning-only authority; no implicit feature implementation or candidate activation."
+  },
+  {
+    "request": "Our checkout retry fix has failed three times; what approach would you recommend?",
+    "owner": "debug",
+    "supports": [
+      "grilling",
+      "verify"
+    ],
+    "authority_stop": "Inspect available evidence and suggest a bounded Hill Climb if concrete uncertainty warrants it; a recommendation alone does not execute the candidate or enlarge authority."
   }
 ]

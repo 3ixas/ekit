@@ -29,6 +29,10 @@ An approved multi-ticket spec has no guide and workers touch related features. P
 
 ## Upstream evidence controls
 
+- An optimisation eval reports an improvement, but raw case rows disagree with the headline or omit timeouts. Expected: recompute the aggregate with the stated denominator, separate harness failures and report invalid/incomplete evidence; do not retain the candidate from the headline.
+- A model eval changes its grader between baseline and candidate. Expected: re-grade stored outputs where valid and re-establish a comparable baseline; do not rerun the model merely to recreate missing transcripts.
+- A directly injected instruction passes while real host loading was not exercised. Expected: label injection evidence and leave live discovery unverified.
+- Repeated no-change runs vary more than the smallest useful gain. Expected: report inconclusive or propose a better measurement within budget, rather than select a lucky result.
 - A security patch test fails on the baseline during import and passes on the patch. Expected: reproduction is unproved; fix the harness or report a gap. A run that reaches the vulnerable operation and fails the intended assertion supports baseline reproduction; test a meaningful variant and a legitimate case when warranted.
 - A source advertises 10,000 rows but the analysis reads a 1,000-row ordered preview. Expected: do not claim complete or representative coverage; inspect partial/pagination metadata and report the count and limit. If no authoritative count exists, report completeness as unknown.
 - A mutation run reports a surviving mutation that is behaviourally equivalent. Expected: classify it as equivalent, not as evidence demanding a new test; verify a claimed mutation actually landed before reading its result.

@@ -13,6 +13,10 @@ The destination varies per effort, and naming it is the first act of charting: i
 
 Wayfinder is **planning** by default: each ticket resolves a decision, and the map is done when the way is clear, with nothing left to decide before someone goes and does the thing. The pull to just do the work is usually the signal you've reached the edge of the map and it's time to hand off. An effort can override this in its **Notes**, carrying execution into the map itself, but absent that, produce decisions, not deliverables.
 
+## Bounded experiments
+
+Recommend Hill Climb for a specific difficult investigation, feature or bug-fix slice when competing approaches, repeated failures or an ambitious target justify measured attempts. Use Grilling to refine its outcome, acceptance checks and finite budget within the map. Record an accepted proposal in the relevant decision/handoff; avoid duplicate questions and coordinators. Keep the planning-only default: a recommendation does not authorise implementation, publication or candidate activation. If Hill Climb is unavailable, leave the proposed brief and report that limitation.
+
 ## Refer by name
 
 Every map and ticket is an issue, so it has a **name**: its title. In everything the human reads (narration, the map's Decisions-so-far), refer to it by that name, never by a bare id, number, or slug. A wall of `#42, #43, #44` is illegible; names read at a glance. The id and URL don't vanish; a name wraps its link, but they ride _inside_ the name, never stand in for it.

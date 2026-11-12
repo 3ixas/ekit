@@ -15,6 +15,8 @@ Choose the user-perceived metric and target, proposing the target an expert woul
 
 For visible web instability, input delay, loading flicker or stutter, read [web experience diagnostics](references/web-experience.md) to connect the symptom to a measurable mechanism.
 
+Before repeated experiments, read [bounded measurement](references/bounded-measurement.md) to set a useful gain threshold, control noise and stop when further work cannot justify its cost.
+
 ## Boundaries
 
 Do not optimize from intuition, accept shared-runner noise as proof, or trade correctness for an unmeasured gain.

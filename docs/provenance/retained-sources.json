@@ -196,6 +196,18 @@
       "disposition": "reference-only; no copying grant asserted"
     },
     {
+      "bundle": "skills/agent-system/skill-authoring",
+      "repository": "https://github.com/anthropics/skills",
+      "ref": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/claude-api/shared/evals/eval-hillclimb.md",
+      "digest": "git-blob:7e16832bef17a195ee87da35a4fd4df1b6fc9264",
+      "license": "apache-2.0-anthropic",
+      "use": "informed-by",
+      "changes": "Independently written comparative skill evaluation: consistent before/after requests, direct injection versus real discovery, held-out confirmation, evidence and usage accounting. No upstream prose, harness or assets copied.",
+      "notice": "references/licenses/apache-2.0-anthropic.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/agent-system/teach",
       "repository": "https://github.com/mattpocock/skills",
       "ref": "3cca18b368ae95cdbdebbff572ccafa662551015",
@@ -577,6 +589,30 @@
       "use": "informed-by",
       "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Distinguish field metrics from lab observations without introducing a design score.",
       "notice": "references/licenses/web-craft-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/engineering-specialists/performance",
+      "repository": "https://github.com/anthropics/skills",
+      "ref": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/claude-api/shared/evals/eval-hillclimb.md",
+      "digest": "git-blob:7e16832bef17a195ee87da35a4fd4df1b6fc9264",
+      "license": "apache-2.0-anthropic",
+      "use": "informed-by",
+      "changes": "Independently written measurement-resolution, useful-gain, noise and headroom guidance. No upstream text or assets copied.",
+      "notice": "references/licenses/apache-2.0-anthropic.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/engineering-specialists/performance",
+      "repository": "https://github.com/Bil0000/Hill-Climb",
+      "ref": "551c997e9eb3ae81fed9edf1d8a66bd32cd0dbf8",
+      "path": "skills/hill-climb/SKILL.md",
+      "digest": "git-blob:7a0411a2a7ce0912a63f5b2ab899bfa320c81d9b",
+      "license": "mit-bil0000-hill-climb",
+      "use": "informed-by",
+      "changes": "Independently written bounded single-hypothesis experiments, comparable measurements, preservation checks and early stopping. Unlimited/soft budgets, automatic commits and broad rollback not adopted; no source text or scripts copied.",
+      "notice": "references/licenses/mit-bil0000-hill-climb.txt",
       "disposition": "reference-only; no copying grant asserted"
     },
     {
@@ -3937,6 +3973,18 @@
       "use": "informed-by",
       "changes": "Independently written baseline and patched assertion evidence guidance; no runner imported.",
       "notice": "references/licenses/cc-by-sa-4.0-trailofbits.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/software-workflows/verify",
+      "repository": "https://github.com/anthropics/skills",
+      "ref": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/claude-api/shared/evals/eval-hillclimb.md",
+      "digest": "git-blob:7e16832bef17a195ee87da35a4fd4df1b6fc9264",
+      "license": "apache-2.0-anthropic",
+      "use": "informed-by",
+      "changes": "Independently written conditional evaluation-validity reference: measurement sensitivity, raw aggregates, grading and environment failures, tuning/confirmation separation and usage evidence. No upstream prose, runner or assets copied.",
+      "notice": "references/licenses/apache-2.0-anthropic.txt",
       "disposition": "reference-only; no copying grant asserted"
     },
     {
