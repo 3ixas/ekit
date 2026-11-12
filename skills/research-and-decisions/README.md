@@ -8,6 +8,7 @@ Find evidence, understand systems, develop options, make decisions, and analyze 
 | `data-analysis` | automatic | Analyze quantitative, product, or business data with explicit grain, quality, assumptions, reproducible methods, validation, and decision relevance. |
 | `data-visualization` | automatic | Design, generate, and verify truthful accessible charts, figures, or analytical dashboards for a defined question and audience. |
 | `doc-review` | automatic | Review requirements, plans, specifications, or decision documents for correctness, completeness, internal consistency, and executability. |
+| `hill-climb` | explicit | Refine rough goals and thoroughly work through difficult features, bug fixes and improvements with bounded evidence-led attempts. |
 | `how` | automatic, supporting | Explain how an existing codebase or system works through entry points, data flow, state, boundaries, ownership, and exact evidence. |
 | `ideate` | automatic | Generate and cull grounded possibilities, then present the strongest three as an options round to pick, combine, or reject. |
 | `product-thinking` | automatic | Pressure-test one product idea with attributed questions from proven product thinkers and end in a build, test-first, reshape, or drop verdict. |

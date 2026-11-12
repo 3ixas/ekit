@@ -2104,6 +2104,42 @@
       "disposition": "retained under recorded upstream terms; preserve companions"
     },
     {
+      "bundle": "skills/research-and-decisions/hill-climb",
+      "repository": "https://github.com/anthropics/skills",
+      "ref": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/claude-api/shared/evals/eval-hillclimb.md",
+      "digest": "git-blob:7e16832bef17a195ee87da35a4fd4df1b6fc9264",
+      "license": "apache-2.0-anthropic",
+      "use": "informed-by",
+      "changes": "Independently written bounded evaluation improvement workflow with validity checks, tuning/confirmation separation and usage accounting; no upstream text or assets copied.",
+      "notice": "references/licenses/apache-2.0-anthropic.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/research-and-decisions/hill-climb",
+      "repository": "https://github.com/Bil0000/Hill-Climb",
+      "ref": "551c997e9eb3ae81fed9edf1d8a66bd32cd0dbf8",
+      "path": "skills/hill-climb/SKILL.md",
+      "digest": "git-blob:7a0411a2a7ce0912a63f5b2ab899bfa320c81d9b",
+      "license": "mit-bil0000-hill-climb",
+      "use": "informed-by",
+      "changes": "Independently written one-hypothesis attempts, persistent history and guarded retain/discard decisions. Hard small budgets replace unlimited/soft limits; runner, judges, auto-commit, multi-repo rollback and kits are not imported.",
+      "notice": "references/licenses/mit-bil0000-hill-climb.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
+      "bundle": "skills/research-and-decisions/hill-climb",
+      "repository": "private:user-supplied-screenshot",
+      "ref": "sha256:33d6d98c601156aee6c937ffb590fc227cbb539646ff3f54c85f2bb09315112e",
+      "path": "sharpen-workflow.jpg",
+      "digest": "sha256:33d6d98c601156aee6c937ffb590fc227cbb539646ff3f54c85f2bb09315112e",
+      "license": "user-supplied-screenshot-reference",
+      "use": "informed-by",
+      "changes": "User-supplied workflow image consulted for frozen evidence and separation of building from verification. Independently written synthesis; no image or text copied, author/licence not established. Fixed three-round councils and named models not adopted.",
+      "notice": "references/licenses/user-supplied-screenshot-reference.txt",
+      "disposition": "reference-only; no copying grant asserted"
+    },
+    {
       "bundle": "skills/research-and-decisions/how",
       "repository": "https://github.com/cursor/plugins",
       "ref": "5bf2b1544db739998121a306340631963c2ff3de",

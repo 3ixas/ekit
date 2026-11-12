@@ -448,7 +448,7 @@
     "request": "Use Grilling to define the offline sync feature; point out pieces where a Hill Climb would help",
     "owner": "grilling",
     "supports": [],
-    "authority_stop": "Recommend a specific uncertain slice with proof and finite effort in the existing frontier; wait for acceptance before looping and report unavailable candidate rather than activate it."
+    "authority_stop": "Recommend a specific uncertain slice with proof and finite effort in the existing frontier; wait for acceptance before looping. Use the active workflow when available; report a host availability limitation without installing it implicitly."
   },
   {
     "request": "Use Wayfinder for the migration destination; identify hard slices worth hill-climbing",
@@ -457,7 +457,7 @@
     "supports": [
       "grilling"
     ],
-    "authority_stop": "Record a scoped climb recommendation in the map/handoff while retaining planning-only authority; no implicit feature implementation or candidate activation."
+    "authority_stop": "Record a scoped climb recommendation in the map/handoff while retaining planning-only authority; no implicit feature implementation or host installation."
   },
   {
     "request": "Our checkout retry fix has failed three times; what approach would you recommend?",
@@ -466,6 +466,60 @@
       "grilling",
       "verify"
     ],
-    "authority_stop": "Inspect available evidence and suggest a bounded Hill Climb if concrete uncertainty warrants it; a recommendation alone does not execute the candidate or enlarge authority."
+    "authority_stop": "Inspect available evidence and suggest a bounded Hill Climb if concrete uncertainty warrants it; a recommendation alone does not start the workflow or enlarge task authority."
+  },
+  {
+    "request": "Use Hill Climb to reduce this eval failure rate with the existing runner and preserve its authority cases",
+    "owner": "hill-climb",
+    "supports": [
+      "verify",
+      "skill-authoring"
+    ],
+    "explicit": true,
+    "authority_stop": "Refine the outcome where needed, bound attempts and executions, preserve authority cases and confirm the result; no extra publication or paid-action authority."
+  },
+  {
+    "request": "Use Hill Climb to make this script faster while retaining its exact outputs; use the existing benchmark",
+    "owner": "hill-climb",
+    "supports": [
+      "performance",
+      "verify"
+    ],
+    "explicit": true,
+    "authority_stop": "Use isolated artifacts and a finite budget, confirm the selected result and preserve unrelated work; no extra paid-action or publication authority."
+  },
+  {
+    "request": "Use Hill Climb on this feature, but there is no credible executable measurement",
+    "owner": "hill-climb",
+    "supports": [
+      "grilling",
+      "verify",
+      "implement"
+    ],
+    "explicit": true,
+    "authority_stop": "Refine missing outcome choices, reuse or establish the smallest acceptance proof, and start the loop only when outcome, scope, proof and finite budget are ready; report a concrete blocker if they cannot be established."
+  },
+  {
+    "request": "Use Hill Climb for this rough offline-editing feature idea; help me work out what good means before building it",
+    "owner": "hill-climb",
+    "explicit": true,
+    "supports": [
+      "grilling",
+      "grill-with-docs",
+      "verify",
+      "implement"
+    ],
+    "authority_stop": "Prepare first, investigate facts, settle consequential choices with Elias and establish acceptance/preservation checks before bounded feature attempts; no speculative implementation from a half-settled goal."
+  },
+  {
+    "request": "Use Hill Climb to finally fix this retry bug; several fixes failed and we need a thorough result",
+    "owner": "hill-climb",
+    "explicit": true,
+    "supports": [
+      "debug",
+      "verify",
+      "implement"
+    ],
+    "authority_stop": "Reproduce and diagnose through debug, refine expected behaviour, share one experiment/review budget, require all acceptance and regression proof; partial progress is incomplete."
   }
 ]
