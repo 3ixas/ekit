@@ -9,6 +9,8 @@ Read [collaborative exploration](references/collaborative-exploration.md) before
 
 Before the first round, run the [depth pass](references/depth-pass.md) on what the user brought: the outcome one level up, what an expert would add, the rawest evidence, an expert-level target, and the independent proof of done. It deepens the tree; anything that would raise scope or ambition enters as a frontier question with your recommendation, never as a silent assumption.
 
+When a specific feature, bug fix or difficult target would benefit from bounded experiments, recommend Hill Climb with the uncertainty, proof and expected effort. Refine its outcome within this frontier before proposing execution; reuse the closing agreement. A suggestion does not start a climb or activate an unavailable candidate.
+
 Work the tree in **rounds**. The **frontier** is every decision whose prerequisites are already settled: the questions you can ask _now_ without guessing at answers you haven't heard yet. Ask the whole frontier in one round: number each question and give your recommended answer. Then wait for the user's answers before the next round.
 
 Format a round like so:

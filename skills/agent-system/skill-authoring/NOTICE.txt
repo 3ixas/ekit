@@ -6,3 +6,4 @@ Applicable records:
 - references/licenses/cc-by-sa-4.0-trailofbits.txt
 - references/licenses/proprietary-reference.txt
 - references/licenses/reference-only-no-copied-text.txt
+- references/licenses/apache-2.0-anthropic.txt

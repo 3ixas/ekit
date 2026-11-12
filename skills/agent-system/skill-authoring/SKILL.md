@@ -14,7 +14,7 @@ A valid owned bundle whose routing and observable behaviour match the approved c
 1. Read [the owned-bundle contract](references/owned-bundle-contract.md) before repository changes. Confirm the approved admission or update decision, current owner, and sources.
 2. Choose the smallest bundle that supplies the approved behaviour. Write discriminating frontmatter and an entrypoint focused on the method; link conditional detail where it is needed and retain only useful scripts/assets.
 3. Record sources, licences, invocation policy, and owned adaptations so the bundle is attributable and its dependencies are explicit.
-4. Run repository checks and realistic positive, nearby negative, authority/failure, and output scenarios required by the contract. Done when the bundle is valid and observed behaviour matches the approved contract; report unresolved failures rather than activating it.
+4. Run repository checks and realistic positive, nearby negative, authority/failure, and output scenarios required by the contract. For substantial behavioural changes, use [comparative evaluation](references/comparative-evaluation.md). Done when the bundle is valid and observed behaviour matches the approved contract; report unresolved failures rather than activating it.
 
 ## Boundaries
 

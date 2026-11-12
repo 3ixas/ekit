@@ -96,6 +96,15 @@
       "license": "cc-by-sa-4.0-trailofbits",
       "use": "informed-by",
       "changes": "Independently written baseline and patched assertion evidence guidance; no runner imported."
+    },
+    {
+      "repository": "https://github.com/anthropics/skills",
+      "ref": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/claude-api/shared/evals/eval-hillclimb.md",
+      "digest": "git-blob:7e16832bef17a195ee87da35a4fd4df1b6fc9264",
+      "license": "apache-2.0-anthropic",
+      "use": "informed-by",
+      "changes": "Independently written conditional evaluation-validity reference: measurement sensitivity, raw aggregates, grading and environment failures, tuning/confirmation separation and usage evidence. No upstream prose, runner or assets copied."
     }
   ],
   "dependencies": {
@@ -104,5 +113,6 @@
       "browser"
     ]
   },
-  "reviewed": "2026-11-01"
+  "reviewed": "2026-11-12",
+  "owned_changes": "2026-11-12: Add conditional measured-improvement guidance and comparative evaluation; preserve ordinary workflow and existing review ownership. No upstream snapshots modified."
 }

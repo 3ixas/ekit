@@ -96,6 +96,24 @@
       "license": "web-craft-reference",
       "use": "informed-by",
       "changes": "Reviewed 2026-11-01; digest fingerprints the retrieved HTML response, not an immutable publisher revision. Independently written; no article text, code or assets copied. Distinguish field metrics from lab observations without introducing a design score."
+    },
+    {
+      "repository": "https://github.com/anthropics/skills",
+      "ref": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/claude-api/shared/evals/eval-hillclimb.md",
+      "digest": "git-blob:7e16832bef17a195ee87da35a4fd4df1b6fc9264",
+      "license": "apache-2.0-anthropic",
+      "use": "informed-by",
+      "changes": "Independently written measurement-resolution, useful-gain, noise and headroom guidance. No upstream text or assets copied."
+    },
+    {
+      "repository": "https://github.com/Bil0000/Hill-Climb",
+      "ref": "551c997e9eb3ae81fed9edf1d8a66bd32cd0dbf8",
+      "path": "skills/hill-climb/SKILL.md",
+      "digest": "git-blob:7a0411a2a7ce0912a63f5b2ab899bfa320c81d9b",
+      "license": "mit-bil0000-hill-climb",
+      "use": "informed-by",
+      "changes": "Independently written bounded single-hypothesis experiments, comparable measurements, preservation checks and early stopping. Unlimited/soft budgets, automatic commits and broad rollback not adopted; no source text or scripts copied."
     }
   ],
   "dependencies": {
@@ -104,5 +122,6 @@
     ],
     "tools": []
   },
-  "reviewed": "2026-11-01"
+  "reviewed": "2026-11-12",
+  "owned_changes": "2026-11-12: Add conditional measured-improvement guidance and comparative evaluation; preserve ordinary workflow and existing review ownership. No upstream snapshots modified."
 }
