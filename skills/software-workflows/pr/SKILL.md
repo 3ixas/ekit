@@ -20,7 +20,7 @@ Use this template for writing the PR body:
 
 ## Before and After
 
-<labelled visual comparison of the same scenario or aspect>
+<labelled before and after screenshots or diagrams of the same scenario>
 
 ## Evidence
 
@@ -173,17 +173,15 @@ You may use one of these, you may use several, it is unlikely you will use all o
 
 ### Before and After
 
-Always include a visual comparison of the PR's main change, including for non-UI work. Label both states and show the same scenario or aspect in each. For added or removed behaviour, make the absent state explicit. Choose the smallest clear representation: screenshots for UI changes when practical; paired diagrams, flow sketches, tables, diffs, or input/output examples for other changes. A text-based visual is sufficient; an image file is not required.
+Show two labelled visual states of the PR's main change, depicting the same scenario or aspect before and after. For UI changes, capture and embed comparable screenshots when practical. For non-UI changes, use paired diagrams (for example, Mermaid flow or structure diagrams). Make an absent state explicit for added or removed behaviour. Prose tables, diffs, and text-only input/output examples do not replace the visual comparison; use them in Summary or Evidence when helpful.
 
-An illustrative comparison explains the change but is not itself proof that it works. Label illustrations as such and do not invent observed results. If the actual before state is unavailable, say so and show an accurately labelled illustration or source-based comparison instead.
+If screenshots or the actual before state are unavailable, state the gap and use an accurately labelled illustration where possible. An illustration explains the change but is not proof that it works; never present it as an observed result. Use the image attachment guidance below to embed screenshots in the comparison.
 
 ### Evidence
 
 Give concrete observed evidence that the change works and name material gaps. Include before-and-after results when available; do not present a sketch or expected output as an observed result.
 
-Screenshots are S-tier - when the environment is set up for it and the change is visual.
-
-`gh pr create` and `gh pr comment` cannot upload images, and the GitHub API has no endpoint for them. Attach screenshots in this order:
+For screenshots in Before and After or Evidence, `gh pr create` and `gh pr comment` cannot upload images, and the GitHub API has no endpoint for them. Attach screenshots in this order:
 
 1. **Browser upload (preferred).** When a browser tool signed in to GitHub is available, open the PR, drag or file-attach the images into a comment box and submit it. GitHub hosts them as durable `user-attachments` URLs. Posting the comment is a publication step, so the delivery caller's authority applies.
 2. **Assets branch (fallback).** With no browser, commit the images to a throwaway branch such as `pr-assets/<pr-number>` (never the PR's own branch, the target or the default branch), push it, and link the `raw.githubusercontent.com` URLs from the body. This works for public repositories; in a private one the images do not render for other viewers. Say in the PR that the branch can be deleted after merge.
