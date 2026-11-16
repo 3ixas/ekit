@@ -13,7 +13,7 @@
       "digest": "git-tree:1816d238fa1b97850789eba7db58d5fd4875ade6",
       "license": "mit-libraries-dev",
       "use": "adapted",
-      "changes": "Owned copy of the public free skill and seven references. Preserves the reveal, read-only review, and apply workflows; removes Pro-only guidance and installer instructions, adds the reference-led design boundary, and keeps future skill updates in the canonical repository."
+      "changes": "Owned copy of the public free skill and seven references. Preserves the reveal, read-only review, and apply workflows; removes Pro-only guidance and installer instructions, adds the reference-led design boundary, condenses the description's trigger phrases into intent categories, and keeps future skill updates in the canonical repository."
     },
     {
       "repository": "https://github.com/Jakubantalik/Libraries.dev",
