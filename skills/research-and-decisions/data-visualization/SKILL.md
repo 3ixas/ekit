@@ -24,4 +24,4 @@ Product dashboard interaction also needs interface-design. Never invent data to 
 
 ## Method detail and preservation
 
-Read [chart methods](references/chart-methods.md) for the specific analytical methods, failure cases and verification needed by the task. These are independently authored methods; [source treatment](references/NOTICE.md) and the reviewed source register travel with the bundle. Use the [preservation cases](evals/preservation-cases.md) when evaluating a material method change. No proprietary runtime, publication service or historical plugin path is required.
+Read [chart methods](references/chart-methods.md) for the specific analytical methods, failure cases and verification needed by the task. These are independently authored methods; [source treatment](references/NOTICE.md) and the reviewed source register travel with the bundle. When changing these methods in EKit, evaluate the change against the bundle's `evals/preservation-cases.md` in the repository.
