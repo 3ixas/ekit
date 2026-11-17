@@ -42,6 +42,12 @@ For my personal knowledge and durable notes, use the Obsidian vault at `/Users/e
 
 My own agent skills, their routing and these shared instructions live in the ekit repository: `/Users/elias/_LifeOS/03_ENGINEERING/repos/personal/ekit` (GitHub `3ixas/ekit`). It is the only source; change a skill there, in a worktree, never in the generated copies under `~/.claude/skills`, `~/.claude/agent-skills-runtime` or `~/.agents/skills`. The old `elias-agent-skills` repository is archived: do not read, edit or recommend it.
 
+## Claude Code
+
+- Prefer the installed Codex plugin's `codex:codex-rescue` agent for generating or editing raster images, exploring a design through a mockup image, and checking or operating a rendered browser or desktop interface when the task needs direct UI interaction. Keep coding, debugging and implementation in Claude unless Elias asks to delegate them.
+- Give Codex a fresh, focused task with the brief or UI target, relevant references, permitted actions and expected output. Ask for read-only mode when the task needs no file edits. Keep the owning EKit workflow in Claude and inspect the saved image or observed UI evidence before using the result.
+- If delegation is unavailable, fails, or returns no usable result, state the limitation and provide a ready-to-run Codex desktop prompt with the target, scope and expected output. Keep normal tool permissions and approvals in place.
+
 ## Writing as me
 
 When writing as me, read the current voice profile at `/Users/elias/_LifeOS/07_KNOWLEDGE/Obsidian/Personal Knowledge/99 System/voice-profile.md` and match the register to the task.
