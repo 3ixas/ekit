@@ -44,8 +44,9 @@ My own agent skills, their routing and these shared instructions live in the eki
 
 ## Claude Code
 
-- Prefer the installed Codex plugin's `codex:codex-rescue` agent for generating or editing raster images, exploring a design through a mockup image, and checking or operating a rendered browser or desktop interface when the task needs direct UI interaction. Keep coding, debugging and implementation in Claude unless Elias asks to delegate them.
-- Give Codex a fresh, focused task with the brief or UI target, relevant references, permitted actions and expected output. Ask for read-only mode when the task needs no file edits. Keep the owning EKit workflow in Claude and inspect the saved image or observed UI evidence before using the result.
+- Start with the installed Codex plugin's `codex:codex-rescue` agent when a task needs raster image generation or editing, a mockup image, or direct interaction with a rendered browser or desktop interface. Try Codex before looking up other image or computer-use tools, unless Elias specifies a tool. Keep coding, debugging and implementation in Claude unless Elias asks to delegate them.
+- Give Codex a fresh, focused task with the brief or UI target, relevant references, permitted actions and expected output. Ask for read-only mode when the task needs no file edits. Keep the owning EKit workflow in Claude and verify the returned UI evidence.
+- When delegating image generation or editing, tell Codex to call its built-in ImageGen tool, save the returned image, and report the tool used and the file path. Accept the result only when Codex confirms ImageGen produced it and you can inspect the saved file.
 - If delegation is unavailable, fails, or returns no usable result, state the limitation and provide a ready-to-run Codex desktop prompt with the target, scope and expected output. Keep normal tool permissions and approvals in place.
 
 ## Writing as me
