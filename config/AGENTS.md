@@ -44,10 +44,15 @@ My own agent skills, their routing and these shared instructions live in the eki
 
 ## Claude Code
 
-- Start with the installed Codex plugin's `codex:codex-rescue` agent when a task needs raster image generation or editing, a mockup image, or direct interaction with a rendered browser or desktop interface. Try Codex before looking up other image or computer-use tools, unless Elias specifies a tool. Keep coding, debugging and implementation in Claude unless Elias asks to delegate them.
-- Give Codex a fresh, focused task with the brief or UI target, relevant references, permitted actions and expected output. Ask for read-only mode when the task needs no file edits. Keep the owning EKit workflow in Claude and verify the returned UI evidence.
+These apply to Claude threads, in T3 Code or Claude Code Desktop.
+
+- T3 Code is my primary host and Claude Code Desktop is the fallback. Claude threads in T3 load these instructions, rules, skills, plugins and hooks, except Desktop mods, and task-list tools unless enabled; see EKit's `docs/agent-portability.md`. Use host-specific tools only when the current host provides them.
+- Keep coding, debugging and implementation in Claude, and never hand a ticket or the main thread to another provider unless I ask; I sometimes start a ticket on Codex myself when Claude usage is low. Delegating the subtasks below to Codex is expected.
+- Send raster image generation or editing, mockup images, direct interaction with a rendered browser or desktop interface, and research run as a background agent to Codex: in T3 through `delegate_task` with the Codex provider; on Desktop, when available, through the Codex plugin's `codex:codex-rescue` agent. Try Codex before looking up other image or computer-use tools, unless I specify a tool.
+- In T3, run background work through `delegate_task`, not a background native agent. Foreground native subagents, such as paired reviewers, stay native.
+- Give Codex a fresh, focused task with the brief or UI target, relevant references, permitted actions and expected output. Ask for read-only mode when the task needs no file edits. Keep the owning EKit workflow in Claude and verify the returned evidence.
 - When delegating image generation or editing, tell Codex to call its built-in ImageGen tool, save the returned image, and report the tool used and the file path. Accept the result only when Codex confirms ImageGen produced it and you can inspect the saved file.
-- If delegation is unavailable, fails, or returns no usable result, state the limitation and provide a ready-to-run Codex desktop prompt with the target, scope and expected output. Keep normal tool permissions and approvals in place.
+- If delegation is unavailable, fails, or returns no usable result, state the limitation. For research, run the investigation directly. Otherwise provide a ready-to-run Codex prompt with the target, scope and expected output. Keep normal tool permissions and approvals in place.
 
 ## Writing as me
 

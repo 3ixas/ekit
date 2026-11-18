@@ -35,8 +35,8 @@
         "supporting": {"status": "unsupported", "detail": "There is no native supporting-only restriction; managed rules provide guidance.", "fallback": "Treat supporting status as routing guidance, not an enforced permission boundary."}
       },
       "orchestration": {
-        "subagents": {"status": "available", "detail": "Claude Code supports custom subagents."},
-        "worktrees": {"status": "available", "detail": "Subagents can use isolated Git worktrees."},
+        "subagents": {"status": "available", "detail": "Claude Code supports custom subagents. In T3 Code, background and cross-provider children use T3's delegate_task tool instead of a background native subagent."},
+        "worktrees": {"status": "available", "detail": "Subagents can use isolated Git worktrees. T3 Code also creates thread worktrees; they do not isolate ports or databases."},
         "model_roles": {"status": "available", "detail": "Subagents support a per-invocation or configured model."},
         "issue_tracker": {"status": "unverified", "detail": "The report can check shared GitHub CLI authentication, but not whether the active Claude Code session permits it."}
       },
