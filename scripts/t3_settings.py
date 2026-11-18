@@ -203,21 +203,26 @@ def apply(root: Path, paths: T3Paths) -> Path | None:
             handle.write(json.dumps(result.desired, indent=2, ensure_ascii=False) + "\n")
         if had_settings:
             shutil.copymode(paths.settings, stage)
+        written = hashlib.sha256(stage.read_bytes()).hexdigest()
         if _read_settings(paths.settings)[1] != result.source_hash:
             raise CheckError(f"{paths.settings}: T3 Code changed the file during sync; nothing was written, run t3-sync again")
         os.replace(stage, paths.settings)
         installed = True
         if plan(root, paths).changes:
-            raise CheckError(f"{paths.settings}: verification failed after apply; the previous file was restored")
-    except Exception:
+            raise CheckError(f"{paths.settings}: verification failed after apply")
+    except Exception as exc:
         if not installed:
             shutil.rmtree(backup, ignore_errors=True)
-        if installed:
-            if had_settings:
-                shutil.copy2(backup / "settings.json", paths.settings)
-            else:
-                paths.settings.unlink(missing_ok=True)
-        raise
+            raise
+        # Restore only our own write: if T3 saved the file since, keep its version.
+        live = hashlib.sha256(paths.settings.read_bytes()).hexdigest() if paths.settings.exists() else None
+        if live != written:
+            raise CheckError(f"{exc}; T3 Code saved the file meanwhile, so its version was kept (backup: {backup})") from exc
+        if had_settings:
+            shutil.copy2(backup / "settings.json", paths.settings)
+        else:
+            paths.settings.unlink(missing_ok=True)
+        raise CheckError(f"{exc}; the previous file was restored") from exc
     finally:
         stage.unlink(missing_ok=True)
     return backup

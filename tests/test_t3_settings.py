@@ -188,6 +188,21 @@ class T3SettingsTests(unittest.TestCase):
                 t3_settings.apply(self.root, self.paths)
         self.assertEqual(self.paths.settings.read_bytes(), before)
 
+    def test_failed_verification_keeps_a_concurrent_app_save(self) -> None:
+        original_plan = t3_settings.plan
+        calls = []
+
+        def app_saves_during_verification(root, paths):
+            calls.append(1)
+            if len(calls) > 1:
+                paths.settings.write_text(json.dumps({"appSavedLater": True}), encoding="utf-8")
+            return original_plan(root, paths)
+
+        with mock.patch.object(t3_settings, "plan", app_saves_during_verification):
+            with self.assertRaises(t3_settings.CheckError):
+                t3_settings.apply(self.root, self.paths)
+        self.assertEqual(self.settings(), {"appSavedLater": True})
+
     def test_cli_reports_invalid_settings_without_traceback(self) -> None:
         bad = Path(self.temporary.name) / "bad.json"
         bad.write_text("[1]", encoding="utf-8")
