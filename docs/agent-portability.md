@@ -78,6 +78,20 @@ Skills describe workflows. The host, MCP server, or executable provides access a
 
 For the approved free Motion documentation and shadcn integrations, see [component MCP setup](component-mcp.md). MCP configuration, backups and project registries are separate from skill projection.
 
+## T3 Code
+
+T3 Code is Elias's primary development host. It is not a separate skill host: it runs Claude through the Claude Agent SDK with `~/.claude`, and Codex through its app server with `~/.codex`, including `~/.codex/AGENTS.md`. Its threads therefore receive the Claude Code and Codex projections above. T3 adds its own `t3-code` tools to every thread, including `delegate_task`, `t3_thread_launch`, `watch_pull_request`, `preview_*` and scheduled tasks, plus orchestration instructions of its own.
+
+| Behavior in T3 | Consequence |
+|---|---|
+| Background work goes through `delegate_task`, never a background native agent | Foreground native subagents still work; background and cross-provider children use `delegate_task`. |
+| `preview_*` is not used unasked to verify or show the agent's own edit | Verification works off-screen unless Elias asks to see the live preview. |
+| Worktrees do not isolate ports or databases | Each worktree's dev server needs its own port. |
+| Claude task-list tools are off unless the Claude instance sets `CLAUDE_CODE_ENABLE_TODO_TOOLS=1` | Set it in T3's Claude provider environment. |
+| Desktop mods, such as the elias-mods band, do not draw | Plain Claude Code hooks still run. |
+
+Load inventory, 2026-11-18, T3 Code desktop 0.1.10 with Claude Opus 5.5 in auto mode, read-only: the thread loaded the shared instructions, generated routing rules, the project `AGENTS.md` through `CLAUDE.md`, about 175 skills including plugin skills, the Concise output style, a SessionStart hook, auto memory and the native Agent tool. Task-list tools and the elias-mods band were absent. This proves what loaded, not how the agent acts on it; the behavioral checks below remain to be run in T3.
+
 ## Fresh-session smoke check
 
 After applying a projection, start a genuinely new session in that host and check three things:
