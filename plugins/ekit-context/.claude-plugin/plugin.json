@@ -1,0 +1,25 @@
+{
+  "name": "ekit-context",
+  "version": "0.1.0",
+  "description": "Asks Claude to offer a handoff once the conversation's context passes a threshold, in Claude Code and T3 Code",
+  "author": {
+    "name": "Elias"
+  },
+  "userConfig": {
+    "handoff_at": {
+      "type": "number",
+      "title": "Handoff threshold",
+      "description": "Context percent at which Claude is asked to offer a handoff",
+      "default": 70,
+      "min": 1,
+      "max": 100
+    },
+    "context_window": {
+      "type": "number",
+      "title": "Context window",
+      "description": "Tokens in the model's context window, used to compute fill",
+      "default": 1000000,
+      "min": 1000
+    }
+  }
+}

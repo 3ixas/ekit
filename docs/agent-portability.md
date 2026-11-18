@@ -89,6 +89,7 @@ T3 Code is Elias's primary development host. It is not a separate skill host: it
 | Worktrees do not isolate ports or databases | Each worktree's dev server needs its own port. |
 | Claude task-list tools are off unless the Claude instance sets `CLAUDE_CODE_ENABLE_TODO_TOOLS=1` | Set it in T3's Claude provider environment. |
 | Desktop mods, such as the elias-mods band, do not draw | Plain Claude Code hooks still run. |
+| No context barometer | The `ekit-context` plugin's hook asks Claude to offer a handoff at the threshold and, after approval, open the pickup thread. |
 
 Load inventory, 2026-11-18, T3 Code desktop 0.1.10 with Claude Opus 5.5 in auto mode, read-only: the thread loaded the shared instructions, generated routing rules, the project `AGENTS.md` through `CLAUDE.md`, about 175 skills including plugin skills, the Concise output style, a SessionStart hook, auto memory and the native Agent tool. Task-list tools and the elias-mods band were absent. This proves what loaded, not how the agent acts on it; the behavioral checks below remain to be run in T3.
 
