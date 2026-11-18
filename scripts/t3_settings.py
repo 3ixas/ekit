@@ -14,7 +14,6 @@ import os
 import shutil
 import sqlite3
 import subprocess
-import tempfile
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
@@ -73,25 +72,23 @@ def _real(path: str) -> str:
 
 
 def project_ids(state: Path) -> dict[str, str]:
-    """Map workspace roots to T3 project ids, reading a private copy of the live database."""
+    """Map workspace roots to T3 project ids from a consistent snapshot of the live database."""
     if not state.is_file():
         return {}
-    with tempfile.TemporaryDirectory() as temporary:
-        copy_path = Path(temporary) / "state.sqlite"
-        # A checkpoint between these copies can only make the copy older, never corrupt it.
-        for suffix in ("", "-wal"):
-            source = Path(str(state) + suffix)
-            if source.is_file():
-                shutil.copy2(source, Path(str(copy_path) + suffix))
-        connection = sqlite3.connect(copy_path)
+    try:
+        # The backup API copies one committed snapshot, even while T3 writes and checkpoints.
+        source = sqlite3.connect(f"{state.resolve().as_uri()}?mode=ro", uri=True)
+        snapshot = sqlite3.connect(":memory:")
         try:
-            rows = connection.execute(
+            source.backup(snapshot)
+            rows = snapshot.execute(
                 "SELECT workspace_root, project_id FROM projection_projects WHERE deleted_at IS NULL"
             ).fetchall()
-        except sqlite3.Error as exc:
-            raise CheckError(f"{state}: cannot read T3 projects ({exc})") from exc
         finally:
-            connection.close()
+            source.close()
+            snapshot.close()
+    except sqlite3.Error as exc:
+        raise CheckError(f"{state}: cannot read T3 projects ({exc})") from exc
     return {_real(root): project_id for root, project_id in rows}
 
 

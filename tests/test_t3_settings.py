@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sqlite3
 import subprocess
 import sys
@@ -202,6 +203,19 @@ class T3SettingsTests(unittest.TestCase):
             with self.assertRaises(t3_settings.CheckError):
                 t3_settings.apply(self.root, self.paths)
         self.assertEqual(self.settings(), {"appSavedLater": True})
+
+    def test_projects_committed_only_to_the_wal_are_seen(self) -> None:
+        state = Path(self.temporary.name) / "wal.sqlite"
+        writer = sqlite3.connect(state)
+        writer.execute("PRAGMA journal_mode=WAL")
+        writer.execute("PRAGMA wal_autocheckpoint=0")
+        writer.execute("CREATE TABLE projection_projects (project_id TEXT, workspace_root TEXT, deleted_at TEXT)")
+        writer.execute("INSERT INTO projection_projects VALUES ('p-wal', ?, NULL)", (str(self.workspace),))
+        writer.commit()
+        try:
+            self.assertEqual(t3_settings.project_ids(state), {os.path.realpath(self.workspace): "p-wal"})
+        finally:
+            writer.close()
 
     def test_cli_reports_invalid_settings_without_traceback(self) -> None:
         bad = Path(self.temporary.name) / "bad.json"
