@@ -187,7 +187,7 @@ def apply(root: Path, paths: T3Paths) -> Path | None:
         raise CheckError(f"{paths.settings}: T3 Code changed the file during sync; nothing was written, run t3-sync again")
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
     backup = paths.backups / stamp
-    backup.mkdir(parents=True, exist_ok=False)
+    backup.mkdir(mode=0o700, parents=True, exist_ok=False)
     had_settings = paths.settings.exists()
     if had_settings:
         shutil.copy2(paths.settings, backup / "settings.json")
@@ -198,7 +198,11 @@ def apply(root: Path, paths: T3Paths) -> Path | None:
     stage = paths.settings.parent / f".{paths.settings.name}.ekit-{stamp}"
     installed = False
     try:
-        stage.write_text(json.dumps(result.desired, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        # The file can hold provider credentials: create it private, then match the original mode.
+        with os.fdopen(os.open(stage, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600), "w", encoding="utf-8") as handle:
+            handle.write(json.dumps(result.desired, indent=2, ensure_ascii=False) + "\n")
+        if had_settings:
+            shutil.copymode(paths.settings, stage)
         if _read_settings(paths.settings)[1] != result.source_hash:
             raise CheckError(f"{paths.settings}: T3 Code changed the file during sync; nothing was written, run t3-sync again")
         os.replace(stage, paths.settings)

@@ -77,6 +77,17 @@ class T3SettingsTests(unittest.TestCase):
         self.assertEqual(settings["projectSettingsOverrides"]["other"]["defaultModelSelection"]["model"], "m")
         self.assertTrue((backup / "settings.json").is_file())
 
+    def test_apply_keeps_the_settings_file_mode(self) -> None:
+        self.paths.settings.chmod(0o600)
+        backup = t3_settings.apply(self.root, self.paths)
+        self.assertEqual(self.paths.settings.stat().st_mode & 0o777, 0o600)
+        self.assertEqual(backup.stat().st_mode & 0o777, 0o700)
+
+    def test_new_settings_file_is_private(self) -> None:
+        self.paths.settings.unlink()
+        t3_settings.apply(self.root, self.paths)
+        self.assertEqual(self.paths.settings.stat().st_mode & 0o777, 0o600)
+
     def test_apply_is_idempotent(self) -> None:
         t3_settings.apply(self.root, self.paths)
         before = self.paths.settings.read_bytes()
