@@ -29,14 +29,16 @@ python3 -m unittest discover -s tests -v
 python3 scripts/skills.py sync
 python3 scripts/skills.py claude-sync
 python3 scripts/skills.py opencode-sync
+python3 scripts/skills.py t3-sync
 ```
 
-The three sync commands above are previews. Read the additions, changes, removals, target paths, and backup plan before applying a projection:
+The four sync commands above are previews. Read the additions, changes, removals, target paths, and backup plan before applying a projection:
 
 ```sh
 python3 scripts/skills.py sync --apply
 python3 scripts/skills.py claude-sync --apply
 python3 scripts/skills.py opencode-sync --apply
+python3 scripts/skills.py t3-sync --apply
 ```
 
 ### Externally managed skills
@@ -55,9 +57,11 @@ python3 -m unittest discover -s tests -v
 python3 scripts/skills.py sync
 python3 scripts/skills.py claude-sync
 python3 scripts/skills.py opencode-sync
+python3 scripts/skills.py t3-sync
 python3 scripts/skills.py doctor
 python3 scripts/skills.py claude-doctor
 python3 scripts/skills.py opencode-doctor
+python3 scripts/skills.py t3-doctor
 ```
 
 Use `python3 scripts/skills.py updates` to check pinned upstream sources without changing owned skill content. Use `python3 scripts/skills.py capabilities` for per-host tool, orchestration, routing, and catalog evidence. Add `--skill <id>` to focus the report on one skill's tool and routing dependencies. `--catalog-warning-tokens N` sets a local early-warning threshold; it is an estimate, not a published Codex limit. The report checks local executable prerequisites, but cannot see every app's live session permissions or connected-tool catalogue.
@@ -89,6 +93,8 @@ T3 Code is Elias's primary development host. It is not a separate skill host: it
 | Worktrees do not isolate ports or databases | Each worktree's dev server needs its own port. |
 | Claude task-list tools are off unless the Claude instance sets `CLAUDE_CODE_ENABLE_TODO_TOOLS=1` | Set it in T3's Claude provider environment. |
 | Desktop mods, such as the elias-mods band, do not draw | Plain Claude Code hooks still run. |
+
+`t3-sync` keeps the T3 settings EKit manages, listed in `config/t3-settings.json`: provider environment variables such as `CLAUDE_CODE_ENABLE_TODO_TOOLS=1`, default and fallback models, favorites, the default permission mode, worktree cleanup and per-project default models. T3 rewrites its settings file whenever Elias changes something in the app, so `t3-sync` merges only those keys and leaves every other key as it is. It resolves projects by folder through a private copy of T3's state database and skips a project T3 has not added yet. T3 watches the file and keeps an external edit, so applying while the app runs is supported; each apply saves the previous file under `~/.t3/ekit-backups`. `t3-doctor` fails when a managed key has drifted and warns about skipped projects and about worktrees under `~/.t3/worktrees` whose branch was deleted upstream, as GitHub does after a merged PR. Squash merges leave no local trace, so a branch still on GitHub is not reported.
 
 Load inventory, 2026-11-18, T3 Code desktop 0.1.10 with Claude Opus 5.5 in auto mode, read-only: the thread loaded the shared instructions, generated routing rules, the project `AGENTS.md` through `CLAUDE.md`, about 175 skills including plugin skills, the Concise output style, a SessionStart hook, auto memory and the native Agent tool. Task-list tools and the elias-mods band were absent. This proves what loaded, not how the agent acts on it; the behavioral checks below remain to be run in T3.
 

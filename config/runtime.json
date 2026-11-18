@@ -12,6 +12,10 @@
   "opencode_backups": "~/.config/opencode/skill-backups/elias-agent-skills",
   "handoffs": "~/.agents/handoffs",
   "codex_config": "~/.codex/config.toml",
+  "t3_settings": "~/.t3/userdata/settings.json",
+  "t3_state": "~/.t3/userdata/statev2.sqlite",
+  "t3_worktrees": "~/.t3/worktrees",
+  "t3_backups": "~/.t3/ekit-backups",
   "external_skills": [
     "yab-browser"
   ]
