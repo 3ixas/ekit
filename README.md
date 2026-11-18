@@ -118,7 +118,7 @@ python3 scripts/skills.py opencode-sync
 
 These commands show the proposed changes without applying them. Review additions, changes, removals, global instructions and the rollback path before using `--apply`. Application requires a marked runtime and creates a timestamped backup. The one-time `sync --apply --adopt-unmanaged` migration also backs up an existing unmarked runtime.
 
-See the [portability guide](docs/agent-portability.md) for setup, rollback and fresh-session checks. The [Claude plugin](plugins/elias-mods/README.md) is installed and updated separately.
+See the [portability guide](docs/agent-portability.md) for setup, rollback and fresh-session checks. The Claude plugins, [elias-mods](plugins/elias-mods/README.md) for Desktop and [ekit-context](plugins/ekit-context/README.md) for any Claude host, are installed and updated separately.
 
 <details>
 <summary>Health checks and upstream updates</summary>
