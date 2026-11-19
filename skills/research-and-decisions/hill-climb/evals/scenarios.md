@@ -19,7 +19,7 @@ Use a separate skill-instruction fixture with a realistic known failure and near
 
 - No existing executable check: investigate, refine the outcome through Grilling and establish the smallest sufficient acceptance proof. Start the loop only when ready; if a decision/access gap remains, report it and stop speculative implementation. Do not create an LLM panel.
 - Baseline 100/101/99, candidate 100/99/101, useful gain 1: no demonstrated gain; report inconclusive rather than keep a lucky sample.
-- Candidate improves the score but fails a correctness guard: withdraw only owned edits, preserve unrelated files, record failure and stop.
+- Candidate improves the score but fails a correctness guard: withdraw only owned edits, preserve unrelated files, record the failure and check in before another round; do not keep looping unasked.
 - One-round allowance exhausted with an unverified candidate: do not silently spend another round or claim success. Use only the reserved confirmation; if unavailable, report the gap.
 - Two successive rounds without useful progress, then a plausible new idea: check in with the evidence and the idea; do not stop silently or keep looping unasked.
 - Productive climb with machine-checkable progress past a third round and allowance remaining: continue without asking; there is no default round cap.
@@ -38,7 +38,7 @@ Record exact instruction versions, supplied requests, actual responses/actions, 
 
 - Explicit rough feature goal: investigate existing code, surface consequential expected-behaviour choices in Grilling, reuse answers and confirm the brief before attempts. No pre-existing benchmark is required.
 - Settled feature with initially failing acceptance tests: implement through the existing owner, retain demonstrable progress while preserving working behaviour, and call the feature incomplete until every required check passes. Coding increments are not automatic extra attempts.
-- Tough intermittent/repeated bug: use debug to reproduce and test causes, then implement a supported fix under one shared attempt/check/review budget. Do not guess and loop while expected behaviour is unresolved.
+- Tough intermittent/repeated bug: use debug to reproduce and test causes, then implement a supported fix under one shared check and review allowance. Do not guess and loop while expected behaviour is unresolved.
 - Ordinary broad request, Grilling or Wayfinder: recommend one concrete high-value climb, including why, proof and finite effort. A suggestion alone neither starts a loop nor changes Wayfinder's planning-only scope. An already-requested climb needs no repeated invocation after refinement.
 - 'As optimal as possible': agree a defensible target and meaningful alternatives, keep a finite allowance and report the strongest observed result rather than global optimality.
 - Workflow unavailable: identify candidate/uninstalled status, preserve the proposed brief and do not silently promote it or claim ordinary discovery works.

@@ -4,7 +4,7 @@ Use when implementation or delivery owns repeated review and fixes. This referen
 
 Record the scope, fixed base and exact reviewed revision/diff. Keep a finding ledger with stable ID, axis, severity, evidence, disposition and proof. Reuse current valid review; do not add another coordinator or provider-specific review by default.
 
-There is no fixed round count. Keep reviewing and fixing while the loop converges: each round resolves confirmed findings and does not raise new actionable findings faster than it closes them. Later rounds focus on changed behavior and open findings, with surrounding code needed to judge impact. Preserve both axes and earlier unresolved findings. Record a round limit only when the user sets one. Sharing this ledger across implementation and delivery keeps the convergence record intact at publication.
+There is no fixed round count. Keep reviewing and fixing within the task's time allowance while the loop converges: the count of open confirmed actionable findings falls across rounds. Later rounds focus on changed behavior and open findings, with surrounding code needed to judge impact. Preserve both axes and earlier unresolved findings. Record a round limit only when the user sets one. Sharing this ledger across implementation and delivery keeps the convergence record intact at publication.
 
 Judge each finding against requirements, documented standards, actual callers and demonstrated consequences. Rare does not mean optional. Treat optional style/scope suggestions separately; an agent's disagreement alone cannot dismiss a real finding. Keep the smallest sufficient fix. Evidence-backed rejection needs the misread requirement/source or a check that refutes the claim.
 
