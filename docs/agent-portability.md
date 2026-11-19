@@ -30,15 +30,17 @@ python3 scripts/skills.py sync
 python3 scripts/skills.py claude-sync
 python3 scripts/skills.py opencode-sync
 python3 scripts/skills.py t3-sync
+python3 scripts/skills.py antigravity-sync
 ```
 
-The four sync commands above are previews. Read the additions, changes, removals, target paths, and backup plan before applying a projection:
+The five sync commands above are previews. Read the additions, changes, removals, target paths, and backup plan before applying a projection:
 
 ```sh
 python3 scripts/skills.py sync --apply
 python3 scripts/skills.py claude-sync --apply
 python3 scripts/skills.py opencode-sync --apply
 python3 scripts/skills.py t3-sync --apply
+python3 scripts/skills.py antigravity-sync --apply
 ```
 
 ### Externally managed skills
@@ -58,10 +60,12 @@ python3 scripts/skills.py sync
 python3 scripts/skills.py claude-sync
 python3 scripts/skills.py opencode-sync
 python3 scripts/skills.py t3-sync
+python3 scripts/skills.py antigravity-sync
 python3 scripts/skills.py doctor
 python3 scripts/skills.py claude-doctor
 python3 scripts/skills.py opencode-doctor
 python3 scripts/skills.py t3-doctor
+python3 scripts/skills.py antigravity-doctor
 ```
 
 Use `python3 scripts/skills.py updates` to check pinned upstream sources without changing owned skill content. Use `python3 scripts/skills.py capabilities` for per-host tool, orchestration, routing, and catalog evidence. Add `--skill <id>` to focus the report on one skill's tool and routing dependencies. `--catalog-warning-tokens N` sets a local early-warning threshold; it is an estimate, not a published Codex limit. The report checks local executable prerequisites, but cannot see every app's live session permissions or connected-tool catalogue.
@@ -72,6 +76,7 @@ Use `python3 scripts/skills.py updates` to check pinned upstream sources without
 |---|---|---|---|
 | Codex | `~/.codex/AGENTS.md` | `~/.agents/skills` | User-requested skills permit model loading through `allow_implicit_invocation: true`. `$skill-name` is optional. |
 | Claude Code | `~/.claude/CLAUDE.md` links to shared instructions; generated routing in `~/.claude/rules/elias-agent-skills.md` | `~/.claude/skills` links to the managed runtime | Owned skills remain model-loadable; `/skill-name` is optional. The plugin checks supporting ownership without redirecting requested workflows to slash commands. |
+| Antigravity | Managed `GEMINI.md` in `~/.gemini/config` and in each T3 Code Antigravity profile | `~/.gemini/config/skills` links to `~/.agents/skills` | Skills load by name and description. User-requested and supporting-only routing are guidance in the managed rules, not enforced. |
 | OpenCode | `~/.config/opencode/AGENTS.md` | Native discovery from `~/.agents/skills` | User-requested skills remain model-loadable; V2 metadata explicitly enables autoinvocation. Stable V1 follows descriptions and instructions. |
 
 `explicit` means **user-requested**, not manual-command-only. Natural language and dictation count when they name or clearly request the workflow. Discussion, quoted mentions, negation, and adjacent questions do not request execution. Multiple requested methods and supporting handoffs may compose under one primary owner without another invocation. Request recognition is model-guided on every host, not a deterministic permission boundary. Supporting-only routing is guidance; the Claude plugin can warn or refuse missing ownership. Loading a skill grants no additional action authority.
@@ -99,6 +104,20 @@ T3 Code is Elias's primary development host. It is not a separate skill host: it
 `t3-sync` keeps the T3 settings EKit manages, listed in `config/t3-settings.json`: provider environment variables such as `CLAUDE_CODE_ENABLE_TODO_TOOLS=1`, default and fallback models, favorites, the default permission mode, worktree cleanup and per-project default models. T3 rewrites its settings file whenever Elias changes something in the app, so `t3-sync` merges only those keys and leaves every other key as it is. It resolves projects by folder through a read-only, consistent snapshot of T3's state database and skips a project T3 has not added yet. T3 watches the file and keeps an external edit, so applying while the app runs is supported; each apply saves the previous file under `~/.t3/ekit-backups`. `t3-doctor` fails when a managed key has drifted and warns about skipped projects and about worktrees under `~/.t3/worktrees` whose branch was deleted upstream, as GitHub does after a merged PR. Squash merges leave no local trace, so a branch still on GitHub is not reported.
 
 Load inventory, 2026-11-18, T3 Code desktop 0.1.10 with Claude Opus 5.5 in auto mode, read-only: the thread loaded the shared instructions, generated routing rules, the project `AGENTS.md` through `CLAUDE.md`, about 175 skills including plugin skills, the Concise output style, a SessionStart hook, auto memory and the native Agent tool. Task-list tools and the elias-mods band were absent. This proves what loaded, not how the agent acts on it; the behavioral checks below remain to be run in T3.
+
+## Antigravity
+
+Antigravity runs Gemini 4 Neon. In T3 Code it is a provider like Claude and Codex, but T3 starts it with a private `GEMINI_HOME`: `~/.t3/userdata/providers/antigravity/<sha256 of the instance id>`. That profile isolates credentials, hooks and MCP. T3 links only the skill folders `~/.gemini/config/skills` and `~/.gemini/antigravity-cli/skills` into it, so Antigravity's global rules in `~/.gemini/config` do not reach T3 sessions, and Antigravity never reads `~/.agents/skills` directly.
+
+`antigravity-sync` therefore writes the same managed `GEMINI.md` (the shared instructions plus generated routing) to `~/.gemini/config` for the standalone `agy` CLI and to `config/` inside each T3 profile listed in `config/runtime.json` under `antigravity_t3_instances`. It makes `~/.gemini/config/skills` a link to the shared `~/.agents/skills` runtime, replacing only an empty folder the harness left behind. A `skills.json` registration would not work in T3, because T3 reads only that linked skills folder from `~/.gemini`. A profile T3 has not created yet is skipped, and `antigravity-doctor` fails until the instance is enabled in T3 and the sync rerun. Unmarked rule files and a real skills folder stop the sync; every apply saves a snapshot under `~/.gemini/ekit-backups`. Antigravity truncates a rule file over 24,000 bytes, so the sync refuses a larger projection.
+
+| Behavior | Consequence |
+|---|---|
+| T3 Code's Antigravity sessions have no `watch_pull_request` | Delivery polls PR state at bounded intervals while the turn is active. |
+| Antigravity creates empty `.gemini/skills` and `.agents/skills` folders in a workspace | Git ignores them. |
+| T3 runs Neon at `medium` thinking unless a thread or child sets `thought_level` | A Neon thread started without an explicit level runs at `medium`. |
+
+Verification, 2026-11-19, T3 Code with Antigravity CLI 1.5.13 and Gemini 4 Neon: before the projection, a fresh Neon child loaded only the project `AGENTS.md` and four built-in skills. Probe rules in `~/.gemini/config` did not load; the same rules in the T3 profile's `config/` did, as `GEMINI.md`, `AGENTS.md` and `rules/*.md`. With `~/.gemini/config/skills` linked to the shared runtime, the child listed 93 owned skills and could activate `implement`. After `antigravity-sync --apply`, a fresh Neon child reported the managed global rule (headings `# Personal agent preferences` and `## Managed Antigravity skill routing`), quoted the shared instruction that durable notes go to the Obsidian vault, and activated `implement` and `code-review`. `antigravity-doctor` passed.
 
 ## Fresh-session smoke check
 

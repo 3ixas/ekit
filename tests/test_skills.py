@@ -704,6 +704,176 @@ class ClaudeSyncTests(unittest.TestCase):
             self.apply()
 
 
+class AntigravitySyncTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.temporary = tempfile.TemporaryDirectory()
+        self.base = Path(self.temporary.name)
+        self.root, self.home = self.base / "repo", self.base / "home"
+        make_repo(self.root)
+        add_skill(self.root, "automatic")
+        add_skill(self.root, "supporting-only", invocation=["supporting"])
+        add_skill(self.root, "explicit-only", invocation=["explicit"])
+        self.skills_target = self.home / ".agents" / "skills"
+        self.global_target = self.home / ".codex" / "AGENTS.md"
+        self.global_target.parent.mkdir(parents=True)
+        self.global_target.write_text((self.root / "config" / "AGENTS.md").read_text())
+        skills.sync_apply(self.root, self.skills_target, self.global_target, self.home / ".agents" / "skill-backups")
+        self.config_dir = self.home / ".gemini" / "config"
+        self.profiles = self.home / ".t3" / "userdata" / "providers" / "antigravity"
+        self.profile = skills.antigravity_t3_profile(self.profiles, "antigravity")
+        (self.profile / "config").mkdir(parents=True)
+        self.instances = ["antigravity", "not-enabled"]
+        self.backups = self.home / ".gemini" / "ekit-backups"
+        self.environ = mock.patch.dict("os.environ", {"HOME": str(self.home)})
+        self.environ.start()
+
+    def tearDown(self) -> None:
+        self.environ.stop()
+        self.temporary.cleanup()
+
+    def sync(self) -> skills.AntigravitySyncStatus:
+        return skills.antigravity_sync_status(
+            self.root, self.config_dir, self.profiles, self.instances, self.skills_target, self.global_target,
+            backup_root=self.backups,
+        )
+
+    def apply(self) -> Path | None:
+        return skills.antigravity_sync_apply(
+            self.root, self.config_dir, self.profiles, self.instances, self.skills_target, self.global_target, self.backups,
+        )
+
+    def doctor(self) -> list[str]:
+        return skills.antigravity_doctor(
+            self.root, self.config_dir, self.profiles, self.instances, self.skills_target, self.global_target,
+            backup_root=self.backups,
+        )
+
+    def test_t3_profile_is_named_by_instance_id_hash(self) -> None:
+        self.assertEqual(
+            skills.antigravity_t3_profile(Path("/p"), "antigravity").name,
+            "ac0a3dfd6dddb20962cecff6ee5fe65e19d3923be20e52c5ab52ff877f7e4c32",
+        )
+
+    def test_preview_targets_global_and_existing_t3_profiles_only(self) -> None:
+        status = self.sync()
+        self.assertEqual(status.rule_targets, [self.config_dir / "GEMINI.md", self.profile / "config" / "GEMINI.md"])
+        self.assertEqual(status.changed_rules, status.rule_targets)
+        self.assertTrue(status.link_changed)
+        self.assertEqual(len(status.skipped_profiles), 1)
+        self.assertIn("not-enabled", status.skipped_profiles[0])
+        self.assertEqual(status.conflicts, [])
+        self.assertFalse(self.config_dir.exists())
+
+    def test_apply_writes_rules_and_links_shared_skills_then_is_idempotent(self) -> None:
+        user_file = self.config_dir / "mcp_config.json"
+        user_file.parent.mkdir(parents=True)
+        user_file.write_text("{}\n")
+        self.assertIsNotNone(self.apply())
+        for target in (self.config_dir / "GEMINI.md", self.profile / "config" / "GEMINI.md"):
+            text = target.read_text()
+            self.assertTrue(text.startswith("<!-- ekit antigravity managed v1 sha256:"))
+            self.assertIn("Managed Antigravity skill routing", text)
+            self.assertIn("`supporting-only`", text)
+        link = self.config_dir / "skills"
+        self.assertTrue(link.is_symlink())
+        self.assertEqual(link.resolve(), self.skills_target.resolve())
+        self.assertEqual(user_file.read_text(), "{}\n")
+        self.instances = ["antigravity"]
+        self.assertEqual(self.doctor(), [])
+        self.assertIsNone(self.apply())
+
+    def test_doctor_fails_when_a_configured_t3_profile_is_missing(self) -> None:
+        self.apply()
+        errors = self.doctor()
+        self.assertEqual(len(errors), 1)
+        self.assertIn("`not-enabled` has no profile yet", errors[0])
+
+    def test_failed_apply_restores_the_empty_placeholder(self) -> None:
+        placeholder = self.config_dir / "skills"
+        placeholder.mkdir(parents=True)
+        with mock.patch.object(Path, "symlink_to", side_effect=OSError("injected")):
+            with self.assertRaisesRegex(OSError, "injected"):
+                self.apply()
+        self.assertTrue(placeholder.is_dir() and not placeholder.is_symlink())
+        self.assertFalse((self.config_dir / "GEMINI.md").exists())
+        self.assertEqual(list(self.config_dir.glob(".GEMINI.md.*")), [])
+
+    def test_apply_replaces_empty_harness_placeholder_but_refuses_real_skills_folder(self) -> None:
+        (self.config_dir / "skills").mkdir(parents=True)
+        self.apply()
+        self.assertTrue((self.config_dir / "skills").is_symlink())
+
+        (self.config_dir / "skills").unlink()
+        private = self.config_dir / "skills" / "private" / "SKILL.md"
+        private.parent.mkdir(parents=True)
+        private.write_text("private skill\n")
+        self.assertTrue(any("not a link to the shared runtime" in item for item in self.sync().conflicts))
+        with self.assertRaisesRegex(skills.CheckError, "Antigravity sync conflict"):
+            self.apply()
+        self.assertEqual(private.read_text(), "private skill\n")
+
+    def test_unmanaged_rule_conflicts_and_managed_edit_is_drift(self) -> None:
+        rule = self.profile / "config" / "GEMINI.md"
+        rule.write_text("user rules\n")
+        self.assertTrue(any("not owned by this sync" in item for item in self.sync().conflicts))
+        with self.assertRaisesRegex(skills.CheckError, "Antigravity sync conflict"):
+            self.apply()
+        self.assertEqual(rule.read_text(), "user rules\n")
+
+        rule.unlink()
+        self.apply()
+        rule.write_bytes(rule.read_bytes() + b"manual edit\n")
+        self.assertTrue(any("edited after" in item for item in self.sync().drift))
+        self.assertTrue(any("edited after" in item for item in self.doctor()))
+
+    def test_doctor_reports_missing_link_and_stale_rules(self) -> None:
+        self.apply()
+        (self.config_dir / "skills").unlink()
+        self.assertTrue(any("skills link" in item and "missing" in item for item in self.doctor()))
+        self.assertEqual(self.sync().link_state, "missing")
+        self.apply()
+        canonical = self.root / "config" / "AGENTS.md"
+        canonical.write_text(canonical.read_text() + "\nUpdated canonical instruction.\n")
+        skills.sync_apply(self.root, self.skills_target, self.global_target, self.home / ".agents" / "skill-backups")
+        self.assertTrue(any("differs from the canonical projection" in item for item in self.doctor()))
+
+    def test_link_to_another_folder_is_drift(self) -> None:
+        other = self.home / "elsewhere"
+        other.mkdir()
+        self.config_dir.mkdir(parents=True)
+        (self.config_dir / "skills").symlink_to(other)
+        self.assertTrue(any("points to" in item for item in self.sync().drift))
+        with self.assertRaisesRegex(skills.CheckError, "drift"):
+            self.apply()
+
+    def test_failed_verification_restores_previous_rules_and_link(self) -> None:
+        self.apply()
+        rule = self.config_dir / "GEMINI.md"
+        previous = rule.read_bytes()
+        canonical = self.root / "config" / "AGENTS.md"
+        canonical.write_text(canonical.read_text() + "\nUpdated canonical instruction.\n")
+        skills.sync_apply(self.root, self.skills_target, self.global_target, self.home / ".agents" / "skill-backups")
+        with mock.patch.object(skills, "_verify_antigravity", side_effect=skills.CheckError("injected")):
+            with self.assertRaisesRegex(skills.CheckError, "injected"):
+                self.apply()
+        self.assertEqual(rule.read_bytes(), previous)
+        self.assertTrue((self.config_dir / "skills").is_symlink())
+        self.assertEqual(list(self.config_dir.glob(".GEMINI.md.*")), [])
+
+    def test_failed_first_apply_removes_new_link_and_rules(self) -> None:
+        with mock.patch.object(skills, "_verify_antigravity", side_effect=skills.CheckError("injected")):
+            with self.assertRaisesRegex(skills.CheckError, "injected"):
+                self.apply()
+        self.assertFalse((self.config_dir / "GEMINI.md").exists())
+        self.assertFalse((self.config_dir / "skills").is_symlink())
+
+    def test_shared_runtime_must_be_synced_first(self) -> None:
+        self.global_target.write_text("stale instructions\n")
+        self.assertTrue(self.sync().prerequisites)
+        with self.assertRaisesRegex(skills.CheckError, "prerequisites"):
+            self.apply()
+
+
 class OpenCodeSyncTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()

@@ -59,7 +59,7 @@ class CapabilityReportTests(unittest.TestCase):
             run=run,
         )
 
-        self.assertEqual({agent["id"] for agent in report["agents"]}, {"codex", "claude-code", "opencode"})
+        self.assertEqual({agent["id"] for agent in report["agents"]}, {"codex", "claude-code", "opencode", "antigravity"})
         for agent in report["agents"]:
             self.assertEqual(agent["tools"]["github"]["status"], "available")
             self.assertEqual(agent["tools"]["stitch"]["status"], "unverified")

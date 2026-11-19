@@ -36,6 +36,8 @@ BUNDLE_ENTRIES = RUNTIME_ENTRIES | {"metadata.json", "evals"}
 MARKER = ".elias-agent-skills.json"
 MARKER_SCHEMA = 1
 OPENCODE_FILE_MARKER = re.compile(rb"^<!-- elias-agent-skills opencode managed v1 sha256:([0-9a-f]{64}) -->\n")
+ANTIGRAVITY_FILE_MARKER = re.compile(rb"^<!-- ekit antigravity managed v1 sha256:([0-9a-f]{64}) -->\n")
+ANTIGRAVITY_RULE_BYTES = 24_000
 
 
 class CheckError(ValueError):
@@ -341,9 +343,9 @@ def check_repo(root: Path = ROOT) -> list[str]:
         errors.append(f"{capabilities_path}: expected a schema 1 object")
         capabilities = {}
     configured_agents = capabilities.get("agents", {})
-    required_agents = {"codex", "claude-code", "opencode"}
+    required_agents = {"codex", "claude-code", "opencode", "antigravity"}
     if not isinstance(configured_agents, dict) or set(configured_agents) != required_agents:
-        errors.append(f"{capabilities_path}: agents must define Codex, Claude Code, and OpenCode")
+        errors.append(f"{capabilities_path}: agents must define Codex, Claude Code, OpenCode, and Antigravity")
     else:
         for agent_id, agent in configured_agents.items():
             if not isinstance(agent, dict):
@@ -757,6 +759,21 @@ class ClaudeSyncStatus:
 
 
 @dataclass(frozen=True)
+class AntigravitySyncStatus:
+    rule_targets: list[Path]
+    changed_rules: list[Path]
+    skills_link: Path
+    link_state: str  # current, missing, placeholder, drift or conflict
+    link_changed: bool
+    drift: list[str]
+    conflicts: list[str]
+    prerequisites: list[str]
+    skipped_profiles: list[str]
+    routing: dict[str, list[str]]
+    limitations: list[str]
+
+
+@dataclass(frozen=True)
 class OpenCodeSyncStatus:
     changed: bool
     drift: list[str]
@@ -864,7 +881,7 @@ def _claude_rules(global_target: Path, routing: dict[str, list[str]]) -> str:
     )
 
 
-def _opencode_routing(root: Path) -> dict[str, list[str]]:
+def _skill_routing(root: Path) -> dict[str, list[str]]:
     invocation_by_id = {
         item["id"]: read_json(item["path"] / "metadata.json")["invocation"]
         for item in discover(root) if item["lifecycle"] == "skills"
@@ -872,8 +889,8 @@ def _opencode_routing(root: Path) -> dict[str, list[str]]:
     return _invocation_routing(invocation_by_id)
 
 
-def opencode_instructions(root: Path = ROOT) -> tuple[bytes, dict[str, list[str]]]:
-    routing = _opencode_routing(root)
+def _managed_routing_instructions(root: Path, heading: str, discovery: str, policy: str) -> tuple[bytes, dict[str, list[str]]]:
+    routing = _skill_routing(root)
 
     def list_ids(values: list[str]) -> str:
         return ", ".join(f"`{skill_id}`" for skill_id in values) if values else "(none)"
@@ -881,13 +898,13 @@ def opencode_instructions(root: Path = ROOT) -> tuple[bytes, dict[str, list[str]
     supporting = "\n".join(f"- `{skill_id}`" for skill_id in routing["supporting_only"]) or "- (none)"
     explicit = "\n".join(f"- `{skill_id}`" for skill_id in routing["explicit"]) or "- (none)"
     suffix = (
-        "## Managed OpenCode skill routing\n\n"
+        f"## {heading}\n\n"
         "Generated from this repository's activation metadata. Edit the canonical instructions or skill metadata instead of this section.\n\n"
-        "Owned skills are discovered directly from the shared `~/.agents/skills` Agent Skills path; this setup does not create a second skill catalog.\n\n"
+        f"{discovery}\n\n"
         f"- Automatic skills may own a request when their descriptions clearly fit: {list_ids(routing['automatic'])}.\n"
         "- Supporting-only skills must not own the request. Load one only when a separately selected primary capability needs its expertise.\n"
         "- Explicit means user-requested: load when Elias names or clearly requests the workflow in ordinary language or dictation; special command syntax is optional.\n\n"
-        "When OpenCode V2 is installed, shared-runtime sync enables model loading with `metadata.opencode/autoinvoke: true` for user-requested skills. Request recognition follows descriptions and instructions on every host; it is not a deterministic permission check. OpenCode has no native supporting-only policy; that rule is guidance, not enforced routing.\n\n"
+        f"{policy}\n\n"
         "### Supporting-only skills\n\n"
         f"{supporting}\n\n"
         "### Explicit-only skills\n\n"
@@ -896,6 +913,15 @@ def opencode_instructions(root: Path = ROOT) -> tuple[bytes, dict[str, list[str]
     canonical = (root / "config" / "AGENTS.md").read_bytes()
     ending = b"\n" if not canonical.endswith(b"\n") else b""
     return canonical + ending + b"\n" + suffix.encode("utf-8"), routing
+
+
+def opencode_instructions(root: Path = ROOT) -> tuple[bytes, dict[str, list[str]]]:
+    return _managed_routing_instructions(
+        root,
+        "Managed OpenCode skill routing",
+        "Owned skills are discovered directly from the shared `~/.agents/skills` Agent Skills path; this setup does not create a second skill catalog.",
+        "When OpenCode V2 is installed, shared-runtime sync enables model loading with `metadata.opencode/autoinvoke: true` for user-requested skills. Request recognition follows descriptions and instructions on every host; it is not a deterministic permission check. OpenCode has no native supporting-only policy; that rule is guidance, not enforced routing.",
+    )
 
 
 def _opencode_managed_content(body: bytes) -> bytes:
@@ -914,7 +940,7 @@ def _opencode_marker_drift(content: bytes) -> str | None:
     return None
 
 
-def _opencode_sync_prerequisites(root: Path, skills_target: Path, global_target: Path) -> list[str]:
+def _shared_runtime_prerequisites(root: Path, skills_target: Path, global_target: Path) -> list[str]:
     shared = sync_status(root, skills_target, global_target)
     prerequisites: list[str] = []
     if shared.drift:
@@ -982,7 +1008,7 @@ def opencode_sync_status(
         changed,
         drift,
         conflicts,
-        _opencode_sync_prerequisites(root, skills_target, global_target),
+        _shared_runtime_prerequisites(root, skills_target, global_target),
         routing,
         limitations,
         version,
@@ -1000,7 +1026,7 @@ def _verify_opencode(
     marker = OPENCODE_FILE_MARKER.match(actual)
     if not marker or actual[marker.end():] != expected:
         raise CheckError("OpenCode global AGENTS.md verification failed")
-    errors = _opencode_sync_prerequisites(root, skills_target, global_target)
+    errors = _shared_runtime_prerequisites(root, skills_target, global_target)
     if errors:
         raise CheckError("OpenCode shared skill runtime verification failed: " + "; ".join(errors))
 
@@ -1084,6 +1110,273 @@ def opencode_doctor(
     errors.extend(status.prerequisites)
     if status.changed:
         errors.append("OpenCode global AGENTS.md differs from the canonical projection")
+    return sorted(set(errors))
+
+
+def antigravity_runtime_config(root: Path = ROOT) -> dict[str, Any]:
+    raw = read_json(root / "config" / "runtime.json")
+    required = {"skills", "global_agents", "antigravity_config", "antigravity_t3_profiles", "antigravity_backups"}
+    if not isinstance(raw, dict) or not required <= set(raw) or not all(isinstance(raw.get(key), str) for key in required):
+        raise CheckError(f"{root / 'config' / 'runtime.json'}: missing Antigravity runtime paths")
+    instances = raw.get("antigravity_t3_instances", [])
+    if not isinstance(instances, list) or not all(isinstance(item, str) and item for item in instances):
+        raise CheckError(f"{root / 'config' / 'runtime.json'}: antigravity_t3_instances must be a list of instance ids")
+    config: dict[str, Any] = {key: _absolute_path(Path(raw[key])) for key in required}
+    config["antigravity_t3_instances"] = list(instances)
+    return config
+
+
+def antigravity_t3_profile(profiles_root: Path, instance_id: str) -> Path:
+    """T3 Code gives each Antigravity instance a private GEMINI_HOME named by the SHA-256 of its instance id."""
+    return _absolute_path(profiles_root) / hashlib.sha256(instance_id.encode("utf-8")).hexdigest()
+
+
+def antigravity_instructions(root: Path = ROOT) -> tuple[bytes, dict[str, list[str]]]:
+    return _managed_routing_instructions(
+        root,
+        "Managed Antigravity skill routing",
+        "Owned skills reach Antigravity through `~/.gemini/config/skills`, a link to the shared `~/.agents/skills` runtime; this setup does not create a second skill catalog. Where a skill names Codex or Claude Code syntax, such as `$skill` or `/skill`, load the skill by name instead.",
+        "Antigravity has no native supporting-only or user-requested-only policy; these rules are guidance, not enforced routing.",
+    )
+
+
+def _antigravity_managed_content(body: bytes) -> bytes:
+    digest = hashlib.sha256(body).hexdigest().encode("ascii")
+    return b"<!-- ekit antigravity managed v1 sha256:" + digest + b" -->\n" + body
+
+
+def _antigravity_marker_drift(content: bytes) -> str | None:
+    match = ANTIGRAVITY_FILE_MARKER.match(content)
+    if not match:
+        if content.startswith(b"<!-- ekit antigravity managed"):
+            return "managed marker is invalid"
+        return "not marked as managed"
+    if bytes_hash(content[match.end():]) != "sha256:" + match.group(1).decode("ascii"):
+        return "edited after the last managed sync"
+    return None
+
+
+def _antigravity_rule_targets(config_dir: Path, profiles_root: Path, instances: Sequence[str]) -> tuple[list[Path], list[str]]:
+    targets = [_absolute_path(config_dir) / "GEMINI.md"]
+    skipped: list[str] = []
+    for instance_id in instances:
+        profile = antigravity_t3_profile(profiles_root, instance_id)
+        if profile.is_dir():
+            targets.append(profile / "config" / "GEMINI.md")
+        else:
+            skipped.append(f"T3 Antigravity instance `{instance_id}` has no profile yet ({profile}); enable it in T3, then rerun")
+    return targets, skipped
+
+
+def antigravity_sync_status(
+    root: Path,
+    config_dir: Path,
+    profiles_root: Path,
+    instances: Sequence[str],
+    skills_target: Path,
+    global_target: Path,
+    *,
+    backup_root: Path | None = None,
+) -> AntigravitySyncStatus:
+    config_dir = _absolute_path(config_dir)
+    skills_target = _absolute_path(skills_target)
+    global_target = _absolute_path(global_target)
+    backup_root = _absolute_path(backup_root) if backup_root else None
+    body, routing = antigravity_instructions(root)
+    desired = _antigravity_managed_content(body)
+    rule_targets, skipped = _antigravity_rule_targets(config_dir, profiles_root, instances)
+    conflicts: list[str] = []
+    drift: list[str] = []
+    changed_rules: list[Path] = []
+    if len(desired) > ANTIGRAVITY_RULE_BYTES:
+        conflicts.append(f"Antigravity rule is {len(desired)} bytes; Antigravity truncates rule files over {ANTIGRAVITY_RULE_BYTES}")
+    for target in rule_targets:
+        if target.is_symlink():
+            conflicts.append(f"Antigravity rule target {target} must be a regular file, not a symlink")
+        elif target.exists() and not target.is_file():
+            conflicts.append(f"Antigravity rule target {target} exists but is not a regular file")
+        elif target.is_file():
+            error = _antigravity_marker_drift(target.read_bytes())
+            if error == "not marked as managed":
+                conflicts.append(f"Antigravity rule {target} already exists and is not owned by this sync")
+            elif error:
+                drift.append(f"Antigravity rule {target} {error}")
+        if not target.is_file() or target.read_bytes() != desired:
+            changed_rules.append(target)
+        if _paths_overlap(target, root.resolve(strict=False)):
+            conflicts.append(f"Antigravity rule target {target} must be outside the canonical repository")
+    skills_link = config_dir / "skills"
+    link_state = "missing"
+    if skills_link.is_symlink():
+        resolved = Path(os.path.abspath(os.path.join(skills_link.parent, os.readlink(skills_link))))
+        if resolved == skills_target:
+            link_state = "current"
+        else:
+            link_state = "drift"
+            drift.append(f"Antigravity skills link {skills_link} points to {resolved}, not {skills_target}")
+    elif skills_link.exists():
+        if skills_link.is_dir() and not any(skills_link.iterdir()):
+            link_state = "placeholder"  # an empty folder left by the harness; apply replaces it
+        else:
+            link_state = "conflict"
+            conflicts.append(f"Antigravity skills path {skills_link} already exists and is not a link to the shared runtime")
+    link_changed = link_state != "current"
+    if _paths_overlap(config_dir, skills_target) or _paths_overlap(config_dir, global_target):
+        conflicts.append("Antigravity config directory and the shared runtime targets must be separate")
+    if backup_root:
+        if backup_root.is_symlink() or (backup_root.exists() and not backup_root.is_dir()):
+            conflicts.append("Antigravity backup path must be a real directory")
+        if any(_paths_overlap(backup_root, path) for path in (*rule_targets, skills_link, skills_target, global_target)):
+            conflicts.append("Antigravity backup directory must be separate from managed targets")
+        if _paths_overlap(backup_root, root.resolve(strict=False)):
+            conflicts.append("Antigravity backup directory must be outside the canonical repository")
+    limitations = [
+        "User-requested workflow recognition is model-guided through descriptions and instructions, not host-enforced.",
+        "Antigravity has no native supporting-only invocation mode; generated rule guidance is not enforced.",
+        "T3 Code's Antigravity sessions have no watch_pull_request; delivery polls PR state instead.",
+    ]
+    return AntigravitySyncStatus(
+        rule_targets,
+        changed_rules,
+        skills_link,
+        link_state,
+        link_changed,
+        drift,
+        conflicts,
+        _shared_runtime_prerequisites(root, skills_target, global_target),
+        skipped,
+        routing,
+        limitations,
+    )
+
+
+def _verify_antigravity(root: Path, rule_targets: Sequence[Path], skills_link: Path, skills_target: Path, global_target: Path) -> None:
+    expected, _ = antigravity_instructions(root)
+    for target in rule_targets:
+        actual = target.read_bytes()
+        marker = ANTIGRAVITY_FILE_MARKER.match(actual)
+        if not marker or actual[marker.end():] != expected:
+            raise CheckError(f"Antigravity rule verification failed: {target}")
+    if not skills_link.is_symlink() or Path(os.path.abspath(os.path.join(skills_link.parent, os.readlink(skills_link)))) != _absolute_path(skills_target):
+        raise CheckError("Antigravity skills link verification failed")
+    errors = _shared_runtime_prerequisites(root, skills_target, global_target)
+    if errors:
+        raise CheckError("Antigravity shared skill runtime verification failed: " + "; ".join(errors))
+
+
+def antigravity_sync_apply(
+    root: Path,
+    config_dir: Path,
+    profiles_root: Path,
+    instances: Sequence[str],
+    skills_target: Path,
+    global_target: Path,
+    backup_root: Path,
+) -> Path | None:
+    errors = check_repo(root)
+    if errors:
+        raise CheckError("repository check failed:\n" + "\n".join(errors))
+    status = antigravity_sync_status(
+        root, config_dir, profiles_root, instances, skills_target, global_target, backup_root=backup_root,
+    )
+    if status.conflicts:
+        raise CheckError("Antigravity sync conflict: " + "; ".join(status.conflicts))
+    if status.drift:
+        raise CheckError("Antigravity runtime drift must be resolved before apply: " + "; ".join(status.drift))
+    if status.prerequisites:
+        raise CheckError("Antigravity sync prerequisites are not met: " + "; ".join(status.prerequisites))
+    if not status.changed_rules and not status.link_changed:
+        return None
+
+    skills_target = _absolute_path(skills_target)
+    backup_root = _absolute_path(backup_root)
+    body, _ = antigravity_instructions(root)
+    desired = _antigravity_managed_content(body)
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
+    backup = backup_root / stamp
+    backup.mkdir(parents=True, exist_ok=False)
+    link = status.skills_link
+    write_json(backup / "snapshot.json", {
+        "schema": 1,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "rules": [
+            {
+                "target": str(target),
+                "existed": target.is_file(),
+                "hash": file_hash(target) if target.is_file() else None,
+                "backup": f"GEMINI-{index}.md" if target.is_file() else None,
+            }
+            for index, target in enumerate(status.changed_rules)
+        ],
+        "skills_link": str(link),
+        "skills_link_state": status.link_state,
+        "skills_link_previous": os.readlink(link) if link.is_symlink() else None,
+        "shared_skills_target": str(skills_target),
+    })
+    restores: list[tuple[Path, Path | None]] = []  # (target, previous copy or None when absent)
+    stages: list[Path] = []
+    placeholder_removed = False
+    try:
+        for index, target in enumerate(status.changed_rules):
+            previous = None
+            if target.is_file():
+                shutil.copy2(target, backup / f"GEMINI-{index}.md")
+                previous = target.parent / f".{target.name}.previous-{stamp}"
+                os.replace(target, previous)
+            restores.append((target, previous))
+            target.parent.mkdir(parents=True, exist_ok=True)
+            stage = target.parent / f".{target.name}.stage-{stamp}"
+            stages.append(stage)
+            stage.write_bytes(desired)
+            os.replace(stage, target)
+        if status.link_changed:
+            link.parent.mkdir(parents=True, exist_ok=True)
+            if status.link_state == "placeholder":
+                link.rmdir()
+                placeholder_removed = True
+            link.symlink_to(skills_target, target_is_directory=True)
+        _verify_antigravity(root, status.rule_targets, link, skills_target, global_target)
+    except Exception:
+        for target, previous in reversed(restores):
+            target.unlink(missing_ok=True)
+            if previous is not None and previous.exists():
+                os.replace(previous, target)
+        for stage in stages:
+            stage.unlink(missing_ok=True)
+        if status.link_changed and link.is_symlink():
+            link.unlink()
+        if placeholder_removed and not link.exists():
+            link.mkdir()
+        raise
+    else:
+        for _, previous in restores:
+            if previous is not None:
+                previous.unlink(missing_ok=True)
+        return backup
+
+
+def antigravity_doctor(
+    root: Path,
+    config_dir: Path,
+    profiles_root: Path,
+    instances: Sequence[str],
+    skills_target: Path,
+    global_target: Path,
+    *,
+    backup_root: Path | None = None,
+) -> list[str]:
+    status = antigravity_sync_status(
+        root, config_dir, profiles_root, instances, skills_target, global_target, backup_root=backup_root,
+    )
+    errors = check_repo(root)
+    errors.extend(status.conflicts)
+    errors.extend(status.drift)
+    errors.extend(status.prerequisites)
+    errors.extend(status.skipped_profiles)
+    for target in status.changed_rules:
+        errors.append(f"Antigravity rule {target} differs from the canonical projection")
+    if status.link_state in {"missing", "placeholder"}:
+        errors.append(f"Antigravity skills link {status.skills_link} is missing")
     return sorted(set(errors))
 
 
@@ -1745,7 +2038,7 @@ def command_claude_sync(args: argparse.Namespace) -> int:
     return 0
 
 
-def _print_opencode_routing(status: OpenCodeSyncStatus) -> None:
+def _print_skill_routing(status: OpenCodeSyncStatus) -> None:
     print(f"OpenCode version: {status.version if status.version is not None else 'not detected'}")
     print(f"Routing: {len(status.routing['automatic'])} automatic, {len(status.routing['supporting_only'])} supporting-only, {len(status.routing['explicit'])} user-requested")
     print("User-requested skills remain model-loadable; descriptions and managed instructions guide request recognition.")
@@ -1775,7 +2068,7 @@ def command_opencode_sync(args: argparse.Namespace) -> int:
             print(f"{heading}: {len(values)}")
             for value in values:
                 print(f"  {value}")
-        _print_opencode_routing(status)
+        _print_skill_routing(status)
         if not args.apply:
             return 1 if status.drift or status.conflicts or status.prerequisites else 0
         backup = opencode_sync_apply(
@@ -1790,6 +2083,91 @@ def command_opencode_sync(args: argparse.Namespace) -> int:
         print(f"Applied. Rollback snapshot: {backup}")
     return 0
 
+
+
+def _antigravity_paths(args: argparse.Namespace | None = None) -> tuple[Path, Path, list[str], Path, Path, Path]:
+    config = antigravity_runtime_config(ROOT)
+    def pick(name: str, key: str) -> Path:
+        value = getattr(args, name, None) if args is not None else None
+        return Path(value).expanduser() if value else config[key]
+    return (
+        pick("config_dir", "antigravity_config"),
+        pick("profiles_root", "antigravity_t3_profiles"),
+        config["antigravity_t3_instances"],
+        pick("skills_target", "skills"),
+        pick("global_target", "global_agents"),
+        pick("backup_root", "antigravity_backups"),
+    )
+
+
+def _print_antigravity_status(status: AntigravitySyncStatus) -> None:
+    for target in status.rule_targets:
+        action = "unchanged" if target not in status.changed_rules else ("replace" if target.exists() else "create")
+        print(f"Antigravity rule: {target} ({action})")
+    link_action = {
+        "current": "unchanged",
+        "missing": "create link",
+        "placeholder": "remove empty placeholder folder, then create link",
+        "drift": "blocked: points elsewhere",
+        "conflict": "blocked: existing path is not a link",
+    }[status.link_state]
+    print(f"Skills link: {status.skills_link} -> shared runtime ({link_action}; no duplicate catalog)")
+    for heading, values in (("drift", status.drift), ("conflict", status.conflicts), ("prerequisite", status.prerequisites), ("skipped", status.skipped_profiles)):
+        print(f"{heading}: {len(values)}")
+        for value in values:
+            print(f"  {value}")
+    print(f"Routing: {len(status.routing['automatic'])} automatic, {len(status.routing['supporting_only'])} supporting-only, {len(status.routing['explicit'])} user-requested")
+    for limitation in status.limitations:
+        print(f"Limitation: {limitation}")
+
+
+def command_antigravity_sync(args: argparse.Namespace) -> int:
+    try:
+        config_dir, profiles_root, instances, skills_target, global_target, backup_root = _antigravity_paths(args)
+        status = antigravity_sync_status(
+            ROOT, config_dir, profiles_root, instances, skills_target, global_target, backup_root=backup_root,
+        )
+        _print_antigravity_status(status)
+        if not args.apply:
+            return 1 if status.drift or status.conflicts or status.prerequisites else 0
+        backup = antigravity_sync_apply(
+            ROOT, config_dir, profiles_root, instances, skills_target, global_target, backup_root,
+        )
+    except (CheckError, OSError) as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
+    if backup is None:
+        print("Already current; no files changed.")
+    else:
+        print(f"Applied. Rollback snapshot: {backup}")
+    return 0
+
+
+def command_antigravity_doctor(_: argparse.Namespace) -> int:
+    status = None
+    try:
+        config_dir, profiles_root, instances, skills_target, global_target, backup_root = _antigravity_paths()
+        status = antigravity_sync_status(
+            ROOT, config_dir, profiles_root, instances, skills_target, global_target, backup_root=backup_root,
+        )
+        errors = antigravity_doctor(
+            ROOT, config_dir, profiles_root, instances, skills_target, global_target, backup_root=backup_root,
+        )
+    except (CheckError, OSError) as exc:
+        errors = [str(exc)]
+    if status:
+        _print_antigravity_status(status)
+    if shutil.which("agy") is None:
+        print("Live smoke: pending; the Antigravity CLI (agy) is not on PATH. T3 Code may still run its managed runtime.")
+    else:
+        print("Live smoke: pending; start a fresh Antigravity thread in T3 Code to verify rules and skills load.")
+    if errors:
+        print("Antigravity doctor found issues:")
+        for error in errors:
+            print(f"- {error}")
+        return 1
+    print("Antigravity doctor passed.")
+    return 0
 
 def command_opencode_doctor(_: argparse.Namespace) -> int:
     try:
@@ -1806,7 +2184,7 @@ def command_opencode_doctor(_: argparse.Namespace) -> int:
         errors = [str(exc)]
         status = None
     if status:
-        _print_opencode_routing(status)
+        _print_skill_routing(status)
     if shutil.which("opencode") is None:
         print("Live smoke: pending; the OpenCode CLI is not installed.")
     else:
@@ -2042,6 +2420,16 @@ def parser() -> argparse.ArgumentParser:
     t3_sync.set_defaults(func=command_t3_sync)
     t3_doctor_command = commands.add_parser("t3-doctor", help="check EKit-managed T3 Code settings and leftover worktrees")
     t3_doctor_command.set_defaults(func=command_t3_doctor)
+    antigravity_sync = commands.add_parser("antigravity-sync", help="preview or apply Antigravity's shared skill and instruction setup")
+    antigravity_sync.add_argument("--apply", action="store_true")
+    antigravity_sync.add_argument("--config-dir")
+    antigravity_sync.add_argument("--profiles-root")
+    antigravity_sync.add_argument("--skills-target")
+    antigravity_sync.add_argument("--global-target")
+    antigravity_sync.add_argument("--backup-root")
+    antigravity_sync.set_defaults(func=command_antigravity_sync)
+    antigravity_doctor_command = commands.add_parser("antigravity-doctor", help="check Antigravity's shared skills and global rules")
+    antigravity_doctor_command.set_defaults(func=command_antigravity_doctor)
     return result
 
 

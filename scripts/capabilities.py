@@ -104,8 +104,8 @@ def build_report(
     if not isinstance(manifest, dict) or manifest.get("schema") != 1:
         raise skills.CheckError("config/agent-capabilities.json: expected schema 1")
     agents = manifest.get("agents")
-    if not isinstance(agents, dict) or set(agents) != {"codex", "claude-code", "opencode"}:
-        raise skills.CheckError("config/agent-capabilities.json: expected Codex, Claude Code, and OpenCode entries")
+    if not isinstance(agents, dict) or set(agents) != {"codex", "claude-code", "opencode", "antigravity"}:
+        raise skills.CheckError("config/agent-capabilities.json: expected Codex, Claude Code, OpenCode, and Antigravity entries")
 
     tools = skills.read_json(root / "config" / "tools.json")
     if not isinstance(tools, dict):
