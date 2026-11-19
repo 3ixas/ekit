@@ -113,6 +113,6 @@
       "browser"
     ]
   },
-  "reviewed": "2026-11-12",
-  "owned_changes": "2026-11-12: Add conditional measured-improvement guidance and comparative evaluation; preserve ordinary workflow and existing review ownership. No upstream snapshots modified."
+  "reviewed": "2026-11-18",
+  "owned_changes": "2026-11-12: Add conditional measured-improvement guidance and comparative evaluation; preserve ordinary workflow and existing review ownership. No upstream snapshots modified. 2026-11-18: Verify rendered interfaces off-screen by default on the checkout's own port, attach named screenshots, and open the host's shared preview only on request or for mainly visual changes. No upstream snapshots modified."
 }
