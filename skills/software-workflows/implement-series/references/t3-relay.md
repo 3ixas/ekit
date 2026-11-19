@@ -23,6 +23,7 @@ A relay handoff is an ordinary `handoff` document whose first line is exactly `R
 - the original request's authority, quoted briefly, and any user choices that shape the run (stated order, deadlines, waiting budget);
 - the run id: the first thread's start time as `YYYYMMDDHHMM`, set once and carried unchanged by every relay;
 - the run ledger: one row per completed ticket with its PR, verified merge commit and thread link, carried forward from the previous relay handoff plus this ticket;
+- the run's role (the Engineer by default, or the Lead when Elias asked for it) and any fallback in use;
 - the proposed next ticket, and any blocked tickets with their exact resume points;
 - this thread's `threadId` and link as the predecessor;
 - "Learned this run": repository facts the next thread would otherwise rediscover, such as a known flaky check, a slow test command or a sync quirk. Keep it short; link artifacts rather than copying them.
@@ -36,8 +37,7 @@ A relay handoff is an ordinary `handoff` document whose first line is exactly `R
    - `message`: ask it to use the `pickup` skill on the relay handoff's absolute path and continue Implement Series;
    - `workspaceStrategy`: `worktree` from the freshly fetched target (`origin/<target>` with `startFromOrigin: true`), on a new branch named for the ticket;
    - `clientRequestId`: `series-<graph-slug>-<run-id>-r<n>`, where `n` is the number of tickets in the ledger after this one. It identifies this relay transition, not a ticket, so a successor that switches tickets never blocks a later relay; reuse it unchanged on any retry so a lost reply never creates a second thread;
-   - `modelSelection`: the Engineer at `high`, from the role table in the shared instructions, unless Elias asked for the Lead ("use Opus for this") for this run; when Antigravity is unavailable or out of quota, use the Engineer's fallback and record it in the handoff;
-   - `runtimeMode`: `auto-accept-edits` for an Engineer successor, because T3 offers Antigravity no `auto` mode; otherwise inherit it. Inherit the interaction mode.
+   - `modelSelection` and `runtimeMode`: the run's role from the role table in the shared instructions, the Engineer at `high` unless Elias asked for the Lead for this run. When the Engineer's launch fails or its provider reports exhausted quota, use the table's Engineer fallback and record it in the handoff. Inherit the interaction mode.
 4. On a confirmed launch, this thread takes no further action on the run. End with the successor's link, then the handoff path and resume command as the `handoff` skill requires, and settle this thread (`t3_thread_organize`, `action: "settle"`, no `threadId`).
 5. If the launch errors or its reply is lost, retry once with the same `clientRequestId`. If that also fails, search for a thread with the successor's title created after the handoff (`t3_thread_search` or `t3_thread_list`):
    - Found: treat it as the successor and finish step 4.
