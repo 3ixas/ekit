@@ -100,7 +100,7 @@ const BAND = {
   requestId: 'above-prompt',
   surface: 'desktop',
   viewport: { columns: 160, rows: 50 },
-  props: { hasSurvey: false, isWorking: false, maxRows: 6, bodyColumns: 150, scroll: { offset: 0, bodyRows: 6 }, view: {} },
+  props: { hasSurvey: false, isCollapsed: false, isWorking: false, maxRows: 6, bodyColumns: 150, scroll: { offset: 0, bodyRows: 6 }, view: {} },
 } as const
 
 // The engine beneath the plugin: panes it opens and closes, prompts it submits, toasts

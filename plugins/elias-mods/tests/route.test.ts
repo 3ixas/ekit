@@ -20,7 +20,7 @@ const BAND = {
   requestId: 'above-prompt',
   surface: 'desktop',
   viewport: { columns: 120, rows: 40 },
-  props: { hasSurvey: false, isWorking: false, maxRows: 6, bodyColumns: 110, scroll: { offset: 0, bodyRows: 6 }, view: {} },
+  props: { hasSurvey: false, isCollapsed: false, isWorking: false, maxRows: 6, bodyColumns: 110, scroll: { offset: 0, bodyRows: 6 }, view: {} },
 } as const
 
 // A repository as loadPolicy reads it: skills/<group>/<id>/metadata.json, invocation lists as written

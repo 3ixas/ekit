@@ -19,6 +19,7 @@ const BAND = {
   viewport: { columns: 120, rows: 40 },
   props: {
     hasSurvey: false,
+    isCollapsed: false,
     isWorking: false,
     maxRows: 6,
     bodyColumns: 110,
