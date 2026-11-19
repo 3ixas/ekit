@@ -64,6 +64,26 @@
         "https://opencode.ai/docs/skills",
         "https://opencode.ai/docs/agents"
       ]
+    },
+    "antigravity": {
+      "label": "Antigravity",
+      "routing": {
+        "automatic": {"status": "available", "detail": "The model selects skills from their names and descriptions, loaded by progressive disclosure."},
+        "explicit": {"status": "available", "detail": "User-requested skills stay model-loadable. Descriptions and managed rules recognize natural-language requests; command syntax is optional. Recognition is model-guided, not an enforced permission boundary."},
+        "supporting": {"status": "unsupported", "detail": "There is no native supporting-only restriction; managed rules provide guidance.", "fallback": "Treat supporting status as routing guidance, not an enforced permission boundary."}
+      },
+      "orchestration": {
+        "subagents": {"status": "available", "detail": "Antigravity defines native subagents; in T3 Code, delegate_task also starts children on any enabled provider."},
+        "worktrees": {"status": "available", "detail": "In T3 Code, threads and delegated children can run in prepared worktrees."},
+        "model_roles": {"status": "available", "detail": "Thinking level (low to xhigh) is chosen per session; T3 Code sets provider, model and options per thread or child."},
+        "pr_wake": {"status": "unsupported", "detail": "T3 Code's Antigravity sessions do not expose watch_pull_request.", "fallback": "Poll PR state at bounded intervals while the turn is active, as the delivery lifecycle allows."},
+        "issue_tracker": {"status": "unverified", "detail": "The report can check shared GitHub CLI authentication, but not whether the active Antigravity session permits it."}
+      },
+      "entrypoint": {"kind": "executable", "command": "agy"},
+      "sources": [
+        "https://antigravity.google/docs/models/",
+        "https://github.com/pingdotgg/t3code/blob/main/docs/user/providers-antigravity.md"
+      ]
     }
   }
 }

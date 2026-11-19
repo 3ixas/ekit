@@ -115,6 +115,7 @@ python3 scripts/skills.py sync
 python3 scripts/skills.py claude-sync
 python3 scripts/skills.py opencode-sync
 python3 scripts/skills.py t3-sync
+python3 scripts/skills.py antigravity-sync
 ```
 
 These commands show the proposed changes without applying them. Review additions, changes, removals, global instructions and the rollback path before using `--apply`. Application requires a marked runtime and creates a timestamped backup. The one-time `sync --apply --adopt-unmanaged` migration also backs up an existing unmarked runtime.
@@ -129,6 +130,7 @@ python3 scripts/skills.py doctor
 python3 scripts/skills.py claude-doctor
 python3 scripts/skills.py opencode-doctor
 python3 scripts/skills.py t3-doctor
+python3 scripts/skills.py antigravity-doctor
 python3 scripts/skills.py capabilities
 python3 scripts/skills.py updates
 ```

@@ -39,3 +39,19 @@ _Avoid_: Full-history publication, public export (when implying a second maintai
 **Private archive**:
 The preserved original skill-repository history and associated records retained outside the public baseline. It remains private recovery and reference material.
 _Avoid_: Public backup branch, discarded history
+
+**Lead**:
+The role that owns judgement-heavy and open-ended work: orchestrating ticket graphs, grilling, specs, tickets, diagnosing bugs of unknown cause, long interactive sessions, and reviewing an Engineer's work. The role table names the model that fills it.
+_Avoid_: Main model, orchestrator model, Opus (when meaning the role)
+
+**Engineer**:
+The role that owns bounded work against an approved brief: implementing approved tickets, reviewing a Lead's work, and exploring a codebase to answer a defined question. It escalates to the Lead rather than settling an open decision. The role table names the model that fills it.
+_Avoid_: Worker model, cheap model, Neon (when meaning the role)
+
+**Role table**:
+The single mapping from each role to the provider, model and reasoning level that fill it, plus the fallback when that provider is unavailable. Skills name roles, never models.
+_Avoid_: Model routing (when meaning the mapping), model config
+
+**Escalation**:
+An Engineer handing a ticket back to the Lead because it reached a decision the approved brief does not settle, or failed review twice on the same issue, with its branch and evidence preserved.
+_Avoid_: Fallback (that is the provider-unavailable path), bail-out
