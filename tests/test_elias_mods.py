@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import re
 import shutil
 import subprocess
@@ -100,8 +101,19 @@ class MiningScriptTests(unittest.TestCase):
         self.assertEqual((after_install["typed_prompts"], after_install["pure_approval_replies"], after_install["mod_replies"]), (2, 1, 1))
 
 
-@unittest.skipUnless(shutil.which("claude"), "claude CLI unavailable")
+# CI sets this so a missing CLI fails the run instead of skipping the plugin's checks
+REQUIRE_CLAUDE = os.environ.get("EKIT_REQUIRE_CLAUDE") == "1"
+
+
 class EliasModsTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        if shutil.which("claude"):
+            return
+        if REQUIRE_CLAUDE:
+            raise AssertionError("EKIT_REQUIRE_CLAUDE=1 but the claude CLI is not on PATH")
+        raise unittest.SkipTest("claude CLI unavailable")
+
     def run_claude(self, *args: str) -> subprocess.CompletedProcess[str]:
         return subprocess.run(["claude", "plugin", *args], cwd=PLUGIN, capture_output=True, text=True, timeout=120)
 

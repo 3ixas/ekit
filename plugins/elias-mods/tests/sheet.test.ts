@@ -2,6 +2,7 @@ import { expect, test, type Engine } from 'claude-code/testing'
 import type { On, PaneOpenArgs, PromptSubmitInput } from 'claude-code'
 import { acceptAll, composeReply, isComplete, parseRound, sentToast, type Answer } from '../hooks/sheet.js'
 import { MODS_DESIGN, ONE_BOLD, REVISITED, SKILL_REVIEW, WITH_TRAILER } from './rounds.js'
+import { abovePrompt } from './above-prompt.js'
 
 // Parsing synthetic rounds
 
@@ -94,14 +95,7 @@ const PANE = {
   props: { title: 'Grilling round', isFocused: false, bodyColumns: 70, placement: 'dock', scroll: { offset: 0, bodyRows: 40 }, view: {} },
 } as const
 
-const BAND = {
-  plugin: 'elias-mods',
-  component: 'AbovePrompt',
-  requestId: 'above-prompt',
-  surface: 'desktop',
-  viewport: { columns: 160, rows: 50 },
-  props: { hasSurvey: false, isCollapsed: false, isWorking: false, maxRows: 6, bodyColumns: 150, scroll: { offset: 0, bodyRows: 6 }, view: {} },
-} as const
+const BAND = abovePrompt('desktop', { columns: 160, rows: 50 })
 
 // The engine beneath the plugin: panes it opens and closes, prompts it submits, toasts
 function stubEngine(on: On, { dropSubmit = false } = {}) {

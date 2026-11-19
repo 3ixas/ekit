@@ -10,23 +10,7 @@ import {
   recordTurn,
   sparklineText,
 } from '../hooks/band.js'
-
-// What Claude Code passes to an AbovePrompt hook, apart from the app
-const BAND = {
-  plugin: 'elias-mods',
-  component: 'AbovePrompt',
-  requestId: 'above-prompt',
-  viewport: { columns: 120, rows: 40 },
-  props: {
-    hasSurvey: false,
-    isCollapsed: false,
-    isWorking: false,
-    maxRows: 6,
-    bodyColumns: 110,
-    scroll: { offset: 0, bodyRows: 6 },
-    view: {},
-  },
-} as const
+import { abovePrompt } from './above-prompt.js'
 
 // Stubs every test needs before its first call on $
 function stubSession(on: On, saved: Map<string, unknown>, surfaces: RenderSurface[]) {
@@ -47,7 +31,7 @@ test('the band shows the placeholder row on Desktop and keeps later mods', async
   stubSession(on, saved, ['desktop'])
   await $.session.start({ surface: 'desktop', isInteractive: true, cwd: '/work' })
 
-  const ui = await $.ui.mount({ ...BAND, surface: 'desktop' })
+  const ui = await $.ui.mount(abovePrompt('desktop'))
   expect(
     await ui.find({ type: 'Text', text: /^elias-mods · desktop · Claude Code 2\.1\.300 · features: context barometer, skill route, answer sheet$/ }),
   ).toBeDefined()
@@ -59,7 +43,7 @@ test('the band draws in the terminal too', async ($, on) => {
   stubSession(on, new Map(), ['terminal'])
   await $.session.start({ surface: 'terminal', isInteractive: true, cwd: '/work' })
 
-  const ui = await $.ui.mount({ ...BAND, surface: 'terminal' })
+  const ui = await $.ui.mount(abovePrompt('terminal'))
   expect(await ui.find({ type: 'Text', text: /^elias-mods · terminal · / })).toBeDefined()
   await ui.unmount()
 })
@@ -104,7 +88,7 @@ test('/elias-mods names the app that attached when the roster reads empty', asyn
 test('/elias-mods names the surface that drew the band when nothing attached', async ($, on) => {
   stubSession(on, new Map(), [])
   await $.session.start({ surface: null, isInteractive: true, cwd: '/work' })
-  const ui = await $.ui.mount({ ...BAND, surface: 'desktop' })
+  const ui = await $.ui.mount(abovePrompt('desktop'))
   await ui.unmount()
 
   const answer = await $.command.run({ command: 'elias-mods:elias-mods', args: '', origin: { kind: 'composer' }, presentation: { isFullscreen: false, columns: 120 } })
@@ -154,7 +138,7 @@ test('Desktop draws the context fill and an Svg sparkline in place of the placeh
   await $.session.start({ surface: 'desktop', isInteractive: true, cwd: '/work' })
   await turns($, current, [usageAt(10), usageAt(25), usageAt(40)])
 
-  const ui = await $.ui.mount({ ...BAND, surface: 'desktop' })
+  const ui = await $.ui.mount(abovePrompt('desktop'))
   expect(await ui.find({ type: 'Text', text: 'context 40% · 80k/200k' })).toBeDefined()
   const svg = await ui.find({ type: 'Svg' })
   const source = String(svg?.props.source)
@@ -176,7 +160,7 @@ test('Desktop shows plan limits beside the sparkline', async ($, on) => {
   const resetsAt = new Date(Date.now() + 3 * 1440 * MINUTE + 4 * 60 * MINUTE + 20_000).toISOString()
   await turns($, current, [usageAt(20, [{ kind: 'five_hour', percentUsed: 34 }, { kind: 'seven_day', percentUsed: 12, resetsAt }])])
 
-  const ui = await $.ui.mount({ ...BAND, surface: 'desktop' })
+  const ui = await $.ui.mount(abovePrompt('desktop'))
   expect(await ui.find({ type: 'Text', text: '5h 34% · 7d 12% resets 3d4h' })).toBeDefined()
   await ui.unmount()
 })
@@ -187,7 +171,7 @@ test('surfaces other than Desktop get the text line, mobile included', async ($,
   await $.session.start({ surface: 'mobile', isInteractive: true, cwd: '/work' })
   await turns($, current, [usageAt(10)])
 
-  const ui = await $.ui.mount({ ...BAND, surface: 'mobile' })
+  const ui = await $.ui.mount(abovePrompt('mobile'))
   expect(await ui.find({ type: 'Svg' })).toBeUndefined()
   expect(await ui.find({ type: 'Text', text: 'context 10% · 20k/200k ▁' })).toBeDefined()
   await ui.unmount()
@@ -208,7 +192,7 @@ test('a Handoff that cannot start says so in a toast', async ($, on) => {
   await $.session.start({ surface: 'desktop', isInteractive: true, cwd: '/work' })
   await turns($, current, [usageAt(80)])
 
-  const ui = await $.ui.mount({ ...BAND, surface: 'desktop' })
+  const ui = await $.ui.mount(abovePrompt('desktop'))
   await ui.press({ key: 'handoff' })
   await failed
   // The press is acknowledged at once, since /handoff waits for the session to go idle
@@ -223,7 +207,7 @@ test('the terminal gets the barometer as one line of text', async ($, on) => {
   await $.session.start({ surface: 'terminal', isInteractive: true, cwd: '/work' })
   await turns($, current, [usageAt(10), usageAt(55)])
 
-  const ui = await $.ui.mount({ ...BAND, surface: 'terminal' })
+  const ui = await $.ui.mount(abovePrompt('terminal'))
   expect(await ui.find({ type: 'Svg' })).toBeUndefined()
   expect(await ui.find({ type: 'Text', text: 'context 55% · 110k/200k ▁▅' })).toBeDefined()
   await ui.unmount()
@@ -246,12 +230,12 @@ test('plan limits show with their reset time, and are left out when there are no
   const resetsAt = new Date(Date.now() + 130 * MINUTE + 20_000).toISOString()
   await turns($, current, [usageAt(20, [{ kind: 'five_hour', percentUsed: 34, resetsAt }, { kind: 'seven_day', percentUsed: 12 }])])
 
-  const ui = await $.ui.mount({ ...BAND, surface: 'terminal' })
+  const ui = await $.ui.mount(abovePrompt('terminal'))
   expect(await ui.find({ type: 'Text', text: 'context 20% · 40k/200k ▂ · 5h 34% resets 2h10m · 7d 12%' })).toBeDefined()
   await ui.unmount()
 
   await turns($, current, [usageAt(21)])
-  const again = await $.ui.mount({ ...BAND, surface: 'terminal' })
+  const again = await $.ui.mount(abovePrompt('terminal'))
   expect(await again.find({ type: 'Text', text: 'context 21% · 42k/200k ▂▂' })).toBeDefined()
   await again.unmount()
 })
@@ -269,12 +253,12 @@ test('at 70% the Handoff button appears and starts /handoff', async ($, on) => {
   await $.session.start({ surface: 'desktop', isInteractive: true, cwd: '/work' })
 
   await turns($, current, [usageAt(69)])
-  const below = await $.ui.mount({ ...BAND, surface: 'desktop' })
+  const below = await $.ui.mount(abovePrompt('desktop'))
   expect(await below.find({ type: 'Button', key: 'handoff' })).toBeUndefined()
   await below.unmount()
 
   await turns($, current, [usageAt(70)])
-  const at = await $.ui.mount({ ...BAND, surface: 'desktop' })
+  const at = await $.ui.mount(abovePrompt('desktop'))
   expect(await at.find({ type: 'Button', text: 'Handoff' })).toBeDefined()
   await at.press({ key: 'handoff' })
   expect(await ran).toBe('handoff')
@@ -287,7 +271,7 @@ test('handoff_at moves the threshold', { options: { handoff_at: 50 } }, async ($
   await $.session.start({ surface: 'terminal', isInteractive: true, cwd: '/work' })
   await turns($, current, [usageAt(50)])
 
-  const ui = await $.ui.mount({ ...BAND, surface: 'terminal' })
+  const ui = await $.ui.mount(abovePrompt('terminal'))
   expect(await ui.find({ type: 'Button', key: 'handoff' })).toBeDefined()
   await ui.unmount()
 })
@@ -298,7 +282,7 @@ test('with the barometer off, a measured turn draws nothing new', { options: { b
   await $.session.start({ surface: 'desktop', isInteractive: true, cwd: '/work' })
   await turns($, current, [usageAt(90)])
 
-  const ui = await $.ui.mount({ ...BAND, surface: 'desktop' })
+  const ui = await $.ui.mount(abovePrompt('desktop'))
   expect(await ui.find({ type: 'Text', text: /^context / })).toBeUndefined()
   expect(await ui.find({ type: 'Text', text: /features: skill route, answer sheet$/ })).toBeDefined()
   await ui.unmount()
@@ -312,7 +296,7 @@ test('a rate-limit-only measurement updates limits without adding a sparkline po
   current.usage = usageAt(40, [{ kind: 'five_hour', percentUsed: 80 }])
   await $.session.measure({ context: current.usage.context, rateLimits: current.usage.rateLimits, changed: ['rateLimits'] })
 
-  const ui = await $.ui.mount({ ...BAND, surface: 'terminal' })
+  const ui = await $.ui.mount(abovePrompt('terminal'))
   expect(await ui.find({ type: 'Text', text: 'context 40% · 80k/200k ▄ · 5h 80%' })).toBeDefined()
   await ui.unmount()
 })
@@ -365,7 +349,7 @@ const ROW_KEYS = FEATURES.map((feature) => feature.id)
 
 // The keys of the band's rows, top to bottom
 async function rowKeys($: Engine, props: { maxRows?: number } = {}) {
-  const ui = await $.ui.mount({ ...BAND, surface: 'desktop', props: { ...BAND.props, ...props } })
+  const ui = await $.ui.mount(abovePrompt('desktop', { props }))
   const boxes = await ui.findAll({ type: 'Box' })
   await ui.unmount()
   return boxes.flatMap((box) => (ROW_KEYS.includes(String(box.key)) || box.key === 'placeholder' ? [String(box.key)] : []))
@@ -387,7 +371,7 @@ test('short of rows, the skill route goes first, then the barometer; the round s
 test('a narrow band drops plan limits, then the sparkline, never the context reading', async ($, on) => {
   await everyRow($, on)
   const at = async (bodyColumns: number) => {
-    const ui = await $.ui.mount({ ...BAND, surface: 'desktop', props: { ...BAND.props, bodyColumns } })
+    const ui = await $.ui.mount(abovePrompt('desktop', { props: { bodyColumns } }))
     const seen = {
       context: (await ui.find({ type: 'Text', text: 'context 35% · 70k/200k' })) !== undefined,
       spark: (await ui.find({ type: 'Svg' })) !== undefined,
@@ -407,7 +391,7 @@ test('the terminal line drops plan limits, then the block sparkline, as the band
   await $.session.start({ surface: 'terminal', isInteractive: true, cwd: '/work' })
   await turns($, current, [usageAt(30, [...LIMITS]), usageAt(35, [...LIMITS])])
   const line = async (bodyColumns: number) => {
-    const ui = await $.ui.mount({ ...BAND, surface: 'terminal', props: { ...BAND.props, bodyColumns } })
+    const ui = await $.ui.mount(abovePrompt('terminal', { props: { bodyColumns } }))
     const text = (await ui.find({ type: 'Text', text: /^context / }))?.text
     await ui.unmount()
     return text
@@ -429,7 +413,7 @@ test('one measured turn draws no Svg dot on Desktop', async ($, on) => {
   const current = stubUsage(on)
   await $.session.start({ surface: 'desktop', isInteractive: true, cwd: '/work' })
   await turns($, current, [usageAt(35)])
-  const ui = await $.ui.mount({ ...BAND, surface: 'desktop' })
+  const ui = await $.ui.mount(abovePrompt('desktop'))
   expect(await ui.find({ type: 'Svg' })).toBeUndefined()
   expect(await ui.find({ type: 'Text', text: 'context 35% · 70k/200k' })).toBeDefined()
   await ui.unmount()

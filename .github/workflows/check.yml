@@ -3,17 +3,22 @@ name: Check
 on:
   push:
   pull_request:
+  # Weekly run against the latest Claude Code, to catch plugin SDK changes before a local update does
+  schedule:
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: check-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  # The event keeps the weekly run from cancelling, or being cancelled by, a push to main
+  group: check-${{ github.workflow }}-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
   check:
-    if: (github.event_name == 'push' && !github.event.deleted) || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository)
+    if: (github.event_name == 'push' && !github.event.deleted) || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository) || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -35,7 +40,17 @@ jobs:
           echo '8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8  '"$RUNNER_TEMP/actionlint.tar.gz" | sha256sum -c -
           tar -xzf "$RUNNER_TEMP/actionlint.tar.gz" -C "$RUNNER_TEMP" actionlint
           echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
+      - name: Install Claude Code CLI
+        env:
+          # Pinned for pushes and PRs; the weekly and manual runs take the latest release
+          CLAUDE_CODE_VERSION: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && 'latest' || '2.1.327' }}
+        run: |
+          npm install --global "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}"
+          claude --version
       - name: Run checks
         env:
+          EKIT_REQUIRE_CLAUDE: '1'
+          DISABLE_AUTOUPDATER: '1'
+          CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC: '1'
           CHECK_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: bash scripts/check.sh
