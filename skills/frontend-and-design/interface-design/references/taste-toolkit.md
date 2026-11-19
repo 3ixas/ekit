@@ -66,7 +66,7 @@ Findings retain upstream IDs, measurements and severity in `upstreamLevel`; the 
 - **aesthetic:** strong Taste defaults. Approved exceptions become visible `INFO` entries instead of repeated restyling demands.
 - **heuristic:** inferred composition/contrast/space/scene judgements become `WARN` pending rendered confirmation. A computed ancestor colour does not prove contrast over imagery or gradients.
 
-Exit 0 means no remaining `FAIL` findings, not approved design or release readiness. Exit 1 means findings remain; exit 2 means unavailable/invalid execution. Inspector JSON includes `status: measured` or `unavailable`; failed required probes cannot silently become clean measurements. Source lint alone cannot prove a visual defect. Inspect screenshots at each width, fix the three material problems, and repeat at most three rounds. Retain before/after evidence and unresolved limits.
+Exit 0 means no remaining `FAIL` findings, not approved design or release readiness. Exit 1 means findings remain; exit 2 means unavailable/invalid execution. Inspector JSON includes `status: measured` or `unavailable`; failed required probes cannot silently become clean measurements. Source lint alone cannot prove a visual defect. Inspect screenshots at each width, fix the most material problems, and repeat while each round removes material problems; there is no fixed round count, and this replaces the vendored workflow's three-round limit. Follow the round rules in [screenshot critique](screenshot-critique.md). Retain before/after evidence and unresolved limits.
 
 ## Assets, code and motion
 

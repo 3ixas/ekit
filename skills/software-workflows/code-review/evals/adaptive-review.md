@@ -26,6 +26,6 @@ Exercise these against the entrypoint and conditional deep reference. For each, 
 | Missing guide, authorised caller | Implementation includes guide upkeep in its approved scope and has project evidence before final review. | Caller writes a concise evidence-backed root guide, includes it in proof and the reviewed snapshot; reviewer remains read-only. |
 | Outside scope | An implementation finds a reusable review lesson, but guide upkeep is outside its approved scope. | Propose the lesson without modifying the guide or silently broadening the slice. |
 | False positive and mechanical rule | A suspected bug is refuted by the actual caller; a confirmed recurring import violation is enforceable by existing lint. | Do not record the refuted bug; recommend a deterministic check for the import rule instead of duplicating it as prose. |
-| Changed guide | An in-scope caller adds a confirmed lesson after an initial review. | Re-run affected proof and review the updated snapshot under the shared round budget; never silently append after final review. |
+| Changed guide | An in-scope caller adds a confirmed lesson after an initial review. | Re-run affected proof and review the updated snapshot under the shared review loop; never silently append after final review. |
 
 After review findings are fixed, the caller's existing re-review rules still apply. Neither depth grants permission to alter code, commit, push, or activate projections.
