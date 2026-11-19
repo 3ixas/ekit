@@ -12,16 +12,7 @@ import {
   repositoryCandidates,
   type RoutePolicy,
 } from '../hooks/route.js'
-
-// What Claude Code passes to an AbovePrompt hook
-const BAND = {
-  plugin: 'elias-mods',
-  component: 'AbovePrompt',
-  requestId: 'above-prompt',
-  surface: 'desktop',
-  viewport: { columns: 120, rows: 40 },
-  props: { hasSurvey: false, isCollapsed: false, isWorking: false, maxRows: 6, bodyColumns: 110, scroll: { offset: 0, bodyRows: 6 }, view: {} },
-} as const
+import { abovePrompt } from './above-prompt.js'
 
 // A repository as loadPolicy reads it: skills/<group>/<id>/metadata.json, invocation lists as written
 const SKILLS: Record<string, Record<string, string[]>> = {
@@ -80,7 +71,7 @@ const begin = ($: Engine, turnId = 'turn-1') => $.turn.start({ text: 'prompt', t
 const typedSkill = ($: Engine, skill: string) => $.skill.prompt({ skill, text: `${skill} instructions` })
 
 async function chip($: Engine) {
-  const ui = await $.ui.mount(BAND)
+  const ui = await $.ui.mount(abovePrompt('desktop'))
   const found = await ui.find({ type: 'Text', text: /^skills / })
   await ui.unmount()
   return found
