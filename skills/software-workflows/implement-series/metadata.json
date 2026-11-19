@@ -10,12 +10,14 @@
     "skills": [
       "implement",
       "full-send",
-      "babysit-pr"
+      "babysit-pr",
+      "handoff",
+      "pickup"
     ],
     "tools": [
       "git",
       "github"
     ]
   },
-  "reviewed": "2026-11-06"
+  "reviewed": "2026-11-19"
 }
