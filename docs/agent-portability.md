@@ -90,6 +90,7 @@ T3 Code is Elias's primary development host. It is not a separate skill host: it
 |---|---|
 | Background work goes through `delegate_task`, never a background native agent | Foreground native subagents still work; background and cross-provider children use `delegate_task`. |
 | `preview_*` is not used unasked to verify or show the agent's own edit | Verification works off-screen; agents open the live preview when Elias asks or the change is mainly visual. |
+| `html_preview` and `html_render` reach every provider's thread; Claude artifacts reach only Claude threads | Visual options and design directions render inline through `html_render` whatever the model; an artifact is the choice for phone review, element comments or sharing. Screenshots stay as the agent's own check evidence. |
 | Worktrees do not isolate ports or databases | Each worktree's dev server needs its own port. |
 | Claude task-list tools are off unless the Claude instance sets `CLAUDE_CODE_ENABLE_TODO_TOOLS=1` | Set it in T3's Claude provider environment. |
 | Desktop mods, such as the elias-mods band, do not draw | Plain Claude Code hooks still run. |
