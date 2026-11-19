@@ -115,7 +115,8 @@ Antigravity runs Gemini 4 Neon. In T3 Code it is a provider like Claude and Code
 |---|---|
 | T3 Code's Antigravity sessions have no `watch_pull_request` | Delivery polls PR state at bounded intervals while the turn is active. |
 | Antigravity creates empty `.gemini/skills` and `.agents/skills` folders in a workspace | Git ignores them. |
-| T3 runs Neon at `medium` thinking unless a thread or child sets `thought_level` | A Neon thread started without an explicit level runs at `medium`. |
+| T3 picks its own default `thought_level` for Neon (`medium` in early probes, `low` in the 2026-11-19 catalog) | Every workflow that starts an Engineer sets the level from the role table in `config/AGENTS.md`. |
+| T3 offers Antigravity no `auto` runtime mode | The shared instructions run Antigravity in `auto-accept-edits`, which still runs shell and `gh` unattended. |
 
 Verification, 2026-11-19, T3 Code with Antigravity CLI 1.5.13 and Gemini 4 Neon: before the projection, a fresh Neon child loaded only the project `AGENTS.md` and four built-in skills. Probe rules in `~/.gemini/config` did not load; the same rules in the T3 profile's `config/` did, as `GEMINI.md`, `AGENTS.md` and `rules/*.md`. With `~/.gemini/config/skills` linked to the shared runtime, the child listed 93 owned skills and could activate `implement`. After `antigravity-sync --apply`, a fresh Neon child reported the managed global rule (headings `# Personal agent preferences` and `## Managed Antigravity skill routing`), quoted the shared instruction that durable notes go to the Obsidian vault, and activated `implement` and `code-review`. `antigravity-doctor` passed.
 

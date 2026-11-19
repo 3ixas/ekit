@@ -42,15 +42,32 @@ For my personal knowledge and durable notes, use the Obsidian vault at `/Users/e
 
 My own agent skills, their routing and these shared instructions live in the ekit repository: `/Users/elias/_LifeOS/03_ENGINEERING/repos/personal/ekit` (GitHub `3ixas/ekit`). It is the only source; change a skill there, in a worktree, never in the generated copies under `~/.claude/skills`, `~/.claude/agent-skills-runtime` or `~/.agents/skills`. The old `elias-agent-skills` repository is archived: do not read, edit or recommend it.
 
+## Roles
+
+Skills name roles; this table names the models. In T3, select one with `modelSelection` (`t3_thread_launch`) or `target` (`delegate_task`) using the instance, model and option shown.
+
+| Role | Model | Reasoning | Fallback |
+|---|---|---|---|
+| Lead | Claude Opus 5.5 (`claudeAgent`, `claude-opus-5-5`, option `effort`) | `medium` | Gemini 4 Neon at `xhigh`, T3's fallback model |
+| Engineer | Gemini 4 Neon via Antigravity (`antigravity`, `gemini-4-neon`, option `thought_level`) | `high` to implement, `xhigh` to review, `medium` to explore or write | Codex `gpt-6.2-sol` (`codex`, option `reasoningEffort`, same levels) when the Engineer's launch fails or Google quota is exhausted |
+
+- The Lead orchestrates ticket graphs and owns grilling, specs, tickets, `debug` of an unknown cause, long interactive sessions and review of Engineer work.
+- The Engineer implements approved tickets, reviews Lead work and explores codebases, writing the copy, docs, PR bodies and commits inside its own run. Always start it with an explicit reasoning level.
+- Approved tickets run on the Engineer by default. Ad-hoc coding in a Lead thread stays on the Lead, and "use Opus for this" puts the work on the Lead.
+- Set the runtime mode by provider: `auto-accept-edits` on Antigravity, which T3 offers no `auto`, and `auto` otherwise, never above the launching thread's own mode.
+- A fallback covers one launch; the next launch tries the role's own model first.
+- Switch models only when starting a new thread or child, never in the thread I am talking in.
+- Codex keeps images, rendered browser or desktop work and web research. T3's Orchestrator (Neon) model, Gemini 4 Carbon and Sonnet are not routed.
+
 ## Claude Code
 
 These apply to Claude threads, in T3 Code or Claude Code Desktop.
 
 - T3 Code is my primary host and Claude Code Desktop is the fallback. Claude threads in T3 load these instructions, rules, skills, plugins and hooks, except Desktop mods, and task-list tools unless enabled; see EKit's `docs/agent-portability.md`. Use host-specific tools only when the current host provides them.
-- Keep coding, debugging and implementation in Claude, and never hand a ticket or the main thread to another provider unless I ask; I sometimes start a ticket on Codex myself when Claude usage is low. Delegating the subtasks below to Codex is expected.
+- Route work by the role table above; never hand the main thread to another provider unless I ask. Delegating the subtasks below to Codex is expected.
 - Send raster image generation or editing, mockup images, interactive work in a rendered browser or desktop interface (headless verification checks stay in the thread), and research run as a background agent to Codex: in T3 through `delegate_task` with the Codex provider; on Desktop, when available, through the Codex plugin's `codex:codex-rescue` agent. Try Codex before looking up other image or computer-use tools, unless I specify a tool.
 - In T3, run background work through `delegate_task`, not a background native agent. Foreground native subagents, such as paired reviewers, stay native.
-- Give Codex a fresh, focused task with the brief or UI target, relevant references, permitted actions and expected output. Ask for read-only mode when the task needs no file edits. Keep the owning EKit workflow in Claude and verify the returned evidence.
+- Give Codex a fresh, focused task with the brief or UI target, relevant references, permitted actions and expected output. Ask for read-only mode when the task needs no file edits. Keep the owning EKit workflow in its own thread and verify the returned evidence.
 - When delegating image generation or editing, tell Codex to call its built-in ImageGen tool, save the returned image, and report the tool used and the file path. Accept the result only when Codex confirms ImageGen produced it and you can inspect the saved file.
 - If delegation is unavailable, fails, or returns no usable result, state the limitation. For research, run the investigation directly. Otherwise provide a ready-to-run Codex prompt with the target, scope and expected output. Keep normal tool permissions and approvals in place.
 
