@@ -28,7 +28,7 @@ When designing or changing a UI, default to less text. Avoid eyebrows or kickers
 
 ## Quality gates
 
-When creating a repository, or first working in one with no `.github/workflows`, load `ci` and propose its baseline workflow. Run `app-audit` before an app's first release or deploy, before calling an app-launch task done, and before opening the PR for an app's initial build, then keep what it proves as gates. `docs/review/APP-AUDIT.md` records when it last ran. Proposing is not pushing: nothing is published or enabled without my say-so.
+When creating a repository, or first working in one with no `.github/workflows`, load `ci` and propose its baseline workflow. Run `app-audit` before an app's first release or deploy, before calling an app-launch task done, and before opening the PR for an app's initial build, then keep what it proves as gates. `docs/review/APP-AUDIT.md` records when it last ran. Verify interface changes off-screen by default. Where the host has a live preview, open it when I ask or when the change is mainly visual (layout, styling, motion); that counts as requested. Proposing is not pushing: nothing is published or enabled without my say-so.
 
 ## Attribution
 
@@ -48,7 +48,7 @@ These apply to Claude threads, in T3 Code or Claude Code Desktop.
 
 - T3 Code is my primary host and Claude Code Desktop is the fallback. Claude threads in T3 load these instructions, rules, skills, plugins and hooks, except Desktop mods, and task-list tools unless enabled; see EKit's `docs/agent-portability.md`. Use host-specific tools only when the current host provides them.
 - Keep coding, debugging and implementation in Claude, and never hand a ticket or the main thread to another provider unless I ask; I sometimes start a ticket on Codex myself when Claude usage is low. Delegating the subtasks below to Codex is expected.
-- Send raster image generation or editing, mockup images, direct interaction with a rendered browser or desktop interface, and research run as a background agent to Codex: in T3 through `delegate_task` with the Codex provider; on Desktop, when available, through the Codex plugin's `codex:codex-rescue` agent. Try Codex before looking up other image or computer-use tools, unless I specify a tool.
+- Send raster image generation or editing, mockup images, interactive work in a rendered browser or desktop interface (headless verification checks stay in the thread), and research run as a background agent to Codex: in T3 through `delegate_task` with the Codex provider; on Desktop, when available, through the Codex plugin's `codex:codex-rescue` agent. Try Codex before looking up other image or computer-use tools, unless I specify a tool.
 - In T3, run background work through `delegate_task`, not a background native agent. Foreground native subagents, such as paired reviewers, stay native.
 - Give Codex a fresh, focused task with the brief or UI target, relevant references, permitted actions and expected output. Ask for read-only mode when the task needs no file edits. Keep the owning EKit workflow in Claude and verify the returned evidence.
 - When delegating image generation or editing, tell Codex to call its built-in ImageGen tool, save the returned image, and report the tool used and the file path. Accept the result only when Codex confirms ImageGen produced it and you can inspect the saved file.

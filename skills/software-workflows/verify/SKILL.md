@@ -23,6 +23,8 @@ When important test sensitivity is uncertain and the risk warrants the cost, con
 
 For tests, typechecks, lint, and builds, preserve complete stdout/stderr and the check's actual exit status before summarizing or filtering; use [check output](references/check-output.md). An interrupted run or missing evidence cannot establish a pass.
 
+For a rendered interface, verify off-screen by default, in a headless browser or simulator against your own checkout's dev server, and attach named screenshots to the report. Read [rendered interfaces](references/rendered-interfaces.md) for ports, widths, evidence and when to show the live preview.
+
 A build, checkmark, another agent's report, or final screenshot alone is not integrated proof. Separate product failures, harness failures, and unavailable environments. Report concrete blockers and continue independent checks; inaccessible required surfaces remain Skip, never Pass.
 
 A generated guide is working only after one journey has run end to end and its evidence survives cleanup. Name that journey and distinguish it from unexecuted coverage. Use only resources and actions authorized by the task; a guide grants no authority to send, publish, deploy, pay, or destroy valuable data.
