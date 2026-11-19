@@ -42,5 +42,5 @@
     ]
   },
   "reviewed": "2026-10-29",
-  "owned_changes": "2026-10-26 writing-for-agents pass: Removed dependence on a host-specific Skill tool. Specified the minimum continuation context needed to make self-contained checkable. Replaced a truncated or stale UI summary with a complete description of the current workflow. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed."
+  "owned_changes": "2026-10-26 writing-for-agents pass: Removed dependence on a host-specific Skill tool. Specified the minimum continuation context needed to make self-contained checkable. Replaced a truncated or stale UI summary with a complete description of the current workflow. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed.\n\n2026-11-19: In T3 Code, settles the current thread after writing the handoff so it remains the thread's last message, and puts the resume command in its own fenced block for copying. Independently authored from Elias's request; no upstream source changed."
 }

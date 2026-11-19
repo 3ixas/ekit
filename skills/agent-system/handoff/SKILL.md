@@ -16,7 +16,7 @@ Redact any sensitive information, such as API keys, passwords, or personally ide
 
 If the user passed arguments, treat them as a description of what the next session will focus on and tailor the doc accordingly.
 
-End your reply with the absolute path you wrote and the exact resume command, so a fresh session after a context reset can find it: `/pickup <absolute-path>` in Claude Code, `$pickup <absolute-path>` in Codex.
+End your reply with the absolute path you wrote and the exact resume command in its own fenced code block, so it can be copied in one go from this thread later: `/pickup <absolute-path>` in Claude Code, `$pickup <absolute-path>` in Codex.
 
 
 ## Host note
@@ -24,3 +24,5 @@ End your reply with the absolute path you wrote and the exact resume command, so
 The handoff folder is shared by Codex and Claude Code, so either host can resume it. Keep the document self-contained: state the goal, settled decisions, authorized scope, current work state, observed checks, unresolved blockers, and exact next action, linking existing artifacts for detail. Do not rely on host-specific commands or hidden chat history. If writing fails because the sandbox denies the folder, say so, write to the OS temporary directory as a fallback (`$TMPDIR` when set, otherwise `/tmp` on Unix; `%TEMP%` on Windows), and report both the failure and the fallback path.
 
 In T3 Code, when Elias approves a handoff and the file is written, open the pickup thread: call `t3_thread_launch` in the same project with a prompt that asks the new thread to use the pickup skill on the absolute path, then give Elias the thread. Do not launch it before the approval or when Elias asks to resume elsewhere.
+
+In T3 Code, once the file is written, also settle this thread with `t3_thread_organize` (`action: "settle"`, no `threadId`) so the handoff stays its last message; T3 applies it at the end of the turn. Skip settling when Elias wants to keep working in this thread, or when writing failed and no handoff exists.
