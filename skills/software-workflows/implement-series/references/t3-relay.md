@@ -40,7 +40,7 @@ A relay handoff is an ordinary `handoff` document whose first line is exactly `R
 4. On a confirmed launch, this thread takes no further action on the run. End with the successor's link, then the handoff path and resume command as the `handoff` skill requires, and settle this thread (`t3_thread_organize`, `action: "settle"`, no `threadId`).
 5. If the launch errors or its reply is lost, retry once with the same `clientRequestId`. If that also fails, search for a thread with the successor's title created after the handoff (`t3_thread_search` or `t3_thread_list`):
    - Found: treat it as the successor and finish step 4.
-   - None found: keep ownership here. Report the failed launch and continue the run in this thread from step 2; the unused handoff stays as a record.
+   - None found: keep ownership here. Report the failed launch, do not settle this thread, and continue at step 2 of Implement Series here; the unused handoff stays as a record.
    - Unknown, because the search failed: stop with the exact resume state rather than risk two owners.
 
 ## Successor start
