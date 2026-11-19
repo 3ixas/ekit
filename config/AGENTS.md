@@ -44,16 +44,18 @@ My own agent skills, their routing and these shared instructions live in the eki
 
 ## Roles
 
-Skills name roles; this table names the models. In T3, select one with `modelSelection` (`t3_thread_launch`) or `target` (`delegate_task`) using the instance, model, option and runtime mode shown.
+Skills name roles; this table names the models. In T3, select one with `modelSelection` (`t3_thread_launch`) or `target` (`delegate_task`) using the instance, model and option shown.
 
-| Role | Model | Reasoning | Runtime mode | Fallback |
-|---|---|---|---|---|
-| Lead | Claude Opus 5.5 (`claudeAgent`, `claude-opus-5-5`, option `effort`) | `medium` | `auto` | Gemini 4 Neon at `xhigh`, T3's fallback model |
-| Engineer | Gemini 4 Neon via Antigravity (`antigravity`, `gemini-4-neon`, option `thought_level`) | `high` to implement, `xhigh` to review, `medium` to explore or write | `auto-accept-edits` (T3 offers Antigravity no `auto`) | Codex `gpt-6.2-sol` (`codex`, option `reasoningEffort`, same levels, `auto`) when the Engineer's launch fails or Google quota is exhausted |
+| Role | Model | Reasoning | Fallback |
+|---|---|---|---|
+| Lead | Claude Opus 5.5 (`claudeAgent`, `claude-opus-5-5`, option `effort`) | `medium` | Gemini 4 Neon at `xhigh`, T3's fallback model |
+| Engineer | Gemini 4 Neon via Antigravity (`antigravity`, `gemini-4-neon`, option `thought_level`) | `high` to implement, `xhigh` to review, `medium` to explore or write | Codex `gpt-6.2-sol` (`codex`, option `reasoningEffort`, same levels) when the Engineer's launch fails or Google quota is exhausted |
 
 - The Lead orchestrates ticket graphs and owns grilling, specs, tickets, `debug` of an unknown cause, long interactive sessions and review of Engineer work.
 - The Engineer implements approved tickets, reviews Lead work and explores codebases, writing the copy, docs, PR bodies and commits inside its own run. Always start it with an explicit reasoning level.
 - Approved tickets run on the Engineer by default. Ad-hoc coding in a Lead thread stays on the Lead, and "use Opus for this" puts the work on the Lead.
+- Set the runtime mode by provider: `auto-accept-edits` on Antigravity, which T3 offers no `auto`, and `auto` otherwise, never above the launching thread's own mode.
+- A fallback covers one launch; the next launch tries the role's own model first.
 - Switch models only when starting a new thread or child, never in the thread I am talking in.
 - Codex keeps images, rendered browser or desktop work and web research. T3's Orchestrator (Neon) model, Gemini 4 Carbon and Sonnet are not routed.
 
