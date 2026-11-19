@@ -1951,6 +1951,59 @@ def command_claude_doctor(_: argparse.Namespace) -> int:
     return 0
 
 
+def _t3_settings_module() -> Any:
+    # Run as a script, this module is __main__; register it as `skills` so
+    # t3_settings shares its CheckError instead of importing a second copy.
+    sys.modules.setdefault("skills", sys.modules[__name__])
+    import t3_settings
+    return t3_settings
+
+
+def command_t3_sync(args: argparse.Namespace) -> int:
+    t3_settings = _t3_settings_module()
+    try:
+        paths = t3_settings.runtime_paths(ROOT)
+        if args.settings_target:
+            paths.settings = Path(args.settings_target).expanduser()
+        result = t3_settings.plan(ROOT, paths)
+        print(f"T3 Code settings: {paths.settings} ({'change' if result.changes else 'unchanged'})")
+        for heading, values in (("managed change", result.changes), ("skipped", result.skipped)):
+            print(f"{heading}: {len(values)}")
+            for value in values:
+                print(f"  {value}")
+        if result.changes:
+            print(f"Rollback: apply saves the current file under {paths.backups}/<timestamp>/settings.json")
+        if not args.apply:
+            return 0
+        backup = t3_settings.apply(ROOT, paths)
+    except (CheckError, OSError) as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
+    if backup is None:
+        print("Already current; no files changed.")
+    else:
+        print(f"Applied. Rollback snapshot: {backup}")
+    return 0
+
+
+def command_t3_doctor(_: argparse.Namespace) -> int:
+    t3_settings = _t3_settings_module()
+    try:
+        errors, warnings = t3_settings.doctor(ROOT, t3_settings.runtime_paths(ROOT))
+    except (CheckError, OSError) as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
+    for warning in warnings:
+        print(f"warning: {warning}")
+    if errors:
+        for error in errors:
+            print(error, file=sys.stderr)
+        print("T3 doctor failed: run `python3 scripts/skills.py t3-sync` to review the managed changes.", file=sys.stderr)
+        return 1
+    print("T3 doctor passed: managed T3 Code settings match the canonical source.")
+    return 0
+
+
 def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(description=__doc__)
     commands = result.add_subparsers(dest="command", required=True)
@@ -1983,6 +2036,12 @@ def parser() -> argparse.ArgumentParser:
     claude_doctor_command.set_defaults(func=command_claude_doctor)
     opencode_doctor_command = commands.add_parser("opencode-doctor", help="check OpenCode's shared skills and global instructions")
     opencode_doctor_command.set_defaults(func=command_opencode_doctor)
+    t3_sync = commands.add_parser("t3-sync", help="preview or apply EKit-managed T3 Code settings")
+    t3_sync.add_argument("--apply", action="store_true")
+    t3_sync.add_argument("--settings-target")
+    t3_sync.set_defaults(func=command_t3_sync)
+    t3_doctor_command = commands.add_parser("t3-doctor", help="check EKit-managed T3 Code settings and leftover worktrees")
+    t3_doctor_command.set_defaults(func=command_t3_doctor)
     return result
 
 

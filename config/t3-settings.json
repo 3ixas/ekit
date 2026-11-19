@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "settings": {
+    "defaultRuntimeMode": "auto",
+    "defaultModelSelection": {"instanceId": "claudeAgent", "model": "claude-opus-5-5", "options": [{"id": "effort", "value": "medium"}]},
+    "fallbackModelSelection": {"instanceId": "codex", "model": "gpt-6.2-sol"},
+    "favorites": [
+      {"provider": "claudeAgent", "model": "claude-opus-5-5"},
+      {"provider": "codex", "model": "gpt-6.2-sol"}
+    ],
+    "storageCleanup": {"worktreeOnMerge": true, "worktreeOnDelete": true}
+  },
+  "providerEnvironment": {
+    "claudeAgent": {"driver": "claudeAgent", "variables": {"CLAUDE_CODE_ENABLE_TODO_TOOLS": "1"}}
+  },
+  "projects": {
+    "ekit": {
+      "workspaceRoot": "~/_LifeOS/03_ENGINEERING/repos/personal/ekit",
+      "defaultModelSelection": {"instanceId": "claudeAgent", "model": "claude-opus-5-5", "options": [{"id": "effort", "value": "medium"}]}
+    },
+    "eliasb.dev": {
+      "workspaceRoot": "~/_LifeOS/03_ENGINEERING/repos/personal/eliasb.dev",
+      "defaultModelSelection": {"instanceId": "claudeAgent", "model": "claude-opus-5-5", "options": [{"id": "effort", "value": "medium"}]}
+    },
+    "ask-professor-past-v2": {
+      "workspaceRoot": "~/_LifeOS/03_ENGINEERING/repos/personal/ask-professor-past-v2",
+      "defaultModelSelection": {"instanceId": "claudeAgent", "model": "claude-opus-5-5", "options": [{"id": "effort", "value": "medium"}]}
+    }
+  }
+}
