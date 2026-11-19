@@ -2135,7 +2135,7 @@
       "digest": "git-blob:7a0411a2a7ce0912a63f5b2ab899bfa320c81d9b",
       "license": "mit-bil0000-hill-climb",
       "use": "informed-by",
-      "changes": "Independently written one-hypothesis attempts, persistent history and guarded retain/discard decisions. Hard small budgets replace unlimited/soft limits; runner, judges, auto-commit, multi-repo rollback and kits are not imported.",
+      "changes": "Independently written one-hypothesis attempts, persistent history and guarded retain/discard decisions. Hard agreed allowances in time and executions replace unlimited/soft limits, with open-ended rounds and review checkpoints instead of a fixed round count; runner, judges, auto-commit, multi-repo rollback and kits are not imported.",
       "notice": "references/licenses/mit-bil0000-hill-climb.txt",
       "disposition": "reference-only; no copying grant asserted"
     },
