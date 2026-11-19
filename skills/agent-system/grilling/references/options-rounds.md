@@ -47,7 +47,13 @@ The chosen option becomes the starting point of the next round, one stage down. 
 
 ## Rendering
 
-Text options fit in the table above. For visual options, render all three side by side with what the host offers: inline visuals or an artifact page in Claude, and HTML files or images with their paths in Codex. When an owning skill names the surface (for example `interface-design` with Claude Design or Stitch), use that surface and its confirmation rules. When a choice depends on feeling an interaction live, `prototype`'s picker can render the branches.
+Text options fit in the table above. For visual options, render all three side by side as a live page the user can interact with, using the first surface the host offers:
+
+1. In T3 Code, any provider: pass the HTML to `html_preview`, then `html_render`, so it renders inline in the thread.
+2. In Claude without T3's renderer: an artifact page. In T3, use one instead when the user wants to review on another device, comment on specific elements, or share the page.
+3. Elsewhere: an HTML file, linked by its absolute path.
+
+Do not present visual options as screenshots; keep screenshots for the agent's own rendered checks. When an owning skill names the surface (for example `interface-design` with Claude Design or Stitch), use that surface and its confirmation rules. When a choice depends on feeling an interaction live, `prototype`'s picker can render the branches.
 
 ## Exploration trail
 

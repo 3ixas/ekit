@@ -59,5 +59,6 @@
       "imagegen"
     ]
   },
-  "reviewed": "2026-10-26"
+  "reviewed": "2026-11-19",
+  "owned_changes": "2026-11-19: Show visual work to the user as a live page, not screenshots: T3's html_render with any provider first, then a Claude artifact or a linked HTML file; an artifact in T3 when phone review, element comments or sharing is wanted."
 }
