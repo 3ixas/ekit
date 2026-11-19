@@ -41,6 +41,15 @@
       "license": "mit-tstack",
       "use": "adapted",
       "changes": "Independently written adaptation. Non-merging delivery must prevent auto-merge before push; no duplicate approval when caller already holds task authority."
+    },
+    {
+      "repository": "https://github.com/pingdotgg/t3code",
+      "ref": "21eb9a421aff7a8fbe044b1a34bb3e364fb94a68",
+      "path": "apps/server/src/orchestration-v2/PullRequestWatchReactor.ts",
+      "digest": "git-blob:f668bbd3f10d2b688fc7c5847fed31240a81a49e",
+      "license": "reference-only-no-copied-text",
+      "use": "informed-by",
+      "changes": "Host facts for T3 Code's watch_pull_request (PRs #15057 and #15415): one-minute polling, wake conditions, ten comment-only wakes, fifteen-minute read-failure stop, parent-thread ownership. Independently written host note and reference; no code or text copied."
     }
   ],
   "dependencies": {
@@ -55,5 +64,5 @@
       "github"
     ]
   },
-  "reviewed": "2026-10-26"
+  "reviewed": "2026-11-18"
 }
