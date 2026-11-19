@@ -17,6 +17,8 @@ When given a PR, branch or chat instead of a handoff file, start with that sourc
 2. The newest file in `~/.agents/handoffs/<project>/`, where `<project>` is the main checkout's directory name, which is the same from any worktree (`basename "$(dirname "$(git rev-parse --path-format=absolute --git-common-dir)")"`), or the current directory's name outside a repository.
 3. Legacy locations: files matching `*handoff*.md` (any case) in the OS temporary directory (`$TMPDIR`), newest first, whose file name contains the project name (with dots and spaces read as hyphens). A file that only mentions the project in its content is a candidate to show and confirm, never one to pick automatically.
 
+A handoff whose first line is `Relay: <workflow>` comes from an authorized relay; `implement-series` defines the contract in its T3 relay reference. When its path was given with the request, follow that workflow's successor-start rules and continue without asking for confirmation unless they find another active owner or live state contradicts the handoff. A relay handoff found only by searching may be stale: confirm it before acting.
+
 Say which file you picked and its timestamp. If more than one recent candidate fits, list them and confirm which to use. If nothing is found, say so plainly and list every place you looked. Never start from scratch silently.
 
 ## Method
