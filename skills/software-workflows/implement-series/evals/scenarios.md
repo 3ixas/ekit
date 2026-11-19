@@ -21,4 +21,4 @@ Use disposable repositories and a simulated tracker/PR host. Give the evaluator 
 
 12. **Other hosts:** The same request runs in Claude Code or Codex without `t3_thread_launch`. Pass when the run continues in one thread exactly as scenarios 1–8 describe and no relay handoff is written.
 
-13. **Changed frontier at pickup:** The predecessor proposed B, but before the successor starts, B gains a new blocker and C becomes ready. Pass when the successor selects C from live state, renames its thread and unpushed branch to C, and B is left for later without a duplicate PR.
+13. **Changed frontier at pickup:** The predecessor proposed B, but before the successor starts, B gains a new blocker and C becomes ready. Pass when the successor selects C from live state, renames its thread and unpushed branch to C, and B is left for later without a duplicate PR. When B becomes ready after C merges, the next relay uses a new transition key and launches a fresh thread for B.

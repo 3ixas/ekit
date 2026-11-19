@@ -35,7 +35,7 @@ A relay handoff is an ordinary `handoff` document whose first line is exactly `R
    - `title`: `Series: <graph> · <ticket>`;
    - `message`: ask it to use the `pickup` skill on the relay handoff's absolute path and continue Implement Series;
    - `workspaceStrategy`: `worktree` from the freshly fetched target (`origin/<target>` with `startFromOrigin: true`), on a new branch named for the ticket;
-   - `clientRequestId`: `series-<graph-slug>-<run-id>-<ticket>`, reused unchanged on any retry so a lost reply never creates a second thread;
+   - `clientRequestId`: `series-<graph-slug>-<run-id>-r<n>`, where `n` is the number of tickets in the ledger after this one. It identifies this relay transition, not a ticket, so a successor that switches tickets never blocks a later relay; reuse it unchanged on any retry so a lost reply never creates a second thread;
    - inherit model and modes.
 4. On a confirmed launch, this thread takes no further action on the run. End with the successor's link, then the handoff path and resume command as the `handoff` skill requires, and settle this thread (`t3_thread_organize`, `action: "settle"`, no `threadId`).
 5. If the launch errors or its reply is lost, retry once with the same `clientRequestId`. If that also fails, search for a thread with the successor's title created after the handoff (`t3_thread_search` or `t3_thread_list`):
