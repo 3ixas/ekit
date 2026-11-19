@@ -329,6 +329,6 @@
       "stitch"
     ]
   },
-  "reviewed": "2026-11-01",
-  "owned_changes": "Independently authored adaptation: explain consequential design trade-offs, use grilling when exhaustive exploration is warranted or requested, and distinguish taste from usability evidence within proportionate checkpoints."
+  "reviewed": "2026-11-19",
+  "owned_changes": "Independently authored adaptation: explain consequential design trade-offs, use grilling when exhaustive exploration is warranted or requested, and distinguish taste from usability evidence within proportionate checkpoints.\n\n2026-11-19: Elias asked to open up every fixed three-round rule. Screenshot critique and Taste toolkit rounds have no fixed count; they continue while material problems fall, with review checkpoints for taste, stalls and milestones. Overrides the vendored three-round limit without editing vendored files."
 }

@@ -2135,7 +2135,7 @@
       "digest": "git-blob:7a0411a2a7ce0912a63f5b2ab899bfa320c81d9b",
       "license": "mit-bil0000-hill-climb",
       "use": "informed-by",
-      "changes": "Independently written one-hypothesis attempts, persistent history and guarded retain/discard decisions. Hard small budgets replace unlimited/soft limits; runner, judges, auto-commit, multi-repo rollback and kits are not imported.",
+      "changes": "Independently written one-hypothesis attempts, persistent history and guarded retain/discard decisions. Hard agreed allowances in time and executions replace unlimited/soft limits, with open-ended rounds and review checkpoints instead of a fixed round count; runner, judges, auto-commit, multi-repo rollback and kits are not imported.",
       "notice": "references/licenses/mit-bil0000-hill-climb.txt",
       "disposition": "reference-only; no copying grant asserted"
     },
@@ -2987,7 +2987,7 @@
       "digest": "sha256:1db1eb4c4a156ee666070e9a12623d520cd1bd9b19c3fc21003fe5a440ba0b10",
       "license": "mit-tstack",
       "use": "adapted",
-      "changes": "Independently written adaptation. Bounded shared review budget, stable findings, evidence-backed disagreement and focused re-review; preserves two axes, selected model and snapshot gates. Rejects rare-case dismissal, vendor orchestration and attribution.",
+      "changes": "Independently written adaptation. Shared convergence-based review loop with no fixed round count, stable findings, evidence-backed disagreement and focused re-review; preserves two axes, selected model and snapshot gates. Rejects rare-case dismissal, vendor orchestration and attribution.",
       "notice": "references/licenses/mit-tstack.txt",
       "disposition": "retained under recorded upstream terms; preserve companions"
     },
@@ -3359,7 +3359,7 @@
       "digest": "sha256:1db1eb4c4a156ee666070e9a12623d520cd1bd9b19c3fc21003fe5a440ba0b10",
       "license": "mit-tstack",
       "use": "adapted",
-      "changes": "Independently written adaptation. Bounded shared review budget, stable findings, evidence-backed disagreement and focused re-review; preserves two axes, selected model and snapshot gates. Rejects rare-case dismissal, vendor orchestration and attribution.",
+      "changes": "Independently written adaptation. Shared convergence-based review loop with no fixed round count, stable findings, evidence-backed disagreement and focused re-review; preserves two axes, selected model and snapshot gates. Rejects rare-case dismissal, vendor orchestration and attribution.",
       "notice": "references/licenses/mit-tstack.txt",
       "disposition": "retained under recorded upstream terms; preserve companions"
     },
@@ -3419,7 +3419,7 @@
       "digest": "sha256:1db1eb4c4a156ee666070e9a12623d520cd1bd9b19c3fc21003fe5a440ba0b10",
       "license": "mit-tstack",
       "use": "adapted",
-      "changes": "Independently written adaptation. Bounded shared review budget, stable findings, evidence-backed disagreement and focused re-review; preserves two axes, selected model and snapshot gates. Rejects rare-case dismissal, vendor orchestration and attribution.",
+      "changes": "Independently written adaptation. Shared convergence-based review loop with no fixed round count, stable findings, evidence-backed disagreement and focused re-review; preserves two axes, selected model and snapshot gates. Rejects rare-case dismissal, vendor orchestration and attribution.",
       "notice": "references/licenses/mit-tstack.txt",
       "disposition": "retained under recorded upstream terms; preserve companions"
     },

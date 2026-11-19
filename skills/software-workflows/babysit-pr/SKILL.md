@@ -17,7 +17,7 @@ Keep one owner and watcher for this PR. Use actual host event/wake tools when av
 1. Read fresh PR state, actual head/base SHAs, checks, approval/change-request state, and paginated unresolved threads. Merged/closed ends this run with that observed status.
 2. Use `pr-feedback` for all unresolved actionable findings, including older ones still relevant. Judge each with evidence. Fix and post only within authority; preserve drafts/local work otherwise.
 3. If head or base moved during the pass, discard stale CI/readiness conclusions and reread. Diagnose an in-scope CI failure with `debug`; rerun a clearly flaky/infrastructure failure at most once when rerun authority exists. Unknown or external failures are residual blockers, not green checks.
-4. Reprove and review behavior-changing fixes on their exact snapshot before pushing. Carry the caller's finding ledger and review budget across pushes; do not reset them for a new CI run.
+4. Reprove and review behavior-changing fixes on their exact snapshot before pushing. Carry the caller's finding ledger and review-loop record across pushes; do not reset them for a new CI run.
 5. Standalone babysitting never rebases or force-pushes. Use a non-rewriting update only when within authority and needed. A Full Stop/Full Send coordinator owns any task-branch rebase/explicit-SHA lease update; return that need to it. Never publish from an unrelated or default/base branch.
 6. Before pushing or triggering CI, inspect auto-merge/queue settings. Both delivery coordinators authorize disabling them until their final gate; a standalone watcher needs that separate authority or must stop before an action that could merge. Verify the state again after relevant changes.
 

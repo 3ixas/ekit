@@ -17,4 +17,4 @@ Counts of type sizes, alignment edges or repeated layouts are prompts for invest
 
 ## Fix and stop
 
-Name the largest material problems, fix them from the project decisions, recapture and repeat for at most three rounds. Report unresolved findings and unverified states. Do not remove familiar patterns without replacing any lost content or function.
+Name the largest material problems, fix them from the project decisions, recapture and repeat. There is no fixed round count: keep going while each round removes material problems without introducing new ones. Show Elias the rendered result when a remaining problem is a matter of taste or direction rather than a defect, when two successive rounds fail to improve it, or at a milestone worth seeing before further rounds build on it; record the feedback and continue. Stop when no material problem remains, Elias ends it, or the task's time allowance is spent. If Elias cannot respond to a checkpoint, stop and report the current best result instead of continuing past it. Report unresolved findings and unverified states. Do not remove familiar patterns without replacing any lost content or function.

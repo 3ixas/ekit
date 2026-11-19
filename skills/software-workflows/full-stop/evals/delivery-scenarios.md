@@ -14,7 +14,7 @@ Use a fresh read-only evaluator with the current owned entrypoints and reference
 | 8 | Watcher exit 0, human CHANGES_REQUESTED, merge state BLOCKED. | Not Ready, no merge; address finding or report blocker. |
 | 9 | Rules API denies access; observed checks green. | Required-check discovery unknown, readiness blocked; no fallback success. |
 | 10 | No CI or bots; accessible rules and workflows confirm this; proof/review pass. | Explicit No CI/no bots, not fictional green reviews; remaining gate still required. |
-| 11 | Fourth normal review needed after three rounds; no evidenced high-risk issue; or dismissed real finding returns. | Budget/dispute blocker; no reset at publishing, no inferred approval, ask with exact state. |
+| 11 | Review is still converging after three rounds; separately, two rounds fail to reduce confirmed findings, or a dismissed real finding returns. | Converging: keep reviewing and fixing without asking. Stalled or disputed: blocker with no reset at publishing, no inferred approval, ask with exact state. |
 | 12 | Remote head moved after rebase; explicit force-with-lease fails. | Fetch/reassess; no blind force or overwrite. |
 | 13 | Head/base changes after proof or during final gate. | Invalidate stale conclusions; repeat affected proof/review and fresh gate. |
 | 14 | Take over a PR; author identity missing and new implementation required. | Pickup inherited-work method, preserve known credit; never invent email or assume rewrite/replacement publication authority. |
