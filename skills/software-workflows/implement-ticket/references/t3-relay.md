@@ -8,6 +8,7 @@ Relay to an Engineer thread is the default when all of these hold:
 
 - The host provides `t3_thread_launch` (T3 Code) and the current thread is running as the **Lead**.
 - Elias has not explicitly asked for the Lead (per the Roles section of the shared instructions) and has not asked to keep the work in this thread ("stay in this thread", "no relay").
+- The Lead is not resuming an Engineer's `Escalation:` handoff; an escalated ticket is delivered by the Lead thread that received it.
 - The ticket is resolved from live tracker state, its scope and endpoint are established, and its readiness is verified: every blocker has a verified merge satisfying it (an open or queued PR, armed auto-merge or closed issue alone is not proof), no open product ambiguity blocks it, and existing PRs and branches have been checked to avoid duplicate work. If blocked, ambiguous or already delivered, report that here and do not launch a thread.
 
 When the current thread is already running as the **Engineer** (including the launched successor) or another non-Lead role and Elias did not ask for the Lead, when a Lead thread was explicitly asked for the Lead or to stay in-thread, or on hosts without `t3_thread_launch`, deliver the ticket directly in this thread. If Elias explicitly asked for the **Lead** while in a non-Lead thread, do not silently implement on the Engineer: launch a fresh **Lead** worktree thread using the same relay contract when `t3_thread_launch` is available, or report the role mismatch and ask before continuing.

@@ -54,8 +54,9 @@ Skills name roles; this table names the models. In T3, select one with `modelSel
 - The Lead orchestrates ticket graphs and owns grilling, specs, tickets, `debug` of an unknown cause, long interactive sessions and review of Engineer work.
 - The Engineer implements approved tickets, reviews Lead work and explores codebases, writing the copy, docs, PR bodies and commits inside its own run. Always start it with an explicit reasoning level.
 - Approved tickets run on the Engineer by default. Ad-hoc coding in a Lead thread stays on the Lead, and "use Opus for this" puts the work on the Lead.
-- Set the runtime mode by provider: `full-access` on Antigravity, which T3 offers no `auto`, and `auto` otherwise. T3 refuses a mode broader than the launching thread's, so a thread in `auto` starts Antigravity in `auto-accept-edits` and tells me that its tool calls will wait for my approval.
+- Set the runtime mode by provider: `full-access` on Antigravity, whose T3 `auto` mode still asks me to approve every tool call, and `auto` otherwise. T3 refuses a mode broader than the launching thread's, so a thread in `auto` can start Antigravity only in an approval-asking mode; tell me before launching that its tool calls will wait for my approval.
 - A fallback covers one launch; the next launch tries the role's own model first.
+- An Engineer escalates to the Lead, rather than guessing or asking me, when it reaches a decision the approved brief does not settle or fails review twice on the same issue: it preserves the work, writes a handoff naming the decision and launches a Lead thread, which settles it or asks me when it is mine. Escalation is not fallback.
 - Switch models only when starting a new thread or child, never in the thread I am talking in.
 - Codex keeps images, rendered browser or desktop work and web research. T3's Orchestrator (Neon) model, Gemini 4 Carbon and Sonnet are not routed.
 

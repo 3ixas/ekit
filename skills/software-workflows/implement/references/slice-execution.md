@@ -2,7 +2,7 @@
 
 ## Establish the contract
 
-Read the whole target issue or request, its parent spec, project instructions, and affected code. If the target is a GitHub issue, load it with `gh issue view <number-or-url> --json number,title,body,state,labels,url` using the exact repository; prefer the most efficient supported GitHub capability for issue reading. State the observable completion conditions and, for each, the independent check that will prove it; this is the proof plan `SKILL.md` asks for. If behavior is unresolved, return to `grill-with-docs`; if the request is clear but technically incomplete, investigate and make routine implementation choices.
+Read the whole target issue or request, its parent spec, project instructions, and affected code. If the target is a GitHub issue, load it with `gh issue view <number-or-url> --json number,title,body,state,labels,url` using the exact repository; prefer the most efficient supported GitHub capability for issue reading. State the observable completion conditions and, for each, the independent check that will prove it; this is the proof plan `SKILL.md` asks for. If behavior is unresolved, return to `grill-with-docs` (as the Engineer, [escalate](escalation.md) instead); if the request is clear but technically incomplete, investigate and make routine implementation choices.
 
 Inspect existing patterns at the entry point, boundary, data owner, and tests. Check current repository status and preserve unrelated changes. Identify the smallest coherent diff that delivers the requested behavior through every necessary layer.
 

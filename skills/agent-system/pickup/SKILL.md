@@ -19,6 +19,8 @@ When given a PR, branch or chat instead of a handoff file, start with that sourc
 
 A handoff whose first line is `Relay: <workflow>` comes from an authorized relay; the named workflow (such as `implement-series` or `implement-ticket`) defines the contract in its T3 relay reference. When its path was given with the request, follow that workflow's successor-start rules and continue without asking for confirmation unless they find another active owner or live state contradicts the handoff. A relay handoff found only by searching may be stale: confirm it before acting.
 
+A handoff whose first line is `Escalation: <workflow>` is an Engineer handing its ticket to the Lead; the `implement` skill's escalation reference defines the Lead side. When its path was given with the request, follow that Lead side without asking for confirmation: settle the decision or ask Elias when it is his, then resume the named workflow. One found only by searching may be stale: confirm it before acting.
+
 Say which file you picked and its timestamp. If more than one recent candidate fits, list them and confirm which to use. If nothing is found, say so plainly and list every place you looked. Never start from scratch silently.
 
 ## Method
