@@ -9,12 +9,14 @@
   "dependencies": {
     "skills": [
       "implement",
-      "full-send"
+      "full-send",
+      "handoff",
+      "pickup"
     ],
     "tools": [
       "git",
       "github"
     ]
   },
-  "reviewed": "2026-11-07"
+  "reviewed": "2026-11-20"
 }

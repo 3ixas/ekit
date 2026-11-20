@@ -64,11 +64,11 @@
       "github"
     ]
   },
-  "reviewed": "2026-11-19",
+  "reviewed": "2026-11-20",
   "owned_changes": {
-    "date": "2026-11-07",
+    "date": "2026-11-20",
     "method": "Independently written redesign requested by Elias; upstream source records and licence companions preserved.",
-    "changes": "Replaces one integration branch and integrated PR with isolated ticket workers, separate PRs, serialized protected merges and dependency refresh; Full Stop preserves the unmerged frontier.",
+    "changes": "Replaces one integration branch and integrated PR with isolated ticket workers, separate PRs, serialized protected merges and dependency refresh; Full Stop preserves the unmerged frontier. 2026-11-20: starts isolated workers on the Engineer at high by default (using the shared role table), with single-launch fallback and explicit Lead override.",
     "maintained_contract": "skills/software-workflows/implement-parallel/SKILL.md"
   }
 }
