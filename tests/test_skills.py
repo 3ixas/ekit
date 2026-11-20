@@ -146,10 +146,19 @@ class RepositoryValidationTests(unittest.TestCase):
             add_skill(root, "later", lifecycle="candidates", role="lead")
             files, routing = skills.claude_projection(root)
             self.assertEqual((routing["lead"], routing["engineer"]), (["grill"], ["build"]))
-            for text in (skills._claude_rules(root / "AGENTS.md", routing), skills.antigravity_instructions(root)[0].decode()):
+            generated = (
+                skills._claude_rules(root / "AGENTS.md", routing),
+                skills.opencode_instructions(root)[0].decode(),
+                skills.antigravity_instructions(root)[0].decode(),
+            )
+            for text in generated:
                 self.assertIn("- Lead skills: `grill`.", text)
                 self.assertIn("- Engineer skills: `build`.", text)
-                self.assertNotIn("`both`", text.split("ole phases", 1)[1])
+                self.assertNotIn("`both`", text.split("Role phases", 1)[1])
+
+    def test_repository_antigravity_rule_fits_the_byte_cap(self) -> None:
+        body, _ = skills.antigravity_instructions(REPOSITORY_ROOT)
+        self.assertLessEqual(len(skills._antigravity_managed_content(body)), skills.ANTIGRAVITY_RULE_BYTES)
 
     def test_explicit_skill_requires_policy(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
