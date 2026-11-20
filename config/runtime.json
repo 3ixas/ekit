@@ -17,10 +17,6 @@
   "t3_worktrees": "~/.t3/worktrees",
   "t3_backups": "~/.t3/ekit-backups",
   "antigravity_config": "~/.gemini/config",
-  "antigravity_t3_profiles": "~/.t3/userdata/providers/antigravity",
-  "antigravity_t3_instances": [
-    "antigravity"
-  ],
   "antigravity_backups": "~/.gemini/ekit-backups",
   "external_skills": [
     "yab-browser"

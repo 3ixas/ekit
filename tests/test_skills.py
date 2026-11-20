@@ -719,10 +719,10 @@ class AntigravitySyncTests(unittest.TestCase):
         self.global_target.write_text((self.root / "config" / "AGENTS.md").read_text())
         skills.sync_apply(self.root, self.skills_target, self.global_target, self.home / ".agents" / "skill-backups")
         self.config_dir = self.home / ".gemini" / "config"
+        self.rule_target = self.home / ".gemini" / "GEMINI.md"
         self.profiles = self.home / ".t3" / "userdata" / "providers" / "antigravity"
-        self.profile = skills.antigravity_t3_profile(self.profiles, "antigravity")
+        self.profile = self.profiles / "profile-a"
         (self.profile / "config").mkdir(parents=True)
-        self.instances = ["antigravity", "not-enabled"]
         self.backups = self.home / ".gemini" / "ekit-backups"
         self.environ = mock.patch.dict("os.environ", {"HOME": str(self.home)})
         self.environ.start()
@@ -733,60 +733,208 @@ class AntigravitySyncTests(unittest.TestCase):
 
     def sync(self) -> skills.AntigravitySyncStatus:
         return skills.antigravity_sync_status(
-            self.root, self.config_dir, self.profiles, self.instances, self.skills_target, self.global_target,
+            self.root, self.config_dir, self.profiles, self.skills_target, self.global_target,
             backup_root=self.backups,
         )
 
     def apply(self) -> Path | None:
         return skills.antigravity_sync_apply(
-            self.root, self.config_dir, self.profiles, self.instances, self.skills_target, self.global_target, self.backups,
+            self.root, self.config_dir, self.profiles, self.skills_target, self.global_target, self.backups,
         )
 
     def doctor(self) -> list[str]:
         return skills.antigravity_doctor(
-            self.root, self.config_dir, self.profiles, self.instances, self.skills_target, self.global_target,
+            self.root, self.config_dir, self.profiles, self.skills_target, self.global_target,
             backup_root=self.backups,
         )
 
-    def test_t3_profile_is_named_by_instance_id_hash(self) -> None:
-        self.assertEqual(
-            skills.antigravity_t3_profile(Path("/p"), "antigravity").name,
-            "ac0a3dfd6dddb20962cecff6ee5fe65e19d3923be20e52c5ab52ff877f7e4c32",
-        )
+    def managed_bytes(self, text: bytes = b"# Old managed rule\n") -> bytes:
+        return skills._antigravity_managed_content(text)
 
-    def test_preview_targets_global_and_existing_t3_profiles_only(self) -> None:
+    def test_runtime_config_drops_profile_list_and_derives_profiles_root(self) -> None:
+        raw = skills.read_json(REPOSITORY_ROOT / "config" / "runtime.json")
+        self.assertNotIn("antigravity_t3_profiles", raw)
+        self.assertNotIn("antigravity_t3_instances", raw)
+        self.assertFalse(hasattr(skills, "antigravity_t3_profile"))
+        config = skills.antigravity_runtime_config(REPOSITORY_ROOT)
+        self.assertEqual(config["t3_antigravity_profiles"], config["t3_settings"].parent / "providers" / "antigravity")
+
+    def test_preview_targets_global_root_rule_without_per_profile_writes(self) -> None:
         status = self.sync()
-        self.assertEqual(status.rule_targets, [self.config_dir / "GEMINI.md", self.profile / "config" / "GEMINI.md"])
-        self.assertEqual(status.changed_rules, status.rule_targets)
+        self.assertEqual(status.rule_target, self.rule_target)
+        self.assertTrue(status.rule_changed)
+        self.assertEqual(status.stale_rules, [])
         self.assertTrue(status.link_changed)
-        self.assertEqual(len(status.skipped_profiles), 1)
-        self.assertIn("not-enabled", status.skipped_profiles[0])
         self.assertEqual(status.conflicts, [])
+        self.assertFalse(self.rule_target.exists())
         self.assertFalse(self.config_dir.exists())
 
-    def test_apply_writes_rules_and_links_shared_skills_then_is_idempotent(self) -> None:
+    def test_clean_install_without_profiles_passes_doctor_and_is_idempotent(self) -> None:
+        self.profiles = self.home / ".t3" / "userdata" / "providers" / "not-created-yet"
         user_file = self.config_dir / "mcp_config.json"
         user_file.parent.mkdir(parents=True)
         user_file.write_text("{}\n")
         self.assertIsNotNone(self.apply())
-        for target in (self.config_dir / "GEMINI.md", self.profile / "config" / "GEMINI.md"):
-            text = target.read_text()
-            self.assertTrue(text.startswith("<!-- ekit antigravity managed v1 sha256:"))
-            self.assertIn("Managed Antigravity skill routing", text)
-            self.assertIn("`supporting-only`", text)
+        text = self.rule_target.read_text()
+        self.assertTrue(text.startswith("<!-- ekit antigravity managed v1 sha256:"))
+        self.assertIn("Managed Antigravity skill routing", text)
+        self.assertIn("`supporting-only`", text)
+        self.assertFalse((self.config_dir / "GEMINI.md").exists())
         link = self.config_dir / "skills"
         self.assertTrue(link.is_symlink())
         self.assertEqual(link.resolve(), self.skills_target.resolve())
         self.assertEqual(user_file.read_text(), "{}\n")
-        self.instances = ["antigravity"]
         self.assertEqual(self.doctor(), [])
         self.assertIsNone(self.apply())
 
-    def test_doctor_fails_when_a_configured_t3_profile_is_missing(self) -> None:
+    def test_doctor_checks_existing_profile_link_and_stale_managed_copies(self) -> None:
         self.apply()
+        # Existing profile without T3's root symlink fails doctor until T3 links it.
         errors = self.doctor()
-        self.assertEqual(len(errors), 1)
-        self.assertIn("`not-enabled` has no profile yet", errors[0])
+        self.assertTrue(any("does not link" in item for item in errors))
+
+        # Wrong link target fails doctor.
+        other = self.home / "other.md"
+        other.write_text("other\n")
+        (self.profile / "GEMINI.md").symlink_to(other)
+        self.assertTrue(any("points to" in item for item in self.doctor()))
+
+        # Unmanaged real file at profile root fails doctor and is not deleted by apply.
+        (self.profile / "GEMINI.md").unlink()
+        (self.profile / "GEMINI.md").write_text("user profile rule\n")
+        self.assertTrue(any("has a real file" in item for item in self.doctor()))
+        self.assertIsNone(self.apply())
+        self.assertEqual((self.profile / "GEMINI.md").read_text(), "user profile rule\n")
+
+        # Valid symlink from profile root to ~/.gemini/GEMINI.md passes doctor.
+        (self.profile / "GEMINI.md").unlink()
+        (self.profile / "GEMINI.md").symlink_to(self.rule_target)
+        self.assertEqual(self.doctor(), [])
+
+        # Stale managed copy in profile config fails doctor even when the link is present.
+        stale_copy = self.profile / "config" / "GEMINI.md"
+        stale_copy.write_bytes(self.managed_bytes())
+        self.assertTrue(any("Stale managed Antigravity rule copy" in item for item in self.doctor()))
+
+    def test_migration_backs_up_and_removes_stale_managed_copies(self) -> None:
+        profile_b = self.profiles / "profile-b"
+        (profile_b / "config").mkdir(parents=True)
+        legacy_cli = self.config_dir / "GEMINI.md"
+        legacy_cli.parent.mkdir(parents=True)
+        legacy_cli.write_bytes(self.managed_bytes(b"# Legacy CLI\n"))
+        stale_profile_config = self.profile / "config" / "GEMINI.md"
+        stale_profile_config.write_bytes(self.managed_bytes(b"# Legacy profile config\n"))
+        stale_profile_root = profile_b / "GEMINI.md"
+        stale_profile_root.write_bytes(self.managed_bytes(b"# Legacy profile root\n"))
+        unmanaged_profile_config = profile_b / "config" / "GEMINI.md"
+        unmanaged_profile_config.write_text("user personal rule\n")
+
+        status = self.sync()
+        self.assertEqual(status.stale_rules, [legacy_cli, stale_profile_config, stale_profile_root])
+        self.assertTrue(any("Stale managed Antigravity rule copy" in item for item in self.doctor()))
+
+        backup = self.apply()
+        self.assertIsNotNone(backup)
+        assert backup is not None
+        self.assertTrue(self.rule_target.is_file())
+        self.assertFalse(legacy_cli.exists())
+        self.assertFalse(stale_profile_config.exists())
+        self.assertFalse(stale_profile_root.exists())
+        self.assertEqual(unmanaged_profile_config.read_text(), "user personal rule\n")
+
+        snapshot = skills.read_json(backup / "snapshot.json")
+        self.assertEqual(snapshot["schema"], 2)
+        self.assertEqual(len(snapshot["removed_stale_rules"]), 3)
+        for entry in snapshot["removed_stale_rules"]:
+            self.assertTrue((backup / entry["backup"]).is_file())
+
+        # Once T3 links both profiles on launch, doctor passes cleanly.
+        (self.profile / "GEMINI.md").symlink_to(self.rule_target)
+        (profile_b / "GEMINI.md").symlink_to(self.rule_target)
+        self.assertEqual(self.doctor(), [])
+
+    def test_rollback_restores_previous_files_and_link_from_backup_snapshot(self) -> None:
+        legacy_cli = self.config_dir / "GEMINI.md"
+        legacy_cli_bytes = self.managed_bytes(b"# Legacy CLI\n")
+        legacy_cli.parent.mkdir(parents=True)
+        legacy_cli.write_bytes(legacy_cli_bytes)
+        stale_profile = self.profile / "config" / "GEMINI.md"
+        stale_profile_bytes = self.managed_bytes(b"# Legacy profile\n")
+        stale_profile.write_bytes(stale_profile_bytes)
+        placeholder = self.config_dir / "skills"
+        placeholder.mkdir()
+
+        backup = self.apply()
+        assert backup is not None
+        self.assertTrue(self.rule_target.is_file())
+        self.assertFalse(legacy_cli.exists())
+        self.assertFalse(stale_profile.exists())
+        self.assertTrue(placeholder.is_symlink())
+
+        skills.antigravity_rollback(backup)
+        self.assertFalse(self.rule_target.exists())
+        self.assertEqual(legacy_cli.read_bytes(), legacy_cli_bytes)
+        self.assertEqual(stale_profile.read_bytes(), stale_profile_bytes)
+        self.assertTrue(placeholder.is_dir() and not placeholder.is_symlink())
+
+        # Re-apply, update canonical instructions, apply again, then roll back the update.
+        self.apply()
+        previous_rule = self.rule_target.read_bytes()
+        canonical = self.root / "config" / "AGENTS.md"
+        canonical.write_text(canonical.read_text() + "\nUpdated canonical instruction.\n")
+        skills.sync_apply(self.root, self.skills_target, self.global_target, self.home / ".agents" / "skill-backups")
+        update_backup = self.apply()
+        assert update_backup is not None
+        self.assertNotEqual(self.rule_target.read_bytes(), previous_rule)
+        skills.antigravity_rollback(update_backup)
+        self.assertEqual(self.rule_target.read_bytes(), previous_rule)
+        self.assertTrue((self.config_dir / "skills").is_symlink())
+
+        # Tampered backup file hash is refused before touching targets.
+        tampered_backup = self.apply()
+        assert tampered_backup is not None
+        (tampered_backup / "GEMINI.md").write_bytes(b"tampered\n")
+        with self.assertRaisesRegex(skills.CheckError, "hash mismatch"):
+            skills.antigravity_rollback(tampered_backup)
+
+    def test_rollback_refuses_post_sync_edits_and_malformed_snapshots_and_replaces_t3_link(self) -> None:
+        stale_root = self.profile / "GEMINI.md"
+        stale_root_bytes = self.managed_bytes(b"# Old profile root\n")
+        stale_root.write_bytes(stale_root_bytes)
+
+        backup = self.apply()
+        assert backup is not None
+        self.assertFalse(stale_root.exists())
+
+        # Rollback refuses to clobber post-sync edits to ~/.gemini/GEMINI.md.
+        edited_rule = self.rule_target.read_bytes() + b"post-sync edit\n"
+        self.rule_target.write_bytes(edited_rule)
+        with self.assertRaisesRegex(skills.CheckError, "changed after this sync"):
+            skills.antigravity_rollback(backup)
+        self.assertEqual(self.rule_target.read_bytes(), edited_rule)
+
+        # Restore exact applied content, then simulate T3 creating <profile>/GEMINI.md -> ~/.gemini/GEMINI.md.
+        self.rule_target.write_bytes(edited_rule[: -len(b"post-sync edit\n")])
+        stale_root.symlink_to(self.rule_target)
+        skills.antigravity_rollback(backup)
+        self.assertFalse(self.rule_target.exists())
+        self.assertTrue(stale_root.is_file() and not stale_root.is_symlink())
+        self.assertEqual(stale_root.read_bytes(), stale_root_bytes)
+
+        # Malformed snapshot raises CheckError, not KeyError.
+        malformed = self.backups / "malformed"
+        malformed.mkdir(parents=True)
+        write_json(malformed / "snapshot.json", {"schema": 2, "rule": {}, "removed_stale_rules": []})
+        with self.assertRaisesRegex(skills.CheckError, "Malformed"):
+            skills.antigravity_rollback(malformed)
+
+        # Rollback refuses if a real file was created at a removed stale target's path after apply.
+        backup2 = self.apply()
+        assert backup2 is not None
+        stale_root.write_text("new user file\n")
+        with self.assertRaisesRegex(skills.CheckError, "already exists after sync"):
+            skills.antigravity_rollback(backup2)
+        self.assertEqual(stale_root.read_text(), "new user file\n")
 
     def test_failed_apply_restores_the_empty_placeholder(self) -> None:
         placeholder = self.config_dir / "skills"
@@ -795,8 +943,8 @@ class AntigravitySyncTests(unittest.TestCase):
             with self.assertRaisesRegex(OSError, "injected"):
                 self.apply()
         self.assertTrue(placeholder.is_dir() and not placeholder.is_symlink())
-        self.assertFalse((self.config_dir / "GEMINI.md").exists())
-        self.assertEqual(list(self.config_dir.glob(".GEMINI.md.*")), [])
+        self.assertFalse(self.rule_target.exists())
+        self.assertEqual(list(self.rule_target.parent.glob(".GEMINI.md.*")), [])
 
     def test_apply_replaces_empty_harness_placeholder_but_refuses_real_skills_folder(self) -> None:
         (self.config_dir / "skills").mkdir(parents=True)
@@ -813,21 +961,31 @@ class AntigravitySyncTests(unittest.TestCase):
         self.assertEqual(private.read_text(), "private skill\n")
 
     def test_unmanaged_rule_conflicts_and_managed_edit_is_drift(self) -> None:
-        rule = self.profile / "config" / "GEMINI.md"
-        rule.write_text("user rules\n")
+        self.rule_target.parent.mkdir(parents=True, exist_ok=True)
+        self.rule_target.write_text("user rules\n")
         self.assertTrue(any("not owned by this sync" in item for item in self.sync().conflicts))
         with self.assertRaisesRegex(skills.CheckError, "Antigravity sync conflict"):
             self.apply()
-        self.assertEqual(rule.read_text(), "user rules\n")
+        self.assertEqual(self.rule_target.read_text(), "user rules\n")
 
-        rule.unlink()
+        self.rule_target.unlink()
         self.apply()
-        rule.write_bytes(rule.read_bytes() + b"manual edit\n")
+        self.rule_target.write_bytes(self.rule_target.read_bytes() + b"manual edit\n")
         self.assertTrue(any("edited after" in item for item in self.sync().drift))
         self.assertTrue(any("edited after" in item for item in self.doctor()))
 
+    def test_edited_stale_managed_profile_copy_is_drift_and_not_deleted(self) -> None:
+        stale = self.profile / "config" / "GEMINI.md"
+        edited = self.managed_bytes() + b"user edit\n"
+        stale.write_bytes(edited)
+        self.assertTrue(any("edited after" in item for item in self.sync().drift))
+        with self.assertRaisesRegex(skills.CheckError, "drift"):
+            self.apply()
+        self.assertEqual(stale.read_bytes(), edited)
+
     def test_doctor_reports_missing_link_and_stale_rules(self) -> None:
         self.apply()
+        (self.profile / "GEMINI.md").symlink_to(self.rule_target)
         (self.config_dir / "skills").unlink()
         self.assertTrue(any("skills link" in item and "missing" in item for item in self.doctor()))
         self.assertEqual(self.sync().link_state, "missing")
@@ -846,25 +1004,31 @@ class AntigravitySyncTests(unittest.TestCase):
         with self.assertRaisesRegex(skills.CheckError, "drift"):
             self.apply()
 
-    def test_failed_verification_restores_previous_rules_and_link(self) -> None:
+    def test_failed_verification_restores_previous_rules_stale_copies_and_link(self) -> None:
+        stale = self.profile / "config" / "GEMINI.md"
+        stale_bytes = self.managed_bytes(b"# Old profile\n")
+        stale.write_bytes(stale_bytes)
         self.apply()
-        rule = self.config_dir / "GEMINI.md"
-        previous = rule.read_bytes()
+        self.assertFalse(stale.exists())
+        previous = self.rule_target.read_bytes()
+        stale.write_bytes(stale_bytes)
         canonical = self.root / "config" / "AGENTS.md"
         canonical.write_text(canonical.read_text() + "\nUpdated canonical instruction.\n")
         skills.sync_apply(self.root, self.skills_target, self.global_target, self.home / ".agents" / "skill-backups")
         with mock.patch.object(skills, "_verify_antigravity", side_effect=skills.CheckError("injected")):
             with self.assertRaisesRegex(skills.CheckError, "injected"):
                 self.apply()
-        self.assertEqual(rule.read_bytes(), previous)
+        self.assertEqual(self.rule_target.read_bytes(), previous)
+        self.assertEqual(stale.read_bytes(), stale_bytes)
         self.assertTrue((self.config_dir / "skills").is_symlink())
-        self.assertEqual(list(self.config_dir.glob(".GEMINI.md.*")), [])
+        self.assertEqual(list(self.rule_target.parent.glob(".GEMINI.md.*")), [])
+        self.assertEqual(list(stale.parent.glob(".GEMINI.md.*")), [])
 
     def test_failed_first_apply_removes_new_link_and_rules(self) -> None:
         with mock.patch.object(skills, "_verify_antigravity", side_effect=skills.CheckError("injected")):
             with self.assertRaisesRegex(skills.CheckError, "injected"):
                 self.apply()
-        self.assertFalse((self.config_dir / "GEMINI.md").exists())
+        self.assertFalse(self.rule_target.exists())
         self.assertFalse((self.config_dir / "skills").is_symlink())
 
     def test_shared_runtime_must_be_synced_first(self) -> None:
