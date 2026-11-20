@@ -29,7 +29,7 @@ class T3SettingsTests(unittest.TestCase):
         self.workspace.mkdir(parents=True)
         self.managed = {
             "schema": 1,
-            "settings": {"defaultRuntimeMode": "auto", "defaultModelSelection": SELECTION, "storageCleanup": {"worktreeOnMerge": True}},
+            "settings": {"defaultRuntimeMode": "full-access", "defaultModelSelection": SELECTION, "storageCleanup": {"worktreeOnMerge": True}},
             "providerEnvironment": {"claudeAgent": {"driver": "claudeAgent", "variables": {"CLAUDE_CODE_ENABLE_TODO_TOOLS": "1"}}},
             "projects": {
                 "demo": {"workspaceRoot": str(self.workspace), "defaultModelSelection": SELECTION},
@@ -46,7 +46,7 @@ class T3SettingsTests(unittest.TestCase):
         connection.commit()
         connection.close()
         self.paths.settings.write_text(json.dumps({
-            "defaultRuntimeMode": "full-access",
+            "defaultRuntimeMode": "auto",
             "storageCleanup": {"worktreeOnMerge": False, "worktreeAfterDays": 7},
             "providerInstances": {
                 "codex": {"driver": "codex", "enabled": True},
@@ -66,7 +66,7 @@ class T3SettingsTests(unittest.TestCase):
         backup = t3_settings.apply(self.root, self.paths)
         self.assertIsNotNone(backup)
         settings = self.settings()
-        self.assertEqual(settings["defaultRuntimeMode"], "auto")
+        self.assertEqual(settings["defaultRuntimeMode"], "full-access")
         self.assertEqual(settings["defaultModelSelection"], SELECTION)
         self.assertEqual(settings["storageCleanup"], {"worktreeOnMerge": True, "worktreeAfterDays": 7})
         self.assertEqual(settings["appOnly"], {"nested": [1, 2]})
@@ -155,7 +155,7 @@ class T3SettingsTests(unittest.TestCase):
 
     def test_preview_shows_old_and_new_values(self) -> None:
         changes = t3_settings.plan(self.root, self.paths).changes
-        self.assertIn('change defaultRuntimeMode: "full-access" -> "auto"', changes)
+        self.assertIn('change defaultRuntimeMode: "auto" -> "full-access"', changes)
 
     def test_concurrent_app_write_aborts_without_writing(self) -> None:
         original_plan = t3_settings.plan

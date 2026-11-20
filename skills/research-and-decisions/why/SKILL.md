@@ -179,7 +179,7 @@ Its job is the final output: a confidence-weighted, evidence-cited narrative wit
 
 ## Step 5. Present
 
-Check the synthesizer's main citations (commit hashes, PR numbers, `file:line`) and correct or drop any that do not hold, saying so. Then present its output to the user. You may lightly edit for clarity or add context from the conversation, but **do not rewrite the confidence language**. The epistemic framing is the product. Dropping the hedges to sound more authoritative is the exact failure mode this skill exists to prevent.
+Check the synthesizer's main citations (commit hashes, PR numbers, `file:line`, and the key ticket, document or chat citations from MCPs only the calling thread can reach) and correct or drop any that do not hold, saying so. Then present its output to the user. You may lightly edit for clarity or add context from the conversation, but **do not rewrite the confidence language**. The epistemic framing is the product. Dropping the hedges to sound more authoritative is the exact failure mode this skill exists to prevent.
 
 ## Output Format
 
