@@ -519,11 +519,24 @@ def runtime_projection(root: Path = ROOT, *, opencode_v2: bool | None = None) ->
         content = path.read_bytes()
         parts = PurePosixPath(relative).parts
         if len(parts) == 2 and parts[1] == "SKILL.md":
-            invocation = read_json(bundles[parts[0]]["path"] / "metadata.json")["invocation"]
+            metadata = read_json(bundles[parts[0]]["path"] / "metadata.json")
             if opencode_v2:
-                content = _opencode_skill_text(content, invocation)
+                content = _opencode_skill_text(content, metadata["invocation"])
+            content = _role_note(content, metadata["role"])
         result[relative] = content
     return result
+
+
+def _role_note(source: bytes, role: str) -> bytes:
+    """Carry a lead or engineer declaration into the shared runtime, whose hosts never read metadata.json."""
+    if role not in {"lead", "engineer"}:
+        return source
+    ending = b"" if source.endswith(b"\n") else b"\n"
+    note = (
+        f"\nRole: this skill's phases call for the {role.capitalize()}. "
+        "If this thread runs the other role's model, nudge once as the Roles section of the shared instructions says.\n"
+    )
+    return source + ending + note.encode("utf-8")
 
 
 def desired_hashes(root: Path = ROOT) -> dict[str, str]:

@@ -156,6 +156,17 @@ class RepositoryValidationTests(unittest.TestCase):
                 self.assertIn("- Engineer skills: `build`.", text)
                 self.assertNotIn("`both`", text.split("Role phases", 1)[1])
 
+    def test_shared_runtime_carries_lead_and_engineer_roles(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); make_repo(root)
+            for skill_id, role in (("grill", "lead"), ("build", "engineer"), ("both", "either")):
+                add_skill(root, skill_id, role=role)
+            for opencode_v2 in (False, True):
+                files = skills.runtime_projection(root, opencode_v2=opencode_v2)
+                self.assertIn(b"call for the Lead.", files["grill/SKILL.md"])
+                self.assertIn(b"call for the Engineer.", files["build/SKILL.md"])
+                self.assertNotIn(b"Role:", files["both/SKILL.md"])
+
     def test_repository_antigravity_rule_fits_the_byte_cap(self) -> None:
         body, _ = skills.antigravity_instructions(REPOSITORY_ROOT)
         self.assertLessEqual(len(skills._antigravity_managed_content(body)), skills.ANTIGRAVITY_RULE_BYTES)
