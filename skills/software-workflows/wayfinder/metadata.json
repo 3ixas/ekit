@@ -5,6 +5,7 @@
   "invocation": [
     "explicit"
   ],
+  "role": "lead",
   "sources": [
     {
       "repository": "https://github.com/mattpocock/skills",

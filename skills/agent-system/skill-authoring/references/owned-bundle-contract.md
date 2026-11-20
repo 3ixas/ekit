@@ -2,7 +2,7 @@
 
 ## Source layout
 
-An active, candidate, or paused bundle lives at `<lifecycle>/<group>/<id>/`. `SKILL.md` and `metadata.json` are required. For user-requested (`explicit`) skills, add `agents/openai.yaml` with `allow_implicit_invocation: true`; do not disable model invocation. Write descriptions as discriminating natural-language triggers, with adjacent non-triggers. Commands are optional, and supporting handoffs within an authorized workflow need no second invocation. Request recognition is model-guided, not an action permission boundary. Add references, scripts, assets, or evaluations only when they change real behaviour.
+An active, candidate, or paused bundle lives at `<lifecycle>/<group>/<id>/`. `SKILL.md` and `metadata.json` are required. Declare `role` in `metadata.json`: `lead` or `engineer` only for a skill whose phases belong to that role (it triggers a one-time switch offer in the other role's thread), otherwise `either`. For user-requested (`explicit`) skills, add `agents/openai.yaml` with `allow_implicit_invocation: true`; do not disable model invocation. Write descriptions as discriminating natural-language triggers, with adjacent non-triggers. Commands are optional, and supporting handoffs within an authorized workflow need no second invocation. Request recognition is model-guided, not an action permission boundary. Add references, scripts, assets, or evaluations only when they change real behaviour.
 
 ## Instructions
 

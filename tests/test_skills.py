@@ -57,6 +57,7 @@ def add_skill(
     dependencies: list[str] | None = None,
     origin: str = "original",
     sources: list[dict[str, str]] | None = None,
+    role: str = "either",
 ) -> Path:
     bundle = root / lifecycle / group / skill_id
     bundle.mkdir(parents=True)
@@ -73,6 +74,7 @@ def add_skill(
         "group": group,
         "origin": origin,
         "invocation": invocation,
+        "role": role,
         "sources": sources or [],
         "dependencies": {"skills": dependencies or [], "tools": []},
         "reviewed": "2026-09-14",
@@ -116,6 +118,34 @@ class RepositoryValidationTests(unittest.TestCase):
             add_skill(root, "alpha", dependencies=["beta"])
             add_skill(root, "beta", dependencies=["alpha"])
             self.assertTrue(any("dependency cycle" in error for error in skills.check_repo(root)))
+
+    def test_missing_or_invalid_role_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); make_repo(root)
+            for role in ("lead", "engineer", "either"):
+                add_skill(root, f"declared-{role}", role=role)
+            self.assertEqual(skills.check_repo(root), [])
+            missing = add_skill(root, "undeclared")
+            metadata = skills.read_json(missing / "metadata.json"); del metadata["role"]
+            write_json(missing / "metadata.json", metadata)
+            add_skill(root, "misdeclared", role="opus")
+            errors = skills.check_repo(root)
+            self.assertTrue(any("undeclared/metadata.json: role must be one of" in error for error in errors))
+            self.assertTrue(any("misdeclared/metadata.json: role must be one of" in error for error in errors))
+
+    def test_generated_routing_lists_role_phases(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); make_repo(root)
+            add_skill(root, "grill", role="lead")
+            add_skill(root, "build", role="engineer")
+            add_skill(root, "both")
+            add_skill(root, "later", lifecycle="candidates", role="lead")
+            files, routing = skills.claude_projection(root)
+            self.assertEqual((routing["lead"], routing["engineer"]), (["grill"], ["build"]))
+            for text in (skills._claude_rules(root / "AGENTS.md", routing), skills.antigravity_instructions(root)[0].decode()):
+                self.assertIn("- Lead skills: `grill`.", text)
+                self.assertIn("- Engineer skills: `build`.", text)
+                self.assertNotIn("`both`", text.split("ole phases", 1)[1])
 
     def test_explicit_skill_requires_policy(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

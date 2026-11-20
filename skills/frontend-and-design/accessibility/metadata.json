@@ -6,6 +6,7 @@
     "automatic",
     "supporting"
   ],
+  "role": "either",
   "sources": [
     {
       "repository": "https://github.com/hueyexe/frontend-agent-skills",

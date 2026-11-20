@@ -5,6 +5,7 @@
   "invocation": [
     "supporting"
   ],
+  "role": "either",
   "sources": [
     {
       "repository": "https://github.com/emilkowalski/skills",

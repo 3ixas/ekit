@@ -5,6 +5,7 @@
   "invocation": [
     "supporting"
   ],
+  "role": "either",
   "sources": [
     {
       "repository": "openai://curated-skills",

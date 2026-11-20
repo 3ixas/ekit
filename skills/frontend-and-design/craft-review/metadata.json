@@ -5,6 +5,7 @@
   "invocation": [
     "explicit"
   ],
+  "role": "either",
   "sources": [
     {
       "repository": "private:user-supplied-research",

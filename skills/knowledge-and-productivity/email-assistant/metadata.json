@@ -5,6 +5,7 @@
   "invocation": [
     "explicit"
   ],
+  "role": "either",
   "sources": [
     {
       "repository": "user-supplied private scheduled email workflow",

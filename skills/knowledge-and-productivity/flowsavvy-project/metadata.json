@@ -5,6 +5,7 @@
   "invocation": [
     "explicit"
   ],
+  "role": "either",
   "sources": [
     {
       "repository": "https://www.youtube.com/watch?v=5Bmp9cz1JN8",

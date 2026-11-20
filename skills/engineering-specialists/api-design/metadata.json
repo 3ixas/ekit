@@ -6,6 +6,7 @@
     "automatic",
     "supporting"
   ],
+  "role": "either",
   "sources": [
     {
       "repository": "https://github.com/wdm0006/python-skills",
