@@ -244,7 +244,8 @@ def _metadata_errors(root: Path, item: dict[str, Any], tools: dict[str, Any]) ->
         invocation_values = invocation
         if len(set(invocation_values)) != len(invocation_values) or not set(invocation_values) <= INVOCATIONS:
             errors.append(f"{metadata_path}: invalid or duplicate invocation")
-    if metadata.get("role") not in ROLES:
+    role = metadata.get("role")
+    if not isinstance(role, str) or role not in ROLES:
         errors.append(f"{metadata_path}: role must be one of {', '.join(sorted(ROLES))}")
     if "explicit" in invocation_values and item["lifecycle"] == "skills":
         if fm.get("disable-model-invocation") == "true":

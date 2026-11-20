@@ -129,7 +129,11 @@ class RepositoryValidationTests(unittest.TestCase):
             metadata = skills.read_json(missing / "metadata.json"); del metadata["role"]
             write_json(missing / "metadata.json", metadata)
             add_skill(root, "misdeclared", role="opus")
+            listed = add_skill(root, "listed")
+            metadata = skills.read_json(listed / "metadata.json"); metadata["role"] = ["lead"]
+            write_json(listed / "metadata.json", metadata)
             errors = skills.check_repo(root)
+            self.assertTrue(any("listed/metadata.json: role must be one of" in error for error in errors))
             self.assertTrue(any("undeclared/metadata.json: role must be one of" in error for error in errors))
             self.assertTrue(any("misdeclared/metadata.json: role must be one of" in error for error in errors))
 
