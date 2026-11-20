@@ -13,6 +13,10 @@ Three modes:
 2. **Critique.** Explain first, then spawn multiple models to independently identify architectural issues
 3. **Refresh research.** When asked to deepen, verify, or refresh an existing codebase research document, follow [research refresh](references/research-refresh.md). Ordinary explanations do not edit documents.
 
+## Who explores
+
+Exploration runs on the Engineer, as the Roles section of the shared instructions sets out. Outside an Engineer thread, after Step 1, hand Steps 2-3 to one fresh, read-only Engineer child at `medium` (in T3, `delegate_task`): give it the question, your stated interpretation, the repository path, this skill's method and its explorer and explainer prompts, and ask for the explanation in the output format below with `file:line` citations. The child explores and explains itself, fanning out to explorers only for a complex question where its host allows. In Refresh mode, pick the document here (refresh Step 1), then pass it and [research refresh](references/research-refresh.md) to the child, which runs Steps 2-3 and returns cited corrections; this thread checks them and makes any authorized edit. In an Engineer thread, run the steps here with native subagents. Whenever the Engineer runs these steps, its subagents stay on the Engineer model; the model lines below apply only when the Engineer is unavailable and this thread runs the steps itself, which it says. Critique Mode's critics keep their own model rule.
+
 ## Explain Mode
 
 ### Step 1. Understand the Question and Assess Complexity
@@ -81,7 +85,7 @@ The explainer gets all explorers' findings and writes the human-facing explanati
 
 ### Step 4. Present
 
-Present the explainer's output to the user. You may lightly edit for clarity or add context from the conversation, but don't substantially rewrite. The explainer's communication is the product.
+Open the files behind the explanation's main claims and check that they hold; correct or drop any that do not, and say so. Then present the explainer's output to the user. You may lightly edit for clarity or add context from the conversation, but don't substantially rewrite. The explainer's communication is the product.
 
 ### Output Format
 

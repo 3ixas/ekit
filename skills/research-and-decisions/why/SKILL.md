@@ -13,6 +13,10 @@ Companion to the `how` skill. `how` answers what the code does and how it works.
 
 Historical context spreads across seven evidence categories: source control history, issue or ticket tracking, long-form documents, real-time team chat, infrastructure observability, error or exception tracking, and product analytics warehouses. You cannot predict from the question alone which one holds the answer, so the skill enumerates available MCPs at run time, maps each to a category, queries all seven in parallel, then synthesizes with explicit confidence calibration. Null results from searched categories are first-class evidence about how the decision was made; report them alongside positive findings. The default is coverage, not minimalism.
 
+## Who investigates
+
+Investigation runs on the Engineer, as the Roles section of the shared instructions sets out. Outside an Engineer thread, build the code anchor (Step 2) here, then run each investigator and the synthesizer as a fresh Engineer child at `medium` (in T3, `delegate_task`), in place of the model lines in Steps 3 and 4, with the inputs Steps 3 and 4 list. An investigator whose MCP only this host can reach runs here instead, so a reachable category never becomes a false gap; note where each ran in Sources Consulted. In an Engineer thread, coordinate the steps here with native subagents, keeping one investigator per category; they stay on the Engineer model, in place of the same model lines. If the Engineer is unavailable, run the steps here, following those model lines, and say so.
+
 ## Operating Posture
 
 Operate as a careful, cautious, precise investigator. Think like a detective piecing together a historical case from fragmentary records. When the record is thin, say so.
@@ -175,7 +179,7 @@ Its job is the final output: a confidence-weighted, evidence-cited narrative wit
 
 ## Step 5. Present
 
-Take the synthesizer's output and present it to the user. You may lightly edit for clarity or add context from the conversation, but **do not rewrite the confidence language**. The epistemic framing is the product. Dropping the hedges to sound more authoritative is the exact failure mode this skill exists to prevent.
+Check the synthesizer's main citations (commit hashes, PR numbers, `file:line`) and correct or drop any that do not hold, saying so. Then present its output to the user. You may lightly edit for clarity or add context from the conversation, but **do not rewrite the confidence language**. The epistemic framing is the product. Dropping the hedges to sound more authoritative is the exact failure mode this skill exists to prevent.
 
 ## Output Format
 
