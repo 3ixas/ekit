@@ -3,7 +3,7 @@ name: research
 description: Investigate a question against high-trust primary sources and answer it, saving the cited findings as a Markdown note when working in a repository. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent.
 ---
 
-Use a **background agent** for the research when the host supports one, so independent work can continue while it reads. If delegation is unavailable, perform the same investigation directly and disclose that limitation.
+Route the research by what it reads, as the Roles section of the shared instructions sets out: research into a repository or its own documentation runs as a fresh Engineer child at `medium` (in an Engineer thread, in-thread); research that needs the web goes to Codex. Run the agent in the **background** when the host supports it, so independent work can continue while it reads. If the chosen agent is unavailable, perform the same investigation directly and disclose that limitation.
 
 Pick the method for the kind of question from [research modes](references/research-modes.md): a current fact, a recommendation, repository or skill discovery, or recent practitioner evidence.
 
