@@ -5,6 +5,7 @@
   "invocation": [
     "automatic"
   ],
+  "role": "either",
   "sources": [
     {
       "repository": "https://github.com/EveryInc/compound-engineering-plugin",

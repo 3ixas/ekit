@@ -5,6 +5,7 @@
   "invocation": [
     "automatic"
   ],
+  "role": "either",
   "sources": [
     {
       "repository": "openai://curated-skills",
@@ -54,5 +55,5 @@
     ]
   },
   "reviewed": "2026-11-12",
-  "owned_changes": "2026-11-12: Add conditional measured-improvement guidance and comparative evaluation; preserve ordinary workflow and existing review ownership. No upstream snapshots modified. Declared Verify dependency so selective exports include the evaluation-validity method."
+  "owned_changes": "2026-11-12: Add conditional measured-improvement guidance and comparative evaluation; preserve ordinary workflow and existing review ownership. No upstream snapshots modified. Declared Verify dependency so selective exports include the evaluation-validity method. 2026-11-20: Owned bundle contract requires a role declaration (lead, engineer or either)."
 }

@@ -23,6 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 GROUPS = ("software-workflows", "engineering-specialists", "frontend-and-design", "research-and-decisions", "writing-and-artifacts", "knowledge-and-productivity", "personal-workflows", "agent-system")
 LIFECYCLES = ("skills", "candidates", "paused")
 INVOCATIONS = {"automatic", "supporting", "explicit"}
+ROLES = {"lead", "engineer", "either"}
 ORIGINS = {"original", "imported", "adapted", "synthesized"}
 SOURCE_USES = {"copied", "adapted", "informed-by"}
 CAPABILITY_STATUSES = {"available", "missing", "unverified", "unsupported", "conditional"}
@@ -243,6 +244,9 @@ def _metadata_errors(root: Path, item: dict[str, Any], tools: dict[str, Any]) ->
         invocation_values = invocation
         if len(set(invocation_values)) != len(invocation_values) or not set(invocation_values) <= INVOCATIONS:
             errors.append(f"{metadata_path}: invalid or duplicate invocation")
+    role = metadata.get("role")
+    if not isinstance(role, str) or role not in ROLES:
+        errors.append(f"{metadata_path}: role must be one of {', '.join(sorted(ROLES))}")
     if "explicit" in invocation_values and item["lifecycle"] == "skills":
         if fm.get("disable-model-invocation") == "true":
             errors.append(f"{bundle}: user-requested skill must remain model-loadable")
@@ -515,11 +519,24 @@ def runtime_projection(root: Path = ROOT, *, opencode_v2: bool | None = None) ->
         content = path.read_bytes()
         parts = PurePosixPath(relative).parts
         if len(parts) == 2 and parts[1] == "SKILL.md":
-            invocation = read_json(bundles[parts[0]]["path"] / "metadata.json")["invocation"]
+            metadata = read_json(bundles[parts[0]]["path"] / "metadata.json")
             if opencode_v2:
-                content = _opencode_skill_text(content, invocation)
+                content = _opencode_skill_text(content, metadata["invocation"])
+            content = _role_note(content, metadata["role"])
         result[relative] = content
     return result
+
+
+def _role_note(source: bytes, role: str) -> bytes:
+    """Carry a lead or engineer declaration into the shared runtime, whose hosts never read metadata.json."""
+    if role not in {"lead", "engineer"}:
+        return source
+    ending = b"" if source.endswith(b"\n") else b"\n"
+    note = (
+        f"\nRole: this skill's phases call for the {role.capitalize()}. "
+        "If this thread runs the other role's model, nudge once as the Roles section of the shared instructions says.\n"
+    )
+    return source + ending + note.encode("utf-8")
 
 
 def desired_hashes(root: Path = ROOT) -> dict[str, str]:
@@ -825,8 +842,13 @@ def _claude_skill_text(source: str, invocation: Sequence[str]) -> str:
     return "".join(output)
 
 
-def _invocation_routing(invocation_by_id: dict[str, Sequence[str]]) -> dict[str, list[str]]:
+def _invocation_routing(
+    invocation_by_id: dict[str, Sequence[str]], role_by_id: dict[str, str] | None = None,
+) -> dict[str, list[str]]:
+    roles = role_by_id or {}
     return {
+        "lead": sorted(skill_id for skill_id, role in roles.items() if role == "lead"),
+        "engineer": sorted(skill_id for skill_id, role in roles.items() if role == "engineer"),
         "automatic": sorted(
             skill_id for skill_id, invocation in invocation_by_id.items()
             if "automatic" in invocation and "explicit" not in invocation
@@ -844,10 +866,8 @@ def _invocation_routing(invocation_by_id: dict[str, Sequence[str]]) -> dict[str,
 
 def claude_projection(root: Path = ROOT) -> tuple[dict[str, bytes], dict[str, list[str]]]:
     bundles = {item["id"]: item for item in discover(root) if item["lifecycle"] == "skills"}
-    invocation_by_id = {
-        skill_id: read_json(item["path"] / "metadata.json")["invocation"]
-        for skill_id, item in bundles.items()
-    }
+    metadata_by_id = {skill_id: read_json(item["path"] / "metadata.json") for skill_id, item in bundles.items()}
+    invocation_by_id = {skill_id: metadata["invocation"] for skill_id, metadata in metadata_by_id.items()}
     files: dict[str, bytes] = {}
     for relative, source in active_projection(root).items():
         path = PurePosixPath(relative)
@@ -855,7 +875,7 @@ def claude_projection(root: Path = ROOT) -> tuple[dict[str, bytes], dict[str, li
         if len(path.parts) == 2 and path.name == "SKILL.md":
             content = _claude_skill_text(content.decode("utf-8"), invocation_by_id[path.parts[0]]).encode("utf-8")
         files[relative] = content
-    return files, _invocation_routing(invocation_by_id)
+    return files, _invocation_routing(invocation_by_id, {skill_id: metadata["role"] for skill_id, metadata in metadata_by_id.items()})
 
 
 def _claude_rules(global_target: Path, routing: dict[str, list[str]]) -> str:
@@ -878,16 +898,32 @@ def _claude_rules(global_target: Path, routing: dict[str, list[str]]) -> str:
         "that has no owning primary skill. Requested workflows remain model-loadable. The supporting-skill guard only warns unless the plugin's "
         "`skill_guard_refuse` option is on. `claude-sync` reports the remaining gap so it is not mistaken for full parity.\n\n"
         "## Supporting-only skills\n\n"
-        f"{supporting}\n"
+        f"{supporting}\n\n"
+        f"{_role_phases(routing, '## Role phases')}"
     )
 
 
 def _skill_routing(root: Path) -> dict[str, list[str]]:
-    invocation_by_id = {
-        item["id"]: read_json(item["path"] / "metadata.json")["invocation"]
+    metadata_by_id = {
+        item["id"]: read_json(item["path"] / "metadata.json")
         for item in discover(root) if item["lifecycle"] == "skills"
     }
-    return _invocation_routing(invocation_by_id)
+    return _invocation_routing(
+        {skill_id: metadata["invocation"] for skill_id, metadata in metadata_by_id.items()},
+        {skill_id: metadata["role"] for skill_id, metadata in metadata_by_id.items()},
+    )
+
+
+def _role_phases(routing: dict[str, list[str]], heading: str) -> str:
+    def list_ids(values: list[str]) -> str:
+        return ", ".join(f"`{skill_id}`" for skill_id in values) if values else "(none)"
+
+    return (
+        f"{heading}\n\n"
+        "Each skill declares the role its phase calls for; the Roles section of the shared instructions says how to nudge on a mismatch. Every skill not listed here is `either` and never nudges.\n\n"
+        f"- Lead skills: {list_ids(routing.get('lead', []))}.\n"
+        f"- Engineer skills: {list_ids(routing.get('engineer', []))}.\n"
+    )
 
 
 def _managed_routing_instructions(root: Path, heading: str, discovery: str, policy: str) -> tuple[bytes, dict[str, list[str]]]:
@@ -909,7 +945,8 @@ def _managed_routing_instructions(root: Path, heading: str, discovery: str, poli
         "### Supporting-only skills\n\n"
         f"{supporting}\n\n"
         "### Explicit-only skills\n\n"
-        f"{explicit}\n"
+        f"{explicit}\n\n"
+        f"{_role_phases(routing, '### Role phases')}"
     )
     canonical = (root / "config" / "AGENTS.md").read_bytes()
     ending = b"\n" if not canonical.endswith(b"\n") else b""

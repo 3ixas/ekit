@@ -5,6 +5,7 @@
   "invocation": [
     "supporting"
   ],
+  "role": "either",
   "sources": [
     {
       "repository": "https://github.com/supabase/agent-skills",

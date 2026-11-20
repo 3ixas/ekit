@@ -6,6 +6,7 @@
     "explicit",
     "supporting"
   ],
+  "role": "either",
   "sources": [
     {
       "repository": "https://github.com/cursor/plugins",

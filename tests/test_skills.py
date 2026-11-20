@@ -57,6 +57,7 @@ def add_skill(
     dependencies: list[str] | None = None,
     origin: str = "original",
     sources: list[dict[str, str]] | None = None,
+    role: str = "either",
 ) -> Path:
     bundle = root / lifecycle / group / skill_id
     bundle.mkdir(parents=True)
@@ -73,6 +74,7 @@ def add_skill(
         "group": group,
         "origin": origin,
         "invocation": invocation,
+        "role": role,
         "sources": sources or [],
         "dependencies": {"skills": dependencies or [], "tools": []},
         "reviewed": "2026-09-14",
@@ -116,6 +118,58 @@ class RepositoryValidationTests(unittest.TestCase):
             add_skill(root, "alpha", dependencies=["beta"])
             add_skill(root, "beta", dependencies=["alpha"])
             self.assertTrue(any("dependency cycle" in error for error in skills.check_repo(root)))
+
+    def test_missing_or_invalid_role_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); make_repo(root)
+            for role in ("lead", "engineer", "either"):
+                add_skill(root, f"declared-{role}", role=role)
+            self.assertEqual(skills.check_repo(root), [])
+            missing = add_skill(root, "undeclared")
+            metadata = skills.read_json(missing / "metadata.json"); del metadata["role"]
+            write_json(missing / "metadata.json", metadata)
+            add_skill(root, "misdeclared", role="opus")
+            listed = add_skill(root, "listed")
+            metadata = skills.read_json(listed / "metadata.json"); metadata["role"] = ["lead"]
+            write_json(listed / "metadata.json", metadata)
+            errors = skills.check_repo(root)
+            self.assertTrue(any("listed/metadata.json: role must be one of" in error for error in errors))
+            self.assertTrue(any("undeclared/metadata.json: role must be one of" in error for error in errors))
+            self.assertTrue(any("misdeclared/metadata.json: role must be one of" in error for error in errors))
+
+    def test_generated_routing_lists_role_phases(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); make_repo(root)
+            add_skill(root, "grill", role="lead")
+            add_skill(root, "build", role="engineer")
+            add_skill(root, "both")
+            add_skill(root, "later", lifecycle="candidates", role="lead")
+            files, routing = skills.claude_projection(root)
+            self.assertEqual((routing["lead"], routing["engineer"]), (["grill"], ["build"]))
+            generated = (
+                skills._claude_rules(root / "AGENTS.md", routing),
+                skills.opencode_instructions(root)[0].decode(),
+                skills.antigravity_instructions(root)[0].decode(),
+            )
+            for text in generated:
+                self.assertIn("- Lead skills: `grill`.", text)
+                self.assertIn("- Engineer skills: `build`.", text)
+                self.assertNotIn("`both`", text.split("Role phases", 1)[1])
+
+    def test_shared_runtime_carries_lead_and_engineer_roles(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); make_repo(root)
+            for skill_id, role in (("grill", "lead"), ("build", "engineer"), ("both", "either")):
+                add_skill(root, skill_id, role=role)
+            for opencode_v2 in (False, True):
+                files = skills.runtime_projection(root, opencode_v2=opencode_v2)
+                self.assertIn(b"call for the Lead.", files["grill/SKILL.md"])
+                self.assertIn(b"call for the Engineer.", files["build/SKILL.md"])
+                self.assertNotIn(b"Role:", files["both/SKILL.md"])
+
+    def test_repository_antigravity_rule_fits_the_byte_cap(self) -> None:
+        body, _ = skills.antigravity_instructions(REPOSITORY_ROOT)
+        self.assertLessEqual(len(skills._antigravity_managed_content(body)), skills.ANTIGRAVITY_RULE_BYTES)
 
     def test_explicit_skill_requires_policy(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

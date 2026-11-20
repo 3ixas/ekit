@@ -57,7 +57,8 @@ Skills name roles; this table names the models. In T3, select one with `modelSel
 - Set the runtime mode by provider: `full-access` on Antigravity, whose T3 `auto` mode still asks me to approve every tool call, and `auto` otherwise. T3 refuses a mode broader than the launching thread's, so a thread in `auto` can start Antigravity only in an approval-asking mode; tell me before launching that its tool calls will wait for my approval.
 - A fallback covers one launch; the next launch tries the role's own model first.
 - An Engineer escalates to the Lead, rather than guessing or asking me, when it reaches a decision the approved brief does not settle or fails review twice on the same issue: it preserves the work, writes a handoff naming the decision and launches a Lead thread, which settles it or asks me when it is mine. Escalation is not fallback.
-- Switch models only when starting a new thread or child, never in the thread I am talking in.
+- Switch models only when starting a new thread or child, never in the thread I am talking in, except on my yes to a role nudge.
+- Each skill declares a role (`lead`, `engineer` or `either`); the generated routing lists the `lead` and `engineer` ones. When one of those starts a phase in a thread running the other role's model, say once in that phase which role and reasoning level it calls for and offer to switch. Switch this thread (`t3_thread_configure`) only on my yes; otherwise carry on. `either` skills, and work with no skill loaded, never nudge or switch.
 - Codex keeps images, rendered browser or desktop work and web research. T3's Orchestrator (Neon) model, Gemini 4 Carbon and Sonnet are not routed.
 
 ## Claude Code

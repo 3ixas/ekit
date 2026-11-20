@@ -5,6 +5,7 @@
   "invocation": [
     "automatic"
   ],
+  "role": "either",
   "sources": [],
   "dependencies": {
     "skills": [

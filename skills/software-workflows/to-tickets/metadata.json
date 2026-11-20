@@ -5,6 +5,7 @@
   "invocation": [
     "automatic"
   ],
+  "role": "lead",
   "sources": [
     {
       "repository": "https://github.com/mattpocock/skills",

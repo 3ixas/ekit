@@ -5,6 +5,7 @@
   "invocation": [
     "automatic"
   ],
+  "role": "either",
   "sources": [
     {
       "repository": "https://github.com/Nutlope/hallmark",
