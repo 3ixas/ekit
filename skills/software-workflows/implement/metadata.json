@@ -95,5 +95,6 @@
       "github"
     ]
   },
-  "reviewed": "2026-11-19"
+  "reviewed": "2026-11-20",
+  "owned_changes": "2026-11-20: Replaced same-model review with cross-role code-review (Lead reviews an Engineer-implemented slice; Engineer at Extra High reviews a Lead-implemented slice, per the shared role table), with same-role fallback recorded in the report and code verification before acting so unverifiable findings are rejected with evidence. Independently authored from Elias's request; no upstream source changed."
 }

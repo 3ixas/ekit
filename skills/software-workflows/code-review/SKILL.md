@@ -8,13 +8,13 @@ Two-axis review of the diff between the current checkout and a fixed point the u
 - **Standards**: is the changed behaviour correct and compatible with its callers, and does the code conform to this repo's documented standards?
 - **Spec**: does the code faithfully implement the originating issue / spec?
 
-Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings.
+Both axes run as **parallel fresh-context reviewers** so they don't pollute each other's context, then this skill aggregates their findings.
 
 Read the repository tracker configuration. If `docs/agents/issue-tracker.md` is missing, use the most efficient supported tracker capability available on this host; prefer `gh`/`gh api` for structured GitHub state, and report when no tracker is configured.
 
-**When another skill calls this one.** `implement`, `implement-parallel`, and other pipelines run this review unattended and pass the fixed point, the staged paths or diff, the spec pointer, and, when they have one, a proof plan mapping each acceptance claim to a check with its observed result. In that mode never ask the user anything: use what was supplied, and if the spec is missing, skip the Spec sub-agent and report "no spec available".
+**When another skill calls this one.** `implement`, `implement-parallel`, and other pipelines run this review unattended and pass the fixed point, the staged paths or diff, the spec pointer, the implementing role (Engineer or Lead) when known, and, when they have one, a proof plan mapping each acceptance claim to a check with its observed result. In that mode never ask the user anything: use what was supplied, and if the spec is missing, skip the Spec sub-agent and report "no spec available".
 
-Review is read-only at either depth: report findings without editing or committing. The calling workflow owns fixes and re-review; depth does not grant wider implementation authority. `implement` and its ticket coordinators supply the exact slice under review. Judge the supplied scope, without adding review stages, another coordinator, or model/reasoning overrides.
+Review is read-only at either depth: report findings without editing or committing. The calling workflow owns fixes and re-review; depth does not grant wider implementation authority. `implement` and its ticket coordinators supply the exact slice under review. Judge the supplied scope without adding extra review stages or another coordinator; select the reviewer role per step 5 without switching the caller's thread.
 
 For repeated implementation/delivery review, the caller uses [bounded review-loop controls](references/review-loop.md). Return stable finding IDs and the reviewed snapshot so later rounds can focus on changes and unresolved findings without losing either axis. A standalone review remains one read-only pass.
 
@@ -84,21 +84,27 @@ At either depth, supplement the smell baseline with these structural checks:
 
 When a change affects shared state, persistence, background work or a potentially large input, establish the expected deployment and workload from project evidence before judging scale. Check whether process-local state, check-then-write sequences, unbounded growth or repeated per-item work can fail there. State any material assumption, tie findings to a concrete failure case, and keep hypothetical future scale separate from demonstrated regressions.
 
-### 5. Spawn both sub-agents in parallel
+### 5. Spawn both reviewers in parallel
 
-Start each reviewer in a fresh context without the parent conversation or the other reviewer’s findings. Give each the task, scope, authority, fixed revision and evidence listed below; do not pass the implementer’s conclusions as facts. If the host cannot provide fresh context, report that review independence is limited.
+Select the reviewer role from the Roles section of the shared instructions without switching the caller's thread:
+
+- **Implemented slice** (invoked by `implement` or its coordinators, or reviewing changes implemented in the current thread): run both reviewers on the **other role** — **Lead** when the Engineer implemented the slice, **Engineer** at Extra High (`xhigh`) when the Lead implemented it. Start each cross-role reviewer as a fresh-context child on that role using the host's cross-provider delegation mechanism (in T3 Code, `delegate_task` with the role table's provider, model, reasoning option, and provider runtime mode — never above the caller's mode, following the Roles section's approval notice when a child runs under `auto-accept-edits` — and read-only instructions; each re-review round starts fresh children rather than reusing an earlier child).
+- **Same-role fallback:** If the other role's provider is unavailable, out of quota, would fall back to the implementer's own model/provider, or cross-role delegation is unavailable in this host/session, run both fresh-context reviewers on the **same role** instead and explicitly record the same-role fallback and reason in the report.
+- **Standalone review** of work not implemented in this run: keep the current role unless Elias asks for a specific role, and record which role reviewed.
+
+Start each reviewer in a fresh context without the parent conversation or the other reviewer’s findings. Give each the task, scope, authority, fixed revision and evidence listed below; do not pass the implementer’s conclusions as facts. Pass the captured diff from step 1 (inline or as a readable file path) alongside the diff command so read-only reviewers can inspect without unnecessary shell calls. If the host cannot provide fresh context, report that review independence is limited.
 
 **Standards sub-agent prompt** should include:
 
-- The exact diff command, working-tree status when relevant, and commit list. For a staged-slice review, use only the supplied staged paths and fixed point.
+- The captured diff (inline or readable path), exact diff command, working-tree status when relevant, and commit list. For a staged-slice review, use only the supplied staged paths and fixed point.
 - The list of standards-source files you found in step 3, **plus the smell baseline from step 3** pasted in full (the sub-agent has no other access to it).
-- The selected depth, reason, any explicit depth constraint, and all step 4 structural checks and scope boundaries. For deep review, include the linked reference's contents; otherwise supply its path so the reviewer can read it if escalation is justified. Keep the model and reasoning selected for the calling run.
+- The selected depth, reason, any explicit depth constraint, and all step 4 structural checks and scope boundaries. For deep review, include the linked reference's contents; otherwise supply its path so the reviewer can read it if escalation is justified.
 - When step 4's workload check applies, include the expected deployment and workload evidence or material assumptions, and its checks for process-local state, check-then-write races, unbounded growth and repeated per-item work. Keep hypothetical future scale separate from demonstrated regressions.
 - The brief: "Report, per file/hunk where relevant, (a) incorrect changed behaviour or regressions, including impact on existing callers even without a violated standard or spec line; (b) violations of documented standards: cite the standard (file + rule); and (c) concrete baseline smells or structural problems: label the heuristic and quote the hunk. Give evidence, practical consequences and a concrete remedy. Distinguish documented violations, demonstrated regressions, and optional improvements; a documented repo standard overrides the baseline. Skip anything tooling enforces. Return final depth and reason, including any escalation. Keep the report under 400 words; prioritize material findings and state any coverage limit rather than silently omitting them."
 
 **Spec sub-agent prompt** should include:
 
-- The exact diff command, working-tree status when relevant, and commit list. For a staged-slice review, use only the supplied staged paths and fixed point.
+- The captured diff (inline or readable path), exact diff command, working-tree status when relevant, and commit list. For a staged-slice review, use only the supplied staged paths and fixed point.
 - The path or fetched contents of the spec.
 - The caller's proof plan with observed results, when supplied.
 - The brief: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong; (d) when a proof plan is supplied, acceptance claims with no proof, a Fail or Skip result, or proof that does not exercise the claim (a test that asserts its own mock, a check on the wrong surface, a build standing in for behaviour). Quote the spec line for each finding. Under 400 words."
@@ -107,7 +113,7 @@ If the spec is missing, skip the Spec sub-agent and note this in the final repor
 
 ### 6. Aggregate
 
-Present the final depth and reason, then the two reports under `## Standards` and `## Spec` headings, verbatim or lightly cleaned. Within Standards, distinguish blocking findings from optional structural improvements; no optional suggestion changes an otherwise clear review outcome. Do **not** merge or rerank findings across axes, because the two axes are deliberately separate (see _Why two axes_).
+State the reviewer role (and any same-role fallback with its reason), then the final depth and reason, and present the two reports under `## Standards` and `## Spec` headings, verbatim or lightly cleaned. Within Standards, distinguish blocking findings from optional structural improvements; no optional suggestion changes an otherwise clear review outcome. Do **not** merge or rerank findings across axes, because the two axes are deliberately separate (see _Why two axes_). Report the actual reviewer role only when verified; never claim cross-role coverage from a same-role fallback.
 
 End with a one-line summary: blocking findings and optional suggestions per axis, and the worst issue _within each axis_ (if any). Don't pick a single winner across axes: that's the reranking the separation exists to prevent. Preserve any scope limitations and concrete follow-up invocation in the report, including unattended calls; the calling workflow applies its existing scope-decision boundary.
 
