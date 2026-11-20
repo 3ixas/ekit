@@ -760,15 +760,16 @@ class ClaudeSyncStatus:
 
 @dataclass(frozen=True)
 class AntigravitySyncStatus:
-    rule_targets: list[Path]
-    changed_rules: list[Path]
+    rule_target: Path
+    rule_changed: bool
+    stale_rules: list[Path]
+    profile_link_issues: list[str]
     skills_link: Path
     link_state: str  # current, missing, placeholder, drift or conflict
     link_changed: bool
     drift: list[str]
     conflicts: list[str]
     prerequisites: list[str]
-    skipped_profiles: list[str]
     routing: dict[str, list[str]]
     limitations: list[str]
 
@@ -1113,22 +1114,15 @@ def opencode_doctor(
     return sorted(set(errors))
 
 
-def antigravity_runtime_config(root: Path = ROOT) -> dict[str, Any]:
+def antigravity_runtime_config(root: Path = ROOT) -> dict[str, Path]:
     raw = read_json(root / "config" / "runtime.json")
-    required = {"skills", "global_agents", "antigravity_config", "antigravity_t3_profiles", "antigravity_backups"}
+    required = {"skills", "global_agents", "antigravity_config", "antigravity_backups", "t3_settings"}
     if not isinstance(raw, dict) or not required <= set(raw) or not all(isinstance(raw.get(key), str) for key in required):
         raise CheckError(f"{root / 'config' / 'runtime.json'}: missing Antigravity runtime paths")
-    instances = raw.get("antigravity_t3_instances", [])
-    if not isinstance(instances, list) or not all(isinstance(item, str) and item for item in instances):
-        raise CheckError(f"{root / 'config' / 'runtime.json'}: antigravity_t3_instances must be a list of instance ids")
-    config: dict[str, Any] = {key: _absolute_path(Path(raw[key])) for key in required}
-    config["antigravity_t3_instances"] = list(instances)
+    config = {key: _absolute_path(Path(raw[key])) for key in required}
+    # T3 Code stores provider profiles next to its userdata settings file.
+    config["t3_antigravity_profiles"] = config["t3_settings"].parent / "providers" / "antigravity"
     return config
-
-
-def antigravity_t3_profile(profiles_root: Path, instance_id: str) -> Path:
-    """T3 Code gives each Antigravity instance a private GEMINI_HOME named by the SHA-256 of its instance id."""
-    return _absolute_path(profiles_root) / hashlib.sha256(instance_id.encode("utf-8")).hexdigest()
 
 
 def antigravity_instructions(root: Path = ROOT) -> tuple[bytes, dict[str, list[str]]]:
@@ -1156,60 +1150,134 @@ def _antigravity_marker_drift(content: bytes) -> str | None:
     return None
 
 
-def _antigravity_rule_targets(config_dir: Path, profiles_root: Path, instances: Sequence[str]) -> tuple[list[Path], list[str]]:
-    targets = [_absolute_path(config_dir) / "GEMINI.md"]
-    skipped: list[str] = []
-    for instance_id in instances:
-        profile = antigravity_t3_profile(profiles_root, instance_id)
-        if profile.is_dir():
-            targets.append(profile / "config" / "GEMINI.md")
-        else:
-            skipped.append(f"T3 Antigravity instance `{instance_id}` has no profile yet ({profile}); enable it in T3, then rerun")
-    return targets, skipped
+def _antigravity_symlink_matches(link: Path, expected: Path) -> tuple[bool, Path]:
+    resolved = Path(os.path.abspath(os.path.join(link.parent, os.readlink(link))))
+    matches = resolved == expected or resolved.resolve(strict=False) == expected.resolve(strict=False)
+    return matches, resolved
+
+
+def _classify_antigravity_rule_file(path: Path) -> tuple[str | None, str | None]:
+    """Return (kind, detail) for a regular file: ('managed', None), ('drift', reason), ('unmanaged', reason), or (None, None)."""
+    if path.is_symlink() or not path.is_file():
+        return None, None
+    error = _antigravity_marker_drift(path.read_bytes())
+    if error is None:
+        return "managed", None
+    if error == "not marked as managed":
+        return "unmanaged", error
+    return "drift", error
+
+
+def _atomic_write_bytes(target: Path, content: bytes, stage: Path) -> None:
+    target.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        stage.write_bytes(content)
+        os.replace(stage, target)
+    except Exception:
+        stage.unlink(missing_ok=True)
+        raise
 
 
 def antigravity_sync_status(
     root: Path,
     config_dir: Path,
     profiles_root: Path,
-    instances: Sequence[str],
     skills_target: Path,
     global_target: Path,
     *,
     backup_root: Path | None = None,
 ) -> AntigravitySyncStatus:
     config_dir = _absolute_path(config_dir)
+    # Global rules live at ~/.gemini/GEMINI.md (parent of ~/.gemini/config) so T3 0.1.11+ links them into profiles.
+    rule_target = config_dir.parent / "GEMINI.md"
+    profiles_root = _absolute_path(profiles_root)
     skills_target = _absolute_path(skills_target)
     global_target = _absolute_path(global_target)
     backup_root = _absolute_path(backup_root) if backup_root else None
     body, routing = antigravity_instructions(root)
     desired = _antigravity_managed_content(body)
-    rule_targets, skipped = _antigravity_rule_targets(config_dir, profiles_root, instances)
     conflicts: list[str] = []
     drift: list[str] = []
-    changed_rules: list[Path] = []
+    stale_rules: list[Path] = []
+    profile_link_issues: list[str] = []
     if len(desired) > ANTIGRAVITY_RULE_BYTES:
         conflicts.append(f"Antigravity rule is {len(desired)} bytes; Antigravity truncates rule files over {ANTIGRAVITY_RULE_BYTES}")
-    for target in rule_targets:
-        if target.is_symlink():
-            conflicts.append(f"Antigravity rule target {target} must be a regular file, not a symlink")
-        elif target.exists() and not target.is_file():
-            conflicts.append(f"Antigravity rule target {target} exists but is not a regular file")
-        elif target.is_file():
-            error = _antigravity_marker_drift(target.read_bytes())
-            if error == "not marked as managed":
-                conflicts.append(f"Antigravity rule {target} already exists and is not owned by this sync")
-            elif error:
-                drift.append(f"Antigravity rule {target} {error}")
-        if not target.is_file() or target.read_bytes() != desired:
-            changed_rules.append(target)
-        if _paths_overlap(target, root.resolve(strict=False)):
-            conflicts.append(f"Antigravity rule target {target} must be outside the canonical repository")
+    if rule_target.is_symlink():
+        conflicts.append(f"Antigravity rule target {rule_target} must be a regular file, not a symlink")
+    elif rule_target.exists() and not rule_target.is_file():
+        conflicts.append(f"Antigravity rule target {rule_target} exists but is not a regular file")
+    else:
+        kind, detail = _classify_antigravity_rule_file(rule_target)
+        if kind == "unmanaged":
+            conflicts.append(f"Antigravity rule {rule_target} already exists and is not owned by this sync")
+        elif kind == "drift":
+            drift.append(f"Antigravity rule {rule_target} {detail}")
+    rule_changed = True
+    if not rule_target.is_symlink() and rule_target.is_file():
+        rule_changed = rule_target.read_bytes() != desired
+    if _paths_overlap(rule_target, root.resolve(strict=False)):
+        conflicts.append(f"Antigravity rule target {rule_target} must be outside the canonical repository")
+
+    legacy_cli_rule = config_dir / "GEMINI.md"
+    legacy_kind, legacy_detail = _classify_antigravity_rule_file(legacy_cli_rule)
+    if legacy_kind == "managed":
+        stale_rules.append(legacy_cli_rule)
+    elif legacy_kind == "drift":
+        drift.append(f"Stale Antigravity rule {legacy_cli_rule} {legacy_detail}")
+
+    if profiles_root.is_symlink() or (profiles_root.exists() and not profiles_root.is_dir()):
+        conflicts.append(f"T3 Antigravity profiles path {profiles_root} must be a real directory")
+    elif profiles_root.is_dir():
+        profiles = sorted(
+            child
+            for child in profiles_root.iterdir()
+            if not child.name.startswith(".") and child.is_dir() and not child.is_symlink()
+        )
+        for profile in profiles:
+            profile_config_rule = profile / "config" / "GEMINI.md"
+            cfg_kind, cfg_detail = _classify_antigravity_rule_file(profile_config_rule)
+            if cfg_kind == "managed":
+                stale_rules.append(profile_config_rule)
+            elif cfg_kind == "drift":
+                drift.append(f"Stale Antigravity profile rule {profile_config_rule} {cfg_detail}")
+
+            profile_link = profile / "GEMINI.md"
+            if profile_link.is_symlink():
+                matches, resolved = _antigravity_symlink_matches(profile_link, rule_target)
+                if not matches:
+                    profile_link_issues.append(
+                        f"T3 Antigravity profile link {profile_link} points to {resolved}, not {rule_target}"
+                    )
+            elif profile_link.is_file():
+                root_kind, root_detail = _classify_antigravity_rule_file(profile_link)
+                if root_kind == "managed":
+                    stale_rules.append(profile_link)
+                    profile_link_issues.append(
+                        f"T3 Antigravity profile {profile} holds a stale managed file at {profile_link} instead of linking to {rule_target}"
+                    )
+                elif root_kind == "drift":
+                    drift.append(f"Stale Antigravity profile rule {profile_link} {root_detail}")
+                    profile_link_issues.append(
+                        f"T3 Antigravity profile {profile} holds an edited managed file at {profile_link} instead of linking to {rule_target}"
+                    )
+                else:
+                    profile_link_issues.append(
+                        f"T3 Antigravity profile {profile} has a real file at {profile_link}; T3 will not replace it with a link to {rule_target}"
+                    )
+            elif profile_link.exists():
+                profile_link_issues.append(
+                    f"T3 Antigravity profile path {profile_link} exists and is not a link to {rule_target}"
+                )
+            else:
+                profile_link_issues.append(
+                    f"T3 Antigravity profile {profile} does not link {profile_link} to {rule_target}; start a fresh Antigravity thread in T3 Code (0.1.11+) so T3 creates the link"
+                )
+
     skills_link = config_dir / "skills"
     link_state = "missing"
     if skills_link.is_symlink():
-        resolved = Path(os.path.abspath(os.path.join(skills_link.parent, os.readlink(skills_link))))
-        if resolved == skills_target:
+        matches, resolved = _antigravity_symlink_matches(skills_link, skills_target)
+        if matches:
             link_state = "current"
         else:
             link_state = "drift"
@@ -1221,12 +1289,17 @@ def antigravity_sync_status(
             link_state = "conflict"
             conflicts.append(f"Antigravity skills path {skills_link} already exists and is not a link to the shared runtime")
     link_changed = link_state != "current"
-    if _paths_overlap(config_dir, skills_target) or _paths_overlap(config_dir, global_target):
+    if (
+        _paths_overlap(config_dir, skills_target)
+        or _paths_overlap(config_dir, global_target)
+        or _paths_overlap(rule_target, skills_target)
+        or _paths_overlap(rule_target, global_target)
+    ):
         conflicts.append("Antigravity config directory and the shared runtime targets must be separate")
     if backup_root:
         if backup_root.is_symlink() or (backup_root.exists() and not backup_root.is_dir()):
             conflicts.append("Antigravity backup path must be a real directory")
-        if any(_paths_overlap(backup_root, path) for path in (*rule_targets, skills_link, skills_target, global_target)):
+        if any(_paths_overlap(backup_root, path) for path in (rule_target, *stale_rules, skills_link, skills_target, global_target)):
             conflicts.append("Antigravity backup directory must be separate from managed targets")
         if _paths_overlap(backup_root, root.resolve(strict=False)):
             conflicts.append("Antigravity backup directory must be outside the canonical repository")
@@ -1236,28 +1309,40 @@ def antigravity_sync_status(
         "T3 Code's Antigravity sessions have no watch_pull_request; delivery polls PR state instead.",
     ]
     return AntigravitySyncStatus(
-        rule_targets,
-        changed_rules,
+        rule_target,
+        rule_changed,
+        stale_rules,
+        profile_link_issues,
         skills_link,
         link_state,
         link_changed,
         drift,
         conflicts,
         _shared_runtime_prerequisites(root, skills_target, global_target),
-        skipped,
         routing,
         limitations,
     )
 
 
-def _verify_antigravity(root: Path, rule_targets: Sequence[Path], skills_link: Path, skills_target: Path, global_target: Path) -> None:
+def _verify_antigravity(
+    root: Path,
+    rule_target: Path,
+    removed_stale_rules: Sequence[Path],
+    skills_link: Path,
+    skills_target: Path,
+    global_target: Path,
+) -> None:
     expected, _ = antigravity_instructions(root)
-    for target in rule_targets:
-        actual = target.read_bytes()
-        marker = ANTIGRAVITY_FILE_MARKER.match(actual)
-        if not marker or actual[marker.end():] != expected:
-            raise CheckError(f"Antigravity rule verification failed: {target}")
-    if not skills_link.is_symlink() or Path(os.path.abspath(os.path.join(skills_link.parent, os.readlink(skills_link)))) != _absolute_path(skills_target):
+    if rule_target.is_symlink() or not rule_target.is_file():
+        raise CheckError(f"Antigravity rule verification failed: {rule_target}")
+    actual = rule_target.read_bytes()
+    marker = ANTIGRAVITY_FILE_MARKER.match(actual)
+    if not marker or actual[marker.end():] != expected:
+        raise CheckError(f"Antigravity rule verification failed: {rule_target}")
+    for stale in removed_stale_rules:
+        if stale.exists() or stale.is_symlink():
+            raise CheckError(f"Stale Antigravity rule removal verification failed: {stale}")
+    if not skills_link.is_symlink() or not _antigravity_symlink_matches(skills_link, _absolute_path(skills_target))[0]:
         raise CheckError("Antigravity skills link verification failed")
     errors = _shared_runtime_prerequisites(root, skills_target, global_target)
     if errors:
@@ -1268,7 +1353,6 @@ def antigravity_sync_apply(
     root: Path,
     config_dir: Path,
     profiles_root: Path,
-    instances: Sequence[str],
     skills_target: Path,
     global_target: Path,
     backup_root: Path,
@@ -1277,7 +1361,7 @@ def antigravity_sync_apply(
     if errors:
         raise CheckError("repository check failed:\n" + "\n".join(errors))
     status = antigravity_sync_status(
-        root, config_dir, profiles_root, instances, skills_target, global_target, backup_root=backup_root,
+        root, config_dir, profiles_root, skills_target, global_target, backup_root=backup_root,
     )
     if status.conflicts:
         raise CheckError("Antigravity sync conflict: " + "; ".join(status.conflicts))
@@ -1285,7 +1369,7 @@ def antigravity_sync_apply(
         raise CheckError("Antigravity runtime drift must be resolved before apply: " + "; ".join(status.drift))
     if status.prerequisites:
         raise CheckError("Antigravity sync prerequisites are not met: " + "; ".join(status.prerequisites))
-    if not status.changed_rules and not status.link_changed:
+    if not status.rule_changed and not status.stale_rules and not status.link_changed:
         return None
 
     skills_target = _absolute_path(skills_target)
@@ -1295,54 +1379,65 @@ def antigravity_sync_apply(
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
     backup = backup_root / stamp
     backup.mkdir(parents=True, exist_ok=False)
+    rule_target = status.rule_target
+    rule_existed = rule_target.is_file()
     link = status.skills_link
+    if status.rule_changed and rule_existed:
+        shutil.copy2(rule_target, backup / "GEMINI.md")
+    stale_snapshot: list[dict[str, str]] = []
+    for index, stale in enumerate(status.stale_rules):
+        backup_name = f"stale-{index}.md"
+        shutil.copy2(stale, backup / backup_name)
+        stale_snapshot.append({
+            "target": str(stale),
+            "hash": file_hash(stale),
+            "backup": backup_name,
+        })
     write_json(backup / "snapshot.json", {
-        "schema": 1,
+        "schema": 2,
         "created_at": datetime.now(timezone.utc).isoformat(),
-        "rules": [
-            {
-                "target": str(target),
-                "existed": target.is_file(),
-                "hash": file_hash(target) if target.is_file() else None,
-                "backup": f"GEMINI-{index}.md" if target.is_file() else None,
-            }
-            for index, target in enumerate(status.changed_rules)
-        ],
+        "rule": {
+            "target": str(rule_target),
+            "changed": status.rule_changed,
+            "existed": rule_existed,
+            "hash": file_hash(rule_target) if rule_existed else None,
+            "applied_hash": bytes_hash(desired) if status.rule_changed else None,
+            "backup": "GEMINI.md" if (status.rule_changed and rule_existed) else None,
+        },
+        "removed_stale_rules": stale_snapshot,
         "skills_link": str(link),
         "skills_link_state": status.link_state,
+        "skills_link_changed": status.link_changed,
         "skills_link_previous": os.readlink(link) if link.is_symlink() else None,
         "shared_skills_target": str(skills_target),
     })
     restores: list[tuple[Path, Path | None]] = []  # (target, previous copy or None when absent)
-    stages: list[Path] = []
     placeholder_removed = False
     try:
-        for index, target in enumerate(status.changed_rules):
+        if status.rule_changed:
             previous = None
-            if target.is_file():
-                shutil.copy2(target, backup / f"GEMINI-{index}.md")
-                previous = target.parent / f".{target.name}.previous-{stamp}"
-                os.replace(target, previous)
-            restores.append((target, previous))
-            target.parent.mkdir(parents=True, exist_ok=True)
-            stage = target.parent / f".{target.name}.stage-{stamp}"
-            stages.append(stage)
-            stage.write_bytes(desired)
-            os.replace(stage, target)
+            if rule_existed:
+                previous = rule_target.parent / f".{rule_target.name}.previous-{stamp}"
+                os.replace(rule_target, previous)
+            restores.append((rule_target, previous))
+            stage = rule_target.parent / f".{rule_target.name}.stage-{stamp}"
+            _atomic_write_bytes(rule_target, desired, stage)
+        for stale in status.stale_rules:
+            previous = stale.parent / f".{stale.name}.previous-{stamp}"
+            os.replace(stale, previous)
+            restores.append((stale, previous))
         if status.link_changed:
             link.parent.mkdir(parents=True, exist_ok=True)
             if status.link_state == "placeholder":
                 link.rmdir()
                 placeholder_removed = True
             link.symlink_to(skills_target, target_is_directory=True)
-        _verify_antigravity(root, status.rule_targets, link, skills_target, global_target)
+        _verify_antigravity(root, rule_target, status.stale_rules, link, skills_target, global_target)
     except Exception:
         for target, previous in reversed(restores):
             target.unlink(missing_ok=True)
             if previous is not None and previous.exists():
                 os.replace(previous, target)
-        for stage in stages:
-            stage.unlink(missing_ok=True)
         if status.link_changed and link.is_symlink():
             link.unlink()
         if placeholder_removed and not link.exists():
@@ -1355,26 +1450,126 @@ def antigravity_sync_apply(
         return backup
 
 
+def _safe_snapshot_backup(backup_dir: Path, name: Any, expected_hash: Any) -> bytes:
+    if not isinstance(name, str) or not name or Path(name).name != name:
+        raise CheckError(f"invalid backup file name in snapshot: {name!r}")
+    if not isinstance(expected_hash, str) or not expected_hash:
+        raise CheckError(f"missing backup hash in snapshot for: {name}")
+    source = backup_dir / name
+    if source.is_symlink() or not source.is_file():
+        raise CheckError(f"missing backup file in snapshot: {source}")
+    content = source.read_bytes()
+    if bytes_hash(content) != expected_hash:
+        raise CheckError(f"backup file hash mismatch in snapshot: {source}")
+    return content
+
+
+def antigravity_rollback(backup_dir: Path) -> None:
+    backup_dir = _absolute_path(backup_dir)
+    snapshot_path = backup_dir / "snapshot.json"
+    if not snapshot_path.is_file():
+        raise CheckError(f"Antigravity rollback snapshot not found: {snapshot_path}")
+    snapshot = read_json(snapshot_path)
+    if not isinstance(snapshot, dict) or snapshot.get("schema") != 2:
+        raise CheckError(f"Unsupported Antigravity rollback snapshot schema: {snapshot_path}")
+    rule = snapshot.get("rule")
+    removed_stale = snapshot.get("removed_stale_rules")
+    skills_link_raw = snapshot.get("skills_link")
+    if (
+        not isinstance(rule, dict)
+        or not isinstance(rule.get("target"), str)
+        or not isinstance(removed_stale, list)
+        or not isinstance(skills_link_raw, str)
+    ):
+        raise CheckError(f"Malformed Antigravity rollback snapshot: {snapshot_path}")
+
+    # (target, content to write or None to unlink, unlink_rule_symlink_first)
+    file_actions: list[tuple[Path, bytes | None, bool]] = []
+    rule_target = _absolute_path(Path(rule["target"]))
+    if rule.get("changed"):
+        applied_hash = rule.get("applied_hash")
+        if not isinstance(applied_hash, str) or not applied_hash:
+            raise CheckError(f"Malformed Antigravity rollback snapshot (missing applied_hash): {snapshot_path}")
+        if rule_target.is_symlink() or not rule_target.is_file():
+            raise CheckError(f"Antigravity rollback refused: {rule_target} is missing or not a regular file")
+        if file_hash(rule_target) != applied_hash:
+            raise CheckError(f"Antigravity rollback refused: {rule_target} changed after this sync")
+        if rule.get("existed"):
+            content = _safe_snapshot_backup(backup_dir, rule.get("backup"), rule.get("hash"))
+            file_actions.append((rule_target, content, False))
+        else:
+            file_actions.append((rule_target, None, False))
+
+    for entry in removed_stale:
+        if not isinstance(entry, dict) or not isinstance(entry.get("target"), str):
+            raise CheckError(f"Malformed stale-rule entry in snapshot: {snapshot_path}")
+        target = _absolute_path(Path(entry["target"]))
+        replace_t3_link = False
+        if target.is_symlink():
+            if _antigravity_symlink_matches(target, rule_target)[0]:
+                # T3 Code may have linked <profile>/GEMINI.md to ~/.gemini/GEMINI.md after apply removed a stale file there.
+                replace_t3_link = True
+            else:
+                raise CheckError(f"Antigravity rollback refuses symlink not pointing to {rule_target}: {target}")
+        elif target.exists():
+            raise CheckError(f"Antigravity rollback refused: {target} already exists after sync")
+        content = _safe_snapshot_backup(backup_dir, entry.get("backup"), entry.get("hash"))
+        file_actions.append((target, content, replace_t3_link))
+
+    link_changed = bool(snapshot.get("skills_link_changed"))
+    link = _absolute_path(Path(skills_link_raw))
+    if link_changed:
+        shared_target_raw = snapshot.get("shared_skills_target")
+        if not isinstance(shared_target_raw, str):
+            raise CheckError(f"Malformed Antigravity rollback snapshot (missing shared_skills_target): {snapshot_path}")
+        if not link.is_symlink():
+            raise CheckError(f"Antigravity rollback refused: skills link {link} is missing or not a symlink")
+        if not _antigravity_symlink_matches(link, _absolute_path(Path(shared_target_raw)))[0]:
+            raise CheckError(f"Antigravity rollback refused: skills link {link} changed after this sync")
+
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
+    for target, content, replace_t3_link in file_actions:
+        if content is None:
+            target.unlink(missing_ok=True)
+        else:
+            if replace_t3_link and target.is_symlink():
+                target.unlink()
+            stage = target.parent / f".{target.name}.restore-{stamp}"
+            _atomic_write_bytes(target, content, stage)
+
+    if link_changed:
+        if link.is_symlink():
+            link.unlink()
+        previous_state = snapshot.get("skills_link_state")
+        previous_link = snapshot.get("skills_link_previous")
+        if previous_state == "placeholder":
+            link.mkdir(parents=True, exist_ok=True)
+        elif isinstance(previous_link, str) and previous_link:
+            link.parent.mkdir(parents=True, exist_ok=True)
+            link.symlink_to(previous_link, target_is_directory=True)
+
+
 def antigravity_doctor(
     root: Path,
     config_dir: Path,
     profiles_root: Path,
-    instances: Sequence[str],
     skills_target: Path,
     global_target: Path,
     *,
     backup_root: Path | None = None,
 ) -> list[str]:
     status = antigravity_sync_status(
-        root, config_dir, profiles_root, instances, skills_target, global_target, backup_root=backup_root,
+        root, config_dir, profiles_root, skills_target, global_target, backup_root=backup_root,
     )
     errors = check_repo(root)
     errors.extend(status.conflicts)
     errors.extend(status.drift)
     errors.extend(status.prerequisites)
-    errors.extend(status.skipped_profiles)
-    for target in status.changed_rules:
-        errors.append(f"Antigravity rule {target} differs from the canonical projection")
+    if status.rule_changed:
+        errors.append(f"Antigravity rule {status.rule_target} differs from the canonical projection")
+    for stale in status.stale_rules:
+        errors.append(f"Stale managed Antigravity rule copy must be removed: {stale}")
+    errors.extend(status.profile_link_issues)
     if status.link_state in {"missing", "placeholder"}:
         errors.append(f"Antigravity skills link {status.skills_link} is missing")
     return sorted(set(errors))
@@ -2085,15 +2280,14 @@ def command_opencode_sync(args: argparse.Namespace) -> int:
 
 
 
-def _antigravity_paths(args: argparse.Namespace | None = None) -> tuple[Path, Path, list[str], Path, Path, Path]:
+def _antigravity_paths(args: argparse.Namespace | None = None) -> tuple[Path, Path, Path, Path, Path]:
     config = antigravity_runtime_config(ROOT)
     def pick(name: str, key: str) -> Path:
         value = getattr(args, name, None) if args is not None else None
         return Path(value).expanduser() if value else config[key]
     return (
         pick("config_dir", "antigravity_config"),
-        pick("profiles_root", "antigravity_t3_profiles"),
-        config["antigravity_t3_instances"],
+        pick("profiles_root", "t3_antigravity_profiles"),
         pick("skills_target", "skills"),
         pick("global_target", "global_agents"),
         pick("backup_root", "antigravity_backups"),
@@ -2101,9 +2295,10 @@ def _antigravity_paths(args: argparse.Namespace | None = None) -> tuple[Path, Pa
 
 
 def _print_antigravity_status(status: AntigravitySyncStatus) -> None:
-    for target in status.rule_targets:
-        action = "unchanged" if target not in status.changed_rules else ("replace" if target.exists() else "create")
-        print(f"Antigravity rule: {target} ({action})")
+    action = "unchanged" if not status.rule_changed else ("replace" if status.rule_target.exists() else "create")
+    print(f"Antigravity rule: {status.rule_target} ({action})")
+    for stale in status.stale_rules:
+        print(f"Stale managed rule: {stale} (back up and remove)")
     link_action = {
         "current": "unchanged",
         "missing": "create link",
@@ -2112,7 +2307,12 @@ def _print_antigravity_status(status: AntigravitySyncStatus) -> None:
         "conflict": "blocked: existing path is not a link",
     }[status.link_state]
     print(f"Skills link: {status.skills_link} -> shared runtime ({link_action}; no duplicate catalog)")
-    for heading, values in (("drift", status.drift), ("conflict", status.conflicts), ("prerequisite", status.prerequisites), ("skipped", status.skipped_profiles)):
+    for heading, values in (
+        ("drift", status.drift),
+        ("conflict", status.conflicts),
+        ("prerequisite", status.prerequisites),
+        ("profile link", status.profile_link_issues),
+    ):
         print(f"{heading}: {len(values)}")
         for value in values:
             print(f"  {value}")
@@ -2123,15 +2323,22 @@ def _print_antigravity_status(status: AntigravitySyncStatus) -> None:
 
 def command_antigravity_sync(args: argparse.Namespace) -> int:
     try:
-        config_dir, profiles_root, instances, skills_target, global_target, backup_root = _antigravity_paths(args)
+        if args.rollback and args.apply:
+            raise CheckError("--apply and --rollback cannot be combined")
+        if args.rollback:
+            snapshot_dir = Path(args.rollback).expanduser()
+            antigravity_rollback(snapshot_dir)
+            print(f"Restored from rollback snapshot: {_absolute_path(snapshot_dir)}")
+            return 0
+        config_dir, profiles_root, skills_target, global_target, backup_root = _antigravity_paths(args)
         status = antigravity_sync_status(
-            ROOT, config_dir, profiles_root, instances, skills_target, global_target, backup_root=backup_root,
+            ROOT, config_dir, profiles_root, skills_target, global_target, backup_root=backup_root,
         )
         _print_antigravity_status(status)
         if not args.apply:
             return 1 if status.drift or status.conflicts or status.prerequisites else 0
         backup = antigravity_sync_apply(
-            ROOT, config_dir, profiles_root, instances, skills_target, global_target, backup_root,
+            ROOT, config_dir, profiles_root, skills_target, global_target, backup_root,
         )
     except (CheckError, OSError) as exc:
         print(str(exc), file=sys.stderr)
@@ -2140,18 +2347,20 @@ def command_antigravity_sync(args: argparse.Namespace) -> int:
         print("Already current; no files changed.")
     else:
         print(f"Applied. Rollback snapshot: {backup}")
+        if status.profile_link_issues:
+            print("Note: start a fresh Antigravity thread in T3 Code (0.1.11+) so T3 links ~/.gemini/GEMINI.md into existing profiles before running antigravity-doctor.")
     return 0
 
 
 def command_antigravity_doctor(_: argparse.Namespace) -> int:
     status = None
     try:
-        config_dir, profiles_root, instances, skills_target, global_target, backup_root = _antigravity_paths()
+        config_dir, profiles_root, skills_target, global_target, backup_root = _antigravity_paths()
         status = antigravity_sync_status(
-            ROOT, config_dir, profiles_root, instances, skills_target, global_target, backup_root=backup_root,
+            ROOT, config_dir, profiles_root, skills_target, global_target, backup_root=backup_root,
         )
         errors = antigravity_doctor(
-            ROOT, config_dir, profiles_root, instances, skills_target, global_target, backup_root=backup_root,
+            ROOT, config_dir, profiles_root, skills_target, global_target, backup_root=backup_root,
         )
     except (CheckError, OSError) as exc:
         errors = [str(exc)]
@@ -2422,6 +2631,7 @@ def parser() -> argparse.ArgumentParser:
     t3_doctor_command.set_defaults(func=command_t3_doctor)
     antigravity_sync = commands.add_parser("antigravity-sync", help="preview or apply Antigravity's shared skill and instruction setup")
     antigravity_sync.add_argument("--apply", action="store_true")
+    antigravity_sync.add_argument("--rollback", help="restore previous Antigravity rule files and skills link from a backup snapshot directory")
     antigravity_sync.add_argument("--config-dir")
     antigravity_sync.add_argument("--profiles-root")
     antigravity_sync.add_argument("--skills-target")
