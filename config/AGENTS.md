@@ -48,8 +48,8 @@ Skills name roles; this table names the models. In T3, select one with `modelSel
 
 | Role | Model | Reasoning | Fallback |
 |---|---|---|---|
-| Lead | Claude Opus 5.5 (`claudeAgent`, `claude-opus-5-5`, option `effort`) | `medium` | Gemini 4 Neon at `xhigh`, T3's fallback model |
-| Engineer | Gemini 4 Neon via Antigravity (`antigravity`, `gemini-4-neon`, option `thought_level`) | `high` to implement, `xhigh` to review, `medium` to explore or write | Codex `gpt-6.2-sol` (`codex`, option `reasoningEffort`, same levels) when the Engineer's launch fails or Google quota is exhausted |
+| Lead | Claude Opus 5.5 (`claudeAgent`, `claude-opus-5-5`, option `effort`) | `medium` | Gemini 4 Neon at `high`, T3's fallback model |
+| Engineer | Gemini 4 Neon via Antigravity (`antigravity`, `gemini-4-neon`, option `thought_level`) | `high` to implement and review, `medium` to explore or write | Codex `gpt-6.2-sol` (`codex`, option `reasoningEffort`, same levels) when the Engineer's launch fails or Google quota is exhausted |
 
 - The Lead orchestrates ticket graphs and owns grilling, specs, tickets, `debug` of an unknown cause, long interactive sessions and review of Engineer work.
 - The Engineer implements approved tickets, reviews Lead work and explores codebases, writing the copy, docs, PR bodies and commits inside its own run. Always start it with an explicit reasoning level.
