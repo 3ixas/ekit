@@ -84,6 +84,7 @@
       "babysit-pr",
       "code-review",
       "debug",
+      "handoff",
       "pickup",
       "pr",
       "pr-feedback",
@@ -96,5 +97,5 @@
     ]
   },
   "reviewed": "2026-11-20",
-  "owned_changes": "2026-11-20: Replaced same-model review with cross-role code-review (Lead reviews an Engineer-implemented slice; Engineer at High reviews a Lead-implemented slice, per the shared role table), with same-role fallback recorded in the report and code verification before acting so unverifiable findings are rejected with evidence. Independently authored from Elias's request; no upstream source changed."
+  "owned_changes": "2026-11-20: Replaced same-model review with cross-role code-review (Lead reviews an Engineer-implemented slice; Engineer at High reviews a Lead-implemented slice, per the shared role table), with same-role fallback recorded in the report and code verification before acting so unverifiable findings are rejected with evidence. Independently authored from Elias's request; no upstream source changed.\n\n2026-11-20: Added Engineer-to-Lead escalation (references/escalation.md): an unsettled decision or a stalled review loop makes an Engineer preserve its worktree, write an `Escalation:` handoff naming the decision, launch one Lead thread on that worktree and stop; the Lead settles it or asks Elias when it is his. Independently authored from Elias's request; no upstream source changed."
 }

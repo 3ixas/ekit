@@ -44,6 +44,10 @@ A relay handoff is an ordinary `handoff` document whose first line is exactly `R
    - None found: keep ownership here. Report the failed launch, do not settle this thread, and continue at step 2 of Implement Series here; the unused handoff stays as a record.
    - Unknown, because the search failed: stop with the exact resume state rather than risk two owners.
 
+## Escalation
+
+An Engineer that escalates its ticket (as the `implement` skill describes) hands run ownership to the Lead thread it launches. That Lead thread delivers the ticket, then relays as above, carrying the run's role unchanged, so the next ticket starts on the Engineer again. Record the escalation in the ledger row's thread column.
+
 ## Successor start
 
 The successor's `pickup` reads the handoff from the path in its launch message. A relay handoff found only by searching the handoffs folder may be stale, so confirm it with Elias before acting on it.
