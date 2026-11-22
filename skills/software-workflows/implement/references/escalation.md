@@ -21,6 +21,7 @@ Do not guess past a trigger, and do not ask Elias directly or start `grill-with-
    - the ticket, spec and tracker pointers, target branch, endpoint and the original request's authority, quoted briefly;
    - for a coordinated run, the incoming relay handoff path, which carries the run id, ledger, run role, user choices and blocked tickets, plus any ledger rows, blocked tickets or user choices added in this thread since; when this thread started the run without one, record those directly;
    - the worktree path, branch, base commit, last commit, `git status --short`, the staged, unstaged and untracked slice paths, and the staged and working-tree diff checksums, and the PR with its head, checks and the auto-merge, queue and wake state from step 2;
+   - a standalone `Routing:` line recording the escalation cause and the role and model that escalated, e.g. `Routing: escalation=<unsettled-decision|review-stall> role=<role>/<model> cause=<brief cause>`;
    - this thread's `threadId` and link as the predecessor.
 4. Then take exactly one of these branches:
    - **Parallel worker** (a child of an `implement-parallel` coordinator): return the handoff path and the decision to the coordinator, which owns the ticket and acts as the Lead side below. Launch no thread.

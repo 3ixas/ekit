@@ -16,6 +16,8 @@ Redact any sensitive information, such as API keys, passwords, or personally ide
 
 If the user passed arguments, treat them as a description of what the next session will focus on and tailor the doc accordingly.
 
+For an escalation handoff (`Escalation: <workflow>`), include one standalone `Routing:` line naming its cause, using the escalating workflow's format.
+
 End your reply with the absolute path you wrote and the exact resume command in its own fenced code block, so it can be copied in one go from this thread later: `/pickup <absolute-path>` in Claude Code, `$pickup <absolute-path>` in Codex.
 
 

@@ -12,7 +12,7 @@ Both axes run as **parallel fresh-context reviewers** so they don't pollute each
 
 Read the repository tracker configuration. If `docs/agents/issue-tracker.md` is missing, use the most efficient supported tracker capability available on this host; prefer `gh`/`gh api` for structured GitHub state, and report when no tracker is configured.
 
-**When another skill calls this one.** `implement`, `implement-parallel`, and other pipelines run this review unattended and pass the fixed point, the staged paths or diff, the spec pointer, the implementing role (Engineer or Lead) when known, and, when they have one, a proof plan mapping each acceptance claim to a check with its observed result. In that mode never ask the user anything: use what was supplied, and if the spec is missing, skip the Spec sub-agent and report "no spec available".
+**When another skill calls this one.** `implement`, `implement-parallel`, and other pipelines run this review unattended and pass the fixed point, the staged paths or diff, the spec pointer, the implementing role (Engineer or Lead) and model when known, and, when they have one, a proof plan mapping each acceptance claim to a check with its observed result. In that mode never ask the user anything: use what was supplied, and if the spec is missing, skip the Spec sub-agent and report "no spec available".
 
 Review is read-only at either depth: report findings without editing or committing. The calling workflow owns fixes and re-review; depth does not grant wider implementation authority. `implement` and its ticket coordinators supply the exact slice under review. Judge the supplied scope without adding extra review stages or another coordinator; select the reviewer role per step 5 without switching the caller's thread.
 
@@ -116,6 +116,14 @@ If the spec is missing, skip the Spec sub-agent and note this in the final repor
 State the reviewer role (and any same-role fallback with its reason), then the final depth and reason, and present the two reports under `## Standards` and `## Spec` headings, verbatim or lightly cleaned. Within Standards, distinguish blocking findings from optional structural improvements; no optional suggestion changes an otherwise clear review outcome. Do **not** merge or rerank findings across axes, because the two axes are deliberately separate (see _Why two axes_). Report the actual reviewer role only when verified; never claim cross-role coverage from a same-role fallback.
 
 End with a one-line summary: blocking findings and optional suggestions per axis, and the worst issue _within each axis_ (if any). Don't pick a single winner across axes: that's the reranking the separation exists to prevent. Preserve any scope limitations and concrete follow-up invocation in the report, including unattended calls; the calling workflow applies its existing scope-decision boundary.
+
+Then end the report with one standalone `Routing:` line recording the routing outcome:
+
+```text
+Routing: implemented=<role>/<model> reviewed=<role>[ (same-role fallback: <reason>)] findings=<raised>/<accepted> rework=<none|<summary>>
+```
+
+Because `code-review` is read-only, a standalone or per-round review pass emits `findings=<raised>/pending` and `rework=none` (with `implemented=unknown` when unknown). When a calling workflow (`implement` or delivery) finishes its review loop and publishes the review report on a PR, that caller owns writing the **single** final `Routing:` line with the total findings raised and accepted across the loop and any rework rounds, so each PR carries one routing outcome.
 
 ## Why two axes
 

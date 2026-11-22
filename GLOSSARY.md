@@ -55,3 +55,11 @@ _Avoid_: Model routing (when meaning the mapping), model config
 **Escalation**:
 An Engineer handing a ticket back to the Lead because it reached a decision the approved brief does not settle, or failed review twice on the same issue, with its branch and evidence preserved.
 _Avoid_: Fallback (that is the provider-unavailable path), bail-out
+
+**Routing outcome**:
+The one-line record a run leaves of how its routing played out: which role and model implemented, which role reviewed, how many review findings were raised and accepted, any rework, or the cause of an escalation. The run writes it; Elias never does.
+_Avoid_: Metric, score, evaluation
+
+**Routing review**:
+The Lead's reading of all routing outcomes since the last review, done when a model in the role table gets a new version or when Elias asks. It ends in proposed role-table changes that Elias accepts or rejects.
+_Avoid_: Evaluation programme, trial, benchmark

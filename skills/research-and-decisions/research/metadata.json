@@ -33,6 +33,6 @@
       "web"
     ]
   },
-  "reviewed": "2026-11-20",
-  "owned_changes": "2026-10-26 writing-for-agents pass: Clarified that archived upstream plugin instructions do not override the owned workflow. Made the research method executable on hosts without background agents. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed. 2026-11-20: Repository and documentation research now runs as a fresh Engineer child at medium, while research that needs the web stays with Codex; the direct fallback is unchanged. Independently authored from Elias's model-roles scope (#59); no upstream source changed."
+  "reviewed": "2026-11-22",
+  "owned_changes": "2026-10-26 writing-for-agents pass: Clarified that archived upstream plugin instructions do not override the owned workflow. Made the research method executable on hosts without background agents. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed. 2026-11-20: Repository and documentation research now runs as a fresh Engineer child at medium, while research that needs the web stays with Codex; the direct fallback is unchanged. Independently authored from Elias's model-roles scope (#59); no upstream source changed. 2026-11-22: Web research now points to the Codex delegations section for explicit model and effort, requires a Not covered or not verified section, and is judged by relevant detail coverage; repository research now requires claim-level citation checks opening the cited lines. Independently authored from Elias's model-evidence scope (#74); no upstream source changed."
 }
