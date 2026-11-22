@@ -53,14 +53,31 @@ Skills name roles; this table names the models. In T3, select one with `modelSel
 
 - The Lead orchestrates ticket graphs and owns grilling, specs, tickets, `debug` of an unknown cause, long interactive sessions and review of Engineer work.
 - The Engineer implements approved tickets, reviews Lead work and explores codebases, writing the copy, docs, PR bodies and commits inside its own run. Always start it with an explicit reasoning level.
-- Exploration (`how`, `why`, and research into a repository or its documentation) runs on fresh Engineer children at `medium` that change nothing beyond a note they were asked to save and return a cited result; the calling thread checks the citations before answering. An Engineer thread explores in-thread. If the Engineer is unavailable, the calling thread investigates directly, without the Codex fallback, and says so. Research that needs the web stays with Codex.
+- Exploration (`how`, `why`, and research into a repository or its documentation) runs on fresh Engineer children at `medium` that change nothing beyond a note they were asked to save and return a cited result; for each claim the answer or decision rests on, the calling thread opens the cited lines and confirms they support it before answering. An Engineer thread explores in-thread. If the Engineer is unavailable, the calling thread investigates directly, without the Codex fallback, and says so. Research that needs the web uses the Codex delegations below.
 - Approved tickets run on the Engineer by default. Ad-hoc coding in a Lead thread stays on the Lead, and "use Opus for this" puts the work on the Lead.
 - Run threads and children in `full-access`, T3's default here. Antigravity's `auto` mode still asks me to approve every tool call, so always start it in `full-access`. T3 refuses a mode broader than the launching thread's: when a thread still in `auto` or narrower must start Antigravity, tell me first that its tool calls will wait for my approval.
 - A fallback covers one launch; the next launch tries the role's own model first.
 - An Engineer escalates to the Lead, rather than guessing or asking me, when it reaches a decision the approved brief does not settle or fails review twice on the same issue: it preserves the work, writes a handoff naming the decision and launches a Lead thread, which settles it or asks me when it is mine. Escalation is not fallback.
 - Switch models only when starting a new thread or child, never in the thread I am talking in, except on my yes to a role nudge.
 - Each skill declares a role (`lead`, `engineer` or `either`); the generated routing lists the `lead` and `engineer` ones. When one of those starts a phase in a thread running the other role's model, say once in that phase which role and reasoning level it calls for and offer to switch. Switch this thread (`t3_thread_configure`) only on my yes; otherwise carry on. `either` skills, and work with no skill loaded, never nudge or switch.
-- Codex keeps images, rendered browser or desktop work and web research. T3's Orchestrator (Neon) model, Gemini 4 Carbon and Sonnet are not routed.
+- T3's Orchestrator (Neon) model, Gemini 4 Carbon and Sonnet are not routed.
+
+### Codex delegations
+
+These jobs are provider assignments, not roles. Always set the model and `reasoningEffort` explicitly in T3 (`target` on `delegate_task`) so Codex does not fall back to its default `low`.
+
+| Job | Model | Effort |
+|---|---|---|
+| Web research | `gpt-6.2-sol` (`codex`, option `reasoningEffort`) | `xhigh` |
+| Images (generation, editing, mockups) | `gpt-6.2-sol` (`codex`, option `reasoningEffort`) | `medium` |
+| Rendered browser or desktop work | `gpt-6.2-sol` (`codex`, option `reasoningEffort`) | `medium` |
+
+Every web-research brief requires a `Not covered or not verified` section, and the calling thread judges the result by how much relevant detail it covers, not only by whether the questions were answered.
+
+### Routing outcomes and review
+
+- **Routing outcome:** Each run writes one `Routing:` line into its PR review report (`code-review` / `implement`) or escalation handoff (`handoff`); I never write these.
+- **Routing review:** When a model in the role table gets a new version, or when I ask, the Lead reads all routing outcomes since the last review (`gh search prs "Routing:"`, or `"Routing: implemented="` to narrow PR review reports, plus escalation handoffs) and proposes role-table changes for me to accept or reject. A review only reports; changes still need my yes. Add each review record below the model evidence brief in the Obsidian vault (`10 Areas/Engineering/Notes/Market Intelligence/AI Coding Models Developer Experience Brief 2026-11-22.md`).
 
 ## Claude Code
 
@@ -68,7 +85,7 @@ These apply to Claude threads, in T3 Code or Claude Code Desktop.
 
 - T3 Code is my primary host and Claude Code Desktop is the fallback. Claude threads in T3 load these instructions, rules, skills, plugins and hooks, except Desktop mods, and task-list tools unless enabled; see EKit's `docs/agent-portability.md`. Use host-specific tools only when the current host provides them.
 - Route work by the role table above; never hand the main thread to another provider unless I ask. Delegating the subtasks below to Codex is expected.
-- Send raster image generation or editing, mockup images, interactive work in a rendered browser or desktop interface (headless verification checks stay in the thread), and web research run as a background agent to Codex: in T3 through `delegate_task` with the Codex provider; on Desktop, when available, through the Codex plugin's `codex:codex-rescue` agent. Try Codex before looking up other image or computer-use tools, unless I specify a tool.
+- Send raster image generation or editing, mockup images, interactive work in a rendered browser or desktop interface (headless verification checks stay in the thread), and web research run as a background agent to Codex: in T3 through `delegate_task` with the model and effort in `### Codex delegations` above; on Desktop, when available, through the Codex plugin's `codex:codex-rescue` agent. Try Codex before looking up other image or computer-use tools, unless I specify a tool.
 - In T3, run background and cross-role children (such as cross-role reviewers) through `delegate_task`, not a background native agent. Same-provider foreground subagents stay native.
 - Give Codex a fresh, focused task with the brief or UI target, relevant references, permitted actions and expected output. Ask for read-only mode when the task needs no file edits. Keep the owning EKit workflow in its own thread and verify the returned evidence.
 - When delegating image generation or editing, tell Codex to call its built-in ImageGen tool, save the returned image, and report the tool used and the file path. Accept the result only when Codex confirms ImageGen produced it and you can inspect the saved file.
