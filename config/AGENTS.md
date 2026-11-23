@@ -49,18 +49,18 @@ Skills name roles; this table names the models. In T3, select one with `modelSel
 | Role | Model | Reasoning | Fallback |
 |---|---|---|---|
 | Lead | Claude Opus 5.5 (`claudeAgent`, `claude-opus-5-5`, option `effort`) | `medium` | Gemini 4 Neon at `high`, T3's fallback model |
-| Engineer | Gemini 4 Neon via Antigravity (`antigravity`, `gemini-4-neon`, option `thought_level`) | `high` to implement and review, `medium` to explore or write | Codex `gpt-6.2-sol` (`codex`, option `reasoningEffort`, same levels) when the Engineer's launch fails or Google quota is exhausted |
+| Engineer | Gemini 4 Neon via Antigravity (`antigravity`, `gemini-4-neon`, option `thought_level`) | `high` to implement and review, `medium` to explore or write | Claude Sonnet 5.5 (`claudeAgent`, `claude-sonnet-5-5`, option `effort`, same levels) when the Engineer's launch fails or Google quota is exhausted |
 
 - The Lead orchestrates ticket graphs and owns grilling, specs, tickets, `debug` of an unknown cause, long interactive sessions and review of Engineer work.
 - The Engineer implements approved tickets, reviews Lead work and explores codebases, writing the copy, docs, PR bodies and commits inside its own run. Always start it with an explicit reasoning level.
-- Exploration (`how`, `why`, and research into a repository or its documentation) runs on fresh Engineer children at `medium` that change nothing beyond a note they were asked to save and return a cited result; for each claim the answer or decision rests on, the calling thread opens the cited lines and confirms they support it before answering. An Engineer thread explores in-thread. If the Engineer is unavailable, the calling thread investigates directly, without the Codex fallback, and says so. Research that needs the web uses the Codex delegations below.
+- Exploration (`how`, `why`, and research into a repository or its documentation) runs on fresh Engineer children at `medium` that change nothing beyond a note they were asked to save and return a cited result; for each claim the answer or decision rests on, the calling thread opens the cited lines and confirms they support it before answering. An Engineer thread explores in-thread. If the Engineer is unavailable, the calling thread investigates directly, without the Engineer fallback, and says so. Research that needs the web uses the Codex delegations below.
 - Approved tickets run on the Engineer by default. Ad-hoc coding in a Lead thread stays on the Lead, and "use Opus for this" puts the work on the Lead.
 - Run threads and children in `full-access`, T3's default here. Antigravity's `auto` mode still asks me to approve every tool call, so always start it in `full-access`. T3 refuses a mode broader than the launching thread's: when a thread still in `auto` or narrower must start Antigravity, tell me first that its tool calls will wait for my approval.
 - A fallback covers one launch; the next launch tries the role's own model first.
 - An Engineer escalates to the Lead, rather than guessing or asking me, when it reaches a decision the approved brief does not settle or fails review twice on the same issue: it preserves the work, writes a handoff naming the decision and launches a Lead thread, which settles it or asks me when it is mine. Escalation is not fallback.
 - Switch models only when starting a new thread or child, never in the thread I am talking in, except on my yes to a role nudge.
 - Each skill declares a role (`lead`, `engineer` or `either`); the generated routing lists the `lead` and `engineer` ones. When one of those starts a phase in a thread running the other role's model, say once in that phase which role and reasoning level it calls for and offer to switch. Switch this thread (`t3_thread_configure`) only on my yes; otherwise carry on. `either` skills, and work with no skill loaded, never nudge or switch.
-- T3's Orchestrator (Neon) model, Gemini 4 Carbon and Sonnet are not routed.
+- T3's Orchestrator (Neon) model and Gemini 4 Carbon are not routed; Sonnet is used only as the Engineer fallback.
 
 ### Codex delegations
 
