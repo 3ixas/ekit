@@ -63,3 +63,15 @@ _Avoid_: Metric, score, evaluation
 **Routing review**:
 The Lead's reading of all routing outcomes since the last review, done when a model in the role table gets a new version or when Elias asks. It ends in proposed role-table changes that Elias accepts or rejects.
 _Avoid_: Evaluation programme, trial, benchmark
+
+**Skill recommendation**:
+Advice on which skill should own a request: one owner, the supporting skills it brings in, why it fits, the phrase that invokes it, and where its authority stops. It never starts the owner without Elias's yes.
+_Avoid_: Routing (that is the agent's own selection), suggestion list
+
+**Workflow path**:
+The usual ordered sequence of skills for a recurring situation, such as grill-with-docs → to-spec → to-tickets → implement for nontrivial product work.
+_Avoid_: Pipeline, chain
+
+**Skill catalogue**:
+The generated summary of every active skill (purpose, invocation, role, workflow paths, added and reviewed dates) that ships with which-skill so its advice matches the installed collection.
+_Avoid_: Manifest (that is the human-readable activation record), index
