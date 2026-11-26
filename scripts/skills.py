@@ -43,6 +43,8 @@ ANTIGRAVITY_RULE_BYTES = 24_000
 WORKFLOW_PATHS_FILE = Path("config/paths.json")
 README_PATHS_START = "<!-- ekit workflow-paths:start -->"
 README_PATHS_END = "<!-- ekit workflow-paths:end -->"
+WHICH_SKILL_BUNDLE = Path("skills/agent-system/which-skill")
+SKILL_CATALOGUE_FILE = WHICH_SKILL_BUNDLE / "references" / "skill-catalogue.md"
 
 
 class CheckError(ValueError):
@@ -290,13 +292,12 @@ def _metadata_errors(root: Path, item: dict[str, Any], tools: dict[str, Any]) ->
         license_id = source["license"]
         if not isinstance(license_id, str) or not (root / "licenses" / f"{license_id}.txt").is_file():
             errors.append(f"{label} missing licence file {license_id}.txt")
-    reviewed = metadata.get("reviewed")
-    try:
-        if not isinstance(reviewed, str):
-            raise ValueError
-        date.fromisoformat(reviewed)
-    except ValueError:
-        errors.append(f"{metadata_path}: reviewed must be an ISO date")
+    for date_field in ("added", "reviewed"):
+        value = metadata.get(date_field)
+        try:
+            _iso_date(value)
+        except ValueError:
+            errors.append(f"{metadata_path}: {date_field} must be an ISO date")
     deps = metadata.get("dependencies")
     if not isinstance(deps, dict) or set(deps) != {"skills", "tools"}:
         errors.append(f"{metadata_path}: dependencies must contain only skills and tools")
@@ -491,12 +492,125 @@ def render_readme_with_workflow_table(
     return current, desired
 
 
+def _has_which_skill(root: Path) -> bool:
+    bundle = root / WHICH_SKILL_BUNDLE
+    return (bundle / "SKILL.md").is_file() and (bundle / "metadata.json").is_file()
+
+
+def _iso_date(value: object) -> date:
+    """Parse a strict `YYYY-MM-DD` date; `date.fromisoformat` alone also accepts compact and week forms."""
+    if not isinstance(value, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+        raise ValueError(f"not a YYYY-MM-DD date: {value!r}")
+    return date.fromisoformat(value)
+
+
+def _read_generated(path: Path) -> str | None:
+    return path.read_text(encoding="utf-8") if path.is_file() and not path.is_symlink() else None
+
+
+def _md_cell(text: str) -> str:
+    # `frontmatter()` strips the surrounding quotes but keeps YAML `\"` escapes, so unescape them for display.
+    return re.sub(r"\s+", " ", text.replace('\\"', '"')).strip().replace("|", "\\|")
+
+
+def render_skill_catalogue(
+    root: Path,
+    paths: Sequence[dict[str, Any]],
+) -> str:
+    group_order = {group: index for index, group in enumerate(GROUPS)}
+    active_bundles = sorted(
+        (item for item in discover(root) if item["lifecycle"] == "skills"),
+        key=lambda item: (group_order[item["group"]], item["id"]),
+    )
+    frontmatter_by_id: dict[str, dict[str, str]] = {}
+    metadata_by_id: dict[str, dict[str, Any]] = {}
+    input_dates: list[date] = []
+    for item in active_bundles:
+        skill_id = item["id"]
+        try:
+            frontmatter_by_id[skill_id] = frontmatter(item["path"] / "SKILL.md")
+        except (OSError, UnicodeDecodeError) as exc:
+            raise CheckError(f"{item['path'] / 'SKILL.md'}: {exc}") from exc
+        metadata_path = item["path"] / "metadata.json"
+        metadata = read_json(metadata_path)
+        if not isinstance(metadata, dict):
+            raise CheckError(f"{metadata_path}: must contain an object")
+        invocation = metadata.get("invocation")
+        if not isinstance(invocation, list) or not all(isinstance(mode, str) for mode in invocation):
+            raise CheckError(f"{metadata_path}: invocation must be a list of strings")
+        try:
+            input_dates.extend(_iso_date(metadata.get(field)) for field in ("added", "reviewed"))
+        except ValueError as exc:
+            raise CheckError(f"{metadata_path}: {exc}") from exc
+        metadata_by_id[skill_id] = metadata
+    generated_date = max(input_dates).isoformat() if input_dates else "unknown"
+    lines = [
+        "# EKit Skill Catalogue",
+        "",
+        f"Generated: {generated_date} (the latest added or reviewed date among active skills; as fresh as the last EKit sync).",
+        f"Active skills: {len(active_bundles)}",
+        "",
+        "## Active skills",
+    ]
+    by_group: dict[str, list[dict[str, Any]]] = {}
+    for item in active_bundles:
+        by_group.setdefault(item["group"], []).append(item)
+    for group in GROUPS:
+        items = by_group.get(group)
+        if not items:
+            continue
+        lines.extend([
+            "",
+            f"### {group}",
+            "",
+            "| Skill | Invocation | Role | Added | Reviewed | Purpose | Brings in | Authority stop |",
+            "|---|---|---|---|---|---|---|---|",
+        ])
+        for item in items:
+            skill_id = item["id"]
+            metadata = metadata_by_id[skill_id]
+            invocation = ", ".join(metadata.get("invocation", []))
+            role = str(metadata.get("role", "either"))
+            added = str(metadata.get("added", ""))
+            reviewed = str(metadata.get("reviewed", ""))
+            purpose = _md_cell(frontmatter_by_id[skill_id].get("description", ""))
+            dependencies = metadata.get("dependencies")
+            dependency_skills = dependencies.get("skills") if isinstance(dependencies, dict) else None
+            brings_in = (
+                ", ".join(f"`{dep}`" for dep in sorted(dependency_skills) if isinstance(dep, str))
+                if isinstance(dependency_skills, list) and dependency_skills
+                else "none"
+            )
+            authority_stop = _md_cell(metadata["authority_stop"]) if "authority_stop" in metadata and isinstance(metadata["authority_stop"], str) else "No external side effects"
+            lines.append(
+                f"| `{skill_id}` | {_md_cell(invocation)} | {_md_cell(role)} | {_md_cell(added)} | {_md_cell(reviewed)} | {purpose} | {brings_in} | {authority_stop} |"
+            )
+    lines.extend([
+        "",
+        "## Workflow paths",
+        "",
+        render_readme_workflow_table(paths),
+        "",
+    ])
+    return "\n".join(lines)
+
+
 def catalog_plan(root: Path = ROOT) -> dict[Path, tuple[str, str]]:
     paths, errors = load_workflow_paths(root)
     if errors:
         raise CheckError("\n".join(errors))
-    readme_path = root / "README.md"
-    return {readme_path: render_readme_with_workflow_table(root, paths)}
+    plan: dict[Path, tuple[str, str]] = {
+        root / "README.md": render_readme_with_workflow_table(root, paths),
+    }
+    if _has_which_skill(root):
+        catalogue_path = root / SKILL_CATALOGUE_FILE
+        relative = SKILL_CATALOGUE_FILE
+        if any((root / part).is_symlink() for part in [relative, *relative.parents[:-1]]):
+            raise CheckError(f"{catalogue_path}: generated Skill catalogue path must not pass through a symlink")
+        current = _read_generated(catalogue_path) or ""
+        desired = render_skill_catalogue(root, paths)
+        plan[catalogue_path] = (current, desired)
+    return plan
 
 
 def catalog_apply(root: Path = ROOT) -> list[Path]:
@@ -504,6 +618,7 @@ def catalog_apply(root: Path = ROOT) -> list[Path]:
     updated: list[Path] = []
     for path, (current, desired) in plan.items():
         if current != desired:
+            path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(desired, encoding="utf-8", newline="\n")
             updated.append(path)
     return updated
@@ -613,6 +728,17 @@ def check_repo(root: Path = ROOT) -> list[str]:
                 errors.append(
                     f"{root / 'README.md'}: generated workflow table is stale; run `python3 scripts/skills.py catalog --apply`"
                 )
+        if _has_which_skill(root):
+            catalogue_path = root / SKILL_CATALOGUE_FILE
+            try:
+                desired_catalogue = render_skill_catalogue(root, paths)
+            except CheckError as exc:
+                errors.append(str(exc))
+            else:
+                if _read_generated(catalogue_path) != desired_catalogue:
+                    errors.append(
+                        f"{catalogue_path}: generated Skill catalogue is stale; run `python3 scripts/skills.py catalog --apply`"
+                    )
     return sorted(set(errors))
 
 
@@ -2853,7 +2979,7 @@ def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(description=__doc__)
     commands = result.add_subparsers(dest="command", required=True)
     check = commands.add_parser("check"); check.add_argument("--list", action="store_true"); check.set_defaults(func=command_check)
-    catalog_command = commands.add_parser("catalog", help="preview or write the generated README workflow table")
+    catalog_command = commands.add_parser("catalog", help="preview or write the generated Skill catalogue and README workflow table")
     catalog_command.add_argument("--apply", action="store_true", help="write generated changes to the repository")
     catalog_command.set_defaults(func=command_catalog)
     sync = commands.add_parser("sync"); sync.add_argument("--apply", action="store_true"); sync.add_argument("--adopt-unmanaged", action="store_true", help="back up and replace an existing unmarked runtime during the one-time cutover"); sync.add_argument("--target"); sync.add_argument("--global-target"); sync.add_argument("--backup-root"); sync.set_defaults(func=command_sync)

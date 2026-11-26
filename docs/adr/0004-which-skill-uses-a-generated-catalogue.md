@@ -15,3 +15,10 @@ the source.
 
 Workflow paths move from the README's prose table into structured data that
 generates both the README table and the catalogue, so there is one source.
+
+Change dates come from tracked metadata, not git. Each bundle's
+`metadata.json` records an `added` date beside `reviewed`, and the catalogue's
+generation date is the latest of those dates among active skills. Dates read
+from git commits cannot be known before the commit that carries the catalogue
+exists, so a commit or squash merge on a later day would leave `main` failing
+`check`; tracked dates keep regeneration byte-identical everywhere.

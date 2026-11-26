@@ -621,5 +621,12 @@
     "supports": [],
     "explicit": true,
     "authority_stop": "Return the three paste-ready fields grounded only in supplied facts without inventing frequency, urgency, or a workaround, and without submitting or changing FlowSavvy tasks."
+  },
+  {
+    "request": "Use which-skill to advise which EKit skill should own a request or report what changed since 2026-11-01",
+    "owner": "which-skill",
+    "supports": [],
+    "explicit": true,
+    "authority_stop": "Advise on the owning skill and offer to start it; start the owner only on Elias's yes, and wait for Elias's explicit words for explicit-only or side-effecting workflows."
   }
 ]

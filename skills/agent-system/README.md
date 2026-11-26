@@ -15,6 +15,7 @@ Clarify, coordinate learning journeys, teach, preserve continuity, review the wo
 | `teach` | explicit | Teach one coherent mission using the source-faithful guided workspace method. |
 | `learn` | explicit | Coordinate a multi-capability learning journey through bounded Teach tracks, evidence, and route reviews. |
 | `wait-what` | automatic | Recover immediately when Elias says he is lost by restating the current point in plain language and rebuilding only the missing context. |
+| `which-skill` | explicit | Recommend which EKit skill should own a request, check whether this thread is using the right skill, or list what skills changed since a date from the generated Skill catalogue. |
 ## Common paths
 
 - Exhaustive shared understanding: `grilling`. Focused learning: `teach`. Multi-capability learning: `learn` → `teach` → evidence and route review.

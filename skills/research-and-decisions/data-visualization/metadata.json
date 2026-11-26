@@ -53,6 +53,7 @@
       "browser"
     ]
   },
+  "added": "2026-10-27",
   "reviewed": "2026-10-27",
   "owned_changes": "2026-10-27 EKit ticket 5: replaced the restricted OpenAI source snapshot with independently authored methods derived from the approved capability requirements and public primary documentation. Preserved owner, invocation and tool/skill dependency contract; added method-depth and disposable preservation cases. Historical restricted copies remain only in the private recovery boundary. No upstream redistribution permission or unavailable runtime capability is asserted."
 }

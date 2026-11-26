@@ -269,6 +269,7 @@
     ],
     "tools": []
   },
+  "added": "2026-10-27",
   "reviewed": "2026-10-26",
   "owned_changes": "Independently authored 2026-10-22 adaptation: load grilling collaborative exploration, develop answers as well as challenge them, explain product lenses, preserve evidence limits and fold reusable thinking into the existing verdict.\n\n2026-10-26 writing-for-agents pass: Removed generic supporting/evidence paragraph already owned by shared instructions. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed."
 }

@@ -143,6 +143,7 @@
       "github"
     ]
   },
+  "added": "2026-10-27",
   "reviewed": "2026-11-22",
   "owned_changes": "2026-11-20: Replaced same-model review with cross-role review for implemented slices (Lead reviews Engineer slices; Engineer at High reviews Lead slices, per the shared role table), with same-role fallback recorded in the report and code verification before acting so unverifiable findings are rejected with evidence. Independently authored from Elias's request; no upstream source changed.\n\n2026-11-20: A stalled review loop under an Engineer caller escalates to the Lead instead of asking Elias, and the approval notice covers any approval-asking child mode, since T3's Antigravity `auto` also asks. Independently authored from Elias's request; no upstream source changed.\n\n2026-11-22: Added the standalone `Routing:` outcome line to the end of code-review reports (and PR review reports after the review loop), recording implementing role and model, reviewing role and any same-role fallback, findings raised/accepted, and rework. Independently authored from Elias's model-evidence scope (#74); no upstream source changed."
 }

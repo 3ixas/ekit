@@ -45,6 +45,7 @@
       "github"
     ]
   },
+  "added": "2026-10-27",
   "reviewed": "2026-11-20",
   "owned_changes": "2026-10-26 writing-for-agents pass: Removed generic supporting/evidence paragraph already owned by shared instructions. Made reconciliation completion observable without ending authorized continuation at a plan. Replaced a truncated or stale UI summary with a complete description of the current workflow. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed.\n\n2026-11-19: A handoff marked `Relay: <workflow>` follows that workflow's successor-start rules and continues without confirmation when its path was given, unless another owner is active or live state contradicts it; one found only by search is confirmed first. Independently authored from Elias's request; no upstream source changed.\n\n2026-11-20: Generalized the relay reference note to cover both `implement-series` and `implement-ticket` T3 relays. Independently authored from Elias's request; no upstream source changed.\n\n2026-11-20: Recognised `Escalation:` handoffs and pointed to the Lead side in `implement`'s escalation reference. Independently authored from Elias's request; no upstream source changed."
 }

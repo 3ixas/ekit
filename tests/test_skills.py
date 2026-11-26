@@ -85,6 +85,7 @@ def add_skill(
         "role": role,
         "sources": sources or [],
         "dependencies": {"skills": dependencies or [], "tools": []},
+        "added": "2026-09-10",
         "reviewed": "2026-09-14",
     }
     if authority_stop is not None:
@@ -1562,8 +1563,194 @@ class WorkflowPathsTests(unittest.TestCase):
 
     def test_repository_readme_workflow_table_is_generated_and_current(self) -> None:
         plan = skills.catalog_plan(REPOSITORY_ROOT)
+        self.assertIn(REPOSITORY_ROOT / "README.md", plan)
+        self.assertIn(REPOSITORY_ROOT / skills.SKILL_CATALOGUE_FILE, plan)
         for path, (current, desired) in plan.items():
-            self.assertEqual(current, desired, f"{path} is out of date with config/paths.json")
+            self.assertEqual(current, desired, f"{path} is out of date with its inputs")
+
+
+class SkillCatalogueTests(unittest.TestCase):
+    def _add_which_skill(self, root: Path) -> Path:
+        bundle = add_skill(root, "which-skill", group="agent-system", invocation=["explicit"])
+        skill_md = bundle / "SKILL.md"
+        skill_md.write_text(
+            skill_md.read_text(encoding="utf-8") + "\nRead [the Skill catalogue](references/skill-catalogue.md).\n",
+            encoding="utf-8",
+        )
+        return bundle
+
+    def test_catalogue_lists_active_skills_and_excludes_inactive_and_detects_staleness(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); make_repo(root)
+            self._add_which_skill(root)
+            local_bundle = add_skill(root, "alpha", group="software-workflows", role="lead")
+            stop_bundle = add_skill(
+                root,
+                "beta",
+                group="software-workflows",
+                invocation=["explicit"],
+                authority_stop="Stops before merging or deploying.",
+                dependencies=["alpha"],
+            )
+            add_skill(root, "later-candidate", lifecycle="candidates")
+            add_skill(root, "sleeping-paused", lifecycle="paused")
+            write_json(root / "config" / "paths.json", {
+                "schema": 1,
+                "paths": [{"situation": "Ship a slice", "steps": [{"skill": "alpha"}, {"skill": "beta"}]}],
+            })
+
+            errors = skills.check_repo(root)
+            self.assertTrue(any("Skill catalogue is stale" in error for error in errors), errors)
+
+            updated = skills.catalog_apply(root)
+            catalogue = root / skills.SKILL_CATALOGUE_FILE
+            self.assertEqual(set(updated), {root / "README.md", catalogue})
+            self.assertEqual(skills.check_repo(root), [])
+
+            text = catalogue.read_text(encoding="utf-8")
+            self.assertIn("Active skills: 3", text)
+            self.assertIn("### software-workflows", text)
+            self.assertIn("### agent-system", text)
+            self.assertIn("| `alpha` | automatic | lead | 2026-09-10 | 2026-09-14 | Exercise alpha when its exact workflow applies. | none | No external side effects |", text)
+            self.assertIn("| `beta` | explicit | either | 2026-09-10 | 2026-09-14 | Exercise beta when its exact workflow applies. | `alpha` | Stops before merging or deploying. |", text)
+            self.assertIn("| `which-skill` | explicit | either |", text)
+            self.assertIn("| Ship a slice | `alpha` → `beta` |", text)
+            self.assertNotIn("later-candidate", text)
+            self.assertNotIn("sleeping-paused", text)
+
+            # Regenerating unchanged inputs is byte-identical.
+            first_bytes = catalogue.read_bytes()
+            self.assertEqual(skills.catalog_apply(root), [])
+            self.assertEqual(catalogue.read_bytes(), first_bytes)
+
+            # Editing the catalogue directly fails check.
+            catalogue.write_text(text + "\nHand edit.\n", encoding="utf-8")
+            self.assertTrue(any("Skill catalogue is stale" in error for error in skills.check_repo(root)))
+            skills.catalog_apply(root)
+            self.assertEqual(skills.check_repo(root), [])
+
+            # Editing metadata without regenerating fails check.
+            meta_path = stop_bundle / "metadata.json"
+            meta = skills.read_json(meta_path)
+            meta["authority_stop"] = "Stops before publishing."
+            write_json(meta_path, meta)
+            self.assertTrue(any("Skill catalogue is stale" in error for error in skills.check_repo(root)))
+            skills.catalog_apply(root)
+            self.assertEqual(skills.check_repo(root), [])
+            self.assertIn("Stops before publishing.", catalogue.read_text(encoding="utf-8"))
+
+            # Editing SKILL.md description without regenerating fails check.
+            skill_path = local_bundle / "SKILL.md"
+            skill_path.write_text(
+                skill_path.read_text(encoding="utf-8").replace("exact workflow", "updated workflow"),
+                encoding="utf-8",
+            )
+            self.assertTrue(any("Skill catalogue is stale" in error for error in skills.check_repo(root)))
+            skills.catalog_apply(root)
+            self.assertEqual(skills.check_repo(root), [])
+
+    def test_catalogue_dates_come_from_metadata_not_git_history(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); make_repo(root)
+            self._add_which_skill(root)
+            alpha = add_skill(root, "alpha")
+            candidate = add_skill(root, "later-candidate", lifecycle="candidates")
+            meta = skills.read_json(alpha / "metadata.json")
+            meta["added"] = "2026-10-10"
+            meta["reviewed"] = "2026-10-20"
+            write_json(alpha / "metadata.json", meta)
+            candidate_meta_path = candidate / "metadata.json"
+            candidate_meta = skills.read_json(candidate_meta_path)
+            candidate_meta["reviewed"] = "2026-12-31"
+            write_json(candidate_meta_path, candidate_meta)
+
+            skills.catalog_apply(root)
+            catalogue = root / skills.SKILL_CATALOGUE_FILE
+            text = catalogue.read_text(encoding="utf-8")
+            self.assertIn("Generated: 2026-10-20 ", text)
+            self.assertIn("| `alpha` | automatic | either | 2026-10-10 | 2026-10-20 |", text)
+
+            # Committing on any later day leaves the catalogue current.
+            git(root, "init", "--quiet")
+            env = {
+                **os.environ,
+                "GIT_AUTHOR_NAME": "Test", "GIT_AUTHOR_EMAIL": "test@example.com",
+                "GIT_COMMITTER_NAME": "Test", "GIT_COMMITTER_EMAIL": "test@example.com",
+                "GIT_AUTHOR_DATE": "2027-03-03T12:00:00Z", "GIT_COMMITTER_DATE": "2027-03-03T12:00:00Z",
+            }
+            subprocess.run(["git", "add", "."], cwd=root, check=True, capture_output=True, env=env)
+            subprocess.run(["git", "commit", "--quiet", "-m", "later"], cwd=root, check=True, capture_output=True, env=env)
+            self.assertEqual(skills.check_repo(root), [])
+            self.assertEqual(skills.catalog_apply(root), [])
+            self.assertEqual(catalogue.read_text(encoding="utf-8"), text)
+
+    def test_metadata_requires_an_iso_added_date(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); make_repo(root)
+            bundle = add_skill(root, "alpha")
+            meta = skills.read_json(bundle / "metadata.json")
+            meta["added"] = "last week"
+            write_json(bundle / "metadata.json", meta)
+            self.assertTrue(any("added must be an ISO date" in error for error in skills.check_repo(root)))
+            del meta["added"]
+            write_json(bundle / "metadata.json", meta)
+            self.assertTrue(any("added must be an ISO date" in error for error in skills.check_repo(root)))
+            meta["added"] = "20260101"
+            write_json(bundle / "metadata.json", meta)
+            self.assertTrue(any("added must be an ISO date" in error for error in skills.check_repo(root)))
+
+    def test_invalid_active_bundles_report_errors_instead_of_crashing_the_catalogue(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); make_repo(root)
+            self._add_which_skill(root)
+            broken_invocation = add_skill(root, "alpha")
+            meta = skills.read_json(broken_invocation / "metadata.json")
+            meta["invocation"] = None
+            write_json(broken_invocation / "metadata.json", meta)
+            missing_skill_md = add_skill(root, "beta")
+            (missing_skill_md / "SKILL.md").unlink()
+            errors = skills.check_repo(root)
+            self.assertTrue(errors)
+            self.assertFalse(any("Skill catalogue is stale" in error for error in errors), errors)
+            with self.assertRaises(skills.CheckError):
+                skills.catalog_plan(root)
+
+    def test_symlinked_catalogue_is_refused(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); make_repo(root)
+            self._add_which_skill(root)
+            target = root / "elsewhere.md"
+            target.write_text("outside\n", encoding="utf-8")
+            catalogue = root / skills.SKILL_CATALOGUE_FILE
+            catalogue.parent.mkdir(parents=True, exist_ok=True)
+            catalogue.symlink_to(target)
+            with self.assertRaises(skills.CheckError):
+                skills.catalog_apply(root)
+            self.assertEqual(target.read_text(encoding="utf-8"), "outside\n")
+
+            catalogue.unlink()
+            references = catalogue.parent
+            references.rmdir()
+            outside_dir = root / "outside-references"
+            outside_dir.mkdir()
+            references.symlink_to(outside_dir, target_is_directory=True)
+            with self.assertRaises(skills.CheckError):
+                skills.catalog_apply(root)
+            self.assertEqual(list(outside_dir.iterdir()), [])
+
+    def test_repository_skill_catalogue_covers_all_active_skills_and_no_inactive(self) -> None:
+        text = (REPOSITORY_ROOT / skills.SKILL_CATALOGUE_FILE).read_text(encoding="utf-8")
+        bundles = skills.discover(REPOSITORY_ROOT)
+        active = [item for item in bundles if item["lifecycle"] == "skills"]
+        inactive = [item for item in bundles if item["lifecycle"] != "skills"]
+        self.assertIn(f"Active skills: {len(active)}", text)
+        for item in active:
+            self.assertIn(f"| `{item['id']}` |", text)
+            meta = skills.read_json(item["path"] / "metadata.json")
+            if "authority_stop" in meta:
+                self.assertIn(skills._md_cell(meta["authority_stop"]), text)
+        for item in inactive:
+            self.assertNotIn(f"| `{item['id']}` |", text)
 
 
 if __name__ == "__main__":
