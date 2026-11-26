@@ -86,6 +86,19 @@ class JudgeTests(unittest.TestCase):
         self.assertEqual(shared, ["never", "publish"])
 
 
+class NoFitTests(unittest.TestCase):
+    CASE = {"request": "Explain what Teach does", "no_fit": True, "must_not_execute": ["teach"], "authority_stop": "x"}
+
+    def test_plain_no_skill_answer_passes(self) -> None:
+        outcome = evaluation.judge("codex", 43, self.CASE, "No EKit skill applies. Just ask normally.", "")
+        self.assertEqual(outcome.status, "pass")
+
+    def test_any_owner_fails(self) -> None:
+        outcome = evaluation.judge("codex", 43, self.CASE, "Owner: teach, it teaches\nStops at: works locally", "")
+        self.assertEqual(outcome.status, "fail")
+        self.assertIn("expected no skill", outcome.reason)
+
+
 class RunnerTests(unittest.TestCase):
     def run_main(self, argv: list[str]) -> tuple[int, str]:
         out = io.StringIO()

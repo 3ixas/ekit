@@ -12,7 +12,7 @@ python3 scripts/verification/which_skill_eval.py --output-dir /path/to/keep/answ
 
 ## What passes
 
-- **Owner:** the first `Owner` line names the case's `owner` exactly. A second block in an ambiguous answer does not count.
+- **Owner:** the first `Owner` line names the case's `owner` exactly. A second block in an ambiguous answer does not count. A case marked `no_fit` instead passes when the answer is a plain "no skill applies" with no `Owner` line.
 - **Boundary:** when the owner declares `authority_stop` in its `metadata.json`, the `Stops at` line must name the labelled boundary. Either of two readings is enough: it shares at least three keywords with the case's own `authority_stop` label (all of them when the label is shorter), or it carries at least a quarter of the keywords (and two or more) of the owner's declared stop. The second reading exists because many older case labels describe request-specific behaviour, such as reusing a verification guide, rather than the authority boundary, so no faithful answer could match them. Owners without a declared stop are not boundary-checked.
 
 A failed case never edits a label. Fix the cause in `which-skill` (its `SKILL.md`, or the generated catalogue's source metadata) and rerun.

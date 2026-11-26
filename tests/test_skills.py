@@ -1325,6 +1325,12 @@ class RoutingFixtureTests(unittest.TestCase):
         self.assertGreaterEqual(len(scenarios), 10)
         for scenario in scenarios:
             with self.subTest(request=scenario["request"]):
+                if scenario.get("no_fit"):
+                    self.assertNotIn("owner", scenario)
+                    self.assertTrue(scenario["authority_stop"].strip())
+                    for forbidden in scenario.get("must_not_execute", []):
+                        self.assertIn(forbidden, by_id)
+                    continue
                 self.assertIn(scenario["owner"], by_id)
                 expected_lifecycle = "candidates" if scenario.get("candidate") else "skills"
                 self.assertEqual(by_id[scenario["owner"]]["lifecycle"], expected_lifecycle)
@@ -1342,7 +1348,7 @@ class RoutingFixtureTests(unittest.TestCase):
         covered_explicit = {
             scenario["owner"]
             for scenario in scenarios
-            if scenario.get("explicit")
+            if scenario.get("explicit") and not scenario.get("no_fit")
         }
         explicit_primaries = sorted(
             item["id"]

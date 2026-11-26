@@ -32,6 +32,7 @@ import skills  # noqa: E402
 
 HOSTS = ("claude", "codex")
 SKILL_ID = "which-skill"
+NO_FIT = "(no skill)"
 LABELS = ("owner", "brings in", "say", "stops at", "also worth naming")
 STOPWORDS = frozenset(
     "with that this from have been will when only must such than then into over also each unless "
@@ -70,12 +71,17 @@ class Outcome:
     output_file: str = ""
 
 
+def stem(word: str) -> str:
+    """Crude suffix strip so merge/merging and deploy/deployment/deploys compare equal."""
+    for suffix in ("ation", "ment", "ing", "ed", "es", "s"):
+        if word.endswith(suffix) and len(word) - len(suffix) >= 4:
+            word = word[: -len(suffix)]
+            break
+    return word[:-1] if word.endswith("e") and len(word) > 4 else word
+
+
 def keywords(text: str) -> set[str]:
-    return {
-        re.sub(r"(ing|ed|es|s)$", "", word)
-        for word in re.findall(r"[a-z]{4,}", text.lower())
-        if word not in STOPWORDS
-    }
+    return {stem(word) for word in re.findall(r"[a-z]{4,}", text.lower()) if word not in STOPWORDS}
 
 
 def parse_recommendation(text: str) -> tuple[list[str], str]:
@@ -121,9 +127,15 @@ def judge(
     declared_stop: str,
 ) -> Outcome:
     """Judge one answer; `declared_stop` is the owner's metadata `authority_stop`, or empty."""
-    outcome = Outcome(host, index, case["request"], case["owner"])
+    outcome = Outcome(host, index, case["request"], case.get("owner") or NO_FIT)
     owners, stops = parse_recommendation(answer)
     outcome.stops_at = stops
+    if case.get("no_fit"):
+        # A no-fit case passes on a plain "no skill applies" answer: no Owner line at all.
+        if owners:
+            outcome.status, outcome.owner = "fail", owners[0]
+            outcome.reason = f"owner {owners[0]!r}, expected no skill to apply"
+        return outcome
     if not owners:
         outcome.status, outcome.reason = "fail", "no Owner line in the answer"
         return outcome
@@ -201,7 +213,7 @@ def run_case(
     try:
         answer = ask(host, prompt_for(case["request"]), workspace, args.model.get(host), args.timeout, scratch)
     except (RuntimeError, subprocess.TimeoutExpired, OSError) as error:
-        outcome = Outcome(host, index, case["request"], case["owner"], "error", reason=str(error))
+        outcome = Outcome(host, index, case["request"], case.get("owner") or NO_FIT, "error", reason=str(error))
         transcript.write_text(f"ERROR: {error}\n", encoding="utf-8")
     else:
         transcript.write_text(answer, encoding="utf-8")
@@ -217,9 +229,9 @@ def load_cases(only: list[str] | None) -> tuple[list[tuple[int, dict, str]], dic
         for bundle in skills.discover(REPOSITORY_ROOT)
     }
     selected = [
-        (index, case, declared[case["owner"]])
+        (index, case, declared.get(case.get("owner"), ""))
         for index, case in enumerate(cases)
-        if not only or case["owner"] in only or str(index) in only
+        if not only or case.get("owner") in only or str(index) in only
     ]
     return selected, declared
 

@@ -29,13 +29,12 @@
   },
   {
     "request": "Implement the next ready ticket from this approved spec, review the slice, fix any valid findings, and commit it",
-    "owner": "implement-ticket",
+    "owner": "implement",
     "supports": [
       "code-review",
       "verify"
     ],
-    "authority_stop": "Respect the explicit commit endpoint: prove, review and commit one ready ticket without publishing.",
-    "explicit": true
+    "authority_stop": "Respect the explicit commit endpoint: prove, review and commit one ready ticket without publishing."
   },
   {
     "request": "Use Implement Ticket for issue #42",
@@ -235,12 +234,11 @@
   },
   {
     "request": "Refactor this approved state model while preserving behaviour",
-    "owner": "implement",
+    "owner": "refactor",
     "supports": [
-      "refactor",
       "verify"
     ],
-    "authority_stop": "Implement one approved slice with refactor supporting equivalence; code-review remains read-only and broader redesign needs a scope decision."
+    "authority_stop": "Restructure the approved state model while preserving behaviour and proving equivalence; code-review remains read-only and broader redesign needs a scope decision."
   },
   {
     "request": "Add a date filter to this existing app; it has no documented way to launch or prove its user journeys",
@@ -286,11 +284,9 @@
   },
   {
     "request": "Fix a typo in the installation guide",
-    "owner": "implement",
-    "supports": [
-      "verify"
-    ],
-    "authority_stop": "Use document checks appropriate to the edit; do not launch or scaffold an application merely because no verification guide exists."
+    "owner": "writing",
+    "supports": [],
+    "authority_stop": "Make the focused edit and use document checks appropriate to it; do not launch or scaffold an application merely because no verification guide exists."
   },
   {
     "request": "Implement this approved multi-ticket spec in parallel; the app has no verification guide",
@@ -319,8 +315,9 @@
   },
   {
     "request": "Grill this checkout improvement: people must be able to finish using only a keyboard",
-    "owner": "grilling",
+    "owner": "grill-with-docs",
     "supports": [
+      "grilling",
       "accessibility"
     ],
     "authority_stop": "Name the keyboard-completion activity and its useful output before selecting accessibility support; use observed focus and interaction failures to inform the scope. Do not add personas or specialists without distinct contributions, silently expand scope or submit live purchases."
@@ -360,7 +357,7 @@
   },
   {
     "request": "Explain what Teach does",
-    "owner": "how",
+    "no_fit": true,
     "supports": [],
     "must_not_execute": [
       "teach"
@@ -369,7 +366,7 @@
   },
   {
     "request": "Don’t use Teach; briefly explain idempotency",
-    "owner": "how",
+    "no_fit": true,
     "supports": [],
     "must_not_execute": [
       "teach"
@@ -378,7 +375,7 @@
   },
   {
     "request": "This document quotes “Use Teach”; explain what the author means",
-    "owner": "how",
+    "no_fit": true,
     "supports": [],
     "must_not_execute": [
       "teach"
