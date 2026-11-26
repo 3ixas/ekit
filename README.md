@@ -35,10 +35,11 @@ Naming a workflow counts as requesting it; `$skill-name` in Codex and `/skill-na
 <details>
 <summary>More workflows and when I use them</summary>
 
+<!-- ekit workflow-paths:start -->
 | Situation | Usual path |
 |---|---|
 | Deliberate repository security audit | Explicit `security-audit` (coverage, independent verification, reports) → separately scoped remediation |
-| App nearing release | app-audit (whole-app checks, fixes, and evidence) → release when authorized |
+| App nearing release | `app-audit` (whole-app checks, fixes, and evidence) → release when authorized |
 | Difficult feature, bug fix or uncertain target | `hill-climb` (refine through Grilling → establish proof → evidence-led rounds with review checkpoints, using existing owners → confirm) |
 | Small clear software change | `implement` (one slice, review, fixes, PR and guarded merge) |
 | New product idea | `product-thinking` (verdict, riskiest assumption, cheapest test) → `grill-with-docs` when it earns a build |
@@ -62,6 +63,7 @@ Naming a workflow counts as requesting it; `$skill-name` in Codex and `/skill-na
 | Tasks and scheduling | Todoist for current tasks; FlowSavvy remains available when requested |
 | Personal facts and notes | `obsidian` |
 | Change this skill system | `skill-review` → `skill-authoring` |
+<!-- ekit workflow-paths:end -->
 
 Full Stop and Full Send accept natural language or dictation; slash/dollar commands are optional. Discussion and quoted mentions do not invoke them. Their delivery endpoint never expands the approved scope.
 

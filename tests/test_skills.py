@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import contextlib
+import io
 import json
 import os
 import subprocess
@@ -45,6 +47,11 @@ def make_repo(root: Path) -> None:
         "opencode_backups": "~/.config/opencode/skill-backups/elias-agent-skills",
     })
     (root / "licenses" / "mit-test.txt").write_text("MIT\n", encoding="utf-8")
+    write_json(root / "config" / "paths.json", {"schema": 1, "paths": []})
+    (root / "README.md").write_text(
+        f"# Test Repo\n\n{skills.README_PATHS_START}\n{skills.render_readme_workflow_table([])}\n{skills.README_PATHS_END}\n",
+        encoding="utf-8",
+    )
 
 
 def add_skill(
@@ -1345,6 +1352,158 @@ class SourceUpdateTests(unittest.TestCase):
             results = skills.source_updates(catalog)
             self.assertEqual(len(results), 2)
             self.assertEqual({result.status for result in results}, {"unchanged"})
+
+
+class WorkflowPathsTests(unittest.TestCase):
+    def test_valid_paths_generate_readme_table_and_pass_check(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); make_repo(root)
+            add_skill(root, "alpha")
+            add_skill(root, "beta")
+            add_skill(root, "gamma")
+            write_json(root / "config" / "paths.json", {
+                "schema": 1,
+                "paths": [
+                    {
+                        "situation": "Run a workflow",
+                        "steps": [
+                            {"skill": "alpha", "before": "Explicit", "after": "(first step)"},
+                            {"text": "review manually"},
+                            {"skill": "beta", "before": "Add", "label": "“Beta mode”", "after": "at the end"},
+                        ],
+                    },
+                    {
+                        "situation": "With comma notes",
+                        "steps": [{"skill": "alpha"}],
+                        "notes": ", with `beta` and `gamma` when needed",
+                    },
+                    {
+                        "situation": "With semicolon notes",
+                        "steps": [{"skill": "alpha"}],
+                        "notes": "use `beta` when needed",
+                    },
+                ],
+            })
+            self.assertTrue(any("stale" in error for error in skills.check_repo(root)))
+            updated = skills.catalog_apply(root)
+            self.assertEqual(updated, [root / "README.md"])
+            self.assertEqual(skills.check_repo(root), [])
+            readme = (root / "README.md").read_text(encoding="utf-8")
+            self.assertIn(
+                "| Run a workflow | Explicit `alpha` (first step) → review manually → Add “Beta mode” at the end |",
+                readme,
+            )
+            self.assertIn("| With comma notes | `alpha`, with `beta` and `gamma` when needed |", readme)
+            self.assertIn("| With semicolon notes | `alpha`; use `beta` when needed |", readme)
+
+    def test_hand_edited_readme_table_and_missing_markers_fail_check(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); make_repo(root)
+            add_skill(root, "alpha")
+            write_json(root / "config" / "paths.json", {
+                "schema": 1,
+                "paths": [{"situation": "Task", "steps": [{"skill": "alpha"}]}],
+            })
+            skills.catalog_apply(root)
+            self.assertEqual(skills.check_repo(root), [])
+            readme = root / "README.md"
+            readme.write_text(readme.read_text(encoding="utf-8").replace("`alpha`", "`alpha` edited"), encoding="utf-8")
+            errors = skills.check_repo(root)
+            self.assertTrue(any("workflow table is stale" in error for error in errors))
+            readme.write_text("# No markers\n", encoding="utf-8")
+            errors = skills.check_repo(root)
+            self.assertTrue(any("generated section" in error for error in errors))
+
+    def test_unknown_candidate_and_paused_skills_in_paths_and_notes_fail_check(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); make_repo(root)
+            add_skill(root, "active-one")
+            add_skill(root, "candidate-one", lifecycle="candidates")
+            add_skill(root, "paused-one", lifecycle="paused")
+            write_json(root / "config" / "paths.json", {
+                "schema": 1,
+                "paths": [
+                    {"situation": "Unknown", "steps": [{"skill": "missing-skill"}]},
+                    {"situation": "Candidate", "steps": [{"skill": "candidate-one"}]},
+                    {"situation": "Paused", "steps": [{"skill": "paused-one"}]},
+                    {"situation": "Notes unknown", "steps": [{"skill": "active-one"}], "notes": "see `ghost-skill`"},
+                    {"situation": "Notes paused", "steps": [{"skill": "active-one"}], "notes": "see `paused-one`"},
+                ],
+            })
+            errors = skills.check_repo(root)
+            self.assertTrue(any("step 1 references unknown skill missing-skill" in error for error in errors))
+            self.assertTrue(any("step 1 references inactive skill candidate-one (candidates)" in error for error in errors))
+            self.assertTrue(any("step 1 references inactive skill paused-one (paused)" in error for error in errors))
+            self.assertTrue(any("notes references unknown skill ghost-skill" in error for error in errors))
+            self.assertTrue(any("notes references inactive skill paused-one (paused)" in error for error in errors))
+
+    def test_malformed_paths_config_fails_check(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); make_repo(root)
+            add_skill(root, "alpha")
+            write_json(root / "config" / "paths.json", {
+                "schema": 2,
+                "extra": True,
+                "paths": [
+                    {"situation": "", "steps": []},
+                    {"situation": "Duplicate", "steps": [{"skill": "alpha"}]},
+                    {"situation": "duplicate", "steps": [{"skill": "alpha"}]},
+                    {"situation": "Both", "steps": [{"skill": "alpha", "text": "clash"}]},
+                    {"situation": "Neither", "steps": [{}]},
+                    {"situation": "Bad notes", "steps": [{"text": "ok"}], "notes": "line1\nline2"},
+                    {"situation": "Text extras", "steps": [{"text": "ok", "before": "nope"}]},
+                ],
+            })
+            errors = skills.check_repo(root)
+            self.assertTrue(any("schema must be 1" in error for error in errors))
+            self.assertTrue(any("unexpected keys extra" in error for error in errors))
+            self.assertTrue(any("situation must be a non-empty single-line string" in error for error in errors))
+            self.assertTrue(any("duplicate situation" in error for error in errors))
+            self.assertTrue(any("must define either skill or text" in error for error in errors))
+            self.assertTrue(any("notes must be a non-empty single-line string" in error for error in errors))
+            self.assertTrue(any("unexpected keys before" in error for error in errors))
+
+    def test_regenerating_unchanged_inputs_is_byte_identical_and_preview_is_read_only(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); make_repo(root)
+            add_skill(root, "alpha")
+            write_json(root / "config" / "paths.json", {
+                "schema": 1,
+                "paths": [{"situation": "Task", "steps": [{"skill": "alpha"}]}],
+            })
+            readme = root / "README.md"
+            before_preview = readme.read_bytes()
+            with mock.patch.object(skills, "ROOT", root):
+                preview_out = io.StringIO()
+                with contextlib.redirect_stdout(preview_out):
+                    rc = skills.command_catalog(skills.argparse.Namespace(apply=False))
+                self.assertEqual(rc, 0)
+                self.assertIn("README.md: change", preview_out.getvalue())
+                self.assertIn("+| Task | `alpha` |", preview_out.getvalue())
+                self.assertEqual(readme.read_bytes(), before_preview)
+
+                apply_out = io.StringIO()
+                with contextlib.redirect_stdout(apply_out):
+                    rc = skills.command_catalog(skills.argparse.Namespace(apply=True))
+                self.assertEqual(rc, 0)
+                self.assertIn("Updated: README.md", apply_out.getvalue())
+
+                after_first = readme.read_bytes()
+                self.assertNotEqual(after_first, before_preview)
+
+                second_preview = io.StringIO()
+                with contextlib.redirect_stdout(second_preview):
+                    rc = skills.command_catalog(skills.argparse.Namespace(apply=False))
+                self.assertEqual(rc, 0)
+                self.assertIn("README.md: unchanged", second_preview.getvalue())
+
+            self.assertEqual(skills.catalog_apply(root), [])
+            self.assertEqual(readme.read_bytes(), after_first)
+
+    def test_repository_readme_workflow_table_is_generated_and_current(self) -> None:
+        plan = skills.catalog_plan(REPOSITORY_ROOT)
+        for path, (current, desired) in plan.items():
+            self.assertEqual(current, desired, f"{path} is out of date with config/paths.json")
 
 
 if __name__ == "__main__":
