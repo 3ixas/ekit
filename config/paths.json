@@ -1,0 +1,325 @@
+{
+  "schema": 1,
+  "paths": [
+    {
+      "situation": "Deliberate repository security audit",
+      "steps": [
+        {
+          "skill": "security-audit",
+          "before": "Explicit",
+          "after": "(coverage, independent verification, reports)"
+        },
+        {
+          "text": "separately scoped remediation"
+        }
+      ]
+    },
+    {
+      "situation": "App nearing release",
+      "steps": [
+        {
+          "skill": "app-audit",
+          "after": "(whole-app checks, fixes, and evidence)"
+        },
+        {
+          "text": "release when authorized"
+        }
+      ]
+    },
+    {
+      "situation": "Difficult feature, bug fix or uncertain target",
+      "steps": [
+        {
+          "skill": "hill-climb",
+          "after": "(refine through Grilling → establish proof → evidence-led rounds with review checkpoints, using existing owners → confirm)"
+        }
+      ]
+    },
+    {
+      "situation": "Small clear software change",
+      "steps": [
+        {
+          "skill": "implement",
+          "after": "(one slice, review, fixes, PR and guarded merge)"
+        }
+      ]
+    },
+    {
+      "situation": "New product idea",
+      "steps": [
+        {
+          "skill": "product-thinking",
+          "after": "(verdict, riskiest assumption, cheapest test)"
+        },
+        {
+          "skill": "grill-with-docs",
+          "after": "when it earns a build"
+        }
+      ]
+    },
+    {
+      "situation": "Nontrivial or unclear product work",
+      "steps": [
+        {
+          "skill": "grill-with-docs"
+        },
+        {
+          "skill": "to-spec"
+        },
+        {
+          "skill": "to-tickets"
+        },
+        {
+          "skill": "implement",
+          "before": "one-ticket",
+          "after": "per invocation"
+        },
+        {
+          "skill": "verify",
+          "before": "final"
+        },
+        {
+          "skill": "retro"
+        }
+      ]
+    },
+    {
+      "situation": "One ticket",
+      "steps": [
+        {
+          "skill": "implement-ticket"
+        },
+        {
+          "text": "review, monitor and merge its PR"
+        }
+      ]
+    },
+    {
+      "situation": "Approved tickets in parallel",
+      "steps": [
+        {
+          "skill": "implement-parallel"
+        },
+        {
+          "text": "independent ticket PRs and serialized guarded merges"
+        }
+      ]
+    },
+    {
+      "situation": "Approved tickets delivered one at a time",
+      "steps": [
+        {
+          "skill": "implement-series"
+        },
+        {
+          "text": "implement, monitor and merge each ticket's PR"
+        },
+        {
+          "text": "refresh dependencies and continue"
+        }
+      ]
+    },
+    {
+      "situation": "Approved work through PR readiness",
+      "steps": [
+        {
+          "skill": "full-stop",
+          "before": "Add",
+          "label": "“Full stop”",
+          "after": "to the implementation workflow"
+        },
+        {
+          "text": "proof/review"
+        },
+        {
+          "text": "publish and monitor"
+        },
+        {
+          "text": "human merge handoff"
+        }
+      ]
+    },
+    {
+      "situation": "Approved work through merge",
+      "steps": [
+        {
+          "skill": "full-send",
+          "before": "Explicit",
+          "label": "“Full send”"
+        },
+        {
+          "text": "the same delivery lifecycle"
+        },
+        {
+          "text": "guarded merge once all gates pass"
+        }
+      ]
+    },
+    {
+      "situation": "Aging PR",
+      "steps": [
+        {
+          "skill": "modernize",
+          "before": "Explicit"
+        },
+        {
+          "text": "reassess current intent"
+        },
+        {
+          "text": "authorized rebase/update, or REWORK/CLOSE recommendation"
+        }
+      ]
+    },
+    {
+      "situation": "Destination known, route uncertain",
+      "steps": [
+        {
+          "skill": "wayfinder"
+        },
+        {
+          "text": "research/prototypes"
+        },
+        {
+          "skill": "grill-with-docs"
+        }
+      ]
+    },
+    {
+      "situation": "New or substantially changed interface",
+      "steps": [
+        {
+          "skill": "interface-design",
+          "after": "(references → `DESIGN.md` → proportionate exploration and sign-off)"
+        },
+        {
+          "skill": "to-spec"
+        },
+        {
+          "skill": "to-tickets"
+        },
+        {
+          "skill": "implement",
+          "before": "one-ticket",
+          "after": "per invocation"
+        },
+        {
+          "skill": "ui-polish"
+        },
+        {
+          "skill": "verify"
+        },
+        {
+          "skill": "retro"
+        }
+      ]
+    },
+    {
+      "situation": "Diagnose why an interface feels unfinished",
+      "steps": [
+        {
+          "skill": "craft-review",
+          "before": "Explicit"
+        },
+        {
+          "text": "evidenced priorities and existing-owner handoffs"
+        }
+      ]
+    },
+    {
+      "situation": "Existing interface needs craft",
+      "steps": [
+        {
+          "skill": "ui-polish"
+        }
+      ],
+      "notes": ", with `motion` and `accessibility` when relevant"
+    },
+    {
+      "situation": "Writing",
+      "steps": [
+        {
+          "skill": "writing"
+        }
+      ],
+      "notes": "the file-format skill owns DOCX, PDF, spreadsheet, slide, or image output"
+    },
+    {
+      "situation": "Quick understanding",
+      "steps": [
+        {
+          "text": "ask normally"
+        }
+      ],
+      "notes": "Codex may use `how` or `why`"
+    },
+    {
+      "situation": "Focused learning",
+      "steps": [
+        {
+          "skill": "teach"
+        }
+      ]
+    },
+    {
+      "situation": "Multi-capability learning journey",
+      "steps": [
+        {
+          "skill": "learn"
+        },
+        {
+          "skill": "teach"
+        },
+        {
+          "text": "evidence and route review"
+        }
+      ]
+    },
+    {
+      "situation": "Understand completed work",
+      "steps": [
+        {
+          "skill": "defend"
+        }
+      ]
+    },
+    {
+      "situation": "Resume later",
+      "steps": [
+        {
+          "skill": "handoff"
+        },
+        {
+          "skill": "pickup"
+        }
+      ]
+    },
+    {
+      "situation": "Tasks and scheduling",
+      "steps": [
+        {
+          "text": "Todoist for current tasks"
+        }
+      ],
+      "notes": "FlowSavvy remains available when requested"
+    },
+    {
+      "situation": "Personal facts and notes",
+      "steps": [
+        {
+          "skill": "obsidian"
+        }
+      ]
+    },
+    {
+      "situation": "Change this skill system",
+      "steps": [
+        {
+          "skill": "skill-review"
+        },
+        {
+          "skill": "skill-authoring"
+        }
+      ]
+    }
+  ]
+}

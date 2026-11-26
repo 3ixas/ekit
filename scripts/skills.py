@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import difflib
 import hashlib
 import json
 import os
@@ -39,6 +40,9 @@ MARKER_SCHEMA = 1
 OPENCODE_FILE_MARKER = re.compile(rb"^<!-- elias-agent-skills opencode managed v1 sha256:([0-9a-f]{64}) -->\n")
 ANTIGRAVITY_FILE_MARKER = re.compile(rb"^<!-- ekit antigravity managed v1 sha256:([0-9a-f]{64}) -->\n")
 ANTIGRAVITY_RULE_BYTES = 24_000
+WORKFLOW_PATHS_FILE = Path("config/paths.json")
+README_PATHS_START = "<!-- ekit workflow-paths:start -->"
+README_PATHS_END = "<!-- ekit workflow-paths:end -->"
 
 
 class CheckError(ValueError):
@@ -329,6 +333,180 @@ def _metadata_errors(root: Path, item: dict[str, Any], tools: dict[str, Any]) ->
     return errors, skill_deps
 
 
+BACKTICK_TOKEN_RE = re.compile(r"`([^`\s]+)`")
+
+
+def _nonempty_single_line(value: Any) -> bool:
+    return isinstance(value, str) and bool(value.strip()) and "\n" not in value and "\r" not in value
+
+
+def _validate_active_skill_ref(
+    skill_id: Any,
+    label: str,
+    by_id: dict[str, dict[str, Any]],
+) -> str | None:
+    if not isinstance(skill_id, str) or not SKILL_ID_RE.fullmatch(skill_id):
+        return f"{label} skill must be a valid skill id"
+    if skill_id not in by_id:
+        return f"{label} references unknown skill {skill_id}"
+    if by_id[skill_id]["lifecycle"] != "skills":
+        return f"{label} references inactive skill {skill_id} ({by_id[skill_id]['lifecycle']})"
+    return None
+
+
+def load_workflow_paths(
+    root: Path = ROOT,
+    by_id: dict[str, dict[str, Any]] | None = None,
+) -> tuple[list[dict[str, Any]], list[str]]:
+    paths_path = root / WORKFLOW_PATHS_FILE
+    try:
+        raw = read_json(paths_path)
+    except CheckError as exc:
+        return [], [str(exc)]
+    if not isinstance(raw, dict):
+        return [], [f"{paths_path}: must contain an object"]
+    errors: list[str] = []
+    extra_top = sorted(set(raw) - {"schema", "paths"})
+    if extra_top:
+        errors.append(f"{paths_path}: unexpected keys {', '.join(extra_top)}")
+    if raw.get("schema") != 1:
+        errors.append(f"{paths_path}: schema must be 1")
+    entries = raw.get("paths")
+    if not isinstance(entries, list):
+        errors.append(f"{paths_path}: paths must be a list")
+        return [], errors
+    if by_id is None:
+        by_id = {item["id"]: item for item in discover(root)}
+    seen_situations: set[str] = set()
+    validated: list[dict[str, Any]] = []
+    for index, entry in enumerate(entries):
+        label = f"{paths_path}: path {index + 1}"
+        if not isinstance(entry, dict):
+            errors.append(f"{label} must be an object")
+            continue
+        extra_entry = sorted(set(entry) - {"situation", "steps", "notes"})
+        if extra_entry:
+            errors.append(f"{label} unexpected keys {', '.join(extra_entry)}")
+        situation = entry.get("situation")
+        if not _nonempty_single_line(situation):
+            errors.append(f"{label} situation must be a non-empty single-line string")
+        else:
+            key = situation.strip().casefold()
+            if key in seen_situations:
+                errors.append(f"{label} duplicate situation {situation!r}")
+            seen_situations.add(key)
+        if "notes" in entry:
+            if not _nonempty_single_line(entry["notes"]):
+                errors.append(f"{label} notes must be a non-empty single-line string")
+            else:
+                for token in BACKTICK_TOKEN_RE.findall(entry["notes"]):
+                    if SKILL_ID_RE.fullmatch(token):
+                        ref_error = _validate_active_skill_ref(token, f"{label} notes", by_id)
+                        if ref_error:
+                            errors.append(ref_error)
+        steps = entry.get("steps")
+        if not isinstance(steps, list) or not steps:
+            errors.append(f"{label} steps must be a non-empty list")
+            continue
+        for step_index, step in enumerate(steps):
+            step_label = f"{label} step {step_index + 1}"
+            if not isinstance(step, dict):
+                errors.append(f"{step_label} must be an object")
+                continue
+            has_skill = "skill" in step
+            has_text = "text" in step
+            if has_skill == has_text:
+                errors.append(f"{step_label} must define either skill or text")
+                continue
+            if has_skill:
+                extra_step = sorted(set(step) - {"skill", "before", "label", "after"})
+                if extra_step:
+                    errors.append(f"{step_label} unexpected keys {', '.join(extra_step)}")
+                ref_error = _validate_active_skill_ref(step["skill"], step_label, by_id)
+                if ref_error:
+                    errors.append(ref_error)
+                for field in ("before", "label", "after"):
+                    if field in step and not _nonempty_single_line(step[field]):
+                        errors.append(f"{step_label} {field} must be a non-empty single-line string")
+            else:
+                extra_step = sorted(set(step) - {"text"})
+                if extra_step:
+                    errors.append(f"{step_label} unexpected keys {', '.join(extra_step)}")
+                if not _nonempty_single_line(step["text"]):
+                    errors.append(f"{step_label} text must be a non-empty single-line string")
+        validated.append(entry)
+    return ([] if errors else validated), errors
+
+
+def render_workflow_step(step: dict[str, Any]) -> str:
+    if "skill" in step:
+        display = step.get("label") or f"`{step['skill']}`"
+        parts = [part for part in (step.get("before"), display, step.get("after")) if part]
+        return " ".join(parts)
+    return step["text"]
+
+
+def render_workflow_path(entry: dict[str, Any]) -> str:
+    rendered = " → ".join(render_workflow_step(step) for step in entry["steps"])
+    notes = entry.get("notes")
+    if notes:
+        separator = "" if notes.startswith((",", ";")) else "; "
+        return f"{rendered}{separator}{notes}"
+    return rendered
+
+
+def render_readme_workflow_table(paths: Sequence[dict[str, Any]]) -> str:
+    lines = ["| Situation | Usual path |", "|---|---|"]
+    for entry in paths:
+        situation = entry["situation"].replace("|", "\\|")
+        usual_path = render_workflow_path(entry).replace("|", "\\|")
+        lines.append(f"| {situation} | {usual_path} |")
+    return "\n".join(lines)
+
+
+def _readme_paths_span(text: str, readme_path: Path) -> tuple[int, int]:
+    starts = list(re.finditer(rf"^{re.escape(README_PATHS_START)}$", text, re.MULTILINE))
+    ends = list(re.finditer(rf"^{re.escape(README_PATHS_END)}$", text, re.MULTILINE))
+    if len(starts) != 1 or len(ends) != 1 or starts[0].end() >= ends[0].start():
+        raise CheckError(
+            f"{readme_path}: expected exactly one {README_PATHS_START} ... {README_PATHS_END} generated section"
+        )
+    return starts[0].start(), ends[0].end()
+
+
+def render_readme_with_workflow_table(
+    root: Path,
+    paths: Sequence[dict[str, Any]],
+) -> tuple[str, str]:
+    readme_path = root / "README.md"
+    try:
+        current = readme_path.read_text(encoding="utf-8")
+    except OSError as exc:
+        raise CheckError(f"{readme_path}: {exc}") from exc
+    start, end = _readme_paths_span(current, readme_path)
+    block = f"{README_PATHS_START}\n{render_readme_workflow_table(paths)}\n{README_PATHS_END}"
+    desired = current[:start] + block + current[end:]
+    return current, desired
+
+
+def catalog_plan(root: Path = ROOT) -> dict[Path, tuple[str, str]]:
+    paths, errors = load_workflow_paths(root)
+    if errors:
+        raise CheckError("\n".join(errors))
+    readme_path = root / "README.md"
+    return {readme_path: render_readme_with_workflow_table(root, paths)}
+
+
+def catalog_apply(root: Path = ROOT) -> list[Path]:
+    plan = catalog_plan(root)
+    updated: list[Path] = []
+    for path, (current, desired) in plan.items():
+        if current != desired:
+            path.write_text(desired, encoding="utf-8", newline="\n")
+            updated.append(path)
+    return updated
+
+
 def check_repo(root: Path = ROOT) -> list[str]:
     errors: list[str] = []
     tools_path = root / "config" / "tools.json"
@@ -421,6 +599,18 @@ def check_repo(root: Path = ROOT) -> list[str]:
         visiting.remove(node); visited.add(node)
     for skill_id in sorted(active_ids):
         visit(skill_id, [])
+    paths, path_errors = load_workflow_paths(root, by_id)
+    errors.extend(path_errors)
+    if not path_errors:
+        try:
+            current_readme, desired_readme = render_readme_with_workflow_table(root, paths)
+        except CheckError as exc:
+            errors.append(str(exc))
+        else:
+            if current_readme != desired_readme:
+                errors.append(
+                    f"{root / 'README.md'}: generated workflow table is stale; run `python3 scripts/skills.py catalog --apply`"
+                )
     return sorted(set(errors))
 
 
@@ -2194,6 +2384,35 @@ def command_check(args: argparse.Namespace) -> int:
     print(f"Check passed: {len(discover(ROOT))} owned bundle(s)."); return 0
 
 
+def command_catalog(args: argparse.Namespace) -> int:
+    try:
+        if args.apply:
+            updated = catalog_apply(ROOT)
+            if not updated:
+                print("Already current; no files changed.")
+            else:
+                for path in updated:
+                    print(f"Updated: {path.relative_to(ROOT).as_posix()}")
+            return 0
+        plan = catalog_plan(ROOT)
+        for path, (current, desired) in plan.items():
+            relative = path.relative_to(ROOT).as_posix()
+            changed = current != desired
+            print(f"{relative}: {'change' if changed else 'unchanged'}")
+            if changed:
+                diff = difflib.unified_diff(
+                    current.splitlines(keepends=True),
+                    desired.splitlines(keepends=True),
+                    fromfile=f"a/{relative}",
+                    tofile=f"b/{relative}",
+                )
+                sys.stdout.writelines(diff)
+    except (CheckError, OSError) as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
+    return 0
+
+
 def command_sync(args: argparse.Namespace) -> int:
     try:
         config = runtime_config(ROOT)
@@ -2632,6 +2851,9 @@ def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(description=__doc__)
     commands = result.add_subparsers(dest="command", required=True)
     check = commands.add_parser("check"); check.add_argument("--list", action="store_true"); check.set_defaults(func=command_check)
+    catalog_command = commands.add_parser("catalog", help="preview or write the generated README workflow table")
+    catalog_command.add_argument("--apply", action="store_true", help="write generated changes to the repository")
+    catalog_command.set_defaults(func=command_catalog)
     sync = commands.add_parser("sync"); sync.add_argument("--apply", action="store_true"); sync.add_argument("--adopt-unmanaged", action="store_true", help="back up and replace an existing unmarked runtime during the one-time cutover"); sync.add_argument("--target"); sync.add_argument("--global-target"); sync.add_argument("--backup-root"); sync.set_defaults(func=command_sync)
     claude_sync = commands.add_parser("claude-sync", help="preview or apply the Claude Code skills and instruction projection")
     claude_sync.add_argument("--apply", action="store_true")
