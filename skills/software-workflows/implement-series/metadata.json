@@ -6,6 +6,7 @@
     "explicit"
   ],
   "role": "either",
+  "authority_stop": "Authorizes per-ticket task branches, PRs, necessary review replies, CI reruns, auto-merge/queue management, guarded merges, and completion tracker updates for the approved graph (Full Stop leaves PRs unmerged); unrelated tracker changes, deployment, production operations, valuable-data deletion, paid actions, and unrelated services require separate authority.",
   "sources": [],
   "dependencies": {
     "skills": [

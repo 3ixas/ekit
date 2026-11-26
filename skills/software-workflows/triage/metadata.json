@@ -6,6 +6,7 @@
     "automatic"
   ],
   "role": "lead",
+  "authority_stop": "Recommends category and state transitions and waits for maintainer direction (or confirms quick overrides) before changing tracker labels, posting disclaimer-prefixed comments, or closing `wontfix` issues.",
   "sources": [
     {
       "repository": "https://github.com/mattpocock/skills",

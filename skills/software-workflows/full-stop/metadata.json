@@ -6,6 +6,7 @@
     "explicit"
   ],
   "role": "either",
+  "authority_stop": "Authorizes task-branch commits, pushes, PR creation/updates, necessary review replies, CI reruns, and disabling auto-merge or merge-queue entry to leave the PR ready for human merge; never merges, deploys, runs production operations, deletes valuable data, or takes paid or unrelated actions.",
   "sources": [
     {
       "repository": "https://github.com/t3dotgg/tstack",

@@ -6,6 +6,7 @@
     "explicit"
   ],
   "role": "either",
+  "authority_stop": "A direct instruction to create, update, complete, or reschedule authorizes that narrow FlowSavvy write (after resolving recurring-series scope); review or planning alone does not authorize mutation.",
   "sources": [
     {
       "repository": "https://www.youtube.com/watch?v=5Bmp9cz1JN8",

@@ -6,6 +6,7 @@
     "automatic"
   ],
   "role": "lead",
+  "authority_stop": "Synthesizes the spec, confirms test seams, and publishes it to the configured issue tracker with the `ready-for-agent` label; keeps a local draft when external mutation is not authorized or tracker details are unavailable.",
   "sources": [
     {
       "repository": "https://github.com/mattpocock/skills",

@@ -6,6 +6,7 @@
     "automatic"
   ],
   "role": "either",
+  "authority_stop": "Confirms what will be sent or changed before external writes to design services (such as Stitch or Claude Design) unless already authorized, and never authorizes external writes, paid actions, or private-data disclosure on its own (consequential visual decisions also require approval before implementation).",
   "sources": [
     {
       "repository": "https://github.com/Nutlope/hallmark",

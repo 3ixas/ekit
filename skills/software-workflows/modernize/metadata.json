@@ -6,6 +6,7 @@
     "explicit"
   ],
   "role": "either",
+  "authority_stop": "Assessment is read-only; a deliberate modernize/rebase request authorizes updating that task branch only (stopping if auto-merge or a merge queue is armed unless disabling them or Full Stop/Full Send is authorized), never merging, closing, changing the PR base, or rewriting product scope.",
   "sources": [
     {
       "repository": "https://github.com/t3dotgg/tstack",

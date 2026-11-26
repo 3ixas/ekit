@@ -6,6 +6,7 @@
     "automatic"
   ],
   "role": "either",
+  "authority_stop": "Evaluates PR comments and implements accepted local fixes; posts replies and resolves review threads only within existing task authority, keeping drafts otherwise.",
   "sources": [
     {
       "repository": "https://github.com/EveryInc/compound-engineering-plugin",

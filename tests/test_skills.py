@@ -65,6 +65,7 @@ def add_skill(
     origin: str = "original",
     sources: list[dict[str, str]] | None = None,
     role: str = "either",
+    authority_stop: object | None = None,
 ) -> Path:
     bundle = root / lifecycle / group / skill_id
     bundle.mkdir(parents=True)
@@ -76,7 +77,7 @@ def add_skill(
     if "explicit" in invocation:
         (bundle / "agents").mkdir()
         (bundle / "agents" / "openai.yaml").write_text("policy:\n  allow_implicit_invocation: true\n", encoding="utf-8")
-    write_json(bundle / "metadata.json", {
+    metadata: dict[str, object] = {
         "id": skill_id,
         "group": group,
         "origin": origin,
@@ -85,7 +86,10 @@ def add_skill(
         "sources": sources or [],
         "dependencies": {"skills": dependencies or [], "tools": []},
         "reviewed": "2026-09-14",
-    })
+    }
+    if authority_stop is not None:
+        metadata["authority_stop"] = authority_stop
+    write_json(bundle / "metadata.json", metadata)
     return bundle
 
 
@@ -143,6 +147,42 @@ class RepositoryValidationTests(unittest.TestCase):
             self.assertTrue(any("listed/metadata.json: role must be one of" in error for error in errors))
             self.assertTrue(any("undeclared/metadata.json: role must be one of" in error for error in errors))
             self.assertTrue(any("misdeclared/metadata.json: role must be one of" in error for error in errors))
+
+    def test_authority_stop_is_optional_and_validated(self) -> None:
+        schema = json.loads((REPOSITORY_ROOT / "docs" / "skill-metadata.schema.json").read_text(encoding="utf-8"))
+        self.assertIn("authority_stop", schema["properties"])
+        self.assertNotIn("authority_stop", schema["required"])
+        self.assertEqual(schema["properties"]["authority_stop"]["type"], "string")
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); make_repo(root)
+            add_skill(root, "local-only")
+            add_skill(root, "side-effecting", authority_stop="Stops before publishing.")
+            self.assertEqual(skills.check_repo(root), [])
+
+            invalid_cases = {
+                "empty-stop": "",
+                "blank-stop": "   \t ",
+                "multiline-stop": "First line.\nSecond line.",
+                "cr-stop": "First line.\rSecond line.",
+                "list-stop": ["Stops before merging."],
+                "int-stop": 42,
+                "bool-stop": True,
+            }
+            for skill_id, value in invalid_cases.items():
+                add_skill(root, skill_id, authority_stop=value)
+            null_bundle = add_skill(root, "null-stop")
+            null_meta = skills.read_json(null_bundle / "metadata.json")
+            null_meta["authority_stop"] = None
+            write_json(null_bundle / "metadata.json", null_meta)
+            add_skill(root, "candidate-bad", lifecycle="candidates", authority_stop="")
+
+            errors = skills.check_repo(root)
+            for skill_id in (*invalid_cases, "null-stop", "candidate-bad"):
+                self.assertTrue(
+                    any(f"{skill_id}/metadata.json: authority_stop must be a non-empty single-line string" in error for error in errors),
+                    f"Missing authority_stop validation error for {skill_id}; errors={errors}",
+                )
 
     def test_generated_routing_lists_role_phases(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

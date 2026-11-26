@@ -6,6 +6,7 @@
     "explicit"
   ],
   "role": "either",
+  "authority_stop": "Monitors PR checks and review, fixing, pushing, and replying only within existing task authority (watch-only stays read-only); standalone babysitting never rebases, force-pushes, merges, enters a merge queue, enables auto-merge, or approves CI runs.",
   "sources": [
     {
       "repository": "https://github.com/EveryInc/compound-engineering-plugin",

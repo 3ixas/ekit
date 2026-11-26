@@ -6,6 +6,7 @@
     "automatic"
   ],
   "role": "lead",
+  "authority_stop": "Publishes approved tickets and blocking or native sub-issue links to the configured tracker only after breakdown approval; never closes or edits a parent issue's fields, and keeps local drafts when external mutation is not authorized.",
   "sources": [
     {
       "repository": "https://github.com/mattpocock/skills",

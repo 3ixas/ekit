@@ -6,6 +6,7 @@
     "explicit"
   ],
   "role": "either",
+  "authority_stop": "Authorizes one ticket's task branch, PR, necessary review replies, CI reruns, guarded merge, and—when handing off to the Engineer in T3 Code—the relay handoff, worktree thread launch, and settling of the Lead thread (Full Stop leaves it for human merge; an explicit local-only endpoint stops before publication); deployment, production operations, paid actions, and unrelated work require separate authority.",
   "sources": [],
   "dependencies": {
     "skills": [

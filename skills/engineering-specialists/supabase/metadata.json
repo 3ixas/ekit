@@ -6,6 +6,7 @@
     "supporting"
   ],
   "role": "either",
+  "authority_stop": "Confirms project and local/remote target, previews mutations, and distinguishes direct database credential authority; never infers a production target from local configuration.",
   "sources": [
     {
       "repository": "https://github.com/supabase/agent-skills",

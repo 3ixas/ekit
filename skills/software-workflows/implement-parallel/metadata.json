@@ -6,6 +6,7 @@
     "explicit"
   ],
   "role": "lead",
+  "authority_stop": "Authorizes in-scope task branches, separate PRs, necessary review replies, CI reruns, auto-merge/queue management, completion tracker updates, and guarded merges for the approved graph (Full Stop leaves PRs for human merge); deployment, production operations, paid actions, valuable-data deletion, and unrelated work require separate authority.",
   "sources": [
     {
       "repository": "https://github.com/mattpocock/skills",
