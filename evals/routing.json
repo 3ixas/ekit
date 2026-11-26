@@ -521,5 +521,105 @@
       "implement"
     ],
     "authority_stop": "Reproduce and diagnose through debug, refine expected behaviour, share one experiment/review budget, require all acceptance and regression proof; partial progress is incomplete."
+  },
+  {
+    "request": "Use Full Send to carry this approved CSV export change through proof, PR creation, CI and review fixes, and guarded merge",
+    "owner": "full-send",
+    "supports": [
+      "implement",
+      "babysit-pr",
+      "verify"
+    ],
+    "explicit": true,
+    "authority_stop": "Authorizes task-branch work, PR creation and updates, necessary review replies, CI reruns, auto-merge or queue management, and guarded merge after all gates pass; deployment, production operations, valuable-data deletion, paid actions, and unrelated services require separate authority."
+  },
+  {
+    "request": "Use Full Stop on this approved billing fix: prove, review, open the PR, handle CI and feedback, and leave it ready for me to merge",
+    "owner": "full-stop",
+    "supports": [
+      "implement",
+      "babysit-pr",
+      "verify"
+    ],
+    "explicit": true,
+    "authority_stop": "Authorizes task-branch commits, pushes, PR creation and updates, necessary review replies, CI reruns, and disabling auto-merge or merge-queue entry to leave the PR ready for human merge; never merges, deploys, runs production operations, deletes valuable data, or takes paid or unrelated actions."
+  },
+  {
+    "request": "Babysit PR #118 through checks and review comments until it looks ready",
+    "owner": "babysit-pr",
+    "supports": [
+      "pr-feedback",
+      "verify"
+    ],
+    "explicit": true,
+    "authority_stop": "Monitors PR checks and review, fixing, pushing, and replying only within existing task authority (watch-only stays read-only); standalone babysitting never rebases, force-pushes, merges, enters a merge queue, enables auto-merge, or approves CI runs."
+  },
+  {
+    "request": "Modernize and rebase aging PR #74 against main if its intent still belongs",
+    "owner": "modernize",
+    "supports": [
+      "verify",
+      "code-review"
+    ],
+    "explicit": true,
+    "authority_stop": "Assessment is read-only; a deliberate modernize or rebase request authorizes updating that task branch only (stopping if auto-merge or a merge queue is armed unless disabling them or Full Stop/Full Send is authorized), never merging, closing, changing the PR base, or rewriting product scope."
+  },
+  {
+    "request": "Run a Security Audit across this repository with coverage records, isolated hunters, and verified findings",
+    "owner": "security-audit",
+    "supports": [
+      "security"
+    ],
+    "explicit": true,
+    "authority_stop": "Audit target source read-only and write reports only within the authorized output directory; do not change target source, probe live services, install dependencies, spend API quota, publish, or transmit private code."
+  },
+  {
+    "request": "Dogfood the running checkout app as a first-time buyer and report every experience or coherence snag you hit",
+    "owner": "dogfood",
+    "supports": [
+      "verify"
+    ],
+    "explicit": true,
+    "authority_stop": "Exercise safe running journeys and return a journey-based report with reproduction steps; apply only authorized bounded fixes and do not substitute for acceptance verification or redesign."
+  },
+  {
+    "request": "Plan my week by reconciling my Todoist tasks with my calendar commitments and current focus",
+    "owner": "planning",
+    "supports": [
+      "obsidian",
+      "grilling"
+    ],
+    "explicit": true,
+    "authority_stop": "Authorizes reads and planning discussion; Elias's decisions authorize the specific Todoist task and note changes, while deletion, completion, integrations, and messages require their own authority."
+  },
+  {
+    "request": "Run Email Assistant to triage my personal Gmail inbox and prepare today's briefing with reply and cleanup proposals",
+    "owner": "email-assistant",
+    "supports": [],
+    "explicit": true,
+    "authority_stop": "Invocation authorizes Gmail reads, analysis, and chat proposals only, not Gmail mutations; sending requires approval of exact recipients and final content (saving a draft is separate from sending), and deletes, unsubscribes, filters, settings, or task or calendar writes require a separate explicit request."
+  },
+  {
+    "request": "Use Todoist Project to turn my home-office move checklist into a Todoist child project",
+    "owner": "todoist-project",
+    "supports": [],
+    "explicit": true,
+    "authority_stop": "Shows the complete proposal and requires approval before creating the Todoist child project and tasks; keeps any source task intact until verified and follows the approved source-task action, never silently deleting tasks, completing recurring series, or altering fixed commitments."
+  },
+  {
+    "request": "Turn my FlowSavvy task for launching the Q3 onboarding guide into a FlowSavvy project list with child tasks and dependencies",
+    "owner": "flowsavvy-project",
+    "supports": [
+      "flowsavvy"
+    ],
+    "explicit": true,
+    "authority_stop": "Requires explicit approval of the complete proposal before mutating FlowSavvy (planning or review alone never authorizes writes); never alters a recurring series or deletes a fixed-time source without explicit opt-in, and requires final confirmation before deleting a completed project list."
+  },
+  {
+    "request": "Draft a FlowSavvy feature request for grouping recurring chores into a daily batch",
+    "owner": "flowsavvy-feature-request",
+    "supports": [],
+    "explicit": true,
+    "authority_stop": "Return the three paste-ready fields grounded only in supplied facts without inventing frequency, urgency, or a workaround, and without submitting or changing FlowSavvy tasks."
   }
 ]
