@@ -1317,6 +1317,10 @@ class RoutingFixtureTests(unittest.TestCase):
         scenarios = json.loads((REPOSITORY_ROOT / "evals" / "routing.json").read_text())
         bundles = skills.discover(REPOSITORY_ROOT)
         by_id = {item["id"]: item for item in bundles}
+        metadata_by_id = {
+            item["id"]: skills.read_json(item["path"] / "metadata.json")
+            for item in bundles
+        }
         self.assertGreaterEqual(len(scenarios), 10)
         for scenario in scenarios:
             with self.subTest(request=scenario["request"]):
@@ -1327,11 +1331,27 @@ class RoutingFixtureTests(unittest.TestCase):
                 for support in scenario.get("supports", []):
                     self.assertIn(support, by_id)
                     self.assertEqual(by_id[support]["lifecycle"], "skills")
-                metadata = skills.read_json(by_id[scenario["owner"]]["path"] / "metadata.json")
+                metadata = metadata_by_id[scenario["owner"]]
+                if "explicit" in scenario:
+                    self.assertIsInstance(scenario["explicit"], bool)
                 if scenario.get("explicit"):
                     self.assertIn("explicit", metadata["invocation"])
                 if scenario.get("next"):
                     self.assertIn(scenario["next"], by_id)
+        covered_explicit = {
+            scenario["owner"]
+            for scenario in scenarios
+            if scenario.get("explicit")
+        }
+        explicit_primaries = sorted(
+            item["id"]
+            for item in bundles
+            if item["lifecycle"] == "skills"
+            and "explicit" in metadata_by_id[item["id"]]["invocation"]
+            and "supporting" not in metadata_by_id[item["id"]]["invocation"]
+        )
+        missing = [skill_id for skill_id in explicit_primaries if skill_id not in covered_explicit]
+        self.assertEqual(missing, [], f"Missing explicit routing cases for active explicit primary skills: {missing}")
 
 
 class SourceUpdateTests(unittest.TestCase):
