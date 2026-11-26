@@ -1590,6 +1590,7 @@ class SkillCatalogueTests(unittest.TestCase):
                 group="software-workflows",
                 invocation=["explicit"],
                 authority_stop="Stops before merging or deploying.",
+                dependencies=["alpha"],
             )
             add_skill(root, "later-candidate", lifecycle="candidates")
             add_skill(root, "sleeping-paused", lifecycle="paused")
@@ -1610,8 +1611,8 @@ class SkillCatalogueTests(unittest.TestCase):
             self.assertIn("Active skills: 3", text)
             self.assertIn("### software-workflows", text)
             self.assertIn("### agent-system", text)
-            self.assertIn("| `alpha` | automatic | lead | 2026-09-10 | 2026-09-14 | Exercise alpha when its exact workflow applies. | No external side effects |", text)
-            self.assertIn("| `beta` | explicit | either | 2026-09-10 | 2026-09-14 | Exercise beta when its exact workflow applies. | Stops before merging or deploying. |", text)
+            self.assertIn("| `alpha` | automatic | lead | 2026-09-10 | 2026-09-14 | Exercise alpha when its exact workflow applies. | none | No external side effects |", text)
+            self.assertIn("| `beta` | explicit | either | 2026-09-10 | 2026-09-14 | Exercise beta when its exact workflow applies. | `alpha` | Stops before merging or deploying. |", text)
             self.assertIn("| `which-skill` | explicit | either |", text)
             self.assertIn("| Ship a slice | `alpha` → `beta` |", text)
             self.assertNotIn("later-candidate", text)

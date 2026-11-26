@@ -563,8 +563,8 @@ def render_skill_catalogue(
             "",
             f"### {group}",
             "",
-            "| Skill | Invocation | Role | Added | Reviewed | Purpose | Authority stop |",
-            "|---|---|---|---|---|---|---|",
+            "| Skill | Invocation | Role | Added | Reviewed | Purpose | Brings in | Authority stop |",
+            "|---|---|---|---|---|---|---|---|",
         ])
         for item in items:
             skill_id = item["id"]
@@ -574,9 +574,16 @@ def render_skill_catalogue(
             added = str(metadata.get("added", ""))
             reviewed = str(metadata.get("reviewed", ""))
             purpose = _md_cell(frontmatter_by_id[skill_id].get("description", ""))
+            dependencies = metadata.get("dependencies")
+            dependency_skills = dependencies.get("skills") if isinstance(dependencies, dict) else None
+            brings_in = (
+                ", ".join(f"`{dep}`" for dep in sorted(dependency_skills) if isinstance(dep, str))
+                if isinstance(dependency_skills, list) and dependency_skills
+                else "none"
+            )
             authority_stop = _md_cell(metadata["authority_stop"]) if "authority_stop" in metadata and isinstance(metadata["authority_stop"], str) else "No external side effects"
             lines.append(
-                f"| `{skill_id}` | {_md_cell(invocation)} | {_md_cell(role)} | {_md_cell(added)} | {_md_cell(reviewed)} | {purpose} | {authority_stop} |"
+                f"| `{skill_id}` | {_md_cell(invocation)} | {_md_cell(role)} | {_md_cell(added)} | {_md_cell(reviewed)} | {purpose} | {brings_in} | {authority_stop} |"
             )
     lines.extend([
         "",

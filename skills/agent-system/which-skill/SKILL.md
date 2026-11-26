@@ -29,7 +29,7 @@ Also worth naming: <explicit-only skill and condition>
 Rules for each line (keep labels plain, without bold formatting):
 
 - `Owner`: the exact active skill id from the catalogue, followed by a comma and a concise explanation of why it fits so Elias learns the distinction.
-- `Brings in`: the supporting skills the owner will bring in for this request, or `none`.
+- `Brings in`: the supporting skills the owner will bring in for this request, chosen from the owner's catalogue `Brings in` column plus any specialist the request clearly needs, or `none`.
 - `Say`: a concise natural-language phrase Elias can say to invoke that owner (teaching the trigger wording, especially for explicit-only workflows).
 - `Stops at`: when the catalogue declares an `authority_stop` for the owner, preserve its stated stop boundary accurately; when the catalogue says `No external side effects`, write `works locally`.
 - `Also worth naming`: include this line **only** when an explicit-only workflow genuinely applies to the request, naming the skill and the condition under which to use it. Omit the line completely when no explicit-only skill applies.
