@@ -6,6 +6,7 @@
     "explicit"
   ],
   "role": "lead",
+  "authority_stop": "Planning-only by default unless an effort's Notes explicitly carry execution into the map; creates, claims, comments on, updates, and closes map and decision issues on the configured tracker (keeping local drafts when external mutation is not authorized), without implementing deliverables or opening PRs for research branches.",
   "sources": [
     {
       "repository": "https://github.com/mattpocock/skills",

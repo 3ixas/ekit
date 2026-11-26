@@ -6,6 +6,7 @@
     "explicit"
   ],
   "role": "either",
+  "authority_stop": "Executes only external release actions authorized in the current task; preparation and readiness never grant merge, deploy, publish, tag, or message authority.",
   "sources": [
     {
       "repository": "https://github.com/EveryInc/compound-engineering-plugin",

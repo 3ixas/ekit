@@ -6,6 +6,7 @@
     "automatic"
   ],
   "role": "either",
+  "authority_stop": "Authorizes its task branch, PR, necessary review replies, CI reruns, and guarded merge by default (Full Stop leaves the PR unmerged; a local-only request stops locally); deployment, production operations, paid actions, valuable-data deletion, and unrelated work require separate authority.",
   "sources": [
     {
       "repository": "https://github.com/mattpocock/skills",

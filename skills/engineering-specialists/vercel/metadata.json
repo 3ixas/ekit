@@ -6,6 +6,7 @@
     "supporting"
   ],
   "role": "either",
+  "authority_stop": "Confirms project, environment, and target while preserving secret boundaries; leaves external deployment authority to `release`.",
   "sources": [
     {
       "repository": "https://github.com/vercel-labs/agent-skills",

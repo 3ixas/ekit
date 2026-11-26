@@ -6,6 +6,7 @@
     "automatic"
   ],
   "role": "either",
+  "authority_stop": "A direct instruction to create or update a resolved note authorizes that scoped vault write; previews consequential structural changes first, and leaves task or Calendar mutations to separately authorized provider actions.",
   "sources": [
     {
       "repository": "https://github.com/kepano/obsidian-skills",

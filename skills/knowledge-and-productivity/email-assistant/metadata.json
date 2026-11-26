@@ -6,6 +6,7 @@
     "explicit"
   ],
   "role": "either",
+  "authority_stop": "Invocation authorizes Gmail reads, analysis, and chat proposals only, not Gmail mutations; sending requires approval of exact recipients and final content (saving a draft is separate from sending), and deletes, unsubscribes, filters, settings, or task/calendar writes require a separate explicit request.",
   "sources": [
     {
       "repository": "user-supplied private scheduled email workflow",

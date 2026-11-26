@@ -6,6 +6,7 @@
     "explicit"
   ],
   "role": "either",
+  "authority_stop": "Requires explicit approval of the complete proposal before mutating FlowSavvy (planning or review alone never authorizes writes); never alters a recurring series or deletes a fixed-time source without explicit opt-in, and requires final confirmation before deleting a completed project list.",
   "sources": [
     {
       "repository": "https://www.youtube.com/watch?v=5Bmp9cz1JN8",

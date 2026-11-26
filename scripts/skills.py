@@ -251,6 +251,8 @@ def _metadata_errors(root: Path, item: dict[str, Any], tools: dict[str, Any]) ->
     role = metadata.get("role")
     if not isinstance(role, str) or role not in ROLES:
         errors.append(f"{metadata_path}: role must be one of {', '.join(sorted(ROLES))}")
+    if "authority_stop" in metadata and not _nonempty_single_line(metadata["authority_stop"]):
+        errors.append(f"{metadata_path}: authority_stop must be a non-empty single-line string")
     if "explicit" in invocation_values and item["lifecycle"] == "skills":
         if fm.get("disable-model-invocation") == "true":
             errors.append(f"{bundle}: user-requested skill must remain model-loadable")

@@ -6,6 +6,7 @@
     "explicit"
   ],
   "role": "either",
+  "authority_stop": "Authorizes task-branch work, PR creation/updates, necessary review replies, CI reruns, auto-merge/queue management, and guarded merge after all gates pass; deployment, production operations, valuable-data deletion, paid actions, and unrelated services require separate authority.",
   "sources": [
     {
       "repository": "https://github.com/t3dotgg/tstack",

@@ -6,6 +6,7 @@
     "explicit"
   ],
   "role": "either",
+  "authority_stop": "Shows the complete proposal and requires approval before creating the Todoist child project and tasks; keeps any source task intact until verified and follows the approved source-task action, never silently deleting tasks, completing recurring series, or altering fixed commitments.",
   "sources": [
     {
       "repository": "https://www.youtube.com/watch?v=5Bmp9cz1JN8",
