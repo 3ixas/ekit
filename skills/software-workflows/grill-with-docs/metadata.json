@@ -53,6 +53,7 @@
       "git"
     ]
   },
+  "added": "2026-10-27",
   "reviewed": "2026-11-01",
   "owned_changes": "Independently authored 2026-10-22 adaptation: apply grilling collaborative exploration to software behavior, repository evidence and failure cases within existing rounds; keep project documents focused on decisions and rationale."
 }

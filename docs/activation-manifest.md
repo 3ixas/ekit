@@ -4,7 +4,7 @@
 
 This is the reviewed source-to-runtime contract after the 2026-09-15 fidelity and harness migration. Only the **active** collection is projected into `~/.agents/skills`. Candidate and paused bundles remain source-owned but unavailable to normal routing.
 
-- Active: **92** skills
+- Active: **93** skills
 - Candidates: **1** skill
 - Paused: **2** skills
 
@@ -138,6 +138,7 @@ This is the reviewed source-to-runtime contract after the 2026-09-15 fidelity an
 | `learn` | explicit | original |
 | `teach` | explicit | adapted |
 | `wait-what` | automatic | imported |
+| `which-skill` | explicit | original |
 
 ## Paused
 

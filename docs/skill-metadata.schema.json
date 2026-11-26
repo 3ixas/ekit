@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Owned agent skill metadata",
   "type": "object",
-  "required": ["id", "group", "origin", "invocation", "role", "sources", "dependencies", "reviewed"],
+  "required": ["id", "group", "origin", "invocation", "role", "sources", "dependencies", "added", "reviewed"],
   "additionalProperties": false,
   "properties": {
     "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
@@ -42,6 +42,7 @@
         "tools": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}
       }
     },
+    "added": {"type": "string", "format": "date", "description": "The date the skill was first added to EKit. Set it once when creating the bundle; the Skill catalogue reads it."},
     "reviewed": {"type": "string", "format": "date"}
   }
 }

@@ -1,0 +1,16 @@
+{
+  "id": "which-skill",
+  "group": "agent-system",
+  "origin": "original",
+  "invocation": [
+    "explicit"
+  ],
+  "role": "either",
+  "sources": [],
+  "dependencies": {
+    "skills": [],
+    "tools": []
+  },
+  "added": "2026-11-26",
+  "reviewed": "2026-11-26"
+}

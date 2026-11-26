@@ -45,6 +45,7 @@
     ],
     "tools": []
   },
+  "added": "2026-10-27",
   "reviewed": "2026-11-12",
   "owned_changes": "2026-10-26 writing-for-agents pass: Removed host-specific Skill tool assumption. Removed contradictory claim that review never needs exploration; retained implementation/review responsibility split. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed. 2026-11-12: Integrated Learn Taste as a conditional correction-learning and pruning branch; broadened routing and destinations while preserving all environment categories and recommendation-first authority."
 }

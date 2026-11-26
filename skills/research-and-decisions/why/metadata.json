@@ -25,6 +25,7 @@
       "github"
     ]
   },
+  "added": "2026-10-27",
   "reviewed": "2026-11-22",
   "owned_changes": "2026-10-26 writing-for-agents pass: Corrected absence-of-evidence claim to match the existing epistemics contract. Replaced assumed source-control access with observed availability and explicit gaps. Aligned investigator roster with source availability checks. Kept synthesis template from converting unavailable source control into an assumed search. No upstream snapshot, pinned source identity, licence, lifecycle, or action authority changed. 2026-11-20: Investigators and the synthesizer now run as fresh Engineer children at medium outside an Engineer thread, except investigators whose MCP only the calling host can reach; the calling thread builds the code anchor, checks the main citations before presenting, and investigates directly, with disclosure, when the Engineer is unavailable. Independently authored from Elias's model-roles scope (#59); no upstream source changed. 2026-11-20 (follow-up): Step 5 now also has the calling thread check the key ticket, document and chat citations from MCPs only it can reach. Independently authored; no upstream source changed. 2026-11-22: Tightened Step 5 to a claim-level citation check: open the cited source or lines for each claim the answer or decision rests on and confirm they support it. Independently authored from Elias's model-evidence scope (#74); no upstream source changed."
 }

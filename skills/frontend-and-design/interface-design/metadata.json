@@ -331,6 +331,7 @@
       "stitch"
     ]
   },
+  "added": "2026-10-27",
   "reviewed": "2026-11-19",
   "owned_changes": "Independently authored adaptation: explain consequential design trade-offs, use grilling when exhaustive exploration is warranted or requested, and distinguish taste from usability evidence within proportionate checkpoints.\n\n2026-11-19: Elias asked to open up every fixed three-round rule. Screenshot critique and Taste toolkit rounds have no fixed count; they continue while material problems fall, with review checkpoints for taste, stalls and milestones. Overrides the vendored three-round limit without editing vendored files.\n\n2026-11-19: Show visual work to the user as a live page, not screenshots: T3's html_render with any provider first, then a Claude artifact or a linked HTML file; an artifact in T3 when phone review, element comments or sharing is wanted."
 }

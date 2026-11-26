@@ -26,7 +26,7 @@ EKit has 92 active skills. Agents already select owners from descriptions, so ro
 7. **Ambiguity.** Show at most two branches, each with the fact that decides between them (cause unknown → `debug`; known line → `implement`). Ask only when neither branch is safe to start without the answer.
 8. **No fit.** Say plainly that no skill applies and to ask normally. If the request looks recurring, suggest `skill-review` for a possible new skill. Never stretch the nearest skill.
 9. **Workflow paths become structured data** (e.g. `config/paths.json`) generating both the README "More workflows" table and the catalogue, replacing the hand-maintained table.
-10. **Change dates travel with the catalogue.** It records each skill's added date (from git at generation) and `reviewed` date, so "what changed" works without the repository; answers say they are as fresh as the last sync.
+10. **Change dates travel with the catalogue.** It records each skill's `added` date (tracked in metadata, backfilled from git) and `reviewed` date, so "what changed" works without the repository; answers say they are as fresh as the last sync.
 
 11. **Authority stops come from metadata.** An optional `authority_stop` metadata field, filled for skills with side effects, feeds the catalogue's `Stops at` (agreed during to-spec, 2026-11-26).
 
@@ -48,7 +48,7 @@ EKit has 92 active skills. Agents already select owners from descriptions, so ro
 
 - Assumes the catalogue fits comfortably in context when loaded explicitly; measure its token size during implementation (`capabilities --catalog-warning-tokens` exists for this).
 - The exact `config/paths.json` schema and generator design are implementation decisions.
-- The added date relies on git history being available when the catalogue is generated (always true in the canonical checkout).
+- The added date is tracked in metadata rather than read from git, so a later-day commit or squash merge cannot make the catalogue stale (ADR 0004).
 
 ## Evidence
 

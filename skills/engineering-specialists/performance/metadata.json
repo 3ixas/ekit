@@ -123,6 +123,7 @@
     ],
     "tools": []
   },
+  "added": "2026-10-27",
   "reviewed": "2026-11-19",
   "owned_changes": "2026-11-12: Add conditional measured-improvement guidance and comparative evaluation; preserve ordinary workflow and existing review ownership. No upstream snapshots modified.\n\n2026-11-19: Elias asked to open up every fixed three-round rule. Removed the default three-attempt cap; experiments continue within the agreed allowance, with check-ins on stalls, unresolved measurement or scope decisions."
 }

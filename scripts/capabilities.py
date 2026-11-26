@@ -53,10 +53,40 @@ def _tool_health(
     }
 
 
-def _catalog(root: Path, catalog_config: dict[str, Any], override: int | None) -> dict[str, Any]:
+def _token_threshold_status(
+    estimated_tokens: int,
+    threshold: int | None,
+    subject: str,
+) -> tuple[str, str]:
+    if threshold is None:
+        return (
+            "unverified",
+            "No local warning threshold is set, and no numeric limit was found in the public guidance reviewed.",
+        )
+    if estimated_tokens >= threshold:
+        return (
+            "warning",
+            f"{subject} has reached the configured local warning threshold; this is not a product limit.",
+        )
+    return (
+        "within-local-threshold",
+        f"{subject} is below the configured local warning threshold.",
+    )
+
+
+def _catalog_params(catalog_config: dict[str, Any], override: int | None) -> tuple[int, int | None]:
     divisor = catalog_config.get("chars_per_estimated_token", 4)
     if not isinstance(divisor, int) or isinstance(divisor, bool) or divisor < 1:
         raise skills.CheckError("config/agent-capabilities.json: chars_per_estimated_token must be a positive integer")
+    configured_threshold = catalog_config.get("warning_threshold_tokens")
+    threshold = override if override is not None else configured_threshold
+    if threshold is not None and (not isinstance(threshold, int) or isinstance(threshold, bool) or threshold < 1):
+        raise skills.CheckError("catalog warning threshold must be a positive integer")
+    return divisor, threshold
+
+
+def _catalog(root: Path, catalog_config: dict[str, Any], override: int | None) -> dict[str, Any]:
+    divisor, threshold = _catalog_params(catalog_config, override)
     descriptors: list[str] = []
     for item in skills.discover(root):
         if item["lifecycle"] != "skills":
@@ -65,19 +95,7 @@ def _catalog(root: Path, catalog_config: dict[str, Any], override: int | None) -
         descriptors.append(f"{metadata.get('name', item['id'])} {metadata.get('description', '')}".strip())
     characters = sum(len(descriptor) for descriptor in descriptors)
     estimated_tokens = (characters + divisor - 1) // divisor
-    configured_threshold = catalog_config.get("warning_threshold_tokens")
-    threshold = override if override is not None else configured_threshold
-    if threshold is not None and (not isinstance(threshold, int) or isinstance(threshold, bool) or threshold < 1):
-        raise skills.CheckError("catalog warning threshold must be a positive integer")
-    if threshold is None:
-        status = "unverified"
-        message = "No local warning threshold is set, and no numeric limit was found in the public guidance reviewed."
-    elif estimated_tokens >= threshold:
-        status = "warning"
-        message = "Estimated discovery metadata has reached the configured local warning threshold; this is not a product limit."
-    else:
-        status = "within-local-threshold"
-        message = "Estimated discovery metadata is below the configured local warning threshold."
+    status, message = _token_threshold_status(estimated_tokens, threshold, "Estimated discovery metadata")
     return {
         "skill_count": len(descriptors),
         "description_characters": characters,
@@ -87,6 +105,35 @@ def _catalog(root: Path, catalog_config: dict[str, Any], override: int | None) -
         "status": status,
         "message": message,
         "official_limit_note": catalog_config.get("limit_note", "No numeric host limit is recorded."),
+    }
+
+
+def _skill_catalogue(root: Path, catalog_config: dict[str, Any], override: int | None) -> dict[str, Any]:
+    divisor, threshold = _catalog_params(catalog_config, override)
+    catalogue_path = root / skills.SKILL_CATALOGUE_FILE
+    if not catalogue_path.is_file() or catalogue_path.is_symlink():
+        return {
+            "path": skills.SKILL_CATALOGUE_FILE.as_posix(),
+            "present": False,
+            "characters": 0,
+            "estimated_tokens": 0,
+            "estimate_method": f"ceil(character count / {divisor}); approximate only",
+            "warning_threshold_tokens": threshold,
+            "status": "missing",
+            "message": "Generated Skill catalogue is not present in this repository.",
+        }
+    characters = len(catalogue_path.read_text(encoding="utf-8"))
+    estimated_tokens = (characters + divisor - 1) // divisor
+    status, message = _token_threshold_status(estimated_tokens, threshold, "Estimated Skill catalogue")
+    return {
+        "path": skills.SKILL_CATALOGUE_FILE.as_posix(),
+        "present": True,
+        "characters": characters,
+        "estimated_tokens": estimated_tokens,
+        "estimate_method": f"ceil(character count / {divisor}); approximate only",
+        "warning_threshold_tokens": threshold,
+        "status": status,
+        "message": message,
     }
 
 
@@ -209,6 +256,7 @@ def build_report(
     return {
         "report_schema": 1,
         "catalog": _catalog(root, catalog_config, warning_threshold_tokens),
+        "skill_catalogue": _skill_catalogue(root, catalog_config, warning_threshold_tokens),
         "skill_filter": skill_id,
         "agents": host_reports,
     }
@@ -216,13 +264,26 @@ def build_report(
 
 def render_report(report: dict[str, Any]) -> str:
     catalog = report["catalog"]
+    skill_catalogue = report.get("skill_catalogue")
     lines = [
         "Agent capability report (read-only)",
         f"Codex skill catalog: {catalog['skill_count']} skills; approximately {catalog['estimated_tokens']:,} discovery tokens ({catalog['description_characters']:,} characters).",
         f"Catalog status: {catalog['status']} — {catalog['message']}",
+    ]
+    if isinstance(skill_catalogue, dict):
+        if skill_catalogue.get("present"):
+            lines.append(
+                f"Skill catalogue (which-skill): approximately {skill_catalogue['estimated_tokens']:,} tokens "
+                f"({skill_catalogue['characters']:,} characters); status: {skill_catalogue['status']} — {skill_catalogue['message']}"
+            )
+        else:
+            lines.append(
+                f"Skill catalogue (which-skill): {skill_catalogue['status']} — {skill_catalogue['message']}"
+            )
+    lines.extend([
         "Tool availability is checked on this host; app/session connector visibility and permissions remain unverified by this CLI.",
         "Do not claim a tool, integration, or delegated action succeeded without a returned result; use a documented fallback or report the limitation.",
-    ]
+    ])
     if report.get("skill_filter"):
         lines.append(f"Workflow filter: {report['skill_filter']}")
     for agent in report["agents"]:

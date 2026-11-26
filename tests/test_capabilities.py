@@ -143,6 +143,48 @@ class CapabilityReportTests(unittest.TestCase):
         rendered = capabilities.render_report(report)
         self.assertIn("Skills with unsupported invocation mappings: 1 — demo (supporting)", rendered)
 
+    def test_reports_skill_catalogue_token_estimate_and_threshold(self) -> None:
+        missing = capabilities.build_report(self.root, which=lambda _: None)
+        self.assertFalse(missing["skill_catalogue"]["present"])
+        self.assertEqual(missing["skill_catalogue"]["status"], "missing")
+        self.assertEqual(missing["skill_catalogue"]["estimated_tokens"], 0)
+        self.assertIn("Skill catalogue (which-skill): missing", capabilities.render_report(missing))
+
+        bundle = self.root / skills.WHICH_SKILL_BUNDLE
+        bundle.mkdir(parents=True, exist_ok=True)
+        (bundle / "SKILL.md").write_text(
+            "---\nname: which-skill\ndescription: Recommend which skill owns a request.\n---\n\n# Which Skill\n",
+            encoding="utf-8",
+        )
+        write_json(bundle / "metadata.json", {
+            "id": "which-skill",
+            "group": "agent-system",
+            "origin": "original",
+            "invocation": ["explicit"],
+            "role": "either",
+            "sources": [],
+            "dependencies": {"skills": [], "tools": []},
+            "reviewed": "2026-11-26",
+        })
+        catalogue_path = self.root / skills.SKILL_CATALOGUE_FILE
+        catalogue_path.parent.mkdir(parents=True, exist_ok=True)
+        catalogue_path.write_text("x" * 400, encoding="utf-8")
+
+        no_threshold = capabilities.build_report(self.root, which=lambda _: None)
+        self.assertTrue(no_threshold["skill_catalogue"]["present"])
+        self.assertEqual(no_threshold["skill_catalogue"]["characters"], 400)
+        self.assertEqual(no_threshold["skill_catalogue"]["estimated_tokens"], 100)
+        self.assertEqual(no_threshold["skill_catalogue"]["status"], "unverified")
+        rendered = capabilities.render_report(no_threshold)
+        self.assertIn("Skill catalogue (which-skill): approximately 100 tokens (400 characters)", rendered)
+
+        within = capabilities.build_report(self.root, warning_threshold_tokens=200, which=lambda _: None)
+        self.assertEqual(within["skill_catalogue"]["status"], "within-local-threshold")
+
+        warning = capabilities.build_report(self.root, warning_threshold_tokens=100, which=lambda _: None)
+        self.assertEqual(warning["skill_catalogue"]["status"], "warning")
+        self.assertIn("not a product limit", warning["skill_catalogue"]["message"])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -60,6 +60,7 @@
       "git"
     ]
   },
+  "added": "2026-10-27",
   "reviewed": "2026-11-22",
   "owned_changes": "2026-11-20: Exploration, including Refresh mode's investigation, now runs as one fresh, read-only Engineer child at medium outside an Engineer thread, whose subagents stay on the Engineer model, with the calling thread checking its citations before presenting and investigating directly, with disclosure, when the Engineer is unavailable. Independently authored from Elias's model-roles scope (#59); no upstream source changed. 2026-11-22: Tightened citation verification in Step 4 and Refresh mode to a claim-level check: open the cited lines for each claim the explanation or decision rests on and confirm they support it. Independently authored from Elias's model-evidence scope (#74); no upstream source changed."
 }

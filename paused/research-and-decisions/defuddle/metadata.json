@@ -23,6 +23,7 @@
       "defuddle"
     ]
   },
+  "added": "2026-10-27",
   "reviewed": "2026-10-26",
   "owned_changes": "2026-10-26 writing-for-agents pass: aligned description and entrypoint with supporting-only invocation and the existing group catalogue; removed the host-specific WebFetch name and made extraction completeness observable. The pinned upstream identity, licence, and tool method are unchanged."
 }
