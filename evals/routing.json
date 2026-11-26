@@ -284,9 +284,11 @@
   },
   {
     "request": "Fix a typo in the installation guide",
-    "owner": "writing",
-    "supports": [],
-    "authority_stop": "Make the focused edit and use document checks appropriate to it; do not launch or scaffold an application merely because no verification guide exists."
+    "owner": "implement",
+    "supports": [
+      "verify"
+    ],
+    "authority_stop": "Use document checks appropriate to the edit; do not launch or scaffold an application merely because no verification guide exists."
   },
   {
     "request": "Implement this approved multi-ticket spec in parallel; the app has no verification guide",
