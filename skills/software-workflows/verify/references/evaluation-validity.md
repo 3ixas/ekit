@@ -15,6 +15,15 @@ Exercise the same path that the result will claim. For agent instructions, disti
 - For variable results, estimate no-change variation under comparable conditions. Use paired baseline/candidate runs or repetitions when warranted. If a useful gain is smaller than the variation the available sample can resolve, report inconclusive; propose better measurement or additional budget rather than choosing the lucky result.
 - Pin cases, expected outputs, grader, aggregation, relevant dependencies and environment. A material change to those conditions invalidates the comparison: review the change and establish a new baseline. Never weaken a check to retain a candidate.
 
+## Guard model and CLI quota
+
+Before running a batch model or CLI evaluation (more than ~15 fresh sessions per host):
+
+- **Confirm the budget:** Report the planned session count, target model, and expected subscription/quota impact and confirm with Elias unless that exact sweep is already authorized.
+- **Run a 1–2 case canary first:** Execute 1–2 representative cases and verify workspace isolation (confirming the session loads this checkout's code/skills rather than globally installed copies), grading/output parsing, and auth before scaling out.
+- **Iterate on targeted subsets:** Re-run only failing or affected cases while fixing issues; run a full sweep at most once after fixes settle, and prefer resumable runs that skip already-passed cases on unchanged inputs.
+- **Right-size the model:** Avoid defaulting large subscription-backed sweeps to top-tier models (such as Opus on a 5-hour window). Use a lighter model (e.g. Sonnet or Haiku) for full sweeps and reserve top-tier models for a small stratified sample unless full top-tier coverage was explicitly requested. Fail fast per host when a usage or rate limit trips instead of spawning remaining queued sessions.
+
 ## Preserve the evidence boundary
 
 Keep diagnostic cases separate from final confirmation cases where overfitting is plausible. Do not expose held-out answers or traces to the change proposer. Local files in the same readable workspace are not structurally hidden: report that limitation. Repeatedly consulting a confirmation result to choose changes turns it into tuning evidence; obtain fresh confirmation before making a generalisation claim.

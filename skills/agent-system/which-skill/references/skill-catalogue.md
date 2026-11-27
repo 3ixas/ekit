@@ -1,6 +1,6 @@
 # EKit Skill Catalogue
 
-Generated: 2026-11-26 (the latest added or reviewed date among active skills; as fresh as the last EKit sync).
+Generated: 2026-11-27 (the latest added or reviewed date among active skills; as fresh as the last EKit sync).
 Active skills: 93
 
 ## Active skills
@@ -36,7 +36,7 @@ Active skills: 93
 | `to-spec` | automatic | lead | 2026-10-27 | 2026-10-15 | Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you've already discussed. | `architecture`, `domain-modeling` | Synthesizes the spec, confirms test seams, and publishes it to the configured issue tracker with the `ready-for-agent` label; keeps a local draft when external mutation is not authorized or tracker details are unavailable. |
 | `to-tickets` | automatic | lead | 2026-10-27 | 2026-10-29 | Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured tracker (edges as text in one file per ticket locally, or native blocking links on a real tracker). | `to-spec` | Publishes approved tickets and blocking or native sub-issue links to the configured tracker only after breakdown approval; never closes or edits a parent issue's fields, and keeps local drafts when external mutation is not authorized. |
 | `triage` | automatic | lead | 2026-10-27 | 2026-10-26 | Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs. | none | Recommends category and state transitions and waits for maintainer direction (or confirms quick overrides) before changing tracker labels, posting disclaimer-prefixed comments, or closing `wontfix` issues. |
-| `verify` | automatic, supporting | either | 2026-10-27 | 2026-11-22 | Prove software or artifact behaviour against acceptance criteria; automatically establish missing project verification guidance during implementation and maintain affected journeys. | none | No external side effects |
+| `verify` | automatic, supporting | either | 2026-10-27 | 2026-11-27 | Prove software or artifact behaviour against acceptance criteria; automatically establish missing project verification guidance during implementation and maintain affected journeys. | none | No external side effects |
 | `wayfinder` | explicit | lead | 2026-10-27 | 2026-11-12 | Use when Elias requests Wayfinder or its decision-ticket mapping workflow for a known destination with an uncertain route. Do not select for a routine plan or settled implementation. | `prototype`, `research` | Planning-only by default unless an effort's Notes explicitly carry execution into the map; creates, claims, comments on, updates, and closes map and decision issues on the configured tracker (keeping local drafts when external mutation is not authorized), without implementing deliverables or opening PRs for research branches. |
 
 ### engineering-specialists
