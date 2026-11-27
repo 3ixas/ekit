@@ -15,6 +15,7 @@ Exits 0 with a skip message for each missing CLI, and 1 when any case fails or e
 from __future__ import annotations
 
 import argparse
+import contextlib
 import hashlib
 import json
 import os
@@ -24,6 +25,7 @@ import subprocess
 import sys
 import tempfile
 import threading
+import time
 from concurrent.futures import FIRST_COMPLETED, Future, ThreadPoolExecutor, wait
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -268,7 +270,91 @@ def prepare_workspace(root: Path) -> Path:
     return workspace
 
 
-def ask(host: str, prompt: str, workspace: Path, model: str | None, timeout: int, scratch: Path) -> str:
+class ActiveProcesses:
+    """Track live child CLI processes so an interrupt terminates and reaps them before cleanup."""
+
+    def __init__(self) -> None:
+        self._lock = threading.Lock()
+        self._procs: set[subprocess.Popen[str]] = set()
+        self._closed = False
+
+    def start(
+        self,
+        command: list[str],
+        *,
+        cwd: Path,
+        env: dict[str, str] | None = None,
+    ) -> subprocess.Popen[str]:
+        with self._lock:
+            if self._closed:
+                raise InterruptedError("evaluation interrupted")
+            proc = subprocess.Popen(
+                command,
+                cwd=cwd,
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                env=env,
+            )
+            self._procs.add(proc)
+            return proc
+
+    def finish(self, proc: subprocess.Popen[str]) -> None:
+        with self._lock:
+            self._procs.discard(proc)
+
+    def terminate_all(self, grace_seconds: float = 5.0) -> None:
+        with self._lock:
+            self._closed = True
+            procs = list(self._procs)
+        for proc in procs:
+            if proc.poll() is None:
+                with contextlib.suppress(OSError):
+                    proc.terminate()
+        deadline = time.monotonic() + grace_seconds
+        for proc in procs:
+            remaining = max(0.0, deadline - time.monotonic())
+            try:
+                proc.wait(timeout=remaining)
+            except subprocess.TimeoutExpired:
+                with contextlib.suppress(OSError):
+                    proc.kill()
+                with contextlib.suppress(OSError, subprocess.TimeoutExpired):
+                    proc.wait(timeout=5)
+
+
+def _run_cli(
+    command: list[str],
+    cwd: Path,
+    timeout: float,
+    env: dict[str, str] | None,
+    active_procs: ActiveProcesses | None,
+) -> tuple[int, str, str]:
+    tracker = active_procs or ActiveProcesses()
+    proc = tracker.start(command, cwd=cwd, env=env)
+    try:
+        with proc:
+            try:
+                stdout, stderr = proc.communicate(timeout=timeout)
+            except BaseException:
+                proc.kill()
+                proc.wait()
+                raise
+    finally:
+        tracker.finish(proc)
+    return proc.returncode, stdout, stderr
+
+
+def ask(
+    host: str,
+    prompt: str,
+    workspace: Path,
+    model: str | None,
+    timeout: int,
+    scratch: Path,
+    active_procs: ActiveProcesses | None = None,
+) -> str:
     if host == "claude":
         # The prompt precedes --allowedTools, or Claude reads it as a tool name.
         # Project settings only: an installed personal skill would shadow the workspace copy.
@@ -278,10 +364,8 @@ def ask(host: str, prompt: str, workspace: Path, model: str | None, timeout: int
         ]
         if model:
             command += ["--model", model]
-        result = subprocess.run(
-            command, cwd=workspace, stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=timeout
-        )
-        answer = result.stdout
+        returncode, stdout, stderr = _run_cli(command, workspace, timeout, None, active_procs)
+        answer = stdout
     else:
         last_message = scratch / "last-message.txt"
         command = [
@@ -294,16 +378,14 @@ def ask(host: str, prompt: str, workspace: Path, model: str | None, timeout: int
         home = scratch / "home"
         home.mkdir(exist_ok=True)
         codex_home = os.environ.get("CODEX_HOME") or str(Path.home() / ".codex")
-        result = subprocess.run(
-            [*command, prompt], cwd=workspace, stdin=subprocess.DEVNULL, capture_output=True, text=True,
-            timeout=timeout, env={**os.environ, "HOME": str(home), "CODEX_HOME": codex_home},
-        )
-        answer = last_message.read_text(encoding="utf-8") if last_message.exists() else result.stdout
-    if result.returncode != 0:
-        detail = (result.stderr.strip() or answer.strip())[-400:]
-        if QUOTA_RE.search(result.stderr) or QUOTA_RE.search(answer):
+        env = {**os.environ, "HOME": str(home), "CODEX_HOME": codex_home}
+        returncode, stdout, stderr = _run_cli([*command, prompt], workspace, timeout, env, active_procs)
+        answer = last_message.read_text(encoding="utf-8") if last_message.exists() else stdout
+    if returncode != 0:
+        detail = (stderr.strip() or answer.strip())[-400:]
+        if QUOTA_RE.search(stderr) or QUOTA_RE.search(answer):
             raise QuotaError(f"{host} refused the session: {detail[:200]}")
-        raise RuntimeError(f"{host} exited {result.returncode}: {detail}")
+        raise RuntimeError(f"{host} exited {returncode}: {detail}")
     if QUOTA_RE.search(answer) and not _OWNER_RE.search(answer):
         raise QuotaError(f"{host} refused the session: {answer.strip()[:200]}")
     return answer
@@ -334,6 +416,7 @@ def run_case(
     workspace: Path,
     scratch_root: Path,
     stop_event: threading.Event,
+    active_procs: ActiveProcesses | None = None,
 ) -> Outcome:
     transcript = output / f"{host}-{index:02d}.txt"
     model = args.model.get(host)
@@ -341,7 +424,9 @@ def run_case(
         return _skipped_outcome(host, index, case, output, f"{host} skipped after quota/rate limit", model=model)
     scratch = Path(tempfile.mkdtemp(prefix=f"{host}-{index}-", dir=scratch_root))
     try:
-        answer = ask(host, prompt_for(case["request"]), workspace, model, args.timeout, scratch)
+        answer = ask(host, prompt_for(case["request"]), workspace, model, args.timeout, scratch, active_procs)
+    except InterruptedError:
+        return Outcome(host, index, case["request"], case.get("owner") or NO_FIT, "error", reason="interrupted", model=model)
     except QuotaError as error:
         stop_event.set()
         outcome = Outcome(host, index, case["request"], case.get("owner") or NO_FIT, "error", reason=str(error))
@@ -652,6 +737,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if total_pending > 0:
         stop_events = {host: threading.Event() for host in hosts}
+        active_procs = ActiveProcesses()
         per_host_workers = max(1, args.jobs)
         with tempfile.TemporaryDirectory(prefix="which-skill-eval-") as scratch_root:
             workspace = prepare_workspace(Path(scratch_root))
@@ -669,6 +755,7 @@ def main(argv: list[str] | None = None) -> int:
                     workspace,
                     Path(scratch_root),
                     stop_events[host],
+                    active_procs,
                 )
 
             canary_futures: dict[Future[Outcome], tuple[str, list[tuple[int, dict, str]]]] = {}
@@ -722,10 +809,11 @@ def main(argv: list[str] | None = None) -> int:
                     event.set()
                 for future in in_flight:
                     future.cancel()
+                active_procs.terminate_all()
                 raise
             finally:
                 for pool in pools.values():
-                    pool.shutdown(wait=not interrupted, cancel_futures=interrupted)
+                    pool.shutdown(wait=True, cancel_futures=interrupted)
 
     save_results(results_path, fingerprint, saved_outcomes)
     run_outcomes = [

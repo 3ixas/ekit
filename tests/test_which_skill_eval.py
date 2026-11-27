@@ -122,11 +122,19 @@ class IsolationTests(unittest.TestCase):
                 self.assertTrue((workspace / parent / "implement" / "SKILL.md").exists())
                 self.assertFalse((bundle / "metadata.json").exists())
 
+    @staticmethod
+    def _fake_popen(returncode: int, stdout: str, stderr: str) -> mock.MagicMock:
+        proc = mock.MagicMock(returncode=returncode)
+        proc.__enter__.return_value = proc
+        proc.communicate.return_value = (stdout, stderr)
+        proc.poll.return_value = returncode
+        return proc
+
     def captured_call(self, host: str, scratch: Path) -> mock.Mock:
-        done = mock.Mock(returncode=0, stdout=GOOD, stderr="")
-        with mock.patch.object(evaluation.subprocess, "run", return_value=done) as run:
+        done = self._fake_popen(0, GOOD, "")
+        with mock.patch.object(evaluation.subprocess, "Popen", return_value=done) as popen:
             evaluation.ask(host, "prompt", scratch, None, 5, scratch)
-        return run.call_args
+        return popen.call_args
 
     def test_claude_ignores_installed_personal_skills(self) -> None:
         with tempfile.TemporaryDirectory() as root:
@@ -137,20 +145,20 @@ class IsolationTests(unittest.TestCase):
     def test_quota_error_on_stderr_or_stdout_raises_quota_error(self) -> None:
         with tempfile.TemporaryDirectory() as root:
             scratch = Path(root)
-            stderr_limit = mock.Mock(returncode=1, stdout="", stderr="You’ve hit your usage limit.")
-            with mock.patch.object(evaluation.subprocess, "run", return_value=stderr_limit):
+            stderr_limit = self._fake_popen(1, "", "You’ve hit your usage limit.")
+            with mock.patch.object(evaluation.subprocess, "Popen", return_value=stderr_limit):
                 with self.assertRaises(evaluation.QuotaError):
                     evaluation.ask("codex", "prompt", scratch, None, 5, scratch)
-            stdout_limit = mock.Mock(returncode=0, stdout="You've hit your 5-hour limit", stderr="")
-            with mock.patch.object(evaluation.subprocess, "run", return_value=stdout_limit):
+            stdout_limit = self._fake_popen(0, "You've hit your 5-hour limit", "")
+            with mock.patch.object(evaluation.subprocess, "Popen", return_value=stdout_limit):
                 with self.assertRaises(evaluation.QuotaError):
                     evaluation.ask("claude", "prompt", scratch, None, 5, scratch)
 
     def test_nonzero_exit_with_stdout_raises_runtime_error(self) -> None:
         with tempfile.TemporaryDirectory() as root:
             scratch = Path(root)
-            crashed = mock.Mock(returncode=1, stdout="Authentication failed", stderr="")
-            with mock.patch.object(evaluation.subprocess, "run", return_value=crashed):
+            crashed = self._fake_popen(1, "Authentication failed", "")
+            with mock.patch.object(evaluation.subprocess, "Popen", return_value=crashed):
                 with self.assertRaises(RuntimeError) as context:
                     evaluation.ask("claude", "prompt", scratch, None, 5, scratch)
             self.assertNotIsInstance(context.exception, evaluation.QuotaError)
@@ -636,62 +644,94 @@ class CanaryTests(unittest.TestCase):
         self.assertEqual(code, 0, err)
         self.assertNotIn("Running canary case", out)
 
-    def test_interrupt_preserves_completed_outcomes_and_cancels_remaining(self) -> None:
+    def test_run_cli_kills_and_reaps_on_timeout(self) -> None:
+        tracker = evaluation.ActiveProcesses()
+        started: list[evaluation.subprocess.Popen[str]] = []
+        real_start = tracker.start
+
+        def tracked_start(*args, **kwargs):
+            proc = real_start(*args, **kwargs)
+            started.append(proc)
+            return proc
+
+        tracker.start = tracked_start  # type: ignore[method-assign]
+        with tempfile.TemporaryDirectory() as root:
+            with self.assertRaises(evaluation.subprocess.TimeoutExpired):
+                evaluation._run_cli([sys.executable, "-c", "import time; time.sleep(60)"], Path(root), 0.05, None, tracker)
+        self.assertEqual(len(started), 1)
+        self.assertIsNotNone(started[0].poll())
+        self.assertEqual(tracker._procs, set())
+
+    def test_interrupt_terminates_active_subprocess_before_workspace_cleanup(self) -> None:
         cases, _declared = evaluation.load_cases(self.SIX_CASES)
         by_request = {case["request"]: (index, case, stop) for index, case, stop in cases}
         first_index = cases[0][0]
         calls: list[int] = []
         second_started = threading.Event()
-        release_second = threading.Event()
-        second_done = threading.Event()
+        spawned: list[evaluation.subprocess.Popen[str]] = []
+        workspace_existed_after_signal: list[bool] = []
+        scratch_existed_after_signal: list[bool] = []
         real_wait = evaluation.wait
-        real_run_case = evaluation.run_case
         wait_count = 0
 
-        def fake_ask(_host: str, prompt: str, *_args) -> str:
+        def fake_ask(_host: str, prompt: str, workspace: Path, _model, timeout: int, scratch: Path, active_procs) -> str:
             request = prompt.split("Request: ", 1)[1]
             index, case, stop = by_request[request]
             calls.append(index)
-            if index != first_index:
-                second_started.set()
-                release_second.wait(timeout=5)
-            return _passing_answer(case, stop)
+            if index == first_index:
+                return _passing_answer(case, stop)
+            real_start = active_procs.start
 
-        def tracked_run_case(*args, **kwargs):
+            def tracked_start(*args, **kwargs):
+                proc = real_start(*args, **kwargs)
+                spawned.append(proc)
+                second_started.set()
+                return proc
+
+            active_procs.start = tracked_start
             try:
-                return real_run_case(*args, **kwargs)
+                evaluation._run_cli(
+                    [sys.executable, "-c", "import time; time.sleep(60)"], workspace, timeout, None, active_procs
+                )
             finally:
-                if second_started.is_set():
-                    second_done.set()
+                workspace_existed_after_signal.append(workspace.exists())
+                scratch_existed_after_signal.append(scratch.exists())
+            raise RuntimeError("terminated")
 
         def interrupting_wait(fs, **kwargs):
             nonlocal wait_count
             wait_count += 1
             if wait_count == 1:
                 return real_wait(fs, **kwargs)
-            second_started.wait(timeout=5)
+            self.assertTrue(second_started.wait(timeout=5))
             raise KeyboardInterrupt()
+
+        def fake_prepare_workspace(root: Path) -> Path:
+            workspace = root / "workspace"
+            workspace.mkdir()
+            return workspace
 
         with tempfile.TemporaryDirectory() as root:
             out_dir = Path(root) / "out"
-            try:
-                with (
-                    mock.patch.object(evaluation.shutil, "which", side_effect=lambda h: f"/usr/bin/{h}" if h == "claude" else None),
-                    mock.patch.object(evaluation, "prepare_workspace", return_value=Path(root)),
-                    mock.patch.object(evaluation, "ask", side_effect=fake_ask),
-                    mock.patch.object(evaluation, "run_case", side_effect=tracked_run_case),
-                    mock.patch.object(evaluation, "wait", side_effect=interrupting_wait),
-                ):
-                    with self.assertRaises(KeyboardInterrupt):
-                        _run_main(["--host", "claude", "--jobs", "1", "--only", *self.SIX_CASES, "--output-dir", str(out_dir)])
-                saved = json.loads((out_dir / "results.json").read_text(encoding="utf-8"))
-                self.assertEqual([item["index"] for item in saved["outcomes"]], [first_index])
-                self.assertEqual(saved["outcomes"][0]["status"], "pass")
-                self.assertEqual(len(calls), 2)
-            finally:
-                release_second.set()
-                if second_started.is_set():
-                    second_done.wait(timeout=5)
+            started_at = time.monotonic()
+            with (
+                mock.patch.object(evaluation.shutil, "which", side_effect=lambda h: f"/usr/bin/{h}" if h == "claude" else None),
+                mock.patch.object(evaluation, "prepare_workspace", side_effect=fake_prepare_workspace),
+                mock.patch.object(evaluation, "ask", side_effect=fake_ask),
+                mock.patch.object(evaluation, "wait", side_effect=interrupting_wait),
+            ):
+                with self.assertRaises(KeyboardInterrupt):
+                    _run_main(["--host", "claude", "--jobs", "1", "--only", *self.SIX_CASES, "--output-dir", str(out_dir)])
+            elapsed = time.monotonic() - started_at
+            saved = json.loads((out_dir / "results.json").read_text(encoding="utf-8"))
+            self.assertEqual([item["index"] for item in saved["outcomes"]], [first_index])
+            self.assertEqual(saved["outcomes"][0]["status"], "pass")
+            self.assertEqual(len(calls), 2)
+            self.assertEqual(len(spawned), 1)
+            self.assertIsNotNone(spawned[0].poll())
+            self.assertEqual(workspace_existed_after_signal, [True])
+            self.assertEqual(scratch_existed_after_signal, [True])
+            self.assertLess(elapsed, 10.0)
 
 
 class SubsetTests(unittest.TestCase):
