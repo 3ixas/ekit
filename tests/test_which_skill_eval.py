@@ -99,6 +99,14 @@ class NoFitTests(unittest.TestCase):
         self.assertEqual(outcome.status, "fail")
         self.assertIn("expected no skill", outcome.reason)
 
+    def test_empty_or_off_topic_answer_fails_no_fit(self) -> None:
+        empty = evaluation.judge("codex", 43, self.CASE, "   ", "")
+        self.assertEqual(empty.status, "fail")
+        self.assertIn("empty", empty.reason)
+        executed = evaluation.judge("codex", 43, self.CASE, "Teach is a guided mission workflow.", "")
+        self.assertEqual(executed.status, "fail")
+        self.assertIn("no skill applies", executed.reason)
+
 
 class IsolationTests(unittest.TestCase):
     def test_workspace_holds_this_checkout_active_bundles(self) -> None:
@@ -134,6 +142,16 @@ class IsolationTests(unittest.TestCase):
             with mock.patch.object(evaluation.subprocess, "run", return_value=stdout_limit):
                 with self.assertRaises(evaluation.QuotaError):
                     evaluation.ask("claude", "prompt", scratch, None, 5, scratch)
+
+    def test_nonzero_exit_with_stdout_raises_runtime_error(self) -> None:
+        with tempfile.TemporaryDirectory() as root:
+            scratch = Path(root)
+            crashed = mock.Mock(returncode=1, stdout="Authentication failed", stderr="")
+            with mock.patch.object(evaluation.subprocess, "run", return_value=crashed):
+                with self.assertRaises(RuntimeError) as context:
+                    evaluation.ask("claude", "prompt", scratch, None, 5, scratch)
+            self.assertNotIsInstance(context.exception, evaluation.QuotaError)
+            self.assertIn("exited 1", str(context.exception))
 
     def test_quota_error_skips_remaining_cases_for_that_host(self) -> None:
         with tempfile.TemporaryDirectory() as root:
@@ -173,11 +191,45 @@ class RunnerTests(unittest.TestCase):
         self.assertIn("Skipping codex", output)
         self.assertIn("skipping the which-skill behavioural eval", output)
 
-    def test_every_routing_case_can_be_loaded_with_its_side_effect_flag(self) -> None:
-        cases, side_effecting = evaluation.load_cases(None)
+    def test_every_routing_case_can_be_loaded_with_its_declared_stop(self) -> None:
+        cases, declared_stops = evaluation.load_cases(None)
         self.assertGreaterEqual(len(cases), 75)
-        self.assertTrue(side_effecting["implement"])
-        self.assertEqual(side_effecting["debug"], "")
+        self.assertTrue(declared_stops["implement"])
+        self.assertEqual(declared_stops["debug"], "")
+
+    def test_bare_only_flag_is_rejected(self) -> None:
+        with contextlib.redirect_stderr(io.StringIO()):
+            with self.assertRaises(SystemExit) as exited:
+                evaluation.main(["--only"])
+        self.assertEqual(exited.exception.code, 2)
+
+    def test_jobs_caps_concurrency_per_host(self) -> None:
+        import threading
+        import time
+
+        active: dict[str, int] = {"claude": 0, "codex": 0}
+        peak: dict[str, int] = {"claude": 0, "codex": 0}
+        lock = threading.Lock()
+
+        def fake_ask(host: str, *_args) -> str:
+            with lock:
+                active[host] += 1
+                peak[host] = max(peak[host], active[host])
+            time.sleep(0.02)
+            with lock:
+                active[host] -= 1
+            return "Owner: debug, unknown cause\nStops at: works locally"
+
+        with tempfile.TemporaryDirectory() as root:
+            out_dir = Path(root) / "out"
+            with (
+                mock.patch.object(evaluation.shutil, "which", side_effect=lambda h: f"/usr/bin/{h}"),
+                mock.patch.object(evaluation, "prepare_workspace", return_value=Path(root)),
+                mock.patch.object(evaluation, "ask", side_effect=fake_ask),
+            ):
+                code, _ = self.run_main(["--host", "all", "--jobs", "1", "--only", "0", "18", "31", "--output-dir", str(out_dir)])
+        self.assertEqual(code, 1)  # cases 18/31 expect how/verify, not debug
+        self.assertEqual(peak, {"claude": 1, "codex": 1})
 
 
 if __name__ == "__main__":

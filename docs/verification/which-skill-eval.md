@@ -16,7 +16,7 @@ python3 scripts/verification/which_skill_eval.py --host codex --only 0 65 debug
 python3 scripts/verification/which_skill_eval.py --output-dir /path/to/keep/answers
 ```
 
-`--only` takes case indexes (position in `routing.json`) or owner skill ids. `--jobs` sets concurrent sessions per host; `--claude-model` and `--codex-model` pin a model.
+`--only` takes one or more case indexes (position in `routing.json`) or owner skill ids. `--jobs` sets concurrent sessions per host (default 2); `--claude-model` and `--codex-model` pin a model.
 
 ## What passes
 

@@ -15,6 +15,7 @@ Exits 0 with a skip message for each missing CLI, and 1 when any case fails or e
 from __future__ import annotations
 
 import argparse
+import contextlib
 import json
 import os
 import re
@@ -53,6 +54,10 @@ _LABEL_LINE_RE = re.compile(
     _LABEL_PREFIX + "(?:" + "|".join(re.escape(label) for label in LABELS) + r")[\s*_`]*:", re.I
 )
 QUOTA_RE = re.compile(r"hit your .{0,20}limit|usage limit|rate limit|quota", re.I)
+_NO_FIT_RE = re.compile(
+    r"\bno\b.{0,30}\bskill\b|\bask normally\b|\bdoes not apply\b|\bdoesn['’]t apply\b|\bnone of the\b",
+    re.I,
+)
 _STOPS_RE = re.compile(_LABEL_PREFIX + r"stops at[\s*_`]*:[\s*_`]*(.*)", re.I)
 
 
@@ -72,6 +77,7 @@ class Outcome:
     stops_at: str = ""
     boundary_checked: bool = False
     boundary_label: str = ""
+    declared_boundary: str = ""
     shared_keywords: list[str] = field(default_factory=list)
     reason: str = ""
     output_file: str = ""
@@ -134,6 +140,9 @@ def judge(
 ) -> Outcome:
     """Judge one answer; `declared_stop` is the owner's metadata `authority_stop`, or empty."""
     outcome = Outcome(host, index, case["request"], case.get("owner") or NO_FIT)
+    if not answer.strip():
+        outcome.status, outcome.reason = "fail", "empty answer"
+        return outcome
     owners, stops = parse_recommendation(answer)
     outcome.stops_at = stops
     if case.get("no_fit"):
@@ -141,6 +150,8 @@ def judge(
         if owners:
             outcome.status, outcome.owner = "fail", owners[0]
             outcome.reason = f"owner {owners[0]!r}, expected no skill to apply"
+        elif not _NO_FIT_RE.search(answer):
+            outcome.status, outcome.reason = "fail", "answer did not state that no skill applies"
         return outcome
     if not owners:
         outcome.status, outcome.reason = "fail", "no Owner line in the answer"
@@ -155,6 +166,7 @@ def judge(
         # boundary, so the owner's declared stop also counts as the labelled boundary.
         outcome.boundary_checked = True
         outcome.boundary_label = case["authority_stop"]
+        outcome.declared_boundary = declared_stop
         label_ok, shared = boundary_overlap(case["authority_stop"], stops)
         declared_ok, declared_shared = catalogue_overlap(declared_stop, stops)
         outcome.shared_keywords = sorted(set(shared) | set(declared_shared))
@@ -175,13 +187,13 @@ def prompt_for(request: str) -> str:
 def prepare_workspace(root: Path) -> Path:
     """Give the session this checkout's active bundles, as a host synced from it would list them."""
     workspace = Path(tempfile.mkdtemp(prefix="which-skill-eval-", dir=root))
-    bundles = [bundle for bundle in skills.discover(REPOSITORY_ROOT) if bundle["lifecycle"] == "skills"]
-    for parent in (".claude/skills", ".agents/skills"):
-        for bundle in bundles:
-            shutil.copytree(
-                bundle["path"], workspace / parent / bundle["id"],
-                ignore=shutil.ignore_patterns("metadata.json", "evals"),
-            )
+    claude_files, _ = skills.claude_projection(REPOSITORY_ROOT)
+    shared_files = skills.runtime_projection(REPOSITORY_ROOT, opencode_v2=False)
+    for parent, projected in ((".claude/skills", claude_files), (".agents/skills", shared_files)):
+        for relative, content in projected.items():
+            destination = workspace / parent / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(content)
     subprocess.run(["git", "init", "-q"], cwd=workspace, check=True, capture_output=True)
     return workspace
 
@@ -217,11 +229,11 @@ def ask(host: str, prompt: str, workspace: Path, model: str | None, timeout: int
             timeout=timeout, env={**os.environ, "HOME": str(home), "CODEX_HOME": codex_home},
         )
         answer = last_message.read_text(encoding="utf-8") if last_message.exists() else result.stdout
-    if result.returncode != 0 and not answer.strip():
-        stderr_tail = result.stderr.strip()[-400:]
-        if QUOTA_RE.search(stderr_tail):
-            raise QuotaError(f"{host} refused the session: {stderr_tail[:200]}")
-        raise RuntimeError(f"{host} exited {result.returncode}: {stderr_tail}")
+    if result.returncode != 0:
+        detail = (result.stderr.strip() or answer.strip())[-400:]
+        if QUOTA_RE.search(result.stderr) or QUOTA_RE.search(answer):
+            raise QuotaError(f"{host} refused the session: {detail[:200]}")
+        raise RuntimeError(f"{host} exited {result.returncode}: {detail}")
     if QUOTA_RE.search(answer) and not _OWNER_RE.search(answer):
         raise QuotaError(f"{host} refused the session: {answer.strip()[:200]}")
     return answer
@@ -305,6 +317,8 @@ def report(outcomes: list[Outcome], hosts: list[str]) -> str:
             lines.append(f"    request: {item.request}")
             if item.boundary_checked:
                 lines.append(f"    labelled boundary: {item.boundary_label}")
+                if item.declared_boundary:
+                    lines.append(f"    declared boundary: {item.declared_boundary}")
                 lines.append(f"    Stops at: {item.stops_at or '(missing)'}")
                 lines.append(f"    shared keywords: {', '.join(item.shared_keywords) or 'none'}")
             lines.append(f"    transcript: {item.output_file}")
@@ -314,7 +328,7 @@ def report(outcomes: list[Outcome], hosts: list[str]) -> str:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     parser.add_argument("--host", choices=(*HOSTS, "all"), default="all")
-    parser.add_argument("--only", nargs="*", help="run only these case indexes or owner skill ids")
+    parser.add_argument("--only", nargs="+", help="run only these case indexes or owner skill ids")
     parser.add_argument("--jobs", type=int, default=2, help="concurrent sessions per host")
     parser.add_argument("--timeout", type=int, default=300, help="seconds allowed per session")
     parser.add_argument("--claude-model")
@@ -344,15 +358,20 @@ def main(argv: list[str] | None = None) -> int:
 
     outcomes: list[Outcome] = []
     stop_events = {host: threading.Event() for host in hosts}
+    per_host_workers = max(1, args.jobs)
     with tempfile.TemporaryDirectory(prefix="which-skill-eval-") as scratch_root:
         workspace = prepare_workspace(Path(scratch_root))
-        with ThreadPoolExecutor(max_workers=max(1, args.jobs) * len(hosts)) as pool:
+        with contextlib.ExitStack() as stack:
+            pools = {
+                host: stack.enter_context(ThreadPoolExecutor(max_workers=per_host_workers))
+                for host in hosts
+            }
             futures = [
-                pool.submit(
+                pools[host].submit(
                     run_case, host, index, case, declared, args, output, workspace, Path(scratch_root), stop_events[host]
                 )
-                for host in hosts
                 for index, case, declared in cases
+                for host in hosts
             ]
             for future in futures:
                 outcomes.append(future.result())
