@@ -1,6 +1,6 @@
 # Evaluation validity
 
-Use before a score decides which change to retain. Reuse the project's harness and evidence; scale these checks to the consequence and cost of a wrong decision.
+Use before a score decides which change to retain, or before running a batch model or CLI evaluation. Reuse the project's harness and evidence; scale these checks to the consequence and cost of a wrong decision.
 
 ## Establish what the score measures
 
@@ -14,6 +14,15 @@ Exercise the same path that the result will claim. For agent instructions, disti
 - Where sensitivity is uncertain, use a safe disposable known regression and a known improvement to check that the measurement moves in the right direction. Inspect the assertion and grading criteria, not just a reach marker. Do not damage the user's working artifact to test sensitivity.
 - For variable results, estimate no-change variation under comparable conditions. Use paired baseline/candidate runs or repetitions when warranted. If a useful gain is smaller than the variation the available sample can resolve, report inconclusive; propose better measurement or additional budget rather than choosing the lucky result.
 - Pin cases, expected outputs, grader, aggregation, relevant dependencies and environment. A material change to those conditions invalidates the comparison: review the change and establish a new baseline. Never weaken a check to retain a candidate.
+
+## Guard model and CLI quota
+
+For batch model or CLI evaluations:
+
+- **Confirm the budget:** When a run spawns more than 15 fresh sessions, confirm the planned session count, target model, and quota impact with the user (per shared instructions) unless that exact sweep is already authorized.
+- **Run a 1–2 case canary first:** Execute 1–2 representative cases and verify workspace isolation (confirming the session loads this checkout's code/skills rather than globally installed copies), grading/output parsing, and auth before scaling out.
+- **Iterate on targeted subsets:** Re-run only failing or affected cases while fixing issues; run a full sweep at most once after fixes settle, and prefer resumable runs that skip already-passed cases on unchanged inputs.
+- **Right-size the model:** Avoid defaulting large subscription-backed sweeps to top-tier flagship models. Use a lighter model for full sweeps and reserve flagship models for a small stratified sample unless full flagship coverage was explicitly requested, keeping claims scoped to the model tested. Fail fast per host when a usage or rate limit trips instead of spawning remaining queued sessions.
 
 ## Preserve the evidence boundary
 

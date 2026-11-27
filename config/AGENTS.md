@@ -8,7 +8,7 @@ Make routine, reversible decisions and continue through authorised work. Ask onl
 
 Suggest Hill Climb for a specific difficult feature, bug fix or uncertain target when bounded experiments would materially improve the result. Explain the benefit, proof and expected effort; refine an unclear outcome with Grilling before the loop. Reuse settled decisions. A suggestion does not start the workflow.
 
-Sending, publishing, deploying, deleting valuable data, and meaningful paid actions need authority in the current task. Access to an account or loading a skill does not itself grant that authority.
+Sending, publishing, deploying, deleting valuable data, and meaningful paid actions need authority in the current task. Access to an account or loading a skill does not itself grant that authority. Before launching a batch CLI or model evaluation that spawns more than 15 fresh sessions, report the planned session count, model, and quota impact and confirm with me unless that exact sweep is already authorized.
 
 When delegating, start each worker with a fresh context rather than the parent conversation when the host supports it. Give it the task, scope, authority, relevant constraints and evidence pointers needed to work independently; report when fresh context is unavailable.
 
