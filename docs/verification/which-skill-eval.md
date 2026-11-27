@@ -1,6 +1,14 @@
 # which-skill behavioural eval
 
-`scripts/verification/which_skill_eval.py` checks that `which-skill` recommends the right owner. It gives every case in `evals/routing.json` to a fresh, non-interactive Claude session and a fresh Codex session. The request comes from the case; the only EKit skill in the isolated temp workspace is the `which-skill` bundle. The runner is local and opt-in, makes real model calls, and is never part of CI.
+`scripts/verification/which_skill_eval.py` checks that `which-skill` recommends the right owner. It gives every case in `evals/routing.json` to a fresh, non-interactive Claude session and a fresh Codex session. The request comes from the case. The runner is local and opt-in, makes real model calls, and is never part of CI.
+
+## Isolation
+
+Each isolated temp workspace holds this checkout's active bundles, as a host synced from it would list them, so the eval tests the branch and not the last sync. Installed copies are hidden: an installed personal skill shadows a workspace skill of the same name.
+
+- **Claude** runs with `--setting-sources project` and `--no-session-persistence`, which also leaves out user settings, plugins and `~/.claude/CLAUDE.md`, so it uses the CLI's default model unless `--claude-model` is set.
+- **Codex** runs with an empty `HOME` and the real `CODEX_HOME`, which keeps its sign-in, model config, global `AGENTS.md` and any skills under `CODEX_HOME`.
+- One read-only isolated workspace is prepared per run and shared across cases, while each case runs in its own fresh non-interactive CLI session and scratch directory.
 
 ```sh
 python3 scripts/verification/which_skill_eval.py                    # all cases, both hosts
@@ -19,6 +27,8 @@ A failed case never edits a label. Fix the cause in `which-skill` (its `SKILL.md
 
 ## Output and exit status
 
-The runner prints pass, fail and error counts per host, a case-by-host grid, and each failure with its request, labelled boundary, `Stops at` text, shared keywords and transcript path. Raw answers and `results.json` go to `--output-dir`, or to a temp folder it names. A session that errors or hits a provider usage limit is reported as `error`, not `fail`.
+The runner prints pass, fail and error counts per host, a case-by-host grid, and each failure with its request, labelled boundary, `Stops at` text, shared keywords and transcript path. Raw answers and `results.json` go to `--output-dir`, or to a temp folder it names. A session that errors or hits a provider usage limit is reported as `error`, not `fail`; on a quota or rate limit the runner stops spawning remaining queued sessions for that host.
+
+Running all 75 cases launches 75 fresh sessions per host (each loading the ~9.4k-token Skill catalogue). Prefer `--only` for targeted checks and `--claude-model` / `--codex-model` to avoid burning top-tier usage limits during iteration.
 
 Exit 0 when every case passes, and also when a CLI is missing: each missing `claude` or `codex` prints a skip message, and with neither present the run skips entirely. Exit 1 when any case fails or errors.

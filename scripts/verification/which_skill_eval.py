@@ -3,8 +3,8 @@
 
 Local and opt-in: it makes real model calls, so CI never runs it. For each case in
 `evals/routing.json` it starts a non-interactive session in an isolated workspace
-that holds only the `which-skill` bundle, asks which skill should own the case's
-request, and parses the answer.
+that holds this checkout's active bundles, hides the globally installed copies,
+asks `which-skill` which skill should own the case's request, and parses the answer.
 
 A case passes when the `Owner` line names the case's owner exactly. When that owner
 declares an `authority_stop` in its metadata, the `Stops at` line must also name the
@@ -16,11 +16,13 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import shutil
 import subprocess
 import sys
 import tempfile
+import threading
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -52,6 +54,10 @@ _LABEL_LINE_RE = re.compile(
 )
 QUOTA_RE = re.compile(r"hit your .{0,20}limit|usage limit|rate limit|quota", re.I)
 _STOPS_RE = re.compile(_LABEL_PREFIX + r"stops at[\s*_`]*:[\s*_`]*(.*)", re.I)
+
+
+class QuotaError(RuntimeError):
+    """Raised when a host CLI refuses a session due to a usage or rate limit."""
 
 
 @dataclass
@@ -167,10 +173,15 @@ def prompt_for(request: str) -> str:
 
 
 def prepare_workspace(root: Path) -> Path:
-    bundle = REPOSITORY_ROOT / "skills" / "agent-system" / SKILL_ID
+    """Give the session this checkout's active bundles, as a host synced from it would list them."""
     workspace = Path(tempfile.mkdtemp(prefix="which-skill-eval-", dir=root))
+    bundles = [bundle for bundle in skills.discover(REPOSITORY_ROOT) if bundle["lifecycle"] == "skills"]
     for parent in (".claude/skills", ".agents/skills"):
-        shutil.copytree(bundle, workspace / parent / SKILL_ID)
+        for bundle in bundles:
+            shutil.copytree(
+                bundle["path"], workspace / parent / bundle["id"],
+                ignore=shutil.ignore_patterns("metadata.json", "evals"),
+            )
     subprocess.run(["git", "init", "-q"], cwd=workspace, check=True, capture_output=True)
     return workspace
 
@@ -178,7 +189,11 @@ def prepare_workspace(root: Path) -> Path:
 def ask(host: str, prompt: str, workspace: Path, model: str | None, timeout: int, scratch: Path) -> str:
     if host == "claude":
         # The prompt precedes --allowedTools, or Claude reads it as a tool name.
-        command = ["claude", "-p", prompt, "--allowedTools", "Read", "Skill"]
+        # Project settings only: an installed personal skill would shadow the workspace copy.
+        command = [
+            "claude", "-p", prompt, "--setting-sources", "project",
+            "--no-session-persistence", "--allowedTools", "Read", "Skill",
+        ]
         if model:
             command += ["--model", model]
         result = subprocess.run(
@@ -193,25 +208,50 @@ def ask(host: str, prompt: str, workspace: Path, model: str | None, timeout: int
         ]
         if model:
             command += ["-m", model]
+        # An empty HOME hides the installed ~/.agents/skills; CODEX_HOME keeps the sign-in and config.
+        home = scratch / "home"
+        home.mkdir(exist_ok=True)
+        codex_home = os.environ.get("CODEX_HOME") or str(Path.home() / ".codex")
         result = subprocess.run(
-            [*command, prompt], cwd=workspace, stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=timeout
+            [*command, prompt], cwd=workspace, stdin=subprocess.DEVNULL, capture_output=True, text=True,
+            timeout=timeout, env={**os.environ, "HOME": str(home), "CODEX_HOME": codex_home},
         )
         answer = last_message.read_text(encoding="utf-8") if last_message.exists() else result.stdout
     if result.returncode != 0 and not answer.strip():
-        raise RuntimeError(f"{host} exited {result.returncode}: {result.stderr.strip()[-400:]}")
+        stderr_tail = result.stderr.strip()[-400:]
+        if QUOTA_RE.search(stderr_tail):
+            raise QuotaError(f"{host} refused the session: {stderr_tail[:200]}")
+        raise RuntimeError(f"{host} exited {result.returncode}: {stderr_tail}")
     if QUOTA_RE.search(answer) and not _OWNER_RE.search(answer):
-        raise RuntimeError(f"{host} refused the session: {answer.strip()[:200]}")
+        raise QuotaError(f"{host} refused the session: {answer.strip()[:200]}")
     return answer
 
 
 def run_case(
-    host: str, index: int, case: dict, declared_stop: str, args: argparse.Namespace, output: Path, scratch_root: Path
+    host: str,
+    index: int,
+    case: dict,
+    declared_stop: str,
+    args: argparse.Namespace,
+    output: Path,
+    workspace: Path,
+    scratch_root: Path,
+    stop_event: threading.Event,
 ) -> Outcome:
-    scratch = Path(tempfile.mkdtemp(prefix=f"{host}-{index}-", dir=scratch_root))
-    workspace = prepare_workspace(scratch)
     transcript = output / f"{host}-{index:02d}.txt"
+    if stop_event.is_set():
+        reason = f"{host} skipped after quota/rate limit"
+        outcome = Outcome(host, index, case["request"], case.get("owner") or NO_FIT, "error", reason=reason)
+        transcript.write_text(f"ERROR: {reason}\n", encoding="utf-8")
+        outcome.output_file = str(transcript)
+        return outcome
+    scratch = Path(tempfile.mkdtemp(prefix=f"{host}-{index}-", dir=scratch_root))
     try:
         answer = ask(host, prompt_for(case["request"]), workspace, args.model.get(host), args.timeout, scratch)
+    except QuotaError as error:
+        stop_event.set()
+        outcome = Outcome(host, index, case["request"], case.get("owner") or NO_FIT, "error", reason=str(error))
+        transcript.write_text(f"ERROR: {error}\n", encoding="utf-8")
     except (RuntimeError, subprocess.TimeoutExpired, OSError) as error:
         outcome = Outcome(host, index, case["request"], case.get("owner") or NO_FIT, "error", reason=str(error))
         transcript.write_text(f"ERROR: {error}\n", encoding="utf-8")
@@ -275,7 +315,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     parser.add_argument("--host", choices=(*HOSTS, "all"), default="all")
     parser.add_argument("--only", nargs="*", help="run only these case indexes or owner skill ids")
-    parser.add_argument("--jobs", type=int, default=4, help="concurrent sessions per host")
+    parser.add_argument("--jobs", type=int, default=2, help="concurrent sessions per host")
     parser.add_argument("--timeout", type=int, default=300, help="seconds allowed per session")
     parser.add_argument("--claude-model")
     parser.add_argument("--codex-model")
@@ -303,10 +343,14 @@ def main(argv: list[str] | None = None) -> int:
     print(f"Running {len(cases)} cases on {', '.join(hosts)}; answers in {output}", flush=True)
 
     outcomes: list[Outcome] = []
+    stop_events = {host: threading.Event() for host in hosts}
     with tempfile.TemporaryDirectory(prefix="which-skill-eval-") as scratch_root:
+        workspace = prepare_workspace(Path(scratch_root))
         with ThreadPoolExecutor(max_workers=max(1, args.jobs) * len(hosts)) as pool:
             futures = [
-                pool.submit(run_case, host, index, case, declared, args, output, Path(scratch_root))
+                pool.submit(
+                    run_case, host, index, case, declared, args, output, workspace, Path(scratch_root), stop_events[host]
+                )
                 for host in hosts
                 for index, case, declared in cases
             ]
