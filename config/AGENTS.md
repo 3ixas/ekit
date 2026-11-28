@@ -68,7 +68,7 @@ These jobs are provider assignments, not roles. Always set the model and `reason
 
 | Job | Model | Effort |
 |---|---|---|
-| Web research | `gpt-6.2-sol` (`codex`, option `reasoningEffort`) | `xhigh` |
+| Web research | `gpt-6.2-sol` (`codex`, option `reasoningEffort`) | `high` |
 | Images (generation, editing, mockups) | `gpt-6.2-sol` (`codex`, option `reasoningEffort`) | `medium` |
 | Rendered browser or desktop work | `gpt-6.2-sol` (`codex`, option `reasoningEffort`) | `medium` |
 
